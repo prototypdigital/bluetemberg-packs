@@ -1,0 +1,21 @@
+{
+  "name": "bluetemberg-rules-devops",
+  "version": "0.1.0",
+  "description": "Infrastructure rules for Bluetemberg — Docker best practices, Terraform conventions.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "devops",
+    "docker",
+    "terraform"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-rules.git"
+  },
+  "files": [
+    "llm/"
+  ]
+}

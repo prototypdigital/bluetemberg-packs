@@ -1,0 +1,20 @@
+{
+  "name": "bluetemberg-rules-typescript",
+  "version": "0.1.0",
+  "description": "TypeScript code quality rules for Bluetemberg — type safety, coding standards, early returns, no console.log, design system reuse.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "typescript",
+    "code-quality"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-rules.git"
+  },
+  "files": [
+    "llm/"
+  ]
+}

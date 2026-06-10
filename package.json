@@ -1,0 +1,7 @@
+{
+  "name": "bluetemberg-rules",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}

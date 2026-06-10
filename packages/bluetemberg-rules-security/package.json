@@ -1,0 +1,19 @@
+{
+  "name": "bluetemberg-rules-security",
+  "version": "0.1.0",
+  "description": "Security guardrail rules for Bluetemberg — secrets management, environment file protection, API error handling.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "security"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-rules.git"
+  },
+  "files": [
+    "llm/"
+  ]
+}

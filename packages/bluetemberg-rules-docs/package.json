@@ -1,0 +1,20 @@
+{
+  "name": "bluetemberg-rules-docs",
+  "version": "0.1.0",
+  "description": "Documentation and diagnostics rules for Bluetemberg — docs parity, post-edit diagnostics.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "docs",
+    "diagnostics"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-rules.git"
+  },
+  "files": [
+    "llm/"
+  ]
+}
