@@ -1,12 +1,13 @@
 {
-  "name": "bluetemberg-rules-docs",
-  "version": "0.2.0",
-  "description": "Documentation and diagnostics rules for Bluetemberg — docs parity, post-edit diagnostics, Mermaid diagrams.",
+  "name": "bluetemberg-rules-nextjs",
+  "version": "0.1.0",
+  "description": "Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.",
   "keywords": [
     "bluetemberg-pack",
     "rules",
-    "docs",
-    "diagnostics"
+    "nextjs",
+    "react",
+    "frontend"
   ],
   "author": "Prototyp Digital",
   "license": "MIT",
