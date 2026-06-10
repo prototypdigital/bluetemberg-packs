@@ -1,13 +1,16 @@
 {
   "name": "bluetemberg-rules-devops",
-  "version": "0.1.0",
-  "description": "Infrastructure rules for Bluetemberg — Docker best practices, Terraform conventions.",
+  "version": "0.2.0",
+  "description": "Infrastructure rules for Bluetemberg — Docker, Terraform, Ansible, Kubernetes, Helm, CI/CD, shell scripts, and idempotency.",
   "keywords": [
     "bluetemberg-pack",
     "rules",
     "devops",
     "docker",
-    "terraform"
+    "terraform",
+    "ansible",
+    "kubernetes",
+    "helm"
   ],
   "author": "Prototyp Digital",
   "license": "MIT",
