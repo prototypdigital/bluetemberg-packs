@@ -1,0 +1,10 @@
+{
+  "name": "bluetemberg-skills-migration-safety",
+  "version": "0.1.0",
+  "description": "Migration safety skill for Bluetemberg — database migration review and rollback plans.",
+  "keywords": ["bluetemberg-pack", "skills"],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
+  "files": ["llm/"]
+}

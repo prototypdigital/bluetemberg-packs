@@ -1,0 +1,10 @@
+{
+  "name": "bluetemberg-agents-kubernetes-specialist",
+  "version": "0.1.0",
+  "description": "Kubernetes specialist agent for Bluetemberg — manifests, Helm charts, Kustomize overlays.",
+  "keywords": ["bluetemberg-pack", "agents"],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
+  "files": ["llm/"]
+}

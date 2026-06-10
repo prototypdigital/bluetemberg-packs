@@ -1,0 +1,10 @@
+{
+  "name": "bluetemberg-skills-ci-cd-best-practices",
+  "version": "0.1.0",
+  "description": "CI/CD best practices skill for Bluetemberg — pipeline optimization and caching strategies.",
+  "keywords": ["bluetemberg-pack", "skills"],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
+  "files": ["llm/"]
+}

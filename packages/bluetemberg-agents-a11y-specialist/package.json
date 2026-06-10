@@ -1,0 +1,10 @@
+{
+  "name": "bluetemberg-agents-a11y-specialist",
+  "version": "0.1.0",
+  "description": "Accessibility specialist agent for Bluetemberg — WCAG 2.2 A/AA audit and remediation.",
+  "keywords": ["bluetemberg-pack", "agents"],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
+  "files": ["llm/"]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "bluetemberg-agents-security-specialist",
+  "version": "0.1.0",
+  "description": "Security specialist agent for Bluetemberg — vulnerability audit, dependency scanning, secrets.",
+  "keywords": ["bluetemberg-pack", "agents"],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
+  "files": ["llm/"]
+}

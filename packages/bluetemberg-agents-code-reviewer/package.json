@@ -1,0 +1,10 @@
+{
+  "name": "bluetemberg-agents-code-reviewer",
+  "version": "0.1.0",
+  "description": "Code reviewer agent for Bluetemberg — PR review covering patterns, naming, complexity, tests.",
+  "keywords": ["bluetemberg-pack", "agents"],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
+  "files": ["llm/"]
+}

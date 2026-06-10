@@ -1,0 +1,10 @@
+{
+  "name": "bluetemberg-agents-test-specialist",
+  "version": "0.1.0",
+  "description": "Test specialist agent for Bluetemberg — test creation, refactoring, and stabilization.",
+  "keywords": ["bluetemberg-pack", "agents"],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
+  "files": ["llm/"]
+}

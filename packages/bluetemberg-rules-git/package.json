@@ -1,5 +1,5 @@
 {
-  "name": "bluetemberg-rules-git",
+  "name": "bluetemberg-packs.git",
   "version": "0.1.0",
   "description": "Git workflow rules for Bluetemberg — branch protection, naming, PR workflow, git move, pre-commit checks.",
   "keywords": [
@@ -12,7 +12,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/prototypdigital/bluetemberg-rules.git"
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
   },
   "files": [
     "llm/"

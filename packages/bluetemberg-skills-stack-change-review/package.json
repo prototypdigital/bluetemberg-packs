@@ -1,0 +1,10 @@
+{
+  "name": "bluetemberg-skills-stack-change-review",
+  "version": "0.1.0",
+  "description": "Stack change review skill for Bluetemberg — high-blast-radius infrastructure change review.",
+  "keywords": ["bluetemberg-pack", "skills"],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
+  "files": ["llm/"]
+}
