@@ -1,0 +1,65 @@
+{
+  "platforms": ["claude-marketplace"],
+  "source": "llm",
+  "extends": [
+    "./packages/bluetemberg-agents-a11y-specialist",
+    "./packages/bluetemberg-agents-ansible-specialist",
+    "./packages/bluetemberg-agents-backend-specialist",
+    "./packages/bluetemberg-agents-code-reviewer",
+    "./packages/bluetemberg-agents-devops-specialist",
+    "./packages/bluetemberg-agents-docs-maintainer",
+    "./packages/bluetemberg-agents-frontend-specialist",
+    "./packages/bluetemberg-agents-infrastructure-specialist",
+    "./packages/bluetemberg-agents-kubernetes-specialist",
+    "./packages/bluetemberg-agents-security-specialist",
+    "./packages/bluetemberg-agents-sre-specialist",
+    "./packages/bluetemberg-agents-test-specialist",
+    "./packages/bluetemberg-rules-devops",
+    "./packages/bluetemberg-rules-docs",
+    "./packages/bluetemberg-rules-git",
+    "./packages/bluetemberg-rules-nextjs",
+    "./packages/bluetemberg-rules-security",
+    "./packages/bluetemberg-rules-typescript",
+    "./packages/bluetemberg-skills-api-design",
+    "./packages/bluetemberg-skills-ci-cd-best-practices",
+    "./packages/bluetemberg-skills-code-review",
+    "./packages/bluetemberg-skills-docs-upkeep",
+    "./packages/bluetemberg-skills-infrastructure-drift-check",
+    "./packages/bluetemberg-skills-migration-safety",
+    "./packages/bluetemberg-skills-patterns",
+    "./packages/bluetemberg-skills-react-patterns",
+    "./packages/bluetemberg-skills-rollback-plan",
+    "./packages/bluetemberg-skills-security-audit",
+    "./packages/bluetemberg-skills-stack-change-review",
+    "./packages/bluetemberg-skills-workspace-hygiene"
+  ],
+  "marketplace": {
+    "plugins": [
+      {
+        "name": "frontend",
+        "displayName": "Frontend Developer",
+        "description": "Skills and agents for React/TypeScript frontend projects",
+        "profiles": ["frontend"]
+      },
+      {
+        "name": "fullstack",
+        "displayName": "Full-Stack Developer",
+        "description": "Skills and agents for full-stack projects (frontend + backend)",
+        "profiles": ["frontend", "backend", "fullstack"]
+      },
+      {
+        "name": "backend",
+        "displayName": "Backend Developer",
+        "description": "Skills and agents for API, database, and service projects",
+        "profiles": ["backend"]
+      },
+      {
+        "name": "devops",
+        "displayName": "DevOps / Platform Engineer",
+        "description": "Skills and agents for CI/CD, containers, and infrastructure",
+        "profiles": ["devops", "pure-infra"]
+      }
+    ]
+  },
+  "targets": {}
+}
