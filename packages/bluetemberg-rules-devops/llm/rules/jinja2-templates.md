@@ -3,6 +3,9 @@ description: Write safe, readable Jinja2 templates for Ansible and configuration
 scope:
   - "**/*.j2"
   - "**/templates/**"
+profiles:
+  - devops
+  - pure-infra
 ---
 
 # Jinja2 templates
