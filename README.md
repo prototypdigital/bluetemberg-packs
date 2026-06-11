@@ -1,16 +1,18 @@
-# bluetemberg-rules
+# bluetemberg-packs
 
-Official rule packs for [Bluetemberg](https://github.com/prototypdigital/bluetemberg) — install with `bluetemberg add`, sync to every AI assistant you use.
+Official content packs for [Bluetemberg](https://github.com/prototypdigital/bluetemberg) — rules, agents, skills, and guardrails. Install with `bluetemberg add`, sync to every AI assistant you use.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packs](https://img.shields.io/badge/packs-6-brightgreen.svg)](#packs)
+[![Packs](https://img.shields.io/badge/packs-31-brightgreen.svg)](#packs)
 [![Bluetemberg](https://img.shields.io/badge/built%20for-bluetemberg-5b6ee1.svg)](https://github.com/prototypdigital/bluetemberg)
 
-Each pack is a standalone npm package containing vendor-neutral rules in the standard `llm/` layout. [Bluetemberg](https://github.com/prototypdigital/bluetemberg) installs them and syncs the rules into **Cursor, Claude Code, GitHub Copilot, Gemini, and Windsurf** — each in that tool's native format.
+Each pack is a standalone npm package containing vendor-neutral content in the standard `llm/` layout. [Bluetemberg](https://github.com/prototypdigital/bluetemberg) installs them and syncs the content into **Cursor, Claude Code, GitHub Copilot, Gemini, and Windsurf** — each in that tool's native format.
 
-> **New to Bluetemberg?** It's a CLI that maintains AI assistant config from a single source of truth. You write rules once; it generates the per-tool files. These packs are curated, ready-made rule sets you can drop in instead of writing your own. Start with the [Bluetemberg README](https://github.com/prototypdigital/bluetemberg#readme).
+> **New to Bluetemberg?** It's a CLI that maintains AI assistant config from a single source of truth. You write rules once; it generates the per-tool files. These packs are curated, ready-made content you can drop in instead of writing your own. Start with the [Bluetemberg README](https://github.com/prototypdigital/bluetemberg#readme).
 
 ## Packs
+
+### Rules
 
 | Package | Domain | Rules |
 | ------- | ------ | ----- |
@@ -21,7 +23,23 @@ Each pack is a standalone npm package containing vendor-neutral rules in the sta
 | [`bluetemberg-rules-devops`](https://www.npmjs.com/package/bluetemberg-rules-devops) | Infrastructure | `docker-best-practices`, `terraform-conventions`, `ansible-conventions`, `kubernetes-manifests`, `helm-conventions`, `container-image-pinning`, `ci-workflow-conventions`, `shell-script-standards`, `idempotency`, `runbook-discipline` |
 | [`bluetemberg-rules-nextjs`](https://www.npmjs.com/package/bluetemberg-rules-nextjs) | Next.js | `nextjs-public-env-vars` |
 
-See the [Catalog](https://github.com/prototypdigital/bluetemberg-rules/wiki/Catalog) for a description of every rule.
+### Agents
+
+12 specialist agent packs (`bluetemberg-agents-*`): `frontend-specialist`, `backend-specialist`, `test-specialist`, `docs-maintainer`, `code-reviewer`, `a11y-specialist`, `security-specialist`, `infrastructure-specialist`, `devops-specialist`, `ansible-specialist`, `kubernetes-specialist`, `sre-specialist`.
+
+### Skills
+
+12 on-demand skill packs (`bluetemberg-skills-*`): `patterns`, `docs-upkeep`, `workspace-hygiene`, `react-patterns`, `code-review`, `api-design`, `security-audit`, `ci-cd-best-practices`, `migration-safety`, `stack-change-review`, `infrastructure-drift-check`, `rollback-plan`.
+
+### Guardrails
+
+| Package | Guardrails |
+| ------- | ---------- |
+| [`bluetemberg-guardrails-git`](https://www.npmjs.com/package/bluetemberg-guardrails-git) | `conventional-branch-names` — block AI-generated worktree branch names, require `type/description` |
+
+Guardrails are declarative hook definitions: Bluetemberg translates them into platform-native enforcement (e.g. Claude Code `PreToolUse` hooks in `.claude/settings.json`).
+
+See the [Catalog](https://github.com/prototypdigital/bluetemberg-packs/wiki/Catalog) for a description of every pack.
 
 ## Installation
 
@@ -29,7 +47,7 @@ You need [Bluetemberg](https://github.com/prototypdigital/bluetemberg) in your p
 
 ### During `bluetemberg init`
 
-Choose **Rule collections (registry packages)** as the rule source. The wizard suggests packs based on your team profile and writes a `llm/rule-packages.json` manifest. Then:
+The wizard suggests packs based on your team profile and writes a `llm/packages.json` manifest. Then:
 
 ```bash
 bluetemberg install
@@ -40,7 +58,7 @@ bluetemberg sync
 
 ```bash
 bluetemberg add bluetemberg-rules-typescript
-bluetemberg add bluetemberg-rules-security
+bluetemberg add bluetemberg-agents-code-reviewer
 bluetemberg sync
 ```
 
@@ -65,22 +83,22 @@ bluetemberg sync
 
 ## Overrides & priority
 
-When the same rule filename exists in more than one source, the higher-priority source wins:
+When the same filename exists in more than one source, the higher-priority source wins:
 
-1. **Local** `llm/rules/` (your project) — always wins
+1. **Local** `llm/` (your project) — always wins
 2. **`extends`** entries, in array order
 3. **Registry packs**, in manifest order
 
-So you can adopt a whole pack and still override a single rule by creating a file with the same name in your local `llm/rules/`.
+So you can adopt a whole pack and still override a single file by creating one with the same name in your local `llm/`.
 
 ## Documentation
 
-Full docs live in the [**wiki**](https://github.com/prototypdigital/bluetemberg-rules/wiki):
+Full docs live in the [**wiki**](https://github.com/prototypdigital/bluetemberg-packs/wiki):
 
-- [Catalog](https://github.com/prototypdigital/bluetemberg-rules/wiki/Catalog) — every pack and every rule, described
-- [Usage](https://github.com/prototypdigital/bluetemberg-rules/wiki/Usage) — installing, overriding, and troubleshooting
-- [Contributing](https://github.com/prototypdigital/bluetemberg-rules/wiki/Contributing) — add a rule or a new pack
-- [Releasing](https://github.com/prototypdigital/bluetemberg-rules/wiki/Releasing) — versioning and the npm publish flow
+- [Catalog](https://github.com/prototypdigital/bluetemberg-packs/wiki/Catalog) — every pack and every file, described
+- [Usage](https://github.com/prototypdigital/bluetemberg-packs/wiki/Usage) — installing, overriding, and troubleshooting
+- [Contributing](https://github.com/prototypdigital/bluetemberg-packs/wiki/Contributing) — add content or a new pack
+- [Releasing](https://github.com/prototypdigital/bluetemberg-packs/wiki/Releasing) — versioning and the npm publish flow
 
 For how the sync engine, manifest, and lockfile work, see the [Bluetemberg Registry docs](https://github.com/prototypdigital/bluetemberg/wiki/Registry).
 
@@ -88,21 +106,25 @@ For how the sync engine, manifest, and lockfile work, see the [Bluetemberg Regis
 
 ```
 packages/
-  bluetemberg-rules-typescript/
+  bluetemberg-rules-*/         # 6 rule packs
     package.json
     llm/rules/*.md
-  bluetemberg-rules-git/
-  bluetemberg-rules-security/
-  bluetemberg-rules-docs/
-  bluetemberg-rules-devops/
-  bluetemberg-rules-nextjs/
+  bluetemberg-agents-*/        # 12 agent packs
+    package.json
+    llm/agents/*.md
+  bluetemberg-skills-*/        # 12 skill packs
+    package.json
+    llm/skills/<name>/SKILL.md
+  bluetemberg-guardrails-*/    # 1 guardrail pack
+    package.json
+    llm/guardrails/*.md
 ```
 
 Each package is published independently to npm but versioned and released from this one repo.
 
 ## Contributing
 
-Rules are plain Markdown with frontmatter — no build step. To add or change one, edit the `.md` file in the relevant pack and open a PR. See the [Contributing guide](https://github.com/prototypdigital/bluetemberg-rules/wiki/Contributing) for the full workflow.
+Pack content is plain Markdown with frontmatter — no build step. To add or change something, edit the `.md` file in the relevant pack and open a PR. See the [Contributing guide](https://github.com/prototypdigital/bluetemberg-packs/wiki/Contributing) for the full workflow.
 
 ## License
 
