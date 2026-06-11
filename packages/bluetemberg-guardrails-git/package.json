@@ -1,0 +1,20 @@
+{
+  "name": "bluetemberg-guardrails-git",
+  "version": "0.1.0",
+  "description": "Git guardrails for Bluetemberg — enforce conventional branch names on AI-created worktrees.",
+  "keywords": [
+    "bluetemberg-pack",
+    "guardrails",
+    "git",
+    "hooks"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ]
+}
