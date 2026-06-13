@@ -1,5 +1,6 @@
 ---
 description: Define metadata/generateMetadata per page; never use <Head> in App Router
+scope: "**"
 ---
 
 # Next.js Metadata

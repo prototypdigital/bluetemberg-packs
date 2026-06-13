@@ -1,5 +1,6 @@
 ---
 description: Default to React Server Components; use 'use client' only at leaf interactive nodes
+scope: "**"
 ---
 
 # Next.js Server Components

@@ -1,5 +1,6 @@
 ---
 description: Prefer fetch with cache options in Server Components over useEffect + API calls
+scope: "**"
 ---
 
 # Next.js Data Fetching

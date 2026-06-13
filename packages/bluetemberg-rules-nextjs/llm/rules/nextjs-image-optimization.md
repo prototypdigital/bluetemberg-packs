@@ -1,5 +1,6 @@
 ---
 description: Always use next/image; never raw img tags
+scope: "**"
 ---
 
 # Next.js Image Optimization
@@ -47,6 +48,7 @@ import Image from 'next/image'
 ## next.config.js
 
 Remote images must be explicitly whitelisted:
+
 ```js
 /** @type {import('next').NextConfig} */
 module.exports = {
