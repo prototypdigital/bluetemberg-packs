@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-nextjs",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.",
   "keywords": [
     "bluetemberg-pack",
