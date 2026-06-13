@@ -34,6 +34,7 @@
     "./packages/bluetemberg-skills-rollback-plan",
     "./packages/bluetemberg-skills-security-audit",
     "./packages/bluetemberg-skills-stack-change-review",
+    "./packages/bluetemberg-skills-config-echo",
     "./packages/bluetemberg-skills-sub-agent-design",
     "./packages/bluetemberg-skills-workspace-hygiene"
   ],

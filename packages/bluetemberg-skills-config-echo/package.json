@@ -1,0 +1,28 @@
+{
+  "name": "bluetemberg-skills-config-echo",
+  "version": "0.1.0",
+  "description": "Config echo skill for Bluetemberg — verifies that synced configuration was actually loaded by the LLM.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "backend",
+      "fullstack",
+      "devops",
+      "pure-infra"
+    ]
+  }
+}

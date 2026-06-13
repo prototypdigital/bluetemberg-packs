@@ -225,6 +225,14 @@ Code review skill for Bluetemberg — structured review checklist for PRs.
 | ----- | ----------- |
 | `code-review` | Structured code review — intent-first, diff-focused, severity-tiered findings with actionable fix suggestions. |
 
+### bluetemberg-skills-config-echo
+
+Config echo skill for Bluetemberg — verifies that synced configuration was actually loaded by the LLM.
+
+| Skill | Description |
+| ----- | ----------- |
+| `config-echo` | Verify that bluetemberg configuration was actually loaded by the LLM — recall rules, agents, and skills from session context and cross-reference against disk. |
+
 ### bluetemberg-skills-create-skill
 
 Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required sections, and sync.

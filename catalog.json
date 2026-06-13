@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-13T19:23:47.919Z",
+  "generated": "2026-06-13T19:34:58.693Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -381,6 +381,24 @@
         "code-review"
       ],
       "preview": "Use this skill when reviewing a pull request or a set of code changes before merge. - Pull request review (any size) - Post-implementation self-review before opening a PR - Peer review requested by a teammate 1. The agent MUST establish intent before reading any code — run `git log --oneline origin/"
+    },
+    {
+      "name": "bluetemberg-skills-config-echo",
+      "version": "0.1.0",
+      "description": "Config echo skill for Bluetemberg — verifies that synced configuration was actually loaded by the LLM.",
+      "profiles": [
+        "frontend",
+        "backend",
+        "fullstack",
+        "devops",
+        "pure-infra"
+      ],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        "config-echo"
+      ],
+      "preview": "Use this skill to confirm what bluetemberg configuration the LLM has in its active session context, and to verify it matches what is on disk. - After running `bluetemberg sync` to confirm the LLM picked up the changes - When a rule does not seem to be taking effect - Onboarding a new team member — c"
     },
     {
       "name": "bluetemberg-skills-create-skill",
