@@ -1,10 +1,14 @@
 {
-  "name": "bluetemberg-skills-code-review",
-  "version": "0.2.0",
-  "description": "Code review skill for Bluetemberg — structured review checklist for PRs.",
+  "name": "bluetemberg-rules-llm-api-product",
+  "version": "0.1.0",
+  "description": "LLM API and product-engineering rules for Bluetemberg — streaming, cost accounting, and cost-aware model selection.",
   "keywords": [
     "bluetemberg-pack",
-    "skills"
+    "rules",
+    "llm",
+    "streaming",
+    "cost",
+    "model-routing"
   ],
   "author": "Prototyp Digital",
   "license": "MIT",
@@ -18,9 +22,9 @@
   "bluetemberg": {
     "universal": false,
     "profiles": [
-      "frontend",
       "backend",
-      "fullstack"
+      "fullstack",
+      "agentic"
     ]
   }
 }

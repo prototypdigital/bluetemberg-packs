@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-13T19:48:01.610Z",
+  "generated": "2026-06-13T19:57:03.539Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -18,7 +18,7 @@
     },
     {
       "name": "bluetemberg-agents-agentic-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Agentic systems specialist agent for Bluetemberg — agent memory design, state management, orchestration patterns.",
       "profiles": [
         "agentic"
@@ -233,7 +233,7 @@
     },
     {
       "name": "bluetemberg-rules-context-engineering",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Context engineering rules for Bluetemberg — structuring LLM context, managing token budgets, avoiding context pollution.",
       "profiles": [
         "agentic"
@@ -242,10 +242,13 @@
       "kind": "rules",
       "rules": [
         "context-pollution-prevention",
+        "context-positioning",
         "context-window-budget",
-        "multi-turn-state-management"
+        "multi-turn-context-hygiene",
+        "multi-turn-state-management",
+        "prompt-structure"
       ],
-      "preview": "Context pollution is when irrelevant, contradictory, or duplicate information crowds out the signal needed for accurate reasoning. - Scope every search to the narrowest path that will satisfy the question. Never `find .` or `grep` from the repo root when a subdirectory is known. - Do not repeat larg"
+      "preview": "Context pollution is when irrelevant, contradictory, or duplicate information crowds out the signal needed for accurate reasoning. This is not a soft concern: adding even a **single distractor** — plausibly-related but irrelevant content — measurably lowers accuracy, and across frontier models a con"
     },
     {
       "name": "bluetemberg-rules-devops",
@@ -301,6 +304,24 @@
       "preview": "If moving an existing file that is not `git ignored`, use `git mv {source} {dest}`, as this preserves the git history for the file and shows any new diff."
     },
     {
+      "name": "bluetemberg-rules-llm-api-product",
+      "version": "0.1.0",
+      "description": "LLM API and product-engineering rules for Bluetemberg — streaming, cost accounting, and cost-aware model selection.",
+      "profiles": [
+        "backend",
+        "fullstack",
+        "agentic"
+      ],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        "cost-accounting",
+        "model-selection-and-routing",
+        "streaming"
+      ],
+      "preview": "If an LLM feature has unit economics, measure them from the **authoritative numbers the provider returns**, not from estimates you compute yourself. Self-counted token estimates routinely miss what actually drives the bill: prompt-cache reads and writes, tool-use tokens, system-prompt overhead, and"
+    },
+    {
       "name": "bluetemberg-rules-nextjs",
       "version": "0.2.0",
       "description": "Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.",
@@ -321,13 +342,14 @@
     },
     {
       "name": "bluetemberg-rules-security",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Security guardrail rules for Bluetemberg — secrets management, environment file protection, API error handling.",
       "profiles": [],
       "universal": true,
       "kind": "rules",
       "rules": [
         "api-error-handling",
+        "llm-package-hallucination",
         "never-read-env",
         "security-secrets"
       ],
@@ -385,7 +407,7 @@
     },
     {
       "name": "bluetemberg-skills-code-review",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Code review skill for Bluetemberg — structured review checklist for PRs.",
       "profiles": [
         "frontend",

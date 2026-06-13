@@ -37,9 +37,28 @@ Postconditions: what the orchestrator can rely on after success
 Error contract: what the sub-agent throws / returns on failure, and whether the orchestrator should retry
 ```
 
+## Verified tool-use and recovery patterns
+
+These are evidence-backed defaults for tool-calling agents. Apply them when designing tool interfaces and agent loops.
+
+### Tool schema design
+
+- **Name for the model, not the database.** Namespace related tools (`asana_search`, `asana_create`) and give parameters unambiguous names (`user_id`, not `user`). Have tools return semantic identifiers (names, not opaque numeric ids) so downstream calls and the model's own reasoning stay legible. Keep the tool surface small and non-overlapping — too many near-duplicate tools degrade selection. *(Anthropic, "Writing tools for agents," 2025-09 — <https://www.anthropic.com/engineering/writing-tools-for-agents>. The internal per-integration percentage gains in that post are graph-only and not reproducible; rely on the conventions, not those magnitudes.)*
+- **Enforce constraints in the schema, not in prose.** A rule stated only in a parameter's natural-language `description` ("must be ISO-8601", "max 5 items") is frequently violated — function-calling instruction-following benchmarks show prose constraints failing on the order of 20–30% of calls even for strong models. Express the constraint structurally (`enum`, `pattern`, `type`, `minimum`/`maximum`, `maxItems`) **and** re-validate the arguments after the call before acting on them. *(IFEval-FC, arXiv:2509.18420, 2025-09 — <https://arxiv.org/abs/2509.18420>. Treat the ~20–30% figure as order-of-magnitude, not exact.)*
+
+### Error recovery
+
+- **Reflect, then re-call — don't blind-retry.** On a tool error, have the agent run a short structured loop: read the error, state what to change, then issue a corrected call (Reflect → Call → Final). This recovers more tool errors than immediately repeating the same call. *(Builds on Reflexion, NeurIPS 2023, arXiv:2303.11366; reaffirmed by "Failure Makes the Agent Stronger," arXiv:2509.18847 — a single fresh preprint, so lean on the established Reflexion mechanism.)*
+- **Transport retries: capped exponential backoff with full jitter.** For transient failures (429/503/timeout), retry with exponential backoff **plus full jitter** to avoid synchronized retry storms; cap the delay and the attempt count. Retry **only idempotent operations**, and when the provider returns a `retry-after`, honor it before applying your own backoff. *(AWS, "Exponential Backoff and Jitter" — <https://aws.amazon.com/blogs/architecture/exponential-backoff-and-jitter/>.)*
+
+### Human-in-the-loop
+
+- **Gate irreversible or externally visible tools behind per-tool approval.** Any tool that performs an action that is hard to undo or visible outside the repo — payments, deletes, external sends, production infrastructure changes, permanent data exports — should require explicit human approval before execution. Routine repository authoring (file edits, test runs) is covered by the repo review flow and does not require per-call approval. Implement approval as a **pause with resumable state** — the run suspends, surfaces the pending call for approval, and resumes (or aborts) from saved state — rather than blocking a thread. Co-locate the validation/guardrail with the tool so it can't be bypassed by a different call path. *(OpenAI Agents — guardrails & human review — <https://developers.openai.com/api/docs/guides/agents/guardrails-approvals>; corroborated by the Claude Agent SDK permission model.)*
+
 ## Constraints
 
 - Never design a memory system that grows unbounded without a documented pruning strategy.
 - Never introduce an external service (vector DB, message queue) without confirming the project's infrastructure constraints.
 - Never accept ambiguous tool calls — if a sub-agent's output is underspecified, request a schema before wiring it.
 - Prefer deterministic state (files, SQL) over probabilistic retrieval (embeddings) when the data size allows it.
+- Never let an irreversible or externally visible tool run unattended without an approval gate and a documented rollback or idempotency guarantee.

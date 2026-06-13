@@ -25,8 +25,11 @@ Context engineering rules for Bluetemberg — structuring LLM context, managing 
 | Rule | Enforces |
 | ---- | -------- |
 | `context-pollution-prevention` | Prevent context pollution — scope tool calls to what you need, don't inject noise into the conversation. |
+| `context-positioning` | Place load-bearing content at the edges of the context, not the middle — models access the start and end far better than the middle. |
 | `context-window-budget` | Manage context window budget explicitly — prune stale content, compress retrieved data, never let context grow unbounded. |
+| `multi-turn-context-hygiene` | Don't keep talking to a derailed conversation — consolidate the requirements and restart fresh. Multi-turn degradation is large and doesn't self-correct. |
 | `multi-turn-state-management` | Manage state across multi-turn interactions — track what was decided, what changed, and what is still open. |
+| `prompt-structure` | Structure prompts into labeled, delimited sections — separate instructions from data, and keep persistent rules in the system message. |
 
 ### bluetemberg-rules-devops
 
@@ -66,6 +69,16 @@ Git workflow rules for Bluetemberg — branch protection, naming, PR workflow, g
 | `git-workflow` | Branch protection, branch naming, and PR workflow rules. |
 | `pre-commit-checks` | Run formatter, linter, and build checks before every commit. |
 
+### bluetemberg-rules-llm-api-product
+
+LLM API and product-engineering rules for Bluetemberg — streaming, cost accounting, and cost-aware model selection.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `cost-accounting` | Measure LLM cost from the authoritative usage object and the provider's cost API — never from your own token estimates. |
+| `model-selection-and-routing` | Pick models on the accuracy-vs-cost frontier and route easy queries to cheaper models — the most expensive model is rarely the right default. |
+| `streaming` | Stream for perceived latency, but buffer tool-call JSON until the block closes and don't gate safety on partial output. |
+
 ### bluetemberg-rules-nextjs
 
 Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.
@@ -85,6 +98,7 @@ Security guardrail rules for Bluetemberg — secrets management, environment fil
 | Rule | Enforces |
 | ---- | -------- |
 | `api-error-handling` | Use structured error responses and never leak internal details. |
+| `llm-package-hallucination` | Verify every LLM-suggested dependency exists in the registry before installing — hallucinated package names are a real supply-chain attack surface (slopsquatting). |
 | `never-read-env` | Never read .env files directly in code. |
 | `security-secrets` | Never hardcode secrets, tokens, or credentials in source code. |
 
