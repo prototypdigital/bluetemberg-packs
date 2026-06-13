@@ -2,9 +2,24 @@
   "name": "bluetemberg-skills-infrastructure-drift-check",
   "version": "0.1.0",
   "description": "Infrastructure drift check skill for Bluetemberg — verify IaC state matches deployed state.",
-  "keywords": ["bluetemberg-pack", "skills"],
+  "keywords": [
+    "bluetemberg-pack",
+    "skills"
+  ],
   "author": "Prototyp Digital",
   "license": "MIT",
-  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
-  "files": ["llm/"]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "devops",
+      "pure-infra"
+    ]
+  }
 }

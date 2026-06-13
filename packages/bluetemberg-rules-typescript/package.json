@@ -16,5 +16,13 @@
   },
   "files": [
     "llm/"
-  ]
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "backend",
+      "fullstack"
+    ]
+  }
 }

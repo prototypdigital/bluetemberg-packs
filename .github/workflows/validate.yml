@@ -55,7 +55,7 @@ jobs:
       - name: Validate packs (frontmatter, config integrity, version bumps)
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
-        run: node .github/scripts/validate-packs.js
+        run: node .github/scripts/validate-packs.cjs
 
       - name: Lint markdown
         run: npx markdownlint-cli2 "packages/**/llm/**/*.md"

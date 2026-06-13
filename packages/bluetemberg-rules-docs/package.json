@@ -16,5 +16,9 @@
   },
   "files": [
     "llm/"
-  ]
+  ],
+  "bluetemberg": {
+    "universal": true,
+    "profiles": []
+  }
 }

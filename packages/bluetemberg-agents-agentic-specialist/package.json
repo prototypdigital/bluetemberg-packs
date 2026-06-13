@@ -1,10 +1,13 @@
 {
-  "name": "bluetemberg-agents-infrastructure-specialist",
+  "name": "bluetemberg-agents-agentic-specialist",
   "version": "0.1.0",
-  "description": "Infrastructure specialist agent for Bluetemberg — build, CI, container, deployment config.",
+  "description": "Agentic systems specialist agent for Bluetemberg — agent memory design, state management, orchestration patterns.",
   "keywords": [
     "bluetemberg-pack",
-    "agents"
+    "agents",
+    "agentic",
+    "memory",
+    "orchestration"
   ],
   "author": "Prototyp Digital",
   "license": "MIT",
@@ -18,8 +21,7 @@
   "bluetemberg": {
     "universal": false,
     "profiles": [
-      "devops",
-      "pure-infra"
+      "agentic"
     ]
   }
 }

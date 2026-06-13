@@ -1,10 +1,13 @@
 {
-  "name": "bluetemberg-agents-infrastructure-specialist",
+  "name": "bluetemberg-rules-context-engineering",
   "version": "0.1.0",
-  "description": "Infrastructure specialist agent for Bluetemberg — build, CI, container, deployment config.",
+  "description": "Context engineering rules for Bluetemberg — structuring LLM context, managing token budgets, avoiding context pollution.",
   "keywords": [
     "bluetemberg-pack",
-    "agents"
+    "rules",
+    "agentic",
+    "context-engineering",
+    "llm"
   ],
   "author": "Prototyp Digital",
   "license": "MIT",
@@ -18,8 +21,7 @@
   "bluetemberg": {
     "universal": false,
     "profiles": [
-      "devops",
-      "pure-infra"
+      "agentic"
     ]
   }
 }

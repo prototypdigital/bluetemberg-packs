@@ -20,5 +20,12 @@
   },
   "files": [
     "llm/"
-  ]
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "devops",
+      "pure-infra"
+    ]
+  }
 }

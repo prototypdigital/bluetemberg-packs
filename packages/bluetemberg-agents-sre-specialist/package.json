@@ -2,9 +2,24 @@
   "name": "bluetemberg-agents-sre-specialist",
   "version": "0.1.0",
   "description": "SRE specialist agent for Bluetemberg — SLOs, alerting, runbooks, and post-mortems.",
-  "keywords": ["bluetemberg-pack", "agents"],
+  "keywords": [
+    "bluetemberg-pack",
+    "agents"
+  ],
   "author": "Prototyp Digital",
   "license": "MIT",
-  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
-  "files": ["llm/"]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "devops",
+      "pure-infra"
+    ]
+  }
 }

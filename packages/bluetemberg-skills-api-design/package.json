@@ -2,9 +2,24 @@
   "name": "bluetemberg-skills-api-design",
   "version": "0.1.0",
   "description": "API design skill for Bluetemberg — RESTful conventions, pagination, versioning.",
-  "keywords": ["bluetemberg-pack", "skills"],
+  "keywords": [
+    "bluetemberg-pack",
+    "skills"
+  ],
   "author": "Prototyp Digital",
   "license": "MIT",
-  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
-  "files": ["llm/"]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "backend",
+      "fullstack"
+    ]
+  }
 }

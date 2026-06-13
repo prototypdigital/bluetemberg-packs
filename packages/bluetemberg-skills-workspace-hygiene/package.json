@@ -2,9 +2,27 @@
   "name": "bluetemberg-skills-workspace-hygiene",
   "version": "0.1.0",
   "description": "Workspace hygiene skill for Bluetemberg — clean workspace state during edits.",
-  "keywords": ["bluetemberg-pack", "skills"],
+  "keywords": [
+    "bluetemberg-pack",
+    "skills"
+  ],
   "author": "Prototyp Digital",
   "license": "MIT",
-  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
-  "files": ["llm/"]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "backend",
+      "fullstack",
+      "devops",
+      "pure-infra"
+    ]
+  }
 }

@@ -2,9 +2,25 @@
   "name": "bluetemberg-skills-patterns",
   "version": "0.1.0",
   "description": "Patterns skill for Bluetemberg — apply reusable architecture and coding patterns.",
-  "keywords": ["bluetemberg-pack", "skills"],
+  "keywords": [
+    "bluetemberg-pack",
+    "skills"
+  ],
   "author": "Prototyp Digital",
   "license": "MIT",
-  "repository": {"type": "git", "url": "https://github.com/prototypdigital/bluetemberg-packs.git"},
-  "files": ["llm/"]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "backend",
+      "fullstack"
+    ]
+  }
 }

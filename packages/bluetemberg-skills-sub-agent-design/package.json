@@ -1,10 +1,13 @@
 {
-  "name": "bluetemberg-agents-infrastructure-specialist",
+  "name": "bluetemberg-skills-sub-agent-design",
   "version": "0.1.0",
-  "description": "Infrastructure specialist agent for Bluetemberg — build, CI, container, deployment config.",
+  "description": "Sub-agent design skill for Bluetemberg — plan, scope, and implement sub-agent architectures.",
   "keywords": [
     "bluetemberg-pack",
-    "agents"
+    "skills",
+    "agentic",
+    "sub-agent",
+    "orchestration"
   ],
   "author": "Prototyp Digital",
   "license": "MIT",
@@ -18,8 +21,7 @@
   "bluetemberg": {
     "universal": false,
     "profiles": [
-      "devops",
-      "pure-infra"
+      "agentic"
     ]
   }
 }
