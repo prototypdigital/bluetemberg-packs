@@ -1,0 +1,30 @@
+{
+  "name": "bluetemberg-rules-llm-api-product",
+  "version": "0.1.0",
+  "description": "LLM API and product-engineering rules for Bluetemberg — streaming, cost accounting, and cost-aware model selection.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "llm",
+    "streaming",
+    "cost",
+    "model-routing"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "backend",
+      "fullstack",
+      "agentic"
+    ]
+  }
+}
