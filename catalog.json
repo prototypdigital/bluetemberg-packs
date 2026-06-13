@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-13T16:14:52.226Z",
+  "generated": "2026-06-13T19:23:47.919Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -285,7 +285,7 @@
     },
     {
       "name": "bluetemberg-rules-nextjs",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.",
       "profiles": [
         "frontend",
@@ -294,9 +294,13 @@
       "universal": false,
       "kind": "rules",
       "rules": [
-        "nextjs-public-env-vars"
+        "nextjs-data-fetching",
+        "nextjs-image-optimization",
+        "nextjs-metadata",
+        "nextjs-public-env-vars",
+        "nextjs-server-components"
       ],
-      "preview": "Inlined into bundles at `next build` by textual substitution on `process.env.NEXT_PUBLIC_FOO`. Not runtime config. Block if the name matches `(SECRET|TOKEN|PRIVATE|SERVICE_ROLE|PASSWORD|ADMIN)`, or the value looks like `sk_*`, `eyJ` (JWT), `postgres://`, `mongodb://`, `-----BEGIN`. Sentry DSN is int"
+      "preview": "In App Router, data fetching belongs in Server Components using async/await with the extended `fetch` API. `useEffect` + client-side API calls add a waterfall (page load → render → fetch → render again) and send a round-trip that a Server Component can eliminate entirely. - **Fetch data in Server Co"
     },
     {
       "name": "bluetemberg-rules-security",
