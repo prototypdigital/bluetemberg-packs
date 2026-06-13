@@ -9,7 +9,7 @@ React Server Components (RSC) are the default in Next.js 14+ App Router. Every c
 
 ## Rules
 
-- **Do not add `'use client'` unless required.** A component needs `'use client'` only if it uses browser APIs (`window`, `document`, `localStorage`), React hooks that require client state (`useState`, `useEffect`, `useRef`), or event handlers (`onClick`, `onChange`).
+- **Do not add `'use client'` unless required.** A component needs `'use client'` only if it uses browser APIs (`window`, `document`, `localStorage`), React hooks (`useState`, `useEffect`, `useRef`), or event handlers (`onClick`, `onChange`).
 - **Push `'use client'` to the leaves.** If only a small interactive part of a large component tree needs client-side behavior, extract that part into a separate file and mark only that file.
 - **Never mark a layout or a page `'use client'`** unless every single child also needs to be a Client Component — layouts and pages should stay on the server.
 - **Pass Server Component output as `children` props** into Client Components instead of importing Server Components inside Client Components (which is not supported).

@@ -10,7 +10,7 @@ scope: "**"
 ## Rules
 
 - **Always import `Image` from `next/image`** and use it instead of `<img>`.
-- **Always provide `width` and `height`** (or `fill` + a positioned parent) to prevent layout shift. Never omit both.
+- **Provide `width` and `height` for remote/string sources** (or `fill` + a positioned parent) to prevent layout shift. Static imports infer dimensions automatically; never omit both for non-static sources.
 - **Use `fill` with `sizes`** for responsive images that take a percentage of their container.
 - **Set `priority` on above-the-fold images** (hero, LCP candidate) to preload them.
 - **Never use raw `<img>`** in application code. The only acceptable exception is inside SVG markup or third-party embed iframes.

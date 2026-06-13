@@ -43,7 +43,8 @@ export default function AboutPage() { ... }
 // GOOD — dynamic metadata from fetched data
 // app/products/[id]/page.tsx
 import type { Metadata } from 'next'
-export async function generateMetadata({ params }): Promise<Metadata> {
+type ProductPageProps = { params: { id: string } }
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
   const product = await fetchProduct(params.id)
   return {
     title: product.name,
@@ -51,7 +52,7 @@ export async function generateMetadata({ params }): Promise<Metadata> {
     openGraph: { images: [product.imageUrl] },
   }
 }
-export default async function ProductPage({ params }) { ... }
+export default async function ProductPage({ params }: ProductPageProps) { ... }
 
 // GOOD — global defaults in root layout
 // app/layout.tsx
