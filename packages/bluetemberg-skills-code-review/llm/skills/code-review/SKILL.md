@@ -30,7 +30,7 @@ Use this skill when reviewing a pull request or a set of code changes before mer
 
 Every finding must include a file and line reference (`src/foo.ts:42`).
 
-```
+```text
 <label>(<optional-scope>): <what in one sentence>
 
 <why — one or two sentences on the consequence if not fixed>

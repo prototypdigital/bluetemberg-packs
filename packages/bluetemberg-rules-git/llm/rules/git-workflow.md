@@ -13,13 +13,14 @@ Never push commits directly to `main` or `master`. All changes must go through a
 
 Branch names must follow the conventional commit type as a prefix:
 
-```
+```text
 type/short-description
 ```
 
 Common types: `feat`, `fix`, `chore`, `refactor`, `docs`, `test`.
 
 Examples:
+
 - `feat/new-feature`
 - `fix/login-redirect`
 - `chore/update-dependencies`
@@ -31,10 +32,12 @@ Never push fixes or additions directly onto another open PR's branch. Always ope
 
 - Always open PRs against the main branch (`main` or `master`).
 - Before raising a PR, rebase the branch on top of the latest origin:
-  ```
+
+  ```bash
   git fetch origin
   git rebase origin/main
   ```
+
 - Resolve any conflicts during the rebase before pushing.
 - Force-push the rebased branch to update the remote: `git push --force-with-lease`.
 - PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/): `type(scope): description`.
