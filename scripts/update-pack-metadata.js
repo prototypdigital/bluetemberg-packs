@@ -45,7 +45,6 @@ const PROFILES = {
 };
 
 let updated = 0;
-let skipped = 0;
 
 for (const dir of readdirSync(PACKAGES_DIR)) {
   const pkgPath = join(PACKAGES_DIR, dir, 'package.json');
@@ -53,12 +52,6 @@ for (const dir of readdirSync(PACKAGES_DIR)) {
 
   const pkg = JSON.parse(readFileSync(pkgPath, 'utf8'));
   const meta = PROFILES[pkg.name];
-
-  if (meta === null) {
-    console.log(`skip (legacy): ${pkg.name}`);
-    skipped++;
-    continue;
-  }
 
   if (meta === undefined) {
     console.warn(`WARN: no profile entry for ${pkg.name}`);
@@ -70,4 +63,4 @@ for (const dir of readdirSync(PACKAGES_DIR)) {
   updated++;
 }
 
-console.log(`Updated ${updated} packages, skipped ${skipped}`);
+console.log(`Updated ${updated} packages`);
