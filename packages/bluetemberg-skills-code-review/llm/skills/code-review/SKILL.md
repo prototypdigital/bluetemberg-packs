@@ -39,7 +39,7 @@ Every finding must include a file and line reference (`src/foo.ts:42`).
 ```
 
 | Label | Blocks merge? | Meaning |
-|---|---|---|
+| --- | --- | --- |
 | `issue` | Yes | Correctness bug, security vulnerability, or data loss risk — must fix before merge |
 | `warning` | Recommended | Concrete regression or bad pattern likely to cause problems — strongly advised to fix |
 | `suggestion` | No | Worth considering; optional improvement |
