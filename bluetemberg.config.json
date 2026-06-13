@@ -3,6 +3,7 @@
   "source": "llm",
   "extends": [
     "./packages/bluetemberg-agents-a11y-specialist",
+    "./packages/bluetemberg-agents-agentic-specialist",
     "./packages/bluetemberg-agents-ansible-specialist",
     "./packages/bluetemberg-agents-backend-specialist",
     "./packages/bluetemberg-agents-code-reviewer",
@@ -14,6 +15,7 @@
     "./packages/bluetemberg-agents-security-specialist",
     "./packages/bluetemberg-agents-sre-specialist",
     "./packages/bluetemberg-agents-test-specialist",
+    "./packages/bluetemberg-rules-context-engineering",
     "./packages/bluetemberg-rules-devops",
     "./packages/bluetemberg-rules-docs",
     "./packages/bluetemberg-rules-git",
@@ -32,6 +34,7 @@
     "./packages/bluetemberg-skills-rollback-plan",
     "./packages/bluetemberg-skills-security-audit",
     "./packages/bluetemberg-skills-stack-change-review",
+    "./packages/bluetemberg-skills-sub-agent-design",
     "./packages/bluetemberg-skills-workspace-hygiene"
   ],
   "marketplace": {
