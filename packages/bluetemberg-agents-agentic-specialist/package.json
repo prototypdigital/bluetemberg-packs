@@ -17,5 +17,11 @@
   },
   "files": [
     "llm/"
-  ]
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "agentic"
+    ]
+  }
 }

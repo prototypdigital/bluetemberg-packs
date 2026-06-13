@@ -4,8 +4,10 @@
   "workspaces": [
     "packages/*"
   ],
+  "type": "module",
   "scripts": {
     "validate": "node .github/scripts/validate-packs.js",
+    "generate:catalog": "node scripts/generate-catalog.js",
     "lint:md": "markdownlint-cli2 \"packages/**/llm/**/*.md\""
   },
   "devDependencies": {
