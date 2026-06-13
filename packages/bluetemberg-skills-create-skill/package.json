@@ -1,0 +1,20 @@
+{
+  "name": "bluetemberg-skills-create-skill",
+  "version": "0.1.0",
+  "description": "Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required sections, and sync.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "scaffolding",
+    "tooling"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ]
+}
