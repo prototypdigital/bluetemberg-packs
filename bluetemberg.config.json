@@ -23,6 +23,7 @@
     "./packages/bluetemberg-skills-api-design",
     "./packages/bluetemberg-skills-ci-cd-best-practices",
     "./packages/bluetemberg-skills-code-review",
+    "./packages/bluetemberg-skills-create-skill",
     "./packages/bluetemberg-skills-docs-upkeep",
     "./packages/bluetemberg-skills-infrastructure-drift-check",
     "./packages/bluetemberg-skills-migration-safety",
