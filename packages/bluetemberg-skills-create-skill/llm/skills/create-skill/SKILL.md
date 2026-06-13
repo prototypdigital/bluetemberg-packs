@@ -46,7 +46,7 @@ Use this skill when asked to add, create, or write a new skill for the project.
 
 ## Skill template
 
-```
+```markdown
 ---
 name: {kebab-case-name}
 description: {One tight sentence.}
