@@ -15,6 +15,7 @@
     "./packages/bluetemberg-agents-security-specialist",
     "./packages/bluetemberg-agents-sre-specialist",
     "./packages/bluetemberg-agents-test-specialist",
+    "./packages/bluetemberg-rules-agent-memory",
     "./packages/bluetemberg-rules-context-engineering",
     "./packages/bluetemberg-rules-devops",
     "./packages/bluetemberg-rules-docs",

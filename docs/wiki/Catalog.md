@@ -7,6 +7,17 @@ Item names match filenames in each pack's `llm/<kind>/` directory and are used f
 
 Always-on instructions loaded into every AI session automatically.
 
+### bluetemberg-rules-agent-memory
+
+Agent memory rules for Bluetemberg — statelessness as a hard constraint, memory provenance, promotion through consolidation, and authority-ranked recall.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `memory-architecture-checklist` | Treat LLM statelessness as a hard constraint — decide explicitly what state survives a turn, which storage tier holds it, and how it is evicted. |
+| `memory-promotion` | Session observations never write directly to durable memory — promotion runs through a reviewable consolidation step that dedupes, supersedes, and ratifies. |
+| `memory-provenance` | Every durable memory carries provenance — source, time, confidence, and whether it was user-stated or agent-inferred. No silent writes. |
+| `memory-recall-authority` | Rank recalled memory by authority, not only relevance — and never let stale, contradicted, or superseded memory present as a current constraint. |
+
 ### bluetemberg-rules-context-engineering
 
 Context engineering rules for Bluetemberg — structuring LLM context, managing token budgets, avoiding context pollution.
