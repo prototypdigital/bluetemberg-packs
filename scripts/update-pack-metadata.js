@@ -42,8 +42,6 @@ const PROFILES = {
   'bluetemberg-skills-infrastructure-drift-check': { universal: false, profiles: ['devops', 'pure-infra'] },
   'bluetemberg-skills-rollback-plan':              { universal: false, profiles: ['devops', 'pure-infra'] },
   'bluetemberg-skills-sub-agent-design':           { universal: false, profiles: ['agentic'] },
-  // Legacy junk package — skip (will be deprecated)
-  'bluetemberg-packs.git':                         null,
 };
 
 let updated = 0;

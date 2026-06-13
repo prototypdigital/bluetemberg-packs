@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-13T12:25:31.617Z",
+  "generated": "2026-06-13T16:14:52.226Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -270,11 +270,11 @@
       "preview": "A PR that changes behavior without updating docs is not done. - New or removed CLI flags, commands, or options - Changes to user-facing workflows (new prompts, removed choices, changed defaults) - New or removed public APIs, config options, or schema fields - Changes to output behavior or generated"
     },
     {
-      "name": "bluetemberg-packs.git",
+      "name": "bluetemberg-rules-git",
       "version": "0.1.0",
       "description": "Git workflow rules for Bluetemberg — branch protection, naming, PR workflow, git move, pre-commit checks.",
       "profiles": [],
-      "universal": false,
+      "universal": true,
       "kind": "rules",
       "rules": [
         "git-move",
