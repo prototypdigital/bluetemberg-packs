@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-agentic-specialist",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Agentic systems specialist agent for Bluetemberg — agent memory design, state management, orchestration patterns.",
   "keywords": [
     "bluetemberg-pack",
