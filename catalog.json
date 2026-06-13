@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-13T19:34:58.693Z",
+  "generated": "2026-06-13T19:48:01.610Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -213,6 +213,23 @@
         "conventional-branch-names"
       ],
       "preview": "Blocks AI tools from creating worktrees with auto-generated names (e.g. `claude/some-name`). Requires a branch name in `type/description` format before the worktree is created."
+    },
+    {
+      "name": "bluetemberg-rules-agent-memory",
+      "version": "0.1.0",
+      "description": "Agent memory rules for Bluetemberg — statelessness as a hard constraint, memory provenance, promotion through consolidation, and authority-ranked recall.",
+      "profiles": [
+        "agentic"
+      ],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        "memory-architecture-checklist",
+        "memory-promotion",
+        "memory-provenance",
+        "memory-recall-authority"
+      ],
+      "preview": "An LLM call is stateless. Nothing carries between turns except what you put back into the context window. Continuity is an engineering decision, not a model feature — and provider-managed memory APIs delegate the storage, not the decision. - For every piece of state, decide explicitly whether it mus"
     },
     {
       "name": "bluetemberg-rules-context-engineering",

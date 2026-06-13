@@ -1,0 +1,27 @@
+{
+  "name": "bluetemberg-rules-agent-memory",
+  "version": "0.1.0",
+  "description": "Agent memory rules for Bluetemberg — statelessness as a hard constraint, memory provenance, promotion through consolidation, and authority-ranked recall.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "agentic",
+    "agent-memory",
+    "llm"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "agentic"
+    ]
+  }
+}
