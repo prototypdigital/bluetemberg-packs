@@ -3,7 +3,7 @@
 Official content packs for [Bluetemberg](https://github.com/prototypdigital/bluetemberg) — rules, agents, skills, and guardrails. Install with `bluetemberg add`, sync to every AI assistant you use.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Packs](https://img.shields.io/badge/packs-31-brightgreen.svg)](#packs)
+[![Packs](https://img.shields.io/badge/packs-36-brightgreen.svg)](#packs)
 [![Bluetemberg](https://img.shields.io/badge/built%20for-bluetemberg-5b6ee1.svg)](https://github.com/prototypdigital/bluetemberg)
 
 Each pack is a standalone npm package containing vendor-neutral content in the standard `llm/` layout. [Bluetemberg](https://github.com/prototypdigital/bluetemberg) installs them and syncs the content into **Cursor, Claude Code, GitHub Copilot, Gemini, and Windsurf** — each in that tool's native format.
@@ -21,6 +21,7 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 | [`bluetemberg-rules-security`](https://www.npmjs.com/package/bluetemberg-rules-security) | Security guardrails | `never-read-env`, `security-secrets`, `api-error-handling` |
 | [`bluetemberg-rules-docs`](https://www.npmjs.com/package/bluetemberg-rules-docs) | Documentation & diagnostics | `docs-parity`, `post-edit-diagnostics`, `mermaid-diagrams` |
 | [`bluetemberg-rules-devops`](https://www.npmjs.com/package/bluetemberg-rules-devops) | Infrastructure | `docker-best-practices`, `terraform-conventions`, `ansible-conventions`, `kubernetes-manifests`, `helm-conventions`, `container-image-pinning`, `ci-workflow-conventions`, `shell-script-standards`, `idempotency`, `runbook-discipline` |
+| [`bluetemberg-rules-context-engineering`](https://www.npmjs.com/package/bluetemberg-rules-context-engineering) | LLM context engineering | `context-pollution-prevention`, `context-window-budget`, `multi-turn-state-management` |
 | [`bluetemberg-rules-nextjs`](https://www.npmjs.com/package/bluetemberg-rules-nextjs) | Next.js | `nextjs-public-env-vars` |
 
 ### Agents

@@ -61,8 +61,7 @@ vendor-reported magnitudes are flagged inline as non-reproducible.
   position curve, finite-resource/JIT+compaction, long-form-data-at-top,
   delimited-sections (cross-vendor part only), multi-turn-consolidate,
   distractor-pruning. Largest, most coherent, safest cluster.
-- **`bluetemberg-agents-agentic-specialist`** (de-facto "agent-memory"/agentic
-  home — no `bluetemberg-rules-agent-memory` pack exists) — tool-schema
+- **`bluetemberg-agents-agentic-specialist`** — tool-schema
   naming/namespacing, schema-level constraint enforcement, structured
   error-recovery loop, per-tool human-approval gating, backoff/jitter/idempotency.
 - **`bluetemberg-rules-security`** — paired package-hallucination/slopsquatting
