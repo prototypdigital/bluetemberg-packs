@@ -17,7 +17,7 @@ Treat the context window as a fixed resource. Every token spent on stale or redu
 
 ## Anti-patterns
 
-```
+```text
 // BAD — reads entire 800-line file to find one function
 read_file("src/utils/helpers.ts")
 

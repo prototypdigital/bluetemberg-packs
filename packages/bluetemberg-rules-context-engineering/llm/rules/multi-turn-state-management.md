@@ -19,7 +19,7 @@ Long tasks that span many tool calls accumulate implicit state. Making that stat
 
 When a non-obvious choice is made during task execution, record it inline:
 
-```
+```text
 Decision: using `pnpm` (detected in package.json lockfileVersion)
 Decision: targeting `src/api/` only (no matching files in `src/lib/`)
 Decision: skipping format pass — `.prettierignore` excludes `*.generated.ts`

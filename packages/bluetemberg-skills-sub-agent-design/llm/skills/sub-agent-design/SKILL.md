@@ -25,7 +25,7 @@ Use this skill when you need to break a complex agentic task into a coordinated 
 
 Output format:
 
-```
+```text
 Orchestrator: <name> — routes tasks, aggregates results, handles errors
 ├── Sub-agent A: <name> — <one-line responsibility>
 ├── Sub-agent B: <name> — <one-line responsibility>
@@ -36,7 +36,7 @@ Orchestrator: <name> — routes tasks, aggregates results, handles errors
 
 For each agent, document the interface:
 
-```
+```text
 Agent: <name>
 Input:  { <field>: <type>, ... }
 Output: { <field>: <type>, ... }

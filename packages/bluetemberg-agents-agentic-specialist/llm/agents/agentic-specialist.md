@@ -29,7 +29,7 @@ Recommend the simplest storage that satisfies the durability and retrieval requi
 
 When designing a sub-agent interface, document:
 
-```
+```text
 Input: { field: type, ... }  — what the orchestrator sends
 Output: { field: type, ... } — what the sub-agent returns
 Preconditions: what must be true before the sub-agent is called
