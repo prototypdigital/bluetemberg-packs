@@ -5,7 +5,7 @@ scope: "**"
 
 # Context pollution prevention
 
-Context pollution is when irrelevant, contradictory, or duplicate information crowds out the signal needed for accurate reasoning.
+Context pollution is when irrelevant, contradictory, or duplicate information crowds out the signal needed for accurate reasoning. This is not a soft concern: adding even a **single distractor** — plausibly-related but irrelevant content — measurably lowers accuracy, and across frontier models a context with distractors can perform *below* the same context with only the relevant content present. The effect compounds as distractors accumulate, so stale and tangential content is an active liability, not neutral ballast.
 
 ## Rules
 
@@ -21,3 +21,7 @@ Context pollution is when irrelevant, contradictory, or duplicate information cr
 2. Pick the narrowest tool and scope that could answer it.
 3. After retrieval, extract only the fact needed — discard the scaffolding.
 4. Record where the fact came from (file path + line) in case it needs verification.
+
+## Source
+
+Chroma, "Context Rot: How Increasing Input Tokens Impacts LLM Performance," 2025-07 — <https://research.trychroma.com/context-rot>. Across 18 models, performance grows unreliable as input length grows and the presence of distractors degrades accuracy below the distractor-free baseline — empirical backing for actively pruning irrelevant context rather than letting it accumulate.

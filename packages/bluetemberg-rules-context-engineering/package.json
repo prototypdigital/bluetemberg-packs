@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-context-engineering",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Context engineering rules for Bluetemberg — structuring LLM context, managing token budgets, avoiding context pollution.",
   "keywords": [
     "bluetemberg-pack",
