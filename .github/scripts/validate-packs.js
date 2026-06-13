@@ -64,6 +64,27 @@ function listPackDirs() {
   );
 }
 
+// ─── 0. Package name integrity ───────────────────────────────────────────────
+console.log('\n[0] Package name integrity (name field must match directory name)');
+{
+  const NAME_RE = /^bluetemberg-[a-z][a-z0-9-]*$/;
+  for (const dir of listPackDirs()) {
+    const pkgPath = path.join(ROOT, 'packages', dir, 'package.json');
+    if (!fs.existsSync(pkgPath)) {
+      fail(`packages/${dir}: missing package.json`);
+      continue;
+    }
+    const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+    if (pkg.name !== dir) {
+      fail(`packages/${dir}: name field "${pkg.name}" does not match directory name "${dir}"`);
+    } else if (!NAME_RE.test(pkg.name)) {
+      fail(`packages/${dir}: name "${pkg.name}" does not match required pattern ${NAME_RE}`);
+    } else {
+      pass(`packages/${dir}: name "${pkg.name}" ✓`);
+    }
+  }
+}
+
 // ─── 1. Config integrity ──────────────────────────────────────────────────────
 console.log('\n[1] Config integrity (bluetemberg.config.json ↔ packages/)');
 {
