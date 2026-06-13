@@ -16,11 +16,11 @@ Use this skill to confirm what bluetemberg configuration the LLM has in its acti
 
 ## Required behavior
 
-Steps must be executed in order. Do not read any files before completing step 1.
+Steps MUST be executed in order. The LLM MUST NOT read any files before completing step 1.
 
 ### Step 1 — Recall from session memory (no file reads)
 
-Without opening any files, enumerate every bluetemberg item the LLM can identify in its current session context. For each item state:
+The LLM MUST enumerate every bluetemberg item it can identify in its current session context without opening any files. For each item the LLM MUST state:
 
 - Its **name** (the rule slug, agent filename, or skill name)
 - Its **category** (rule / agent / skill)
@@ -30,17 +30,17 @@ This is the actual test. An item loaded into the session at startup will be reca
 
 ### Step 2 — Scan disk
 
-Detect the active platform by checking which output directory exists:
+The LLM MUST detect the active platform by checking which output directory exists:
 
 - Claude Code: `.claude/rules/`, `.claude/agents/`, `.claude/skills/`
 - Cursor: `.cursor/rules/`, `.cursor/agents/`, `.cursor/skills/`
 - Copilot: `.github/instructions/`, `.github/agents/`, `.github/skills/`
 
-For each directory that exists, list every file (or subdirectory for skills). Extract the `name` and `description` from frontmatter where present.
+For each directory that exists, the LLM MUST list every file (or subdirectory for skills) and extract the `name` and `description` from frontmatter where present.
 
 ### Step 3 — Cross-reference
 
-Produce one table per category. Match entries by name, stripping file extensions for comparison.
+The LLM MUST produce one table per category. Entries MUST be matched by name, stripping file extensions for comparison.
 
 | Name | On disk | In context |
 |------|---------|------------|
@@ -49,17 +49,17 @@ Produce one table per category. Match entries by name, stripping file extensions
 
 ### Step 4 — Report
 
-State totals for each category:
+The LLM MUST state totals for each category:
 
 - **Rules**: N on disk, M recalled, K matching
 - **Agents**: N on disk, M recalled, K matching
 - **Skills**: N on disk, M recalled, K matching
 
-For any item on disk but not recalled: note that it may have been added by a sync that ran after this session started — a fresh session will load it.
+For any item on disk but not recalled, the LLM MUST note that it may have been added by a sync that ran after this session started — a fresh session will load it.
 
-For any item recalled but not on disk: note that it may have been deleted or pruned since this session started — a fresh session will not load it.
+For any item recalled but not on disk, the LLM MUST note that it may have been deleted or pruned since this session started — a fresh session will not load it.
 
-If all counts match across all categories, report: `Configuration fully loaded — all N items on disk match context.`
+If all counts match across all categories, the LLM MUST report: `Configuration fully loaded — all N items on disk match context.`
 
 ## What this does NOT test
 
