@@ -18,7 +18,7 @@ Treat the context window as a **finite resource with diminishing marginal return
 ## Two budget tactics for agent loops
 
 - **Just-in-time retrieval.** Don't pre-stuff everything the agent *might* need. Hold lightweight identifiers (file paths, stored queries, links) and load the data into context at runtime via tools, only when a step actually needs it.
-- **Compaction.** When a conversation nears the window limit, summarize it — preserving decisions, unresolved problems, and key implementation details, discarding redundant tool output — and reinitiate a fresh window from that summary rather than letting it run to the edge. (Summarize as a delta/append over structured retention; never trust a single end-to-end monolithic rewrite — see the existing context-collapse guidance.)
+- **Compaction.** When a conversation nears the window limit, summarize it — preserving decisions, unresolved problems, and key implementation details, discarding redundant tool output — and reinitiate a fresh window from that summary rather than letting it run to the edge. (Structure the summary as a delta/append over named retention fields — `decisions`, `open_problems`, `implementation_details` — rather than a single end-to-end monolithic rewrite; a monolithic rewrite silently drops load-bearing context when the model misjudges what is "redundant".)
 
 ## Source
 

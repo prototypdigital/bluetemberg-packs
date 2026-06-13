@@ -53,7 +53,7 @@ These are evidence-backed defaults for tool-calling agents. Apply them when desi
 
 ### Human-in-the-loop
 
-- **Gate side-effecting tools behind per-tool approval.** Any tool that performs a consequential or irreversible action (writes, payments, deletes, external sends) should require explicit human approval before execution. Implement it as a **pause with resumable state** — the run suspends, surfaces the pending call for approval, and resumes (or aborts) from saved state — rather than blocking a thread. Co-locate the validation/guardrail with the tool so it can't be bypassed by a different call path. *(OpenAI Agents — guardrails & human review — <https://developers.openai.com/api/docs/guides/agents/guardrails-approvals>; corroborated by the Claude Agent SDK permission model.)*
+- **Gate irreversible or externally visible tools behind per-tool approval.** Any tool that performs an action that is hard to undo or visible outside the repo — payments, deletes, external sends, production infrastructure changes, permanent data exports — should require explicit human approval before execution. Routine repository authoring (file edits, test runs) is covered by the repo review flow and does not require per-call approval. Implement approval as a **pause with resumable state** — the run suspends, surfaces the pending call for approval, and resumes (or aborts) from saved state — rather than blocking a thread. Co-locate the validation/guardrail with the tool so it can't be bypassed by a different call path. *(OpenAI Agents — guardrails & human review — <https://developers.openai.com/api/docs/guides/agents/guardrails-approvals>; corroborated by the Claude Agent SDK permission model.)*
 
 ## Constraints
 
@@ -61,4 +61,4 @@ These are evidence-backed defaults for tool-calling agents. Apply them when desi
 - Never introduce an external service (vector DB, message queue) without confirming the project's infrastructure constraints.
 - Never accept ambiguous tool calls — if a sub-agent's output is underspecified, request a schema before wiring it.
 - Prefer deterministic state (files, SQL) over probabilistic retrieval (embeddings) when the data size allows it.
-- Never let a side-effecting tool run unattended without an approval gate and a documented rollback or idempotency guarantee.
+- Never let an irreversible or externally visible tool run unattended without an approval gate and a documented rollback or idempotency guarantee.
