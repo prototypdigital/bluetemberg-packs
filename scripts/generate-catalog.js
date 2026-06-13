@@ -58,29 +58,34 @@ function listContentFiles(pkgDir, kind) {
 }
 
 function buildEntry(pkgDir) {
-  const pkgJsonPath = join(pkgDir, 'package.json');
-  if (!existsSync(pkgJsonPath)) return null;
+  try {
+    const pkgJsonPath = join(pkgDir, 'package.json');
+    if (!existsSync(pkgJsonPath)) return null;
 
-  const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
-  const kind = inferKind(pkg.name);
-  const contentFiles = listContentFiles(pkgDir, kind);
+    const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
+    const kind = inferKind(pkg.name);
+    const contentFiles = listContentFiles(pkgDir, kind);
 
-  const preview = contentFiles.length > 0
-    ? extractPreview(readFileSync(contentFiles[0].path, 'utf8'))
-    : '';
+    const preview = contentFiles.length > 0
+      ? extractPreview(readFileSync(contentFiles[0].path, 'utf8'))
+      : '';
 
-  const meta = pkg.bluetemberg ?? {};
+    const meta = pkg.bluetemberg ?? {};
 
-  return {
-    name: pkg.name,
-    version: pkg.version,
-    description: pkg.description ?? '',
-    profiles: meta.profiles ?? [],
-    universal: meta.universal ?? false,
-    kind,
-    [kind]: contentFiles.map((f) => f.name),
-    preview,
-  };
+    return {
+      name: pkg.name,
+      version: pkg.version,
+      description: pkg.description ?? '',
+      profiles: meta.profiles ?? [],
+      universal: meta.universal ?? false,
+      kind,
+      [kind]: contentFiles.map((f) => f.name),
+      preview,
+    };
+  } catch (err) {
+    console.error(`Error building entry for ${pkgDir}:`, err.message);
+    return null;
+  }
 }
 
 function main() {
@@ -98,8 +103,13 @@ function main() {
     packs,
   };
 
-  writeFileSync(CATALOG_PATH, JSON.stringify(catalog, null, 2) + '\n');
-  console.log(`catalog.json written — ${packs.length} pack(s)`);
+  try {
+    writeFileSync(CATALOG_PATH, JSON.stringify(catalog, null, 2) + '\n');
+    console.log(`catalog.json written — ${packs.length} pack(s)`);
+  } catch (err) {
+    console.error(`Failed to write catalog.json:`, err.message);
+    process.exit(1);
+  }
 }
 
 main();
