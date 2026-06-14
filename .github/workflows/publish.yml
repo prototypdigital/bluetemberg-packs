@@ -10,7 +10,6 @@ permissions: read-all
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: NPM
     permissions:
       id-token: write
       contents: read
