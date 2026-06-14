@@ -43,6 +43,10 @@ Use this skill when asked to create a new bluetemberg pack (a publishable npm pa
 
 ## package.json template
 
+Use the correct `bluetemberg` block for the pack's scope — choose one, never mix.
+
+**Profile-scoped pack** (`universal: false` — only installed for specific profiles):
+
 ```json
 {
   "name": "bluetemberg-{kind}-{topic}",
@@ -59,6 +63,28 @@ Use this skill when asked to create a new bluetemberg pack (a publishable npm pa
   "bluetemberg": {
     "universal": false,
     "profiles": ["backend", "fullstack"]
+  }
+}
+```
+
+**Universal pack** (`universal: true` — installed for every profile, `profiles` must be `[]`):
+
+```json
+{
+  "name": "bluetemberg-{kind}-{topic}",
+  "version": "0.1.0",
+  "description": "{One sentence} for Bluetemberg.",
+  "keywords": ["bluetemberg-pack", "{kind}"],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": ["llm/"],
+  "bluetemberg": {
+    "universal": true,
+    "profiles": []
   }
 }
 ```
