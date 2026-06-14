@@ -1,0 +1,29 @@
+{
+  "name": "bluetemberg-rules-testing",
+  "version": "0.1.0",
+  "description": "Testing rules for Bluetemberg — determinism, isolation, and meaningful coverage.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "testing",
+    "test",
+    "quality"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "backend",
+      "fullstack"
+    ]
+  }
+}

@@ -22,6 +22,7 @@
     "./packages/bluetemberg-rules-git",
     "./packages/bluetemberg-rules-llm-api-product",
     "./packages/bluetemberg-rules-nextjs",
+    "./packages/bluetemberg-rules-testing",
     "./packages/bluetemberg-rules-security",
     "./packages/bluetemberg-rules-typescript",
     "./packages/bluetemberg-skills-api-design",
