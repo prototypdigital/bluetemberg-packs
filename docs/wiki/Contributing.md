@@ -43,6 +43,8 @@ Keep rules short and imperative. They are passive context the assistant reads on
 
 Adding or removing a rule is a `feat`; it changes what consumers get. Tweaking wording in an existing rule is usually a `fix` or `docs`.
 
+You don't bump the pack's `version` yourself — [release-please](Releasing) derives the bump from your commit type and maintains a Release PR. Merging that PR publishes the changed packs.
+
 ## Add a new pack
 
 1. Create `packages/bluetemberg-rules-<domain>/` with a `package.json`:
@@ -66,8 +68,9 @@ Adding or removing a rule is a `feat`; it changes what consumers get. Tweaking w
    The `bluetemberg-pack` keyword is what makes the package discoverable via `bluetemberg search`.
 
 2. Add your rules under `llm/rules/`.
-3. Document the pack in the [Catalog](Catalog) and the [README](https://github.com/prototypdigital/bluetemberg-rules#packs).
-4. If the pack should be offered by the `bluetemberg init` wizard, add a matching entry to `RULE_COLLECTION_PRESETS` in the **bluetemberg** repo (`src/init/presets.ts`) — that's a separate PR in that repo.
+3. Register the pack with release-please so it gets versioned and published: add `"packages/<name>": {}` to `release-please-config.json` and `"packages/<name>": "0.1.0"` to `.release-please-manifest.json`. See [Releasing](Releasing) for the one-time npm bootstrap.
+4. Document the pack in the [Catalog](Catalog) and the [README](https://github.com/prototypdigital/bluetemberg-rules#packs).
+5. If the pack should be offered by the `bluetemberg init` wizard, add a matching entry to `RULE_COLLECTION_PRESETS` in the **bluetemberg** repo (`src/init/presets.ts`) — that's a separate PR in that repo.
 
 ## Test a pack locally
 

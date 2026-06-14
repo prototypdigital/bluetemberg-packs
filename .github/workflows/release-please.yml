@@ -1,0 +1,81 @@
+name: Release Please
+
+# Single release pipeline for this packs monorepo:
+#   1. release-please watches conventional commits on main and maintains ONE
+#      aggregated "Release PR" that bumps each changed pack independently and
+#      writes its per-package CHANGELOG.md.
+#   2. Merging that PR creates a GitHub Release + tag per changed pack
+#      (tags look like `bluetemberg-rules-git-v0.2.0`).
+#   3. The publish job then publishes ONLY the packs that were just released
+#      (release-please tells us via `paths_released`) to npm with provenance.
+#
+# Publishing only the released paths is deliberate: `npm publish --workspaces`
+# would re-publish all 41 packs every release and 403 on the already-published
+# ones. Per-path publish is the only correct shape for an incremental monorepo.
+#
+# npm auth: OIDC trusted publishing (no token). The repo owner must register a
+# trusted publisher for each pack on npmjs.com pointing at this repo and this
+# workflow file (release-please.yml). See docs/wiki/Releasing.md.
+
+on:
+  push:
+    branches: [main]
+
+permissions: {}
+
+concurrency:
+  group: release-please
+  cancel-in-progress: false
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      paths_released: ${{ steps.release.outputs.paths_released }}
+    steps:
+      - name: Run release-please
+        id: release
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  publish:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.releases_created == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC trusted publishing to npm
+    strategy:
+      fail-fast: false
+      matrix:
+        # Only the packs release-please actually released this run.
+        path: ${{ fromJSON(needs.release-please.outputs.paths_released) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      # OIDC trusted publishing requires npm >= 11.5.1; the bundled npm may be
+      # older. Removing this silently breaks token-less publishing.
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@latest
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish package
+        env:
+          PKG_PATH: ${{ matrix.path }}
+        run: npm publish -w "$PKG_PATH" --provenance --access public
