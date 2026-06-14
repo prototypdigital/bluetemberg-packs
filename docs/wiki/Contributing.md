@@ -68,7 +68,7 @@ You don't bump the pack's `version` yourself — [release-please](Releasing) der
    The `bluetemberg-pack` keyword is what makes the package discoverable via `bluetemberg search`.
 
 2. Add your rules under `llm/rules/`.
-3. Register the pack with release-please so it gets versioned and published: add `"packages/<name>": {}` to `release-please-config.json` and `"packages/<name>": "0.1.0"` to `.release-please-manifest.json`. See [Releasing](Releasing) for the one-time npm bootstrap.
+3. Register the pack with release-please so it gets versioned and published: add `"packages/<name>": {}` to `release-please-config.json` and `"packages/<name>": "0.1.0"` to `.release-please-manifest.json`. The next release publishes the new pack to npm automatically — there's no manual npm step (see [Releasing](Releasing)).
 4. Document the pack in the [Catalog](Catalog) and the [README](https://github.com/prototypdigital/bluetemberg-packs#packs).
 5. If the pack should be offered by the `bluetemberg init` wizard, add a matching entry to `RULE_COLLECTION_PRESETS` in the **bluetemberg** repo (`src/init/presets.ts`) — that's a separate PR in that repo.
 
