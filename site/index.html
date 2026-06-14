@@ -6,7 +6,34 @@
     <title>Bluetemberg Packs — browse the catalog</title>
     <meta
       name="description"
-      content="Browse every official Bluetemberg pack — rules, agents, skills, and guardrails. Filter by kind, profile, or name."
+      content="Browse every official Bluetemberg pack — rules, agents, skills, and guardrails. Filter by kind, profile, or name, and copy the install command."
+    />
+    <link
+      rel="canonical"
+      href="https://prototypdigital.github.io/bluetemberg-packs/"
+    />
+
+    <!-- Open Graph — renders a card when shared in Slack, LinkedIn, Discord, etc. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bluetemberg Packs" />
+    <meta
+      property="og:url"
+      content="https://prototypdigital.github.io/bluetemberg-packs/"
+    />
+    <meta property="og:title" content="The Bluetemberg pack catalog" />
+    <meta
+      property="og:description"
+      content="Every official Bluetemberg pack — rules, agents, skills, and guardrails — in one searchable, filterable index. Copy the install command, no signup."
+    />
+    <meta
+      property="og:image"
+      content="https://prototypdigital.github.io/bluetemberg-packs/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="The Bluetemberg pack catalog — rules, agents, skills, and guardrails."
     />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -337,10 +364,15 @@
       /* ====== Pack entry ====== */
       .pack {
         display: grid;
-        grid-template-columns: 1fr auto;
+        /* minmax(0, …) lets the main column shrink below its content width so
+           a long install command scrolls inside its box instead of overflowing. */
+        grid-template-columns: minmax(0, 1fr) auto;
         gap: 6px 24px;
         padding: 20px 0 20px 16px;
         border-top: var(--hairline);
+      }
+      .pack-main {
+        min-width: 0;
       }
       .kind-head + .pack {
         border-top: none;
@@ -415,6 +447,113 @@
         color: var(--muted);
       }
 
+      .pack-pub {
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--muted);
+      }
+
+      /* install command + copy */
+      .install {
+        display: inline-flex;
+        align-items: stretch;
+        margin-top: 12px;
+        border: var(--hairline);
+        max-width: 100%;
+      }
+      .install .cmd {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--ink-bright);
+        background: var(--code-bg);
+        padding: 8px 12px;
+        white-space: nowrap;
+        overflow-x: auto;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+      }
+      .install .cmd::before {
+        content: "$";
+        color: var(--muted);
+        padding-right: 9px;
+      }
+      .install .copy {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 0 14px;
+        border-left: var(--hairline);
+        white-space: nowrap;
+        transition:
+          color 0.12s,
+          background-color 0.12s;
+      }
+      .install .copy:hover {
+        color: var(--ink-bright);
+        background: var(--bg-2);
+      }
+      .install .copy.copied {
+        color: var(--k-guardrails);
+      }
+      .soon {
+        display: inline-block;
+        margin-top: 12px;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        border: 1px dashed var(--rule);
+        padding: 7px 11px;
+      }
+
+      /* profile bundle bar */
+      .bundle {
+        display: none;
+        align-items: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 11px;
+        padding: 10px 14px;
+        border: 1px solid var(--accent);
+        background: color-mix(in srgb, var(--accent) 12%, transparent);
+      }
+      .bundle.show {
+        display: flex;
+      }
+      .bundle .lbl {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        color: var(--ink);
+      }
+      .bundle .lbl b {
+        color: var(--ink-bright);
+        font-weight: 500;
+      }
+      .bundle .copy-bundle {
+        font-family: var(--mono);
+        font-size: 10px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-bright);
+        border: var(--hairline);
+        padding: 6px 12px;
+        margin-left: auto;
+        transition:
+          border-color 0.12s,
+          color 0.12s;
+      }
+      .bundle .copy-bundle:hover {
+        border-color: var(--accent-ink);
+      }
+      .bundle .copy-bundle.copied {
+        color: var(--k-guardrails);
+        border-color: var(--k-guardrails);
+      }
+
       .pack-aside {
         display: flex;
         flex-direction: column;
@@ -441,8 +580,8 @@
         padding: 1px 0 1px 7px;
       }
 
-      /* preview disclosure */
-      .prev-toggle {
+      /* contents disclosure — what each pack actually contains */
+      .disclosure {
         grid-column: 1 / -1;
         font-family: var(--mono);
         font-size: 11px;
@@ -453,40 +592,53 @@
         align-items: center;
         gap: 7px;
         width: fit-content;
-        margin-top: 4px;
+        margin-top: 12px;
         transition: color 0.12s;
       }
-      .prev-toggle:hover {
+      .disclosure:hover {
         color: var(--ink);
       }
-      .prev-toggle .chev {
+      .disclosure .chev {
         transition: transform 0.15s;
         display: inline-block;
       }
-      .prev-toggle[aria-expanded="true"] .chev {
+      .disclosure[aria-expanded="true"] .chev {
         transform: rotate(90deg);
       }
-      .preview {
+      .contents {
         grid-column: 1 / -1;
         display: none;
-        margin-top: 10px;
-        background: var(--code-bg);
-        border: 1px solid #000;
-        padding: 14px 16px;
+        margin-top: 12px;
+        border-left: 2px solid var(--kc, var(--rule));
+        padding-left: 16px;
+      }
+      .contents.open {
+        display: block;
+      }
+      .contents dl {
+        display: grid;
+        grid-template-columns: minmax(140px, 220px) 1fr;
+        gap: 6px 20px;
+      }
+      .contents dt {
         font-family: var(--mono);
-        font-size: 12.5px;
-        line-height: 1.6;
-        color: var(--ink);
-        white-space: pre-wrap;
+        font-size: 12px;
+        color: var(--ink-bright);
         word-break: break-word;
       }
-      .preview.open {
-        display: block;
+      .contents dd {
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.45;
       }
-      .preview .cm {
-        color: var(--code-com);
-        display: block;
-        margin-bottom: 6px;
+      @media (max-width: 620px) {
+        .contents dl {
+          grid-template-columns: 1fr;
+          gap: 2px 0;
+        }
+        .contents dd {
+          margin-bottom: 10px;
+        }
       }
 
       /* ====== Empty + error states (real copy, not "no results") ====== */
@@ -625,11 +777,18 @@
             Universal only
           </button>
         </div>
+        <div class="bundle" id="bundle" aria-live="polite"></div>
       </div>
     </div>
 
     <main id="results" class="results">
       <div class="wrap" id="list"></div>
+      <!-- Crawlable, no-JS fallback. build-site.js replaces the marker below
+           with the full pack list so search engines and link unfurlers that
+           don't run JS still see every pack. -->
+      <noscript>
+        <div class="wrap"><!--PACKS--></div>
+      </noscript>
     </main>
 
     <footer class="foot">
@@ -707,6 +866,14 @@
         "agentic",
       ];
 
+      /* Singular noun per kind, for "4 rules" / "1 agent" labels. */
+      const ITEM_TERM = {
+        rules: "rule",
+        agents: "agent",
+        skills: "skill",
+        guardrails: "guardrail",
+      };
+
       const state = {
         kind: "all",
         profile: "all",
@@ -717,6 +884,9 @@
 
       const $list = document.getElementById("list");
       const $count = document.getElementById("count");
+      const $bundle = document.getElementById("bundle");
+      const $search = document.getElementById("search");
+      const $universal = document.getElementById("universal");
 
       const esc = (s) =>
         String(s).replace(
@@ -731,6 +901,48 @@
             })[c],
         );
 
+      const installCmd = (names) =>
+        `bluetemberg add ${(Array.isArray(names) ? names : [names]).join(" ")}`;
+
+      // published === null means build-time enrichment confirmed a 404 on npm.
+      // An absent field (dev, or a transient fetch error) stays installable.
+      const isInstallable = (pack) => pack.published !== null;
+
+      /* ---- URL state — every view is shareable ---- */
+      function readURL() {
+        const p = new URLSearchParams(location.search);
+        const kind = p.get("kind");
+        if (kind === "all" || KIND_ORDER.includes(kind)) state.kind = kind;
+        const profile = p.get("profile");
+        if (profile === "all" || PROFILE_ORDER.includes(profile))
+          state.profile = profile;
+        state.universal = p.get("universal") === "1";
+        state.query = p.get("q") || "";
+      }
+
+      function writeURL() {
+        const p = new URLSearchParams();
+        if (state.kind !== "all") p.set("kind", state.kind);
+        if (state.profile !== "all") p.set("profile", state.profile);
+        if (state.universal) p.set("universal", "1");
+        if (state.query) p.set("q", state.query);
+        const qs = p.toString();
+        history.replaceState(
+          null,
+          "",
+          qs ? `${location.pathname}?${qs}` : location.pathname,
+        );
+      }
+
+      /* ---- search: AND across whitespace-separated tokens ---- */
+      function haystack(pack) {
+        const items = pack[pack.kind] || [];
+        const itemText = items
+          .map((i) => `${i.name} ${i.description || ""}`)
+          .join(" ");
+        return `${pack.name} ${pack.description} ${itemText}`.toLowerCase();
+      }
+
       function matches(pack) {
         if (state.kind !== "all" && pack.kind !== state.kind) return false;
         if (
@@ -740,11 +952,9 @@
           return false;
         if (state.universal && !pack.universal) return false;
         if (state.query) {
-          const q = state.query.toLowerCase();
-          const items = pack[pack.kind] || [];
-          const hay =
-            `${pack.name} ${pack.description} ${items.join(" ")}`.toLowerCase();
-          if (!hay.includes(q)) return false;
+          const hay = haystack(pack);
+          const tokens = state.query.toLowerCase().split(/\s+/).filter(Boolean);
+          if (!tokens.every((t) => hay.includes(t))) return false;
         }
         return true;
       }
@@ -755,38 +965,72 @@
         const profiles = (pack.profiles || [])
           .map((p) => `<span class="tag">${esc(p)}</span>`)
           .join("");
-        const itemEls = items
-          .map((i) => `<span class="it">${esc(i)}</span>`)
-          .join('<span class="sep">·</span>');
-        const itemLabel = items.length
-          ? `<div class="items"><span class="lbl">${esc(pack.kind)}/</span> ${itemEls}</div>`
+
+        const pub = pack.published
+          ? `<span class="pack-pub">· published ${esc(fmtDate(pack.published))}</span>`
           : "";
-        const preview = pack.preview
-          ? `<button class="prev-toggle" aria-expanded="false"><span class="chev">▸</span> preview</button>
-       <div class="preview"><span class="cm">// ${esc(pack.kind)} preview — first lines of the pack</span>${esc(pack.preview)}</div>`
+
+        const cmd = installCmd(pack.name);
+        const install = isInstallable(pack)
+          ? `<div class="install"><code class="cmd">${esc(cmd)}</code><button class="copy" data-copy="${esc(cmd)}" aria-label="Copy install command for ${esc(pack.name)}">Copy</button></div>`
+          : `<span class="soon">not yet on npm — coming soon</span>`;
+
+        const term = ITEM_TERM[pack.kind] || "item";
+        const countLabel = `${items.length} ${term}${items.length === 1 ? "" : "s"}`;
+        const id = `c-${pack.name}`;
+        const contents = items.length
+          ? `<button class="disclosure" aria-expanded="false" aria-controls="${esc(id)}"><span class="chev">▸</span> ${esc(countLabel)}</button>
+       <div class="contents" id="${esc(id)}"><dl>${items
+         .map(
+           (i) =>
+             `<dt>${esc(i.name)}</dt><dd>${esc(i.description || "—")}</dd>`,
+         )
+         .join("")}</dl></div>`
           : "";
 
         return `<article class="pack">
-    <div>
+    <div class="pack-main">
       <div class="pack-head">
         <a class="pack-name" href="${npm}" target="_blank" rel="noopener">${esc(pack.name)} <span class="arr">↗</span></a>
         <span class="pack-ver">v${esc(pack.version)}</span>
+        ${pub}
       </div>
       <p class="pack-desc">${esc(pack.description)}</p>
-      <div class="pack-meta">${profiles}</div>
-      ${itemLabel}
+      ${profiles ? `<div class="pack-meta">${profiles}</div>` : ""}
+      ${install}
     </div>
     <div class="pack-aside">
       <span class="kind-tag" style="--kc:${KIND_META[pack.kind].color}">${esc(KIND_META[pack.kind].heading)}</span>
       ${pack.universal ? '<span class="uni-tag">Universal</span>' : ""}
     </div>
-    ${preview}
+    ${contents}
   </article>`;
+      }
+
+      function renderBundle(visible) {
+        if (state.profile === "all") {
+          $bundle.className = "bundle";
+          $bundle.innerHTML = "";
+          return;
+        }
+        const installable = visible.filter(isInstallable);
+        if (!installable.length) {
+          $bundle.className = "bundle";
+          $bundle.innerHTML = "";
+          return;
+        }
+        const names = installable.map((p) => p.name);
+        const cmd = installCmd(names);
+        const n = names.length;
+        $bundle.className = "bundle show";
+        $bundle.innerHTML = `<span class="lbl"><b>${esc(state.profile)}</b> profile · ${n} installable pack${n === 1 ? "" : "s"} shown</span>
+      <button class="copy-bundle" data-copy="${esc(cmd)}">Copy install for all ${n}</button>`;
       }
 
       function render() {
         const visible = PACKS.filter(matches);
         $count.textContent = visible.length;
+        renderBundle(visible);
 
         if (visible.length === 0) {
           $list.innerHTML = `<div class="state">
@@ -834,10 +1078,7 @@
         kindWrap.style.display = profWrap.style.display = "contents";
 
         kindWrap.appendChild(
-          chip("All", {
-            pressed: true,
-            dataset: { filter: "kind", value: "all" },
-          }),
+          chip("All", { dataset: { filter: "kind", value: "all" } }),
         );
         for (const k of KIND_ORDER) {
           kindWrap.appendChild(
@@ -847,10 +1088,7 @@
           );
         }
         profWrap.appendChild(
-          chip("All", {
-            pressed: true,
-            dataset: { filter: "profile", value: "all" },
-          }),
+          chip("All", { dataset: { filter: "profile", value: "all" } }),
         );
         for (const p of PROFILE_ORDER) {
           profWrap.appendChild(
@@ -867,18 +1105,62 @@
           });
       }
 
+      /* Reflect the current state object onto the controls (used on load + reset). */
+      function syncControls() {
+        setActive("kind", state.kind);
+        setActive("profile", state.profile);
+        $search.value = state.query;
+        $universal.setAttribute("aria-pressed", String(state.universal));
+      }
+
+      /* ---- clipboard with inline feedback ---- */
+      async function copyText(text, btn) {
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          try {
+            document.execCommand("copy");
+          } catch {
+            /* clipboard unavailable — nothing more to do */
+          }
+          ta.remove();
+        }
+        const original = btn.dataset.label || btn.textContent;
+        btn.dataset.label = original;
+        btn.textContent = "Copied";
+        btn.classList.add("copied");
+        clearTimeout(btn._t);
+        btn._t = setTimeout(() => {
+          btn.textContent = original;
+          btn.classList.remove("copied");
+        }, 1600);
+      }
+
       /* ---- events (delegated) ---- */
-      document.getElementById("search").addEventListener("input", (e) => {
+      $search.addEventListener("input", (e) => {
         state.query = e.target.value.trim();
+        writeURL();
         render();
       });
 
       document.addEventListener("click", (e) => {
+        const copyBtn = e.target.closest("[data-copy]");
+        if (copyBtn) {
+          copyText(copyBtn.dataset.copy, copyBtn);
+          return;
+        }
         const filterBtn = e.target.closest(".chip[data-filter]");
         if (filterBtn) {
           const { filter, value } = filterBtn.dataset;
           state[filter] = value;
           setActive(filter, value);
+          writeURL();
           render();
           return;
         }
@@ -886,14 +1168,15 @@
         if (toggle) {
           state.universal = !state.universal;
           toggle.setAttribute("aria-pressed", String(state.universal));
+          writeURL();
           render();
           return;
         }
-        const prev = e.target.closest(".prev-toggle");
-        if (prev) {
-          const open = prev.getAttribute("aria-expanded") === "true";
-          prev.setAttribute("aria-expanded", String(!open));
-          prev.nextElementSibling.classList.toggle("open", !open);
+        const disc = e.target.closest(".disclosure");
+        if (disc) {
+          const open = disc.getAttribute("aria-expanded") === "true";
+          disc.setAttribute("aria-expanded", String(!open));
+          disc.nextElementSibling.classList.toggle("open", !open);
           return;
         }
         if (e.target.id === "reset") {
@@ -901,13 +1184,30 @@
           state.profile = "all";
           state.universal = false;
           state.query = "";
-          document.getElementById("search").value = "";
-          document
-            .getElementById("universal")
-            .setAttribute("aria-pressed", "false");
-          setActive("kind", "all");
-          setActive("profile", "all");
+          syncControls();
+          writeURL();
           render();
+        }
+      });
+
+      /* ---- keyboard: "/" focuses search, Esc clears then blurs ---- */
+      document.addEventListener("keydown", (e) => {
+        const tag = (e.target.tagName || "").toLowerCase();
+        const typing = tag === "input" || tag === "textarea";
+        if (e.key === "/" && !typing) {
+          e.preventDefault();
+          $search.focus();
+          return;
+        }
+        if (e.key === "Escape" && e.target === $search) {
+          if ($search.value) {
+            $search.value = "";
+            state.query = "";
+            writeURL();
+            render();
+          } else {
+            $search.blur();
+          }
         }
       });
 
@@ -933,7 +1233,9 @@
           PACKS = (data.packs || [])
             .slice()
             .sort((a, b) => a.name.localeCompare(b.name));
+          readURL();
           buildFilters();
+          syncControls();
           render();
           document.getElementById("gen").textContent =
             `${PACKS.length} packs · catalog generated ${fmtDate(data.generated)}`;

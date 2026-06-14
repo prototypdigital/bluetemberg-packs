@@ -12,7 +12,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "a11y-specialist"
+        {
+          "name": "a11y-specialist",
+          "description": "Audits and remediates accessibility issues against WCAG 2.2 A/AA standards."
+        }
       ],
       "preview": "You are a WCAG 2.2 A/AA accessibility specialist. Your job is to audit and remediate accessibility issues. - Audit components and pages for WCAG 2.2 A/AA compliance - Remediate accessibility violations - Ensure proper ARIA attributes, roles, and keyboard navigation - Verify color contrast and text a"
     },
@@ -26,7 +29,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "agentic-specialist"
+        {
+          "name": "agentic-specialist",
+          "description": "Designs and implements agentic system memory, state management, and agent-to-agent communication patterns."
+        }
       ],
       "preview": "You are a specialist in designing and implementing agentic systems: persistent memory stores, agent state machines, sub-agent orchestration, and tool-use patterns for LLM-powered workflows. - Design agent memory architectures (episodic, semantic, procedural layers) - Implement persistent state using"
     },
@@ -41,7 +47,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "ansible-specialist"
+        {
+          "name": "ansible-specialist",
+          "description": "Writes and reviews Ansible roles, playbooks, and Jinja2 templates for idempotent infrastructure automation."
+        }
       ],
       "preview": "You are an Ansible specialist. Your job is to write and maintain Ansible roles, playbooks, and Jinja2 templates that automate infrastructure safely and idempotently. - Structure roles with proper `defaults/`, `tasks/`, `handlers/`, `templates/`, `files/` layout - Enforce idempotency — every task mus"
     },
@@ -56,7 +65,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "backend-specialist"
+        {
+          "name": "backend-specialist",
+          "description": "Implements and reviews backend services, APIs, database patterns, and auth flows."
+        }
       ],
       "preview": "You are a backend implementation specialist. Your job is to build and maintain server-side services, APIs, and data layers following the project's architecture and conventions. - Design and implement RESTful or GraphQL APIs with consistent contracts - Apply proper database access patterns (repositor"
     },
@@ -72,7 +84,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "code-reviewer"
+        {
+          "name": "code-reviewer",
+          "description": "Reviews pull requests for code quality, patterns, naming, and potential bugs."
+        }
       ],
       "preview": "You are a code review specialist. Your job is to review changes for quality, correctness, and adherence to project standards. - Check for logical errors, edge cases, and off-by-one mistakes - Verify naming consistency and adherence to project conventions - Identify unnecessary complexity and suggest"
     },
@@ -87,7 +102,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "devops-specialist"
+        {
+          "name": "devops-specialist",
+          "description": "Manages CI/CD pipelines, container builds, infrastructure-as-code, and deployment config."
+        }
       ],
       "preview": "You are a DevOps specialist. Your job is to maintain and optimize build, deployment, and infrastructure configuration. - Configure and optimize CI/CD pipelines for speed and reliability - Build and maintain Docker images with multi-stage, minimal footprints - Manage infrastructure-as-code (Terraform"
     },
@@ -99,7 +117,10 @@
       "universal": true,
       "kind": "agents",
       "agents": [
-        "docs-maintainer"
+        {
+          "name": "docs-maintainer",
+          "description": "Keeps documentation aligned with code and workflow changes."
+        }
       ],
       "preview": "You are a documentation maintenance specialist. Your job is to keep project documentation accurate and aligned with implementation. - Update docs when code behavior changes - Ensure README and guide accuracy - Maintain consistent doc structure and linking - Remove stale references - Keep docs concis"
     },
@@ -114,7 +135,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "frontend-specialist"
+        {
+          "name": "frontend-specialist",
+          "description": "Implements and refactors frontend UI with reusable, accessible, and testable patterns."
+        }
       ],
       "preview": "You are a frontend implementation specialist. Your job is to implement and refactor frontend UI components following the project's design system and coding standards. - Implement new UI features using existing shared components - Refactor existing components for better reusability and accessibility"
     },
@@ -129,7 +153,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "infrastructure-specialist"
+        {
+          "name": "infrastructure-specialist",
+          "description": "Maintains build, CI, container, and deployment configuration."
+        }
       ],
       "preview": "You are an infrastructure specialist. Your job is to maintain build, CI, container, and deployment configuration. - Maintain Dockerfiles and compose configurations - Configure and optimize CI/CD pipelines - Manage build tooling and dependency configuration - Ensure reproducible and secure builds - P"
     },
@@ -144,7 +171,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "kubernetes-specialist"
+        {
+          "name": "kubernetes-specialist",
+          "description": "Writes and reviews Kubernetes manifests, Helm charts, and Kustomize overlays for secure, production-grade deployments."
+        }
       ],
       "preview": "You are a Kubernetes specialist. Your job is to write and maintain Kubernetes manifests, Helm charts, and Kustomize overlays that deploy services safely and reproducibly. - Write Deployments, StatefulSets, Services, Ingress, RBAC, and PodDisruptionBudgets - Design resource requests/limits and autosc"
     },
@@ -161,7 +191,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "security-specialist"
+        {
+          "name": "security-specialist",
+          "description": "Audits code for security vulnerabilities, secrets exposure, and dependency risks."
+        }
       ],
       "preview": "You are a security specialist. Your job is to identify and remediate security vulnerabilities across the codebase. - Audit code for OWASP Top 10 vulnerabilities - Review dependency trees for known CVEs - Identify hardcoded secrets, tokens, and credentials - Verify authentication and authorization im"
     },
@@ -176,7 +209,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "sre-specialist"
+        {
+          "name": "sre-specialist",
+          "description": "Designs SLOs, alerts, on-call runbooks, and reliability improvements for production services."
+        }
       ],
       "preview": "You are a site reliability engineer. Your job is to ensure production services are observable, reliable, and operable by an on-call team. - Define Service Level Objectives (SLOs) and the SLIs that measure them - Write Prometheus alert rules, Grafana dashboards, and alerting policies - Author and mai"
     },
@@ -192,7 +228,10 @@
       "universal": false,
       "kind": "agents",
       "agents": [
-        "test-specialist"
+        {
+          "name": "test-specialist",
+          "description": "Creates, refactors, and stabilizes automated tests with deterministic patterns."
+        }
       ],
       "preview": "You are a testing specialist. Your job is to create, refactor, and stabilize automated tests. - Write unit, integration, and e2e tests - Stabilize flaky tests with deterministic patterns - Ensure adequate test coverage for critical paths - Follow the project's testing conventions - Prefer determinis"
     },
@@ -204,7 +243,10 @@
       "universal": true,
       "kind": "guardrails",
       "guardrails": [
-        "conventional-branch-names"
+        {
+          "name": "conventional-branch-names",
+          "description": "Enforce conventional branch names before creating a worktree"
+        }
       ],
       "preview": "Blocks AI tools from creating worktrees with auto-generated names (e.g. `claude/some-name`). Requires a branch name in `type/description` format before the worktree is created."
     },
@@ -218,10 +260,22 @@
       "universal": false,
       "kind": "rules",
       "rules": [
-        "memory-architecture-checklist",
-        "memory-promotion",
-        "memory-provenance",
-        "memory-recall-authority"
+        {
+          "name": "memory-architecture-checklist",
+          "description": "Treat LLM statelessness as a hard constraint — decide explicitly what state survives a turn, which storage tier holds it, and how it is evicted."
+        },
+        {
+          "name": "memory-promotion",
+          "description": "Session observations never write directly to durable memory — promotion runs through a reviewable consolidation step that dedupes, supersedes, and ratifies."
+        },
+        {
+          "name": "memory-provenance",
+          "description": "Every durable memory carries provenance — source, time, confidence, and whether it was user-stated or agent-inferred. No silent writes."
+        },
+        {
+          "name": "memory-recall-authority",
+          "description": "Rank recalled memory by authority, not only relevance — and never let stale, contradicted, or superseded memory present as a current constraint."
+        }
       ],
       "preview": "An LLM call is stateless. Nothing carries between turns except what you put back into the context window. Continuity is an engineering decision, not a model feature — and provider-managed memory APIs delegate the storage, not the decision. - For every piece of state, decide explicitly whether it mus"
     },
@@ -235,12 +289,30 @@
       "universal": false,
       "kind": "rules",
       "rules": [
-        "context-pollution-prevention",
-        "context-positioning",
-        "context-window-budget",
-        "multi-turn-context-hygiene",
-        "multi-turn-state-management",
-        "prompt-structure"
+        {
+          "name": "context-pollution-prevention",
+          "description": "Prevent context pollution — scope tool calls to what you need, don't inject noise into the conversation."
+        },
+        {
+          "name": "context-positioning",
+          "description": "Place load-bearing content at the edges of the context, not the middle — models access the start and end far better than the middle."
+        },
+        {
+          "name": "context-window-budget",
+          "description": "Manage context window budget explicitly — prune stale content, compress retrieved data, never let context grow unbounded."
+        },
+        {
+          "name": "multi-turn-context-hygiene",
+          "description": "Don't keep talking to a derailed conversation — consolidate the requirements and restart fresh. Multi-turn degradation is large and doesn't self-correct."
+        },
+        {
+          "name": "multi-turn-state-management",
+          "description": "Manage state across multi-turn interactions — track what was decided, what changed, and what is still open."
+        },
+        {
+          "name": "prompt-structure",
+          "description": "Structure prompts into labeled, delimited sections — separate instructions from data, and keep persistent rules in the system message."
+        }
       ],
       "preview": "Context pollution is when irrelevant, contradictory, or duplicate information crowds out the signal needed for accurate reasoning. This is not a soft concern: adding even a **single distractor** — plausibly-related but irrelevant content — measurably lowers accuracy, and across frontier models a con"
     },
@@ -255,17 +327,50 @@
       "universal": false,
       "kind": "rules",
       "rules": [
-        "ansible-conventions",
-        "ci-workflow-conventions",
-        "container-image-pinning",
-        "docker-best-practices",
-        "helm-conventions",
-        "idempotency",
-        "jinja2-templates",
-        "kubernetes-manifests",
-        "runbook-discipline",
-        "shell-script-standards",
-        "terraform-conventions"
+        {
+          "name": "ansible-conventions",
+          "description": "Follow Ansible best practices for idempotent, maintainable infrastructure automation."
+        },
+        {
+          "name": "ci-workflow-conventions",
+          "description": "Secure CI/CD workflows with minimal permissions, pinned actions, and OIDC authentication."
+        },
+        {
+          "name": "container-image-pinning",
+          "description": "Pin container image versions to prevent unexpected breaking changes."
+        },
+        {
+          "name": "docker-best-practices",
+          "description": "Follow container best practices for secure, efficient Docker images."
+        },
+        {
+          "name": "helm-conventions",
+          "description": "Write safe, reusable Helm charts with secure defaults and consistent values structure."
+        },
+        {
+          "name": "idempotency",
+          "description": "Every operation — task, script, or deployment — must be safe to re-run without side effects."
+        },
+        {
+          "name": "jinja2-templates",
+          "description": "Write safe, readable Jinja2 templates for Ansible and configuration generation."
+        },
+        {
+          "name": "kubernetes-manifests",
+          "description": "Write safe, production-grade Kubernetes manifests with resource limits, health checks, and security context."
+        },
+        {
+          "name": "runbook-discipline",
+          "description": "Keep operational runbooks and ADRs accurate and commit them alongside the changes they document."
+        },
+        {
+          "name": "shell-script-standards",
+          "description": "Write safe, portable shell scripts with error handling and clear control flow."
+        },
+        {
+          "name": "terraform-conventions",
+          "description": "Follow Terraform module structure and naming conventions."
+        }
       ],
       "preview": "Write Ansible roles and playbooks that are idempotent, readable, and maintainable. - Use fully qualified collection names (FQCN): `ansible.builtin.copy` not `copy`. - Every task must have a descriptive `name:`. - Avoid `shell` and `command` modules; prefer native modules. - When `shell`/`command` is"
     },
@@ -277,9 +382,18 @@
       "universal": true,
       "kind": "rules",
       "rules": [
-        "docs-parity",
-        "mermaid-diagrams",
-        "post-edit-diagnostics"
+        {
+          "name": "docs-parity",
+          "description": "Keep documentation in sync with every user-facing change."
+        },
+        {
+          "name": "mermaid-diagrams",
+          "description": "Use Mermaid diagrams instead of ASCII art."
+        },
+        {
+          "name": "post-edit-diagnostics",
+          "description": "Run diagnostics and formatter after editing code files."
+        }
       ],
       "preview": "A PR that changes behavior without updating docs is not done. - New or removed CLI flags, commands, or options - Changes to user-facing workflows (new prompts, removed choices, changed defaults) - New or removed public APIs, config options, or schema fields - Changes to output behavior or generated"
     },
@@ -291,9 +405,18 @@
       "universal": true,
       "kind": "rules",
       "rules": [
-        "git-move",
-        "git-workflow",
-        "pre-commit-checks"
+        {
+          "name": "git-move",
+          "description": "Use git mv for tracked files to preserve history."
+        },
+        {
+          "name": "git-workflow",
+          "description": "Branch protection, branch naming, and PR workflow rules."
+        },
+        {
+          "name": "pre-commit-checks",
+          "description": "Run formatter, linter, and build checks before every commit."
+        }
       ],
       "preview": "If moving an existing file that is not `git ignored`, use `git mv {source} {dest}`, as this preserves the git history for the file and shows any new diff."
     },
@@ -309,9 +432,18 @@
       "universal": false,
       "kind": "rules",
       "rules": [
-        "cost-accounting",
-        "model-selection-and-routing",
-        "streaming"
+        {
+          "name": "cost-accounting",
+          "description": "Measure LLM cost from the authoritative usage object and the provider's cost API — never from your own token estimates."
+        },
+        {
+          "name": "model-selection-and-routing",
+          "description": "Pick models on the accuracy-vs-cost frontier and route easy queries to cheaper models — the most expensive model is rarely the right default."
+        },
+        {
+          "name": "streaming",
+          "description": "Stream for perceived latency, but buffer tool-call JSON until the block closes and don't gate safety on partial output."
+        }
       ],
       "preview": "If an LLM feature has unit economics, measure them from the **authoritative numbers the provider returns**, not from estimates you compute yourself. Self-counted token estimates routinely miss what actually drives the bill: prompt-cache reads and writes, tool-use tokens, system-prompt overhead, and"
     },
@@ -326,11 +458,26 @@
       "universal": false,
       "kind": "rules",
       "rules": [
-        "nextjs-data-fetching",
-        "nextjs-image-optimization",
-        "nextjs-metadata",
-        "nextjs-public-env-vars",
-        "nextjs-server-components"
+        {
+          "name": "nextjs-data-fetching",
+          "description": "Prefer fetch with cache options in Server Components over useEffect + API calls"
+        },
+        {
+          "name": "nextjs-image-optimization",
+          "description": "Always use next/image; never raw img tags"
+        },
+        {
+          "name": "nextjs-metadata",
+          "description": "Define metadata/generateMetadata per page; never use <Head> in App Router"
+        },
+        {
+          "name": "nextjs-public-env-vars",
+          "description": "NEXT_PUBLIC_* are inlined into the bundle at build time — never use for secrets or per-environment values."
+        },
+        {
+          "name": "nextjs-server-components",
+          "description": "Default to React Server Components; use 'use client' only at leaf interactive nodes"
+        }
       ],
       "preview": "In App Router, data fetching belongs in Server Components using async/await with the extended `fetch` API. `useEffect` + client-side API calls add a waterfall (page load → render → fetch → render again) and send a round-trip that a Server Component can eliminate entirely. - **Fetch data in Server Co"
     },
@@ -342,10 +489,22 @@
       "universal": true,
       "kind": "rules",
       "rules": [
-        "api-error-handling",
-        "llm-package-hallucination",
-        "never-read-env",
-        "security-secrets"
+        {
+          "name": "api-error-handling",
+          "description": "Use structured error responses and never leak internal details."
+        },
+        {
+          "name": "llm-package-hallucination",
+          "description": "Verify every LLM-suggested dependency exists in the registry before installing — hallucinated package names are a real supply-chain attack surface (slopsquatting)."
+        },
+        {
+          "name": "never-read-env",
+          "description": "Never read .env files directly in code."
+        },
+        {
+          "name": "security-secrets",
+          "description": "Never hardcode secrets, tokens, or credentials in source code."
+        }
       ],
       "preview": "All API endpoints must return structured, consistent error responses. Never expose stack traces, internal paths, or database details to clients. Always return errors with a consistent shape: ```json { \"error\": { \"code\": \"NOT_FOUND\", \"message\": \"Resource not found\" } } ``` - Map internal errors to ap"
     },
@@ -361,11 +520,26 @@
       "universal": false,
       "kind": "rules",
       "rules": [
-        "coding-standards",
-        "design-system-reuse",
-        "early-returns",
-        "no-console-log",
-        "type-safety"
+        {
+          "name": "coding-standards",
+          "description": "Keep functions and components small, readable, and easy to reason about."
+        },
+        {
+          "name": "design-system-reuse",
+          "description": "Reuse existing shared UI components and design tokens before creating new ones."
+        },
+        {
+          "name": "early-returns",
+          "description": "Prefer early returns and guard clauses over nested conditionals."
+        },
+        {
+          "name": "no-console-log",
+          "description": "Forbid console.log in production code; use a logger instead."
+        },
+        {
+          "name": "type-safety",
+          "description": "Enforce strict type safety — no implicit any, no unguarded assertions."
+        }
       ],
       "preview": "Keep functions and components small, readable, and easy to reason about. - Prefer small, single-purpose functions. - Keep control flow shallow; avoid deep nesting. - Use early returns and guard clauses to reduce `else` blocks. - Extract complex logic into well-named helpers. - Favor descriptive name"
     },
@@ -380,7 +554,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "api-design"
+        {
+          "name": "api-design",
+          "description": "Apply RESTful API design conventions for endpoints, pagination, versioning, and error contracts."
+        }
       ],
       "preview": "Use this skill when designing new API endpoints or reviewing existing API contracts. - New endpoint or route creation - API contract review or documentation - Pagination, filtering, or sorting implementation 1. The agent MUST follow RESTful resource naming (plural nouns, no verbs in paths). 2. The a"
     },
@@ -395,7 +572,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "ci-cd-best-practices"
+        {
+          "name": "ci-cd-best-practices",
+          "description": "Optimize CI/CD pipeline configuration for speed, reliability, and caching."
+        }
       ],
       "preview": "Use this skill when creating or modifying CI/CD pipeline configuration. - New or modified GitHub Actions, GitLab CI, or similar workflow files - Build performance optimization - Adding new jobs, steps, or deployment stages 1. The agent MUST cache dependency installs (npm, pip, etc.) between runs. 2."
     },
@@ -411,7 +591,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "code-review"
+        {
+          "name": "code-review",
+          "description": "Structured code review — intent-first, diff-focused, severity-tiered findings with actionable fix suggestions."
+        }
       ],
       "preview": "Use this skill when reviewing a pull request or a set of code changes before merge. - Pull request review (any size) - Post-implementation self-review before opening a PR - Peer review requested by a teammate 1. The agent MUST establish intent before reading any code — run `git log --oneline origin/"
     },
@@ -429,7 +612,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "config-echo"
+        {
+          "name": "config-echo",
+          "description": "Verify that bluetemberg configuration was actually loaded by the LLM — recall rules, agents, and skills from session context and cross-reference against disk."
+        }
       ],
       "preview": "Use this skill to confirm what bluetemberg configuration the LLM has in its active session context, and to verify it matches what is on disk. - After running `bluetemberg sync` to confirm the LLM picked up the changes - When a rule does not seem to be taking effect - Onboarding a new team member — c"
     },
@@ -441,7 +627,10 @@
       "universal": true,
       "kind": "skills",
       "skills": [
-        "create-agent"
+        {
+          "name": "create-agent",
+          "description": "Scaffold a new bluetemberg agent in the correct format — frontmatter with scoped tools, responsibilities, constraints, and sync."
+        }
       ],
       "preview": "Use this skill when asked to add, create, or write a new specialist agent (subagent) for the project. - \"add an agent that...\" - \"create a specialist for...\" - \"we need a subagent to review / audit / generate ...\" - Any request to define a focused, delegatable role with its own tool access 1. The ag"
     },
@@ -453,7 +642,10 @@
       "universal": true,
       "kind": "skills",
       "skills": [
-        "create-pack"
+        {
+          "name": "create-pack",
+          "description": "Scaffold a whole new bluetemberg pack — package.json metadata, llm/ layout, catalog registration, and validation."
+        }
       ],
       "preview": "Use this skill when asked to create a new bluetemberg pack (a publishable npm package of rules, agents, or skills) in the bluetemberg-packs monorepo. - \"create a new pack for...\" - \"scaffold a bluetemberg-rules / -agents / -skills package\" - \"add a new pack that bundles ...\" - Any request to start a"
     },
@@ -465,7 +657,10 @@
       "universal": true,
       "kind": "skills",
       "skills": [
-        "create-rule"
+        {
+          "name": "create-rule",
+          "description": "Scaffold a new bluetemberg rule in the correct format — frontmatter, a Why/Rules/BAD-GOOD/config/gotchas body, and sync."
+        }
       ],
       "preview": "Use this skill when asked to add, create, or write a new always-on rule for the project. - \"add a rule that...\" - \"create a rule for...\" - \"write a rule to enforce...\" - \"we should always / never ...\" stated as a standing convention - Any request to encode a passive, always-applied coding standard f"
     },
@@ -477,7 +672,10 @@
       "universal": true,
       "kind": "skills",
       "skills": [
-        "create-skill"
+        {
+          "name": "create-skill",
+          "description": "Scaffold a new bluetemberg skill in the correct format — frontmatter, five required sections, and sync."
+        }
       ],
       "preview": "Use this skill when asked to add, create, or write a new skill for the project. - \"add a skill that...\" - \"create a skill for...\" - \"write a skill to...\" - Any request to scaffold a new on-demand workflow for the AI tooling 1. The agent MUST check `llm/skills/` for an existing skill with the same na"
     },
@@ -489,7 +687,10 @@
       "universal": true,
       "kind": "skills",
       "skills": [
-        "docs-upkeep"
+        {
+          "name": "docs-upkeep",
+          "description": "Keep canonical documentation aligned with implementation and workflow changes in the same task."
+        }
       ],
       "preview": "Use this skill when code or workflow changes affect documented behavior. - Code change that alters documented behavior or public API - New feature, endpoint, or configuration option that needs documentation - Workflow, CI, or deployment process change 1. The agent MUST update affected docs in the sa"
     },
@@ -504,7 +705,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "infrastructure-drift-check"
+        {
+          "name": "infrastructure-drift-check",
+          "description": "Verify that declared infrastructure state matches deployed state before merging IaC changes."
+        }
       ],
       "preview": "Use this skill before merging infrastructure-as-code changes to ensure the declared state is consistent with what is deployed. - Changes to `*.tf` files (Terraform) - Changes to Ansible playbooks or inventory - Changes to Kubernetes manifests (`k8s/`, `manifests/`, `helm/`) - Changes to Docker Compo"
     },
@@ -519,7 +723,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "migration-safety"
+        {
+          "name": "migration-safety",
+          "description": "Review database migrations for safety, rollback capability, and zero-downtime compatibility."
+        }
       ],
       "preview": "Use this skill when creating or reviewing database schema migrations. - New migration file creation - Schema change review - Pre-deploy database change validation 1. The agent MUST verify every migration has a corresponding rollback (down migration). 2. The agent MUST flag destructive operations (DR"
     },
@@ -535,7 +742,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "patterns"
+        {
+          "name": "patterns",
+          "description": "Apply reusable architecture and coding patterns from project standards when implementing features or reviewing structure."
+        }
       ],
       "preview": "Use this skill when implementing or reviewing feature structure, state placement, and code organization. - New feature implementation that requires architectural decisions - Code review where structure or state placement is in question - Refactoring to align existing code with established patterns 1"
     },
@@ -550,7 +760,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "react-patterns"
+        {
+          "name": "react-patterns",
+          "description": "Apply React component patterns — composition, co-location, and hook extraction — before reaching for custom solutions."
+        }
       ],
       "preview": "Use this skill when implementing or reviewing React components, hooks, or state management. - New React component or hook implementation - Component is growing too large or has mixed responsibilities - State is being lifted or passed through multiple layers - A custom hook is being written to wrap b"
     },
@@ -565,7 +778,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "rollback-plan"
+        {
+          "name": "rollback-plan",
+          "description": "Require an explicit rollback plan for every infrastructure or deployment change before merge."
+        }
       ],
       "preview": "Use this skill when reviewing infrastructure, deployment, or database changes that affect production systems. Every change must have a tested rollback path. - Changes to deployment manifests (Kubernetes, Docker Compose, Helm values) - Ansible playbooks targeting production inventory - Terraform chan"
     },
@@ -582,7 +798,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "security-audit"
+        {
+          "name": "security-audit",
+          "description": "Run a security audit checklist against code changes for secrets, injection, and dependency risks."
+        }
       ],
       "preview": "Use this skill when reviewing code for security concerns or before deploying to production. - Pre-release or pre-deploy review - New authentication or authorization code - Code that handles user input, file uploads, or external data 1. The agent MUST check for hardcoded secrets, tokens, and credenti"
     },
@@ -597,7 +816,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "stack-change-review"
+        {
+          "name": "stack-change-review",
+          "description": "Review high-blast-radius infrastructure changes for safety before merge."
+        }
       ],
       "preview": "Use this skill when reviewing changes to critical infrastructure files that affect deployed services. - Changes to `docker-compose*.yml`, `docker-compose*.yml.j2` - Changes to `group_vars/all.yml` or `group_vars/*/*.yml` - Changes to Ansible host inventory files - Changes to `.env` or `.env.j2` file"
     },
@@ -611,7 +833,10 @@
       "universal": false,
       "kind": "skills",
       "skills": [
-        "sub-agent-design"
+        {
+          "name": "sub-agent-design",
+          "description": "Design a sub-agent system — scope responsibilities, define communication contracts, wire orchestration, and add integration tests."
+        }
       ],
       "preview": "Use this skill when you need to break a complex agentic task into a coordinated set of sub-agents with defined responsibilities and communication contracts. - A single agent is doing too many things (context overloads, inconsistent outputs, hard-to-test) - A workflow has parallelizable phases that r"
     },
@@ -623,7 +848,10 @@
       "universal": true,
       "kind": "skills",
       "skills": [
-        "workspace-hygiene"
+        {
+          "name": "workspace-hygiene",
+          "description": "On-demand workspace audit — review change scope, clean temp artifacts, verify commit focus."
+        }
       ],
       "preview": "Use this skill for an on-demand audit of workspace state before committing or opening a pull request. > **Note:** Formatting, linting, and build checks are handled by the always-on `pre-commit-checks` and `post-edit-diagnostics` rules. This skill covers the manual review steps that those rules canno"
     }
