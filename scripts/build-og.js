@@ -2,7 +2,9 @@
 // @ts-check
 // Rasterize the Open Graph share card (scripts/og-card.svg -> site/og.png).
 //
-// Run after the pack count changes:  npm run build:og
+// The card carries no catalog-derived data, so site/og.png is a static asset
+// (committed, copied as-is by build:site). Re-run only when the card DESIGN
+// changes:  npm run build:og
 //
 // Requires `rsvg-convert` (brew install librsvg). The brand fonts (Newsreader,
 // JetBrains Mono) are fetched to a temp dir so the headline renders correctly
@@ -10,21 +12,14 @@
 // unavailable the script exits non-zero with guidance rather than shipping a
 // fallback-font card silently.
 import { execFileSync } from "node:child_process";
-import {
-  mkdtempSync,
-  readFileSync,
-  writeFileSync,
-  rmSync,
-  existsSync,
-} from "node:fs";
+import { mkdtempSync, writeFileSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, "..");
-const SVG_TEMPLATE = join(__dirname, "og-card.svg");
-const CATALOG_PATH = join(REPO_ROOT, "catalog.json");
+const SVG_PATH = join(__dirname, "og-card.svg");
 const OUT_PNG = join(REPO_ROOT, "site", "og.png");
 
 const FONTS = [
@@ -53,16 +48,6 @@ function ensureRsvg() {
   }
 }
 
-function packCount() {
-  if (!existsSync(CATALOG_PATH)) return "";
-  try {
-    const catalog = JSON.parse(readFileSync(CATALOG_PATH, "utf8"));
-    return String((catalog.packs ?? []).length);
-  } catch {
-    return "";
-  }
-}
-
 async function fetchFonts(dir) {
   if (typeof fetch !== "function") {
     console.error("build:og — global fetch unavailable; cannot fetch fonts.");
@@ -88,24 +73,15 @@ async function fetchFonts(dir) {
 async function main() {
   ensureRsvg();
 
-  const count = packCount();
-  const svg = readFileSync(SVG_TEMPLATE, "utf8").replace(
-    /\{\{COUNT\}\}/g,
-    count,
-  );
-
   const dir = mkdtempSync(join(tmpdir(), "og-fonts-"));
   try {
     const confPath = await fetchFonts(dir);
-    const svgPath = join(dir, "og-card.svg");
-    writeFileSync(svgPath, svg);
-
     execFileSync(
       "rsvg-convert",
-      ["-w", "1200", "-h", "630", svgPath, "-o", OUT_PNG],
+      ["-w", "1200", "-h", "630", SVG_PATH, "-o", OUT_PNG],
       { stdio: "inherit", env: { ...process.env, FONTCONFIG_FILE: confPath } },
     );
-    console.log(`build:og — wrote site/og.png (${count} packs)`);
+    console.log("build:og — wrote site/og.png");
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

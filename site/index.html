@@ -1090,7 +1090,13 @@
         profWrap.appendChild(
           chip("All", { dataset: { filter: "profile", value: "all" } }),
         );
-        for (const p of PROFILE_ORDER) {
+        // PROFILE_ORDER fixes the canonical order; append any profile present in
+        // the catalog but missing from that list so it stays filterable.
+        const known = new Set(PROFILE_ORDER);
+        const extra = [...new Set(PACKS.flatMap((p) => p.profiles || []))]
+          .filter((p) => !known.has(p))
+          .sort();
+        for (const p of [...PROFILE_ORDER, ...extra]) {
           profWrap.appendChild(
             chip(p, { dataset: { filter: "profile", value: p } }),
           );
@@ -1115,8 +1121,10 @@
 
       /* ---- clipboard with inline feedback ---- */
       async function copyText(text, btn) {
+        let ok = false;
         try {
           await navigator.clipboard.writeText(text);
+          ok = true;
         } catch {
           const ta = document.createElement("textarea");
           ta.value = text;
@@ -1125,16 +1133,18 @@
           document.body.appendChild(ta);
           ta.select();
           try {
-            document.execCommand("copy");
+            ok = document.execCommand("copy");
           } catch {
-            /* clipboard unavailable — nothing more to do */
+            /* clipboard unavailable — report failure below */
           }
           ta.remove();
         }
+
+        // Only claim success when the copy actually happened.
         const original = btn.dataset.label || btn.textContent;
         btn.dataset.label = original;
-        btn.textContent = "Copied";
-        btn.classList.add("copied");
+        btn.textContent = ok ? "Copied" : "Copy failed";
+        btn.classList.toggle("copied", ok);
         clearTimeout(btn._t);
         btn._t = setTimeout(() => {
           btn.textContent = original;

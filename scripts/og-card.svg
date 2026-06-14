@@ -19,7 +19,7 @@
   <text x="128" y="436" font-family="Newsreader, Georgia, serif" font-weight="400" font-style="italic" font-size="138" fill="#efcf69">catalog.</text>
 
   <!-- sub-line -->
-  <text x="128" y="512" font-family="'JetBrains Mono', monospace" font-size="25" letter-spacing="0.5" fill="#b2b2bb">{{COUNT}} packs · rules · agents · skills · guardrails</text>
+  <text x="128" y="512" font-family="'JetBrains Mono', monospace" font-size="25" letter-spacing="0.5" fill="#b2b2bb">rules · agents · skills · guardrails</text>
 
   <!-- footer url -->
   <text x="128" y="556" font-family="'JetBrains Mono', monospace" font-size="20" letter-spacing="0.5" fill="#8a8af0">prototypdigital.github.io/bluetemberg-packs</text>

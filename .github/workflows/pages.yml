@@ -27,7 +27,9 @@ jobs:
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '20'
-          cache: 'npm'
+          # No npm cache: this job runs on untrusted pull_request events as well
+          # as trusted release/dispatch ones. A shared cache across that trust
+          # boundary is poisonable, and with only a few devDeps it saves nothing.
 
       - name: Install dependencies
         run: npm ci

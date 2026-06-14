@@ -71,7 +71,9 @@ function listContentFiles(pkgDir, kind) {
     }
   }
 
-  return files;
+  // Sort by name so catalog.json item order and the preview (contentFiles[0])
+  // are deterministic — readdirSync order is filesystem-dependent.
+  return files.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 function buildEntry(pkgDir) {
