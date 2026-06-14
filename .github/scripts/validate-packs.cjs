@@ -3,7 +3,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 
 const ROOT = process.cwd();
 let errors = 0;
@@ -161,43 +160,28 @@ console.log('\n[2] Frontmatter validation');
   }
 }
 
-// ─── 3. Version bump check (PRs only) ────────────────────────────────────────
-const baseSha = process.env.BASE_SHA;
-if (baseSha) {
-  console.log('\n[3] Version bump check');
-  try {
-    const changedFiles = execSync(`git diff --name-only ${baseSha} HEAD`, { encoding: 'utf8' })
-      .trim().split('\n').filter(Boolean);
+// ─── 3. Release-please registration integrity ───────────────────────────────
+// Every pack in packages/ must be registered in both release-please-config.json
+// and .release-please-manifest.json, otherwise new packs silently never release.
+console.log('\n[3] Release-please registration integrity');
+{
+  const packDirs = listPackDirs();
+  const rpConfig = JSON.parse(fs.readFileSync(path.join(ROOT, 'release-please-config.json'), 'utf8'));
+  const rpManifest = JSON.parse(fs.readFileSync(path.join(ROOT, '.release-please-manifest.json'), 'utf8'));
 
-    const affectedPacks = new Set(
-      changedFiles
-        .map(f => { const m = f.match(/^packages\/([^/]+)\//); return m ? m[1] : null; })
-        .filter(Boolean)
-    );
-
-    if (affectedPacks.size === 0) {
-      console.log('  (no pack changes in this PR)');
+  for (const dir of packDirs) {
+    const key = `packages/${dir}`;
+    if (!rpConfig.packages || !(key in rpConfig.packages)) {
+      fail(`${key} missing in release-please-config.json packages`);
+    } else {
+      pass(`${key} present in release-please-config.json`);
     }
-
-    for (const packDir of affectedPacks) {
-      const llmChanged = changedFiles.some(f => f.startsWith(`packages/${packDir}/llm/`));
-      if (!llmChanged) {
-        pass(`packages/${packDir}: no llm/ changes — version bump not required`);
-        continue;
-      }
-
-      const versionBumped = changedFiles.includes(`packages/${packDir}/package.json`);
-      if (!versionBumped) {
-        fail(`packages/${packDir}: llm/ content changed but package.json version was not bumped`);
-      } else {
-        pass(`packages/${packDir}: version bumped`);
-      }
+    if (!(key in rpManifest)) {
+      fail(`${key} missing in .release-please-manifest.json`);
+    } else {
+      pass(`${key} present in .release-please-manifest.json`);
     }
-  } catch (e) {
-    console.warn('  Version check skipped:', e.message);
   }
-} else {
-  console.log('\n[3] Version bump check — skipped (not a PR context)');
 }
 
 // ─── Result ───────────────────────────────────────────────────────────────────
