@@ -14,13 +14,13 @@
   <text x="124" y="116" font-family="'JetBrains Mono', monospace" font-size="22" letter-spacing="3.5" fill="#b2b2bb">BLUETEMBERG-PACKS</text>
 
   <!-- display headline with left accent rule -->
-  <rect x="96" y="196" width="3" height="248" fill="#4343e1"/>
+  <rect x="96" y="196" width="3" height="268" fill="#4343e1"/>
   <text x="128" y="312" font-family="Newsreader, Georgia, serif" font-weight="300" font-size="138" fill="#ffffff">The pack</text>
-  <text x="128" y="436" font-family="Newsreader, Georgia, serif" font-weight="400" font-style="italic" font-size="138" fill="#efcf69">catalog.</text>
+  <text x="128" y="456" font-family="Newsreader, Georgia, serif" font-weight="400" font-style="italic" font-size="138" fill="#efcf69">catalog.</text>
 
   <!-- sub-line -->
-  <text x="128" y="512" font-family="'JetBrains Mono', monospace" font-size="25" letter-spacing="0.5" fill="#b2b2bb">rules · agents · skills · guardrails</text>
+  <text x="128" y="532" font-family="'JetBrains Mono', monospace" font-size="25" letter-spacing="0.5" fill="#b2b2bb">rules · agents · skills · guardrails</text>
 
   <!-- footer url -->
-  <text x="128" y="556" font-family="'JetBrains Mono', monospace" font-size="20" letter-spacing="0.5" fill="#8a8af0">prototypdigital.github.io/bluetemberg-packs</text>
+  <text x="128" y="576" font-family="'JetBrains Mono', monospace" font-size="20" letter-spacing="0.5" fill="#8a8af0">prototypdigital.github.io/bluetemberg-packs</text>
 </svg>
