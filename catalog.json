@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-13T19:57:03.539Z",
+  "generated": "2026-06-13T22:11:02.701Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -438,6 +438,42 @@
         "config-echo"
       ],
       "preview": "Use this skill to confirm what bluetemberg configuration the LLM has in its active session context, and to verify it matches what is on disk. - After running `bluetemberg sync` to confirm the LLM picked up the changes - When a rule does not seem to be taking effect - Onboarding a new team member — c"
+    },
+    {
+      "name": "bluetemberg-skills-create-agent",
+      "version": "0.1.0",
+      "description": "Meta-skill for scaffolding new bluetemberg agents — frontmatter, scoped tools, responsibilities and constraints, and sync.",
+      "profiles": [],
+      "universal": true,
+      "kind": "skills",
+      "skills": [
+        "create-agent"
+      ],
+      "preview": "Use this skill when asked to add, create, or write a new specialist agent (subagent) for the project. - \"add an agent that...\" - \"create a specialist for...\" - \"we need a subagent to review / audit / generate ...\" - Any request to define a focused, delegatable role with its own tool access 1. The ag"
+    },
+    {
+      "name": "bluetemberg-skills-create-pack",
+      "version": "0.1.0",
+      "description": "Meta-skill for scaffolding a whole new bluetemberg pack — package.json metadata, llm/ layout, catalog registration, and validation.",
+      "profiles": [],
+      "universal": true,
+      "kind": "skills",
+      "skills": [
+        "create-pack"
+      ],
+      "preview": "Use this skill when asked to create a new bluetemberg pack (a publishable npm package of rules, agents, or skills) in the bluetemberg-packs monorepo. - \"create a new pack for...\" - \"scaffold a bluetemberg-rules / -agents / -skills package\" - \"add a new pack that bundles ...\" - Any request to start a"
+    },
+    {
+      "name": "bluetemberg-skills-create-rule",
+      "version": "0.1.0",
+      "description": "Meta-skill for scaffolding new bluetemberg rules — frontmatter, the Why/Rules/BAD-GOOD/config/gotchas structure, and sync.",
+      "profiles": [],
+      "universal": true,
+      "kind": "skills",
+      "skills": [
+        "create-rule"
+      ],
+      "preview": "Use this skill when asked to add, create, or write a new always-on rule for the project. - \"add a rule that...\" - \"create a rule for...\" - \"write a rule to enforce...\" - \"we should always / never ...\" stated as a standing convention - Any request to encode a passive, always-applied coding standard f"
     },
     {
       "name": "bluetemberg-skills-create-skill",

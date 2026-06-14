@@ -1,0 +1,24 @@
+{
+  "name": "bluetemberg-skills-create-rule",
+  "version": "0.1.0",
+  "description": "Meta-skill for scaffolding new bluetemberg rules — frontmatter, the Why/Rules/BAD-GOOD/config/gotchas structure, and sync.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "scaffolding",
+    "tooling"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": true,
+    "profiles": []
+  }
+}

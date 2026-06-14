@@ -1,0 +1,24 @@
+{
+  "name": "bluetemberg-skills-create-pack",
+  "version": "0.1.0",
+  "description": "Meta-skill for scaffolding a whole new bluetemberg pack — package.json metadata, llm/ layout, catalog registration, and validation.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "scaffolding",
+    "tooling"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": true,
+    "profiles": []
+  }
+}

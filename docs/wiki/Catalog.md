@@ -258,6 +258,30 @@ Config echo skill for Bluetemberg — verifies that synced configuration was act
 | ----- | ----------- |
 | `config-echo` | Verify that bluetemberg configuration was actually loaded by the LLM — recall rules, agents, and skills from session context and cross-reference against disk. |
 
+### bluetemberg-skills-create-agent
+
+Meta-skill for scaffolding new bluetemberg agents — frontmatter, scoped tools, responsibilities and constraints, and sync.
+
+| Skill | Description |
+| ----- | ----------- |
+| `create-agent` | Scaffold a new bluetemberg agent in the correct format — frontmatter with scoped tools, responsibilities, constraints, and sync. |
+
+### bluetemberg-skills-create-pack
+
+Meta-skill for scaffolding a whole new bluetemberg pack — package.json metadata, llm/ layout, catalog registration, and validation.
+
+| Skill | Description |
+| ----- | ----------- |
+| `create-pack` | Scaffold a whole new bluetemberg pack — package.json metadata, llm/ layout, catalog registration, and validation. |
+
+### bluetemberg-skills-create-rule
+
+Meta-skill for scaffolding new bluetemberg rules — frontmatter, the Why/Rules/BAD-GOOD/config/gotchas structure, and sync.
+
+| Skill | Description |
+| ----- | ----------- |
+| `create-rule` | Scaffold a new bluetemberg rule in the correct format — frontmatter, a Why/Rules/BAD-GOOD/config/gotchas body, and sync. |
+
 ### bluetemberg-skills-create-skill
 
 Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required sections, and sync.
