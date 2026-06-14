@@ -160,12 +160,29 @@ console.log('\n[2] Frontmatter validation');
   }
 }
 
-// ─── 3. Versioning is owned by release-please ───────────────────────────────
-// Contributors do NOT bump package.json versions by hand. release-please
-// derives each pack's bump from conventional commits and maintains a Release
-// PR (see .github/workflows/release-please.yml and docs/wiki/Releasing.md).
-// The old "llm/ changed ⇒ require a manual version bump" check was removed:
-// under the automated flow it would fail every legitimate feature PR.
+// ─── 3. Release-please registration integrity ───────────────────────────────
+// Every pack in packages/ must be registered in both release-please-config.json
+// and .release-please-manifest.json, otherwise new packs silently never release.
+console.log('\n[3] Release-please registration integrity');
+{
+  const packDirs = listPackDirs();
+  const rpConfig = JSON.parse(fs.readFileSync(path.join(ROOT, 'release-please-config.json'), 'utf8'));
+  const rpManifest = JSON.parse(fs.readFileSync(path.join(ROOT, '.release-please-manifest.json'), 'utf8'));
+
+  for (const dir of packDirs) {
+    const key = `packages/${dir}`;
+    if (!rpConfig.packages || !(key in rpConfig.packages)) {
+      fail(`${key} missing in release-please-config.json packages`);
+    } else {
+      pass(`${key} present in release-please-config.json`);
+    }
+    if (!(key in rpManifest)) {
+      fail(`${key} missing in .release-please-manifest.json`);
+    } else {
+      pass(`${key} present in .release-please-manifest.json`);
+    }
+  }
+}
 
 // ─── Result ───────────────────────────────────────────────────────────────────
 console.log(`\n${errors === 0 ? '✅ All checks passed.' : `❌ ${errors} error(s) found.`}\n`);
