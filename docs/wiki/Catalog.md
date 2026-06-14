@@ -31,6 +31,18 @@ Context engineering rules for Bluetemberg — structuring LLM context, managing 
 | `multi-turn-state-management` | Manage state across multi-turn interactions — track what was decided, what changed, and what is still open. |
 | `prompt-structure` | Structure prompts into labeled, delimited sections — separate instructions from data, and keep persistent rules in the system message. |
 
+### bluetemberg-rules-design-craft
+
+Anti-stock design-craft principles for building UI with AI — banned moves, real references, tokens-first, every state.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `anti-stock-defaults` | Decide the visual direction before prompting; AI averages toward stock UI, so name what you want and refuse the safe default. |
+| `banned-moves-first` | Keep a concrete banned-moves list and apply it to every UI build; closing off easy defaults forces something more intentional out. |
+| `design-every-state` | Design and build every screen state — empty, loading, error, success — with real content, never just the default with lorem ipsum. |
+| `references-not-moods` | Anchor visual direction to specific named references, not adjectives; concrete coordinates beat moods the model will average away. |
+| `tokens-before-components` | Lock the visual system (palette, type, spacing) as tokens before building UI, and re-state them every refinement to prevent token drift. |
+
 ### bluetemberg-rules-devops
 
 Infrastructure rules for Bluetemberg — Docker, Terraform, Ansible, Kubernetes, Helm, CI/CD, shell scripts, and idempotency.
@@ -157,6 +169,14 @@ Code reviewer agent for Bluetemberg — PR review covering patterns, naming, com
 | Agent | Description |
 | ----- | ----------- |
 | `code-reviewer` | Reviews pull requests for code quality, patterns, naming, and potential bugs. |
+
+### bluetemberg-agents-design-engineer
+
+Design engineer agent for Bluetemberg — builds UI to a reference section-by-section, holds tokens and banned moves, catches stock drift.
+
+| Agent | Description |
+| ----- | ----------- |
+| `design-engineer` | Builds UI to a design reference section-by-section, holding tokens and banned moves and catching stock drift before it ships. |
 
 ### bluetemberg-agents-devops-specialist
 
@@ -290,6 +310,14 @@ Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required
 | ----- | ----------- |
 | `create-skill` | Scaffold a new bluetemberg skill in the correct format — frontmatter, five required sections, and sync. |
 
+### bluetemberg-skills-design-critique
+
+Design critique skill for Bluetemberg — multi-lens review, hostile QA, and an impact-ranked fix list for built UI.
+
+| Skill | Description |
+| ----- | ----------- |
+| `design-critique` | Critique built UI across multiple lenses, run hostile QA, and return an impact-ranked fix list — specific issues with locations, not praise. |
+
 ### bluetemberg-skills-docs-upkeep
 
 Docs upkeep skill for Bluetemberg — keep docs aligned with implementation changes.
@@ -297,6 +325,14 @@ Docs upkeep skill for Bluetemberg — keep docs aligned with implementation chan
 | Skill | Description |
 | ----- | ----------- |
 | `docs-upkeep` | Keep canonical documentation aligned with implementation and workflow changes in the same task. |
+
+### bluetemberg-skills-figma-to-code
+
+Figma-to-code skill for Bluetemberg — the section-by-section design-to-code loop with prompt stacking, drift checks, and surgical refinement.
+
+| Skill | Description |
+| ----- | ----------- |
+| `figma-to-code` | Translate a Figma comp or screenshot into working UI, section-by-section, with prompt stacking, drift checks, and surgical refinement. |
 
 ### bluetemberg-skills-infrastructure-drift-check
 
@@ -361,6 +397,14 @@ Sub-agent design skill for Bluetemberg — plan, scope, and implement sub-agent 
 | Skill | Description |
 | ----- | ----------- |
 | `sub-agent-design` | Design a sub-agent system — scope responsibilities, define communication contracts, wire orchestration, and add integration tests. |
+
+### bluetemberg-skills-visual-direction
+
+Visual direction skill for Bluetemberg — explore distinct directions, lock one, and produce a banned-moves list and Design System Document.
+
+| Skill | Description |
+| ----- | ----------- |
+| `visual-direction` | Set a distinctive visual direction before building — explore three options, lock one, and produce a banned-moves list and Design System Document. |
 
 ### bluetemberg-skills-workspace-hygiene
 
