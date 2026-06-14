@@ -13,6 +13,7 @@
   "packages/bluetemberg-agents-sre-specialist": "0.1.0",
   "packages/bluetemberg-agents-test-specialist": "0.1.0",
   "packages/bluetemberg-guardrails-git": "0.1.0",
+  "packages/bluetemberg-rules-accessibility": "0.1.0",
   "packages/bluetemberg-rules-agent-memory": "0.1.0",
   "packages/bluetemberg-rules-context-engineering": "0.2.0",
   "packages/bluetemberg-rules-devops": "0.2.0",

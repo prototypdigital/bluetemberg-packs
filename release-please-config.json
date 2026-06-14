@@ -21,6 +21,7 @@
     "packages/bluetemberg-agents-sre-specialist": {},
     "packages/bluetemberg-agents-test-specialist": {},
     "packages/bluetemberg-guardrails-git": {},
+    "packages/bluetemberg-rules-accessibility": {},
     "packages/bluetemberg-rules-agent-memory": {},
     "packages/bluetemberg-rules-context-engineering": {},
     "packages/bluetemberg-rules-devops": {},
