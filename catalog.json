@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-13T22:11:02.701Z",
+  "generated": "2026-06-14T09:37:13.306Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -93,16 +93,10 @@
     },
     {
       "name": "bluetemberg-agents-docs-maintainer",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Docs maintainer agent for Bluetemberg — documentation synchronization with code changes.",
-      "profiles": [
-        "frontend",
-        "backend",
-        "fullstack",
-        "devops",
-        "pure-infra"
-      ],
-      "universal": false,
+      "profiles": [],
+      "universal": true,
       "kind": "agents",
       "agents": [
         "docs-maintainer"
@@ -489,16 +483,10 @@
     },
     {
       "name": "bluetemberg-skills-docs-upkeep",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Docs upkeep skill for Bluetemberg — keep docs aligned with implementation changes.",
-      "profiles": [
-        "frontend",
-        "backend",
-        "fullstack",
-        "devops",
-        "pure-infra"
-      ],
-      "universal": false,
+      "profiles": [],
+      "universal": true,
       "kind": "skills",
       "skills": [
         "docs-upkeep"
@@ -629,16 +617,10 @@
     },
     {
       "name": "bluetemberg-skills-workspace-hygiene",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Workspace hygiene skill for Bluetemberg — clean workspace state during edits.",
-      "profiles": [
-        "frontend",
-        "backend",
-        "fullstack",
-        "devops",
-        "pure-infra"
-      ],
-      "universal": false,
+      "profiles": [],
+      "universal": true,
       "kind": "skills",
       "skills": [
         "workspace-hygiene"
