@@ -29,6 +29,7 @@ const CATALOG_PATH = join(REPO_ROOT, "catalog.json");
 const OUT_CATALOG = join(OUT_DIR, "catalog.json");
 const OUT_INDEX = join(OUT_DIR, "index.html");
 const CATALOG_SCRIPT = join(__dirname, "generate-catalog.js");
+const OG_SCRIPT = join(__dirname, "build-og.js");
 
 const REGISTRY = "https://registry.npmjs.org";
 const FETCH_TIMEOUT_MS = 8000;
@@ -65,6 +66,20 @@ function regenerateCatalog() {
   if (!existsSync(CATALOG_PATH)) {
     console.error("build:site — catalog.json was not produced; aborting.");
     process.exit(1);
+  }
+}
+
+function regenerateOg() {
+  console.log("build:site — regenerating og.png…");
+  try {
+    execFileSync(process.execPath, [OG_SCRIPT], {
+      stdio: "inherit",
+      cwd: REPO_ROOT,
+    });
+  } catch {
+    console.warn(
+      "build:site — og.png regeneration skipped (rsvg-convert not available); using committed static asset.",
+    );
   }
 }
 
@@ -195,6 +210,7 @@ async function main() {
     process.exit(1);
   }
   regenerateCatalog();
+  regenerateOg();
   assembleSite();
   const catalog = await enrichCatalog();
   injectSeo(catalog);
