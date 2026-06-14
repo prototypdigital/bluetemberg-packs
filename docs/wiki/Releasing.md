@@ -50,7 +50,7 @@ strategy:
   matrix:
     path: ${{ fromJSON(needs.release-please.outputs.paths_released) }}
 steps:
-  - run: npm install -g npm@latest          # current npm for provenance
+  - run: npm install -g npm@11              # pinned npm for provenance
   - run: npm ci
   - env: { NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} }
     run: npm publish -w "$PKG_PATH" --provenance --access public

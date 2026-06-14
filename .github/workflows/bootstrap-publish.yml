@@ -71,8 +71,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
 
       # Provenance generation needs a current npm; the bundled one may be older.
+      # Pin the major so a future npm release can't silently break publishing.
       - name: Upgrade npm
-        run: npm install -g npm@latest
+        run: npm install -g npm@11
 
       - name: Install dependencies
         run: npm ci
