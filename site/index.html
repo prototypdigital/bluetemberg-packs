@@ -12,6 +12,7 @@
       rel="canonical"
       href="https://prototypdigital.github.io/bluetemberg-packs/"
     />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 
     <!-- Open Graph — renders a card when shared in Slack, LinkedIn, Discord, etc. -->
     <meta property="og:type" content="website" />
@@ -191,10 +192,9 @@
         color: var(--muted);
         margin-bottom: 22px;
       }
-      .eyebrow .dot {
-        width: 6px;
-        height: 6px;
-        background: var(--accent);
+      .eyebrow-mark {
+        display: block;
+        flex: none;
       }
       .masthead h1 {
         font-family: var(--serif);
@@ -729,7 +729,52 @@
 
     <header class="masthead">
       <div class="wrap">
-        <span class="eyebrow"><span class="dot"></span>bluetemberg-packs</span>
+        <span class="eyebrow">
+          <svg
+            class="eyebrow-mark"
+            viewBox="0 0 64 64"
+            width="16"
+            height="16"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <g fill="#e8e8ef">
+              <rect x="8" y="3" width="8" height="8" />
+              <rect x="18" y="3" width="8" height="8" />
+              <rect x="28" y="3" width="8" height="8" />
+              <rect x="38" y="3" width="8" height="8" />
+              <rect x="48" y="3" width="8" height="8" />
+              <rect x="8" y="13" width="8" height="8" />
+              <rect x="48" y="13" width="8" height="8" />
+              <rect x="18" y="23" width="8" height="8" />
+              <rect x="28" y="23" width="8" height="8" />
+              <rect x="38" y="23" width="8" height="8" />
+              <rect x="8" y="33" width="8" height="8" />
+              <rect x="48" y="33" width="8" height="8" />
+              <rect x="8" y="43" width="8" height="8" />
+              <rect x="48" y="43" width="8" height="8" />
+              <rect x="8" y="53" width="8" height="8" />
+              <rect x="18" y="53" width="8" height="8" />
+              <rect x="28" y="53" width="8" height="8" />
+              <rect x="38" y="53" width="8" height="8" />
+              <rect x="48" y="53" width="8" height="8" />
+            </g>
+            <g fill="#4343e1">
+              <rect x="18" y="13" width="8" height="8" />
+              <rect x="28" y="13" width="8" height="8" />
+              <rect x="38" y="13" width="8" height="8" />
+              <rect x="48" y="23" width="8" height="8" />
+              <rect x="18" y="33" width="8" height="8" />
+              <rect x="28" y="33" width="8" height="8" />
+              <rect x="38" y="33" width="8" height="8" />
+              <rect x="18" y="43" width="8" height="8" />
+              <rect x="28" y="43" width="8" height="8" />
+              <rect x="38" y="43" width="8" height="8" />
+            </g>
+            <rect x="8" y="23" width="8" height="8" fill="#efcf69" />
+          </svg>
+          bluetemberg-packs
+        </span>
         <h1>The pack <em>catalog.</em></h1>
         <p class="lede">
           Every official Bluetemberg pack — rules, agents, skills, and
