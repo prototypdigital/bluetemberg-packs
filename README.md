@@ -10,6 +10,8 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 
 > **New to Bluetemberg?** It's a CLI that maintains AI assistant config from a single source of truth. You write rules once; it generates the per-tool files. These packs are curated, ready-made content you can drop in instead of writing your own. Start with the [Bluetemberg README](https://github.com/prototypdigital/bluetemberg#readme).
 
+**[Browse the pack catalog →](https://prototypdigital.github.io/bluetemberg-packs/)** — a searchable, filterable index of every pack. Filter by kind or team profile, copy the `bluetemberg add` command for any pack (or a whole profile at once), and share any filtered view by URL. No install required.
+
 ## Packs
 
 ### Rules
@@ -96,6 +98,7 @@ So you can adopt a whole pack and still override a single file by creating one w
 
 Full docs live in the [**wiki**](https://github.com/prototypdigital/bluetemberg-packs/wiki):
 
+- [Pack browser](https://prototypdigital.github.io/bluetemberg-packs/) — searchable, filterable catalog of every pack (no install required)
 - [Catalog](https://github.com/prototypdigital/bluetemberg-packs/wiki/Catalog) — every pack and every file, described
 - [Usage](https://github.com/prototypdigital/bluetemberg-packs/wiki/Usage) — installing, overriding, and troubleshooting
 - [Contributing](https://github.com/prototypdigital/bluetemberg-packs/wiki/Contributing) — add content or a new pack

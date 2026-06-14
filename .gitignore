@@ -2,3 +2,4 @@ node_modules/
 plugins/
 .claude-plugin/
 .worktrees/
+_site/

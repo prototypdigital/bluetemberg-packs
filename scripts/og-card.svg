@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Source for the Open Graph share card (site/og.png).
+  Regenerate with: npm run build:og  (rasterizes this with rsvg-convert).
+  Design mirrors the site: Prototyp night surface, indigo accent rule,
+  Newsreader display with a gold italic em.
+-->
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#272729"/>
+  <rect x="32" y="32" width="1136" height="566" fill="none" stroke="#575763" stroke-width="1"/>
+
+  <!-- eyebrow -->
+  <rect x="96" y="104" width="12" height="12" fill="#4343e1"/>
+  <text x="124" y="116" font-family="'JetBrains Mono', monospace" font-size="22" letter-spacing="3.5" fill="#b2b2bb">BLUETEMBERG-PACKS</text>
+
+  <!-- display headline with left accent rule -->
+  <rect x="96" y="196" width="3" height="268" fill="#4343e1"/>
+  <text x="128" y="312" font-family="Newsreader, Georgia, serif" font-weight="300" font-size="138" fill="#ffffff">The pack</text>
+  <text x="128" y="456" font-family="Newsreader, Georgia, serif" font-weight="400" font-style="italic" font-size="138" fill="#efcf69">catalog.</text>
+
+  <!-- sub-line -->
+  <text x="128" y="532" font-family="'JetBrains Mono', monospace" font-size="25" letter-spacing="0.5" fill="#b2b2bb">rules · agents · skills · guardrails</text>
+
+  <!-- footer url -->
+  <text x="128" y="576" font-family="'JetBrains Mono', monospace" font-size="20" letter-spacing="0.5" fill="#8a8af0">prototypdigital.github.io/bluetemberg-packs</text>
+</svg>

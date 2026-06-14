@@ -71,7 +71,9 @@ function listContentFiles(pkgDir, kind) {
     }
   }
 
-  return files;
+  // Sort by name so catalog.json item order and the preview (contentFiles[0])
+  // are deterministic — readdirSync order is filesystem-dependent.
+  return files.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 function buildEntry(pkgDir) {
@@ -96,9 +98,9 @@ function buildEntry(pkgDir) {
       profiles: meta.profiles ?? [],
       universal: meta.universal ?? false,
       kind,
-      [kind]: contentFiles.map((f) => f.name),
-      // used for wiki generation only, stripped before writing catalog.json
-      _items: contentFiles.map((f) => ({ name: f.name, description: f.description })),
+      // Rich items { name, description } — consumed by both the wiki table and
+      // the browser. Descriptions come from each file's frontmatter.
+      [kind]: contentFiles.map((f) => ({ name: f.name, description: f.description })),
       preview,
     };
   } catch (err) {
@@ -163,7 +165,7 @@ function generateWikiCatalog(packs) {
       lines.push(`### ${pack.name}`, '');
       lines.push(pack.description, '');
 
-      const items = pack._items ?? [];
+      const items = pack[pack.kind] ?? [];
       if (items.length > 0) {
         lines.push(`| ${meta.itemCol} | ${meta.descCol} |`);
         lines.push(`| ${'---'.padEnd(meta.itemCol.length, '-')} | ${'---'.padEnd(meta.descCol.length, '-')} |`);
@@ -198,11 +200,9 @@ function main() {
     .map(buildEntry)
     .filter(Boolean);
 
-  // Write catalog.json — strip the wiki-only _items field
-  const catalogPacks = packs.map(({ _items: _drop, ...rest }) => rest);
   const catalog = {
     generated: new Date().toISOString(),
-    packs: catalogPacks,
+    packs,
   };
 
   try {
