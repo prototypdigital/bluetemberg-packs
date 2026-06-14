@@ -8,6 +8,7 @@
   "scripts": {
     "validate": "node .github/scripts/validate-packs.cjs",
     "generate:catalog": "node scripts/generate-catalog.js",
+    "build:site": "node scripts/build-site.js",
     "lint:md": "markdownlint-cli2 \"packages/**/llm/**/*.md\""
   },
   "devDependencies": {
