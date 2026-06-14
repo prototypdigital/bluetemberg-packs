@@ -1,0 +1,82 @@
+name: Bootstrap Publish
+
+# One-shot workflow to publish packs that don't yet exist on npm.
+# Triggered manually from the Actions UI.
+#
+# For each pack in packages/ that returns 404 from the npm registry,
+# this workflow attempts an OIDC-authenticated publish. If OIDC fails
+# because the package has never existed (no trusted publisher configured),
+# you'll see a 403 in the logs — in that case the pack needs a one-time
+# manual `npm publish -w packages/<name> --access public` from a maintainer
+# machine first.
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  detect:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      unpublished: ${{ steps.detect.outputs.unpublished }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Detect unpublished packs
+        id: detect
+        run: |
+          pkgs=()
+          for dir in packages/*/; do
+            pkg="${dir%/}"
+            pkg="${pkg#packages/}"
+            code=$(curl -s -o /dev/null -w "%{http_code}" "https://registry.npmjs.org/$pkg/latest")
+            if [ "$code" = "404" ]; then
+              echo "  unpublished: $pkg"
+              pkgs+=("packages/$pkg")
+            else
+              echo "  exists: $pkg"
+            fi
+          done
+          list=$(printf '%s\n' "${pkgs[@]}" | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          echo "unpublished=$list" >> "$GITHUB_OUTPUT"
+          echo "Unpublished: $list"
+
+  publish:
+    needs: detect
+    if: ${{ needs.detect.outputs.unpublished != '[]' && needs.detect.outputs.unpublished != '' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # OIDC trusted publishing to npm
+    strategy:
+      fail-fast: false
+      matrix:
+        path: ${{ fromJSON(needs.detect.outputs.unpublished) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@latest
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish ${{ matrix.path }}
+        env:
+          PKG_PATH: ${{ matrix.path }}
+        run: npm publish -w "$PKG_PATH" --provenance --access public
