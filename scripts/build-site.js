@@ -4,10 +4,6 @@
 //
 // 1. Regenerate catalog.json (so the site never ships a stale catalog).
 // 2. Copy the catalog + site assets into the Pages artifact dir.
-//    site/og.png is a committed static asset — the OG card carries no
-//    catalog-derived data (no pack count, no version), so it never goes stale
-//    and does NOT need regenerating here. Re-run `npm run build:og` only when
-//    the card DESIGN changes (requires rsvg-convert; not available in CI).
 // 3. Enrich _site/catalog.json with npm publish dates (best-effort, network).
 //    The committed catalog.json stays pure/offline/deterministic — only the
 //    deployed copy carries publish dates.
@@ -73,6 +69,14 @@ function regenerateCatalog() {
 }
 
 function assembleSite() {
+  const ogPath = join(SITE_DIR, "og.png");
+  if (!existsSync(ogPath)) {
+    console.error(
+      "build:site — site/og.png is missing. Run `npm run build:og` to generate it (requires rsvg-convert).",
+    );
+    process.exit(1);
+  }
+
   rmSync(OUT_DIR, { recursive: true, force: true });
   mkdirSync(OUT_DIR, { recursive: true });
 
