@@ -1,6 +1,7 @@
 ---
 name: a11y-specialist
 description: Audits and remediates accessibility issues against WCAG 2.2 A/AA standards.
+scope: "**/*.{tsx,jsx,html,vue}"
 tools: ["read", "search", "edit", "execute"]
 ---
 

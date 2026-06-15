@@ -1,6 +1,7 @@
 ---
 name: backend-specialist
 description: Implements and reviews backend services, APIs, database patterns, and auth flows.
+scope: "**/*.{ts,js,go,java,py}"
 tools: ["read", "search", "edit", "execute"]
 ---
 

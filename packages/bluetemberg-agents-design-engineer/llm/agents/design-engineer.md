@@ -1,6 +1,7 @@
 ---
 name: design-engineer
 description: Builds UI to a design reference section-by-section, holding tokens and banned moves and catching stock drift before it ships.
+scope: "**"
 tools: ["read", "search", "edit", "execute"]
 ---
 

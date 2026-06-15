@@ -1,6 +1,7 @@
 ---
 name: security-specialist
 description: Audits code for security vulnerabilities, secrets exposure, and dependency risks.
+scope: "**/*"
 tools: ["read", "search", "edit", "execute"]
 ---
 

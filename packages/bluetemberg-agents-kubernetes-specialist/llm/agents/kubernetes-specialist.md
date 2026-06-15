@@ -1,6 +1,7 @@
 ---
 name: kubernetes-specialist
 description: Writes and reviews Kubernetes manifests, Helm charts, and Kustomize overlays for secure, production-grade deployments.
+scope: "**/*.{yaml,yml}"
 tools: ["read", "search", "edit", "execute"]
 ---
 

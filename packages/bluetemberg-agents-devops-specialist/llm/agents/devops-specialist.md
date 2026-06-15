@@ -1,6 +1,7 @@
 ---
 name: devops-specialist
 description: Manages CI/CD pipelines, container builds, infrastructure-as-code, and deployment config.
+scope: "{Dockerfile,.github/workflows/**,Makefile,docker-compose.yml,terraform/**}"
 tools: ["read", "search", "edit", "execute"]
 ---
 

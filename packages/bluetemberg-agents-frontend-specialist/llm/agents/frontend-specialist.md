@@ -1,6 +1,7 @@
 ---
 name: frontend-specialist
 description: Implements and refactors frontend UI with reusable, accessible, and testable patterns.
+scope: "**/*.{tsx,jsx,ts,js}"
 tools: ["read", "search", "edit", "execute"]
 ---
 

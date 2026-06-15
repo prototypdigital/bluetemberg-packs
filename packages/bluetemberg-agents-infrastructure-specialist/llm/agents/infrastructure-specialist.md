@@ -1,6 +1,7 @@
 ---
 name: infrastructure-specialist
 description: Maintains build, CI, container, and deployment configuration.
+scope: "{Dockerfile,docker-compose.yml,*.lock,package.json,.github/**}"
 tools: ["read", "search", "edit", "execute"]
 ---
 
