@@ -76,6 +76,20 @@ function listContentFiles(pkgDir, kind) {
   return files.sort((a, b) => a.name.localeCompare(b.name));
 }
 
+/** Returns true if the package name resolves on the npm registry. */
+async function isPublished(name) {
+  try {
+    const res = await fetch(`https://registry.npmjs.org/${encodeURIComponent(name)}`, {
+      headers: { Accept: 'application/json' },
+    });
+    if (!res.ok) return false;
+    const data = await res.json();
+    return !!(data['dist-tags'] && data['dist-tags'].latest);
+  } catch {
+    return false;
+  }
+}
+
 function buildEntry(pkgDir) {
   try {
     const pkgJsonPath = join(pkgDir, 'package.json');
@@ -190,15 +204,24 @@ function generateWikiCatalog(packs) {
   return lines.join('\n');
 }
 
-function main() {
+async function main() {
   const pkgDirs = readdirSync(PACKAGES_DIR, { withFileTypes: true })
     .filter((e) => e.isDirectory())
     .map((e) => join(PACKAGES_DIR, e.name))
     .sort();
 
-  const packs = pkgDirs
-    .map(buildEntry)
-    .filter(Boolean);
+  const candidates = pkgDirs.map(buildEntry).filter(Boolean);
+
+  // Filter to only packs that are published on npm
+  const publishResults = await Promise.all(
+    candidates.map((p) => isPublished(p.name)),
+  );
+
+  const packs = candidates.filter((_, i) => {
+    if (publishResults[i]) return true;
+    console.warn(`  skipped (not on npm): ${candidates[i].name}`);
+    return false;
+  });
 
   const catalog = {
     generated: new Date().toISOString(),
