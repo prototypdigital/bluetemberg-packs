@@ -1,12 +1,16 @@
 {
-  "name": "bluetemberg-agents-frontend-specialist",
+  "name": "bluetemberg-skills-visual-direction",
   "version": "0.1.0",
-  "description": "Frontend specialist agent for Bluetemberg — UI implementation, design-system, i18n, accessibility.",
+  "description": "Visual direction skill for Bluetemberg — explore distinct directions, lock one, and produce a banned-moves list and Design System Document.",
   "keywords": [
     "bluetemberg-pack",
-    "agents"
+    "skills",
+    "design"
   ],
   "author": "Prototyp Digital",
+  "contributors": [
+    "Marko Kolić (https://github.com/marko-prototyp)"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -18,8 +22,6 @@
   "bluetemberg": {
     "universal": false,
     "profiles": [
-      "frontend",
-      "fullstack",
       "design-engineer"
     ]
   }

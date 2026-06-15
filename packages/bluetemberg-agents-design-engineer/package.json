@@ -1,12 +1,16 @@
 {
-  "name": "bluetemberg-agents-frontend-specialist",
+  "name": "bluetemberg-agents-design-engineer",
   "version": "0.1.0",
-  "description": "Frontend specialist agent for Bluetemberg — UI implementation, design-system, i18n, accessibility.",
+  "description": "Design engineer agent for Bluetemberg — builds UI to a reference section-by-section, holds tokens and banned moves, catches stock drift.",
   "keywords": [
     "bluetemberg-pack",
-    "agents"
+    "agents",
+    "design"
   ],
   "author": "Prototyp Digital",
+  "contributors": [
+    "Marko Kolić (https://github.com/marko-prototyp)"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -18,8 +22,6 @@
   "bluetemberg": {
     "universal": false,
     "profiles": [
-      "frontend",
-      "fullstack",
       "design-engineer"
     ]
   }

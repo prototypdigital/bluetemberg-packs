@@ -4,6 +4,7 @@
   "packages/bluetemberg-agents-ansible-specialist": "0.1.0",
   "packages/bluetemberg-agents-backend-specialist": "0.1.0",
   "packages/bluetemberg-agents-code-reviewer": "0.1.0",
+  "packages/bluetemberg-agents-design-engineer": "0.0.0",
   "packages/bluetemberg-agents-devops-specialist": "0.1.0",
   "packages/bluetemberg-agents-docs-maintainer": "0.2.0",
   "packages/bluetemberg-agents-frontend-specialist": "0.1.0",
@@ -16,6 +17,7 @@
   "packages/bluetemberg-rules-accessibility": "0.1.0",
   "packages/bluetemberg-rules-agent-memory": "0.1.0",
   "packages/bluetemberg-rules-context-engineering": "0.2.0",
+  "packages/bluetemberg-rules-design-craft": "0.0.0",
   "packages/bluetemberg-rules-devops": "0.2.0",
   "packages/bluetemberg-rules-docs": "0.2.0",
   "packages/bluetemberg-rules-git": "0.1.0",
@@ -31,7 +33,9 @@
   "packages/bluetemberg-skills-create-pack": "0.1.0",
   "packages/bluetemberg-skills-create-rule": "0.1.0",
   "packages/bluetemberg-skills-create-skill": "0.1.0",
+  "packages/bluetemberg-skills-design-critique": "0.0.0",
   "packages/bluetemberg-skills-docs-upkeep": "0.2.0",
+  "packages/bluetemberg-skills-figma-to-code": "0.0.0",
   "packages/bluetemberg-skills-infrastructure-drift-check": "0.1.0",
   "packages/bluetemberg-skills-migration-safety": "0.1.0",
   "packages/bluetemberg-skills-patterns": "0.1.0",
@@ -40,5 +44,6 @@
   "packages/bluetemberg-skills-security-audit": "0.1.0",
   "packages/bluetemberg-skills-stack-change-review": "0.1.0",
   "packages/bluetemberg-skills-sub-agent-design": "0.1.0",
+  "packages/bluetemberg-skills-visual-direction": "0.0.0",
   "packages/bluetemberg-skills-workspace-hygiene": "0.2.0"
 }
