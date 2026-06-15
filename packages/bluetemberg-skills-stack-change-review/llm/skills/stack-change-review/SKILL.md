@@ -1,6 +1,6 @@
 ---
 name: stack-change-review
-description: Review high-blast-radius infrastructure changes for safety before merge.
+description: Review high-blast-radius infrastructure changes with a risk-tier decision tree, per-change-type protocol, and mandatory runbook checklist.
 ---
 
 # stack-change-review
@@ -16,23 +16,77 @@ Use this skill when reviewing changes to critical infrastructure files that affe
 - Changes to Kubernetes manifests (`k8s/`, `manifests/`, `helm/`)
 - Changes to Terraform root module (`*.tf` in the project root)
 
-## Required behavior
+## Protocol
 
-1. **Port changes:** Flag any port number change (breaks firewall rules and dependent containers).
-2. **Volume paths:** Flag any volume rename or path change (data loss risk).
-3. **Image tags:** For each image version bump, check if there are breaking API changes in the release notes.
-4. **Service names:** Flag any service rename (breaks existing `docker compose down` and references).
-5. **Environment variables:** Flag any var name or default value change (affects all consumers).
-6. **Runbook update:** If any flag is raised, require a runbook or ADR update in the same commit explaining the change, rollback steps, and affected systems.
+### Step 1 — Classify the blast radius
 
-## When to use
+```
+Does the change affect a shared resource (network, volume, env var used by >1 service)?
+  YES → Tier 1 (high blast radius): requires runbook + staging verification before merge
+  NO  → Does it affect a stateful resource (volume path, database, persistent queue)?
+          YES → Tier 2 (data risk): requires data backup confirmation + rollback steps
+          NO  → Tier 3 (isolated): standard review, no special gate
+```
 
-- Before merging high-impact infra changes to main
-- When making changes to production-adjacent files (`group_vars/all.yml`, `docker-compose.prod.yml.j2`)
-- When the change affects multiple services or shared resources
+### Step 2 — Per-change-type checks
+
+Run only the checks that apply to the diff:
+
+**Port changes** → Flag immediately (breaks firewall rules and dependent containers)
+```
+BAD:  services.api.ports: "3000:3000" → "3001:3000"
+      -- Every firewall rule, load balancer, and dependent container referencing port 3000 breaks.
+GOOD: Open an ADR. Update firewall rules, consumers, and the load balancer in the same PR.
+      Document old port → new port in the runbook.
+```
+
+**Volume paths** → Flag immediately (data loss risk)
+```
+BAD:  volumes: - ./data/postgres:/var/lib/postgresql/data
+      changed to: - ./postgres-data:/var/lib/postgresql/data
+      -- The container sees an empty volume. All data is abandoned in-place.
+GOOD: Never rename a volume path without a documented data migration:
+      1. Stop the service. 2. rsync old path → new path. 3. Start with new path.
+```
+
+**Image tags** → For each version bump, check the release notes for breaking API or config changes. If breaking changes exist → Tier 1.
+
+**Service names** → Flag any rename (`docker compose down` uses the old name; rename leaves orphaned containers).
+
+**Environment variables** → Flag any var name or default value change; trace all consumers in the same repo.
+
+### Step 3 — Require a runbook for any Tier 1 or Tier 2 finding
+
+If a flag is raised, the PR description MUST include:
+
+```markdown
+## Runbook
+
+**Change:** [What is changing]
+**Affected systems:** [List every service or resource impacted]
+**Rollback steps:**
+1. [Concrete step]
+2. [Concrete step]
+**Pre-change verification:** [What to confirm before applying]
+**Post-change verification:** [What to confirm the change is live and healthy]
+```
+
+A PR without a runbook for a flagged change MUST NOT be merged.
+
+### Step 4 — Staging gate for Tier 1
+
+Every Tier 1 change MUST be applied to staging first and verified healthy before merging to a production branch. Capture the staging apply output and paste it in the PR.
+
+## Completion checklist
+
+- [ ] Blast radius classified (Tier 1 / 2 / 3)
+- [ ] Port, volume, image tag, service name, and env var changes checked
+- [ ] Runbook present in PR for any Tier 1 or Tier 2 finding
+- [ ] Staging apply output captured for Tier 1 changes
+- [ ] Rollback steps are specific (not "revert the commit")
 
 ## When NOT to use
 
-- Documentation-only changes unrelated to deployed config
-- Comments or formatting changes with no behavioral impact
-- Adding new services that don't rename or change existing ones
+- Documentation-only or comment/formatting changes with no behavioral impact
+- Adding a brand-new service that does not rename or reconfigure any existing service
+- Local development or sandbox stack files (`docker-compose.dev.yml` that never reaches prod)

@@ -1,11 +1,11 @@
 ---
 name: rollback-plan
-description: Require an explicit rollback plan for every infrastructure or deployment change before merge.
+description: Require and validate a structured rollback plan for every production change — with a complexity decision tree, data-loss check, and PR template.
 ---
 
 # rollback-plan
 
-Use this skill when reviewing infrastructure, deployment, or database changes that affect production systems. Every change must have a tested rollback path.
+Use this skill when reviewing infrastructure, deployment, or database changes that affect production systems. Every change must have a tested rollback path before merge.
 
 ## Triggers
 
@@ -16,33 +16,94 @@ Use this skill when reviewing infrastructure, deployment, or database changes th
 - Dependency or image version bumps in production config
 - CI/CD pipeline changes affecting production deploys
 
-## Required behavior
+## Protocol
 
-1. **Define rollback steps:** Every PR must include explicit rollback instructions in the description or a linked runbook. Vague ("revert the commit") is not enough.
-2. **Verify rollback is tested:** For stateful changes (schema migrations, volume changes), the rollback must have been tested in a staging environment.
-3. **Check for data loss risk:** If rolling back would lose data (e.g., a column drop already ran), flag the change as requiring a data backup before applying.
-4. **Time-to-rollback estimate:** Include an estimated time to execute the rollback. If it exceeds 15 minutes, require a pre-change backup or canary deploy.
-5. **Rollback freeze window:** Flag if the change is in scope of an upcoming release freeze or maintenance window.
+### Step 1 — Classify rollback complexity
 
-## Rollback plan format
+```
+Is the change stateful (schema migration, volume rename, data transform)?
+  YES → Tier A (stateful): rollback requires a tested down migration or data restore procedure.
+        Time-to-rollback must be < 15 minutes or a pre-change backup is required.
 
-Include this block in the PR description for every production change:
+  NO  → Is the change reversible by re-deploying the previous artifact?
+          YES → Tier B (artifact): rollback = re-deploy previous tag.
+                Document the exact command; "revert the commit" is not enough.
+          NO  → Tier C (destructive, irreversible): flag immediately.
+                Change must be gated by a canary deploy and a pre-change backup.
+```
+
+### Step 2 — Validate the rollback steps
+
+Reject vague rollback plans:
+
+```
+BAD:  "Rollback: revert the commit"
+      "Rollback: undo the change"
+      -- These describe intent, not procedure. Ops can't execute them under pressure.
+
+GOOD (Tier B — re-deploy previous artifact):
+  1. Identify the last stable image tag: `docker images | grep api | head -5`
+  2. Update `IMAGE_TAG` in `.env` to the previous value (e.g., `v1.23.4`)
+  3. Run `docker compose up -d api`
+  4. Verify health: `curl https://api.example.com/health` returns HTTP 200
+
+GOOD (Tier A — schema migration):
+  1. Confirm no application code reads the new column: `grep -r "new_status" src/`
+  2. Run down migration: `npm run migrate:down --to 20240610_add_new_status`
+  3. Verify schema: `psql -c "\d orders"` — confirm column is absent
+  4. Monitor error rate for 5 minutes post-rollback
+```
+
+### Step 3 — Check for data loss risk
+
+For any stateful change:
+- If rolling back would destroy rows, columns, or files that were written after the change deployed → require a pre-change backup.
+- If the backup process takes >5 minutes → include backup timing in the rollback estimate.
+
+```
+Risk levels:
+  None → Rollback restores previous state with no data loss (new nullable column, no rows written)
+  Low  → Some data loss possible but bounded (backfill not yet complete, partial writes)
+  High → Rollback is destructive (dropped column, data transform already applied to production rows)
+         → Requires backup before applying the change, not after.
+```
+
+### Step 4 — Time-to-rollback gate
+
+If the estimated time to execute the rollback exceeds 15 minutes, the PR MUST include one of:
+- A pre-change backup procedure (with verified restore time)
+- A canary deploy plan (so 100% of traffic can be shifted back in < 1 minute)
+
+### Step 5 — PR description block
+
+Every production change PR MUST include:
 
 ```markdown
 ## Rollback plan
 
+**Tier:** [A — stateful / B — artifact / C — destructive]
+
 **Steps:**
-1. [Step-by-step instructions]
+1. [Concrete step with exact command]
+2. [Concrete step with exact command]
 
 **Time estimate:** [N minutes]
 
-**Data loss risk:** [None / Low (describe) / High (backup required)]
+**Data loss risk:** [None / Low — describe / High — backup required]
 
-**Tested in staging:** [Yes / No — explain]
+**Tested in staging:** [Yes / No — explain why not]
 ```
+
+## Completion checklist
+
+- [ ] Rollback tier classified (A / B / C)
+- [ ] Rollback steps are specific commands, not descriptions of intent
+- [ ] Data loss risk assessed and documented
+- [ ] Time estimate provided; if >15 min → backup or canary plan added
+- [ ] PR description includes the rollback plan block
 
 ## When NOT to use
 
 - Local development or sandbox environments
 - Documentation-only changes
-- Additive-only changes with no existing state at risk (new service, new namespace)
+- Additive-only changes with no existing state at risk (new service, new namespace, new optional field)
