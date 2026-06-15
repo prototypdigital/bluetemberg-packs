@@ -27,14 +27,15 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 | [`bluetemberg-rules-nextjs`](https://www.npmjs.com/package/bluetemberg-rules-nextjs) | Next.js | `nextjs-public-env-vars` |
 | `bluetemberg-rules-agent-memory` _(not yet published)_ | Agent memory patterns | `memory-architecture-checklist`, `memory-promotion`, `memory-provenance`, `memory-recall-authority` |
 | `bluetemberg-rules-llm-api-product` _(not yet published)_ | LLM API product | `cost-accounting`, `model-selection-and-routing`, `streaming` |
+| `bluetemberg-rules-design-craft` _(not yet published)_ | Anti-stock design craft | `anti-stock-defaults`, `banned-moves-first`, `references-not-moods`, `tokens-before-components`, `design-every-state` |
 
 ### Agents
 
-13 specialist agent packs (`bluetemberg-agents-*`): `frontend-specialist`, `backend-specialist`, `test-specialist`, `docs-maintainer`, `code-reviewer`, `a11y-specialist`, `security-specialist`, `infrastructure-specialist`, `devops-specialist`, `ansible-specialist`, `kubernetes-specialist`, `sre-specialist`, `agentic-specialist`.
+14 specialist agent packs (`bluetemberg-agents-*`): `frontend-specialist`, `backend-specialist`, `test-specialist`, `docs-maintainer`, `code-reviewer`, `a11y-specialist`, `security-specialist`, `infrastructure-specialist`, `devops-specialist`, `ansible-specialist`, `kubernetes-specialist`, `sre-specialist`, `agentic-specialist`, `design-engineer`.
 
 ### Skills
 
-18 on-demand skill packs (`bluetemberg-skills-*`): `patterns`, `docs-upkeep`, `workspace-hygiene`, `react-patterns`, `code-review`, `api-design`, `security-audit`, `ci-cd-best-practices`, `migration-safety`, `stack-change-review`, `infrastructure-drift-check`, `rollback-plan`, `config-echo`, `create-agent`, `create-pack`, `create-rule`, `create-skill`, `sub-agent-design`.
+21 on-demand skill packs (`bluetemberg-skills-*`): `patterns`, `docs-upkeep`, `workspace-hygiene`, `react-patterns`, `code-review`, `api-design`, `security-audit`, `ci-cd-best-practices`, `migration-safety`, `stack-change-review`, `infrastructure-drift-check`, `rollback-plan`, `config-echo`, `create-agent`, `create-pack`, `create-rule`, `create-skill`, `sub-agent-design`, `figma-to-code`, `design-critique`, `visual-direction`.
 
 ### Guardrails
 
@@ -45,6 +46,8 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 Guardrails are declarative hook definitions: Bluetemberg translates them into platform-native enforcement (e.g. Claude Code `PreToolUse` hooks in `.claude/settings.json`).
 
 See the [Catalog](https://github.com/prototypdigital/bluetemberg-packs/wiki/Catalog) for a description of every pack.
+
+> The **Design Engineer** packs (`rules-design-craft`, `agents-design-engineer`, `skills-figma-to-code`, `skills-design-critique`, `skills-visual-direction`) adapt [Marko Kolić](https://github.com/marko-prototyp)'s [AI for Designers workshop](https://marko-prototyp.github.io/AI-Workshop/), used with permission.
 
 ## Installation
 
