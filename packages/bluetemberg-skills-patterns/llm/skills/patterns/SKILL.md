@@ -47,7 +47,7 @@ If no match exists → document the new pattern in a one-line comment at the top
 
 ### Step 3 — Decide: extend vs create
 
-```
+```text
 Does an existing pattern cover ≥80% of the new use case?
   YES → Extend the existing file (add a method, add a parameter with a default).
         Never duplicate a class to "keep the original clean."
@@ -55,7 +55,7 @@ Does an existing pattern cover ≥80% of the new use case?
         Add a one-line comment at the top naming the pattern it establishes.
 ```
 
-```
+```text
 BAD:  // Existing: UserService.ts with createUser(), getUser()
       // New: UserServiceV2.ts "to avoid touching the original"
       // Result: two classes, split callers, drifting logic

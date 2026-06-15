@@ -27,7 +27,7 @@ grep -rE "(password|secret|api_key|token|private_key)\s*=\s*['\"][^'\"]{8,}" \
 grep -rE "Bearer [A-Za-z0-9\-_]{20,}" .
 ```
 
-```
+```text
 BAD:  const client = new Stripe("sk_live_abc123XYZ")
 GOOD: const client = new Stripe(process.env.STRIPE_SECRET_KEY)
 ```
@@ -38,7 +38,7 @@ If a live credential is found: halt, rotate the credential immediately, then con
 
 For every location that builds a string from user-controlled input:
 
-```
+```text
 SQL injection:
   BAD:  db.query(`SELECT * FROM users WHERE id = ${req.params.id}`)
   GOOD: db.query('SELECT * FROM users WHERE id = $1', [req.params.id])
@@ -59,7 +59,7 @@ Path traversal:
 - Authorization checks use the server-side session, not a client-supplied ID.
 - Password comparison uses a constant-time function — never `===`.
 
-```
+```text
 BAD:  if (req.body.userId === adminId) { /* grant admin access */ }
 GOOD: if (req.session.userId !== adminId) return res.status(403).json(...)
 ```
@@ -74,7 +74,7 @@ GOOD: if (req.session.userId !== adminId) return res.status(403).json(...)
 
 Error messages must not expose stack traces, SQL errors, internal file paths, or system identifiers.
 
-```
+```text
 BAD:  res.status(500).json({ error: err.stack })
 GOOD: logger.error(err)
       res.status(500).json({ type: 'internal_error', message: 'Something went wrong.' })

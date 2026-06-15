@@ -23,7 +23,7 @@ Scan the migration for:
 - `ALTER COLUMN` that changes type or removes `DEFAULT`
 - `TRUNCATE`
 
-```
+```text
 BAD:  ALTER TABLE orders DROP COLUMN legacy_status;
       -- Data is gone the moment this runs. No rollback without a backup.
 
@@ -40,7 +40,7 @@ GOOD (two-phase approach):
 
 DDL that takes a full table lock on a table under concurrent writes will cause downtime.
 
-```
+```text
 Is the table written to by live production traffic (orders, users, events)?
   YES → Check lock safety of the operation:
 
@@ -65,7 +65,7 @@ GOOD: ALTER TABLE orders ADD COLUMN priority INTEGER;
 
 ### Step 3 — Data migration batching
 
-```
+```text
 Row count < 10 000  → single-statement update acceptable
 Row count ≥ 10 000  → MUST batch to avoid replication lag and table locks
 ```
@@ -90,7 +90,7 @@ END$$;
 
 Every migration MUST have a tested down migration. "Revert the commit" is not a rollback.
 
-```
+```text
 BAD:  No down migration provided.
       -- or: Drops the column we just added after rows were written to it (data loss)
 
@@ -104,6 +104,7 @@ GOOD:
 ### Step 5 — Staging verification
 
 Before approving:
+
 1. Run the up migration against a copy of production data in staging.
 2. Run the down migration immediately after — confirm the schema is restored.
 3. Record duration. If >5 s on staging, plan for longer on prod (larger dataset). Consider a maintenance window or a non-locking alternative.

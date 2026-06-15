@@ -20,7 +20,7 @@ Use this skill when reviewing changes to critical infrastructure files that affe
 
 ### Step 1 — Classify the blast radius
 
-```
+```text
 Does the change affect a shared resource (network, volume, env var used by >1 service)?
   YES → Tier 1 (high blast radius): requires runbook + staging verification before merge
   NO  → Does it affect a stateful resource (volume path, database, persistent queue)?
@@ -33,20 +33,24 @@ Does the change affect a shared resource (network, volume, env var used by >1 se
 Run only the checks that apply to the diff:
 
 **Port changes** → Flag immediately (breaks firewall rules and dependent containers)
-```
-BAD:  services.api.ports: "3000:3000" → "3001:3000"
-      -- Every firewall rule, load balancer, and dependent container referencing port 3000 breaks.
-GOOD: Open an ADR. Update firewall rules, consumers, and the load balancer in the same PR.
-      Document old port → new port in the runbook.
+
+```yaml
+# BAD:
+services:
+  api:
+    ports: "3001:3000"  # was "3000:3000" — every firewall rule and dependent container breaks
+# GOOD: Open an ADR. Update firewall rules, consumers, and load balancer in the same PR.
+#       Document old port → new port in the runbook.
 ```
 
 **Volume paths** → Flag immediately (data loss risk)
-```
-BAD:  volumes: - ./data/postgres:/var/lib/postgresql/data
-      changed to: - ./postgres-data:/var/lib/postgresql/data
-      -- The container sees an empty volume. All data is abandoned in-place.
-GOOD: Never rename a volume path without a documented data migration:
-      1. Stop the service. 2. rsync old path → new path. 3. Start with new path.
+
+```yaml
+# BAD:
+volumes:
+  - ./postgres-data:/var/lib/postgresql/data  # was ./data/postgres — container sees empty volume
+# GOOD: Never rename a volume path without a documented data migration:
+#   1. Stop the service. 2. rsync old path → new path. 3. Start with new path.
 ```
 
 **Image tags** → For each version bump, check the release notes for breaking API or config changes. If breaking changes exist → Tier 1.

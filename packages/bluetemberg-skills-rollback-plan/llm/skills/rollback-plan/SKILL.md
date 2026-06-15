@@ -20,7 +20,7 @@ Use this skill when reviewing infrastructure, deployment, or database changes th
 
 ### Step 1 — Classify rollback complexity
 
-```
+```text
 Is the change stateful (schema migration, volume rename, data transform)?
   YES → Tier A (stateful): rollback requires a tested down migration or data restore procedure.
         Time-to-rollback must be < 15 minutes or a pre-change backup is required.
@@ -36,7 +36,7 @@ Is the change stateful (schema migration, volume rename, data transform)?
 
 Reject vague rollback plans:
 
-```
+```text
 BAD:  "Rollback: revert the commit"
       "Rollback: undo the change"
       -- These describe intent, not procedure. Ops can't execute them under pressure.
@@ -57,10 +57,11 @@ GOOD (Tier A — schema migration):
 ### Step 3 — Check for data loss risk
 
 For any stateful change:
+
 - If rolling back would destroy rows, columns, or files that were written after the change deployed → require a pre-change backup.
 - If the backup process takes >5 minutes → include backup timing in the rollback estimate.
 
-```
+```text
 Risk levels:
   None → Rollback restores previous state with no data loss (new nullable column, no rows written)
   Low  → Some data loss possible but bounded (backfill not yet complete, partial writes)
@@ -71,6 +72,7 @@ Risk levels:
 ### Step 4 — Time-to-rollback gate
 
 If the estimated time to execute the rollback exceeds 15 minutes, the PR MUST include one of:
+
 - A pre-change backup procedure (with verified restore time)
 - A canary deploy plan (so 100% of traffic can be shifted back in < 1 minute)
 

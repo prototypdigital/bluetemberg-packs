@@ -21,7 +21,7 @@ Use this skill before merging infrastructure-as-code changes to ensure declared 
 
 Before running any plan, confirm you are targeting the correct environment. A drift check against the wrong workspace produces false confidence.
 
-```
+```text
 Terraform:  terraform workspace show   # must match the PR target env
 Ansible:    ansible-inventory -i inventories/prod --list | head  # confirm hosts
 Kubernetes: kubectl config current-context  # confirm cluster
@@ -32,16 +32,19 @@ If the workspace is wrong, stop. Do not proceed until confirmed.
 ### Step 2 — Run the plan and capture output
 
 **Terraform:**
+
 ```bash
 terraform plan -out=tfplan.binary 2>&1 | tee plan.txt
 ```
 
 **Ansible:**
+
 ```bash
 ansible-playbook site.yml -i inventories/prod --check --diff 2>&1 | tee ansible-check.txt
 ```
 
 **Kubernetes:**
+
 ```bash
 kubectl diff -f manifests/ 2>&1 | tee k8s-diff.txt
 # or for Helm:
@@ -50,7 +53,7 @@ helm diff upgrade <release> <chart> -f values.prod.yaml 2>&1 | tee helm-diff.txt
 
 ### Step 3 — Interpret the output
 
-```
+```text
 GOOD — plan matches only the PR changes:
   Terraform: "Plan: 1 to add, 0 to destroy, 0 to change" (where 1 is the new resource in the PR)
   Ansible:   All tasks report "ok" or "changed" only for the task introduced in the PR
@@ -68,7 +71,7 @@ BAD — plan shows changes beyond the PR:
 
 ### Step 4 — Flag destroy and replacement operations immediately
 
-```
+```text
 Terraform destroy/replace signals (require synchronous review before merge):
   - "will be destroyed"
   - "must be replaced"
@@ -89,7 +92,7 @@ If `terraform plan` proposes destroying a stateful resource (RDS, S3 bucket, EBS
 
 Paste the plan summary into the PR description with a clear status label:
 
-```
+```text
 ✅ Drift check passed — plan matches only the changes in this PR.
    Resources: +1 to add, 0 to destroy, 0 to change.
 

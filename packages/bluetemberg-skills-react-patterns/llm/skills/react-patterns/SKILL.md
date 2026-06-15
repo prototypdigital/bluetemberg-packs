@@ -32,7 +32,7 @@ If a hook already covers the needed concern, use it. Do not duplicate.
 
 Count how many layers a prop travels before reaching the consumer:
 
-```
+```text
 1 layer  → fine
 2 layers → acceptable if the middle component uses it
 3+ layers, middle component does NOT use the prop:
@@ -54,7 +54,7 @@ GOOD (co-location):
 
 ### Step 3 — Decide: split component or extract hook
 
-```
+```text
 Component >150 lines OR renders >1 logical section?
   YES → Split into smaller components. Each gets its own file if it accepts props.
 
@@ -67,35 +67,35 @@ Extracted logic has no JSX dependency?
   YES → Plain utility function, not a hook.
 ```
 
-```
-BAD: — fetch logic and render tangled together
-  function OrderList() {
-    const [orders, setOrders] = useState([])
-    useEffect(() => {
-      fetch('/api/orders').then(r => r.json()).then(setOrders)
-    }, [])
-    const total = orders.reduce((s, o) => s + o.amount, 0)
-    return <ul>{orders.map(o => <li key={o.id}>{o.name}</li>)}</ul>
-  }
+```javascript
+// BAD: fetch logic and render tangled together
+function OrderList() {
+  const [orders, setOrders] = useState([])
+  useEffect(() => {
+    fetch('/api/orders').then(r => r.json()).then(setOrders)
+  }, [])
+  const total = orders.reduce((s, o) => s + o.amount, 0)
+  return <ul>{orders.map(o => <li key={o.id}>{o.name}</li>)}</ul>
+}
 
-GOOD: — logic in a hook, component is pure render
-  function useOrders() {
-    const [orders, setOrders] = useState([])
-    useEffect(() => {
-      fetch('/api/orders').then(r => r.json()).then(setOrders)
-    }, [])
-    return { orders, total: orders.reduce((s, o) => s + o.amount, 0) }
-  }
+// GOOD: logic in a hook, component is pure render
+function useOrders() {
+  const [orders, setOrders] = useState([])
+  useEffect(() => {
+    fetch('/api/orders').then(r => r.json()).then(setOrders)
+  }, [])
+  return { orders, total: orders.reduce((s, o) => s + o.amount, 0) }
+}
 
-  function OrderList() {
-    const { orders } = useOrders()
-    return <ul>{orders.map(o => <li key={o.id}>{o.name}</li>)}</ul>
-  }
+function OrderList() {
+  const { orders } = useOrders()
+  return <ul>{orders.map(o => <li key={o.id}>{o.name}</li>)}</ul>
+}
 ```
 
 ### Step 4 — Place state at the right level
 
-```
+```text
 State used by only one component?
   YES → Keep local (useState / useReducer inside that component)
 

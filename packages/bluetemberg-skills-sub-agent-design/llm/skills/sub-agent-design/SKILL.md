@@ -30,7 +30,7 @@ Orchestrator: <name> — routes tasks, aggregates results, handles errors
 └── Sub-agent C: <name> — <one-line responsibility> [runs after A]
 ```
 
-```
+```text
 BAD topology:
   Orchestrator → ReviewAgent (reads files, checks style, checks security, writes summary)
   -- One agent does retrieval + multiple synthesis passes. Context overloads; hard to test.
@@ -57,7 +57,7 @@ Error: <what is returned/thrown on failure; retry policy>
 
 Reject ambiguous types. `object` and `any` are not contracts — they hide bugs at the boundary.
 
-```
+```text
 BAD:  Input: { data: any }
       -- The orchestrator can't validate what it sends; the agent can't validate what it receives.
 

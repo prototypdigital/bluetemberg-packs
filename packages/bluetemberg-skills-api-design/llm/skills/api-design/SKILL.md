@@ -22,7 +22,7 @@ Use this skill when designing new HTTP API endpoints or reviewing existing API c
 - No verbs in the path: actions are expressed by the HTTP method
 - Nest at most one level deep; deeper nesting → promote to a top-level resource
 
-```
+```text
 BAD:  POST /createUser
       GET  /user/getAll
       GET  /orders/{id}/items/{itemId}/variants/{variantId}/prices
@@ -34,7 +34,7 @@ GOOD: POST /users
 
 ### Step 2 — Choose pagination strategy
 
-```
+```text
 Is the dataset append-only or sorted by a monotonic key (e.g., created_at)?
   YES → cursor-based pagination
         Request:  ?after=<opaque_cursor>&limit=N
@@ -53,7 +53,7 @@ Never mix strategies on the same collection endpoint. Never expose raw SQL `OFFS
 
 Every error response MUST include a machine-readable `type`, a human-readable `message`, and an optional `detail` array for field-level breakdowns.
 
-```
+```text
 BAD:  { "error": "Invalid input" }
       HTTP 500 { "message": "Something went wrong", "code": 500 }
 
@@ -71,7 +71,7 @@ Standard `type` slugs: `not_found`, `unauthorized`, `forbidden`, `validation_err
 
 ### Step 4 — Decide on versioning
 
-```
+```text
 Does the change rename a field, remove an endpoint, or change a field's type?
   YES → Add /v2/ prefix. Maintain /v1/ until deprecation window closes.
   NO  → No version bump needed. Adding new optional response fields is non-breaking.
@@ -82,6 +82,7 @@ Version in the URL path (`/v1/`), not in headers — headers are invisible to an
 ### Step 5 — Document shapes in the same PR
 
 For every new or changed endpoint, include:
+
 - Request body schema (TypeScript interface or JSON Schema)
 - Response shape for 2xx and every expected error code
 - One `curl` example showing a realistic call
