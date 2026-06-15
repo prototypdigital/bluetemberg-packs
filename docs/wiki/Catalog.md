@@ -7,6 +7,21 @@ Item names match filenames in each pack's `llm/<kind>/` directory and are used f
 
 Always-on instructions loaded into every AI session automatically.
 
+### bluetemberg-rules-accessibility
+
+Accessibility rules for Bluetemberg — WCAG 2.2 A/AA guidance for semantic HTML, ARIA, keyboard navigation, and more.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `accessible-forms` | Every form control must have a programmatic label, clear error identification, and grouped fields where appropriate |
+| `aria-only-when-needed` | ARIA is a fallback for when native HTML falls short — never add redundant or conflicting roles |
+| `color-contrast` | Meet WCAG 2.2 AA contrast ratios; never use color as the only visual signal |
+| `focus-management` | Provide visible focus indicators; move focus intentionally on route change and dialog open/close |
+| `keyboard-navigation` | All interactive elements must be reachable and operable by keyboard alone; no keyboard traps |
+| `reduced-motion` | Honor prefers-reduced-motion; never use motion as the sole affordance for a state change |
+| `semantic-html` | Prefer native HTML elements over div+role soup; semantic elements are accessible by default |
+| `text-alternatives` | Provide descriptive alt text for meaningful images; empty alt for decorative; alternatives for icons and media |
+
 ### bluetemberg-rules-agent-memory
 
 Agent memory rules for Bluetemberg — statelessness as a hard constraint, memory provenance, promotion through consolidation, and authority-ranked recall.

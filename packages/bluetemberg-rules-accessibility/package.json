@@ -1,0 +1,29 @@
+{
+  "name": "bluetemberg-rules-accessibility",
+  "version": "0.1.0",
+  "description": "Accessibility rules for Bluetemberg — WCAG 2.2 A/AA guidance for semantic HTML, ARIA, keyboard navigation, and more.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "frontend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack"
+    ]
+  }
+}
