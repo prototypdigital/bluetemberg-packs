@@ -71,10 +71,10 @@ Risk levels:
 
 ### Step 4 — Time-to-rollback gate
 
-If the estimated time to execute the rollback exceeds 15 minutes, the PR MUST include one of:
+If the estimated time to execute the rollback exceeds 15 minutes:
 
-- A pre-change backup procedure (with verified restore time)
-- A canary deploy plan (so 100% of traffic can be shifted back in < 1 minute)
+- **Tier A (stateful):** A pre-change backup procedure with a verified restore time is required. A canary deploy may be added as an extra blast-radius limiter but does not replace a tested rollback or data restore procedure — a canary only limits exposure during deploy; it does not restore data.
+- **Tier B/C (non-stateful):** A canary deploy plan (so 100% of traffic can be shifted back in < 1 minute) is sufficient.
 
 ### Step 5 — PR description block
 
@@ -101,11 +101,11 @@ Every production change PR MUST include:
 - [ ] Rollback tier classified (A / B / C)
 - [ ] Rollback steps are specific commands, not descriptions of intent
 - [ ] Data loss risk assessed and documented
-- [ ] Time estimate provided; if >15 min → backup or canary plan added
+- [ ] Time estimate provided; if >15 min → Tier A requires backup procedure; Tier B/C may use canary
 - [ ] PR description includes the rollback plan block
 
 ## When NOT to use
 
 - Local development or sandbox environments
 - Documentation-only changes
-- Additive-only changes with no existing state at risk (new service, new namespace, new optional field)
+- Additive-only changes with no existing state at risk (e.g. a new optional API field with no deploy risk)
