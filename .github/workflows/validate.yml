@@ -60,3 +60,6 @@ jobs:
 
       - name: Audit dependencies
         run: npm audit --audit-level=high
+
+      - name: Check all packs are published on npm
+        run: node .github/scripts/check-npm-publish.cjs

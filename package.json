@@ -7,6 +7,7 @@
   "type": "module",
   "scripts": {
     "validate": "node .github/scripts/validate-packs.cjs",
+    "check:publish": "node .github/scripts/check-npm-publish.cjs",
     "generate:catalog": "node scripts/generate-catalog.js",
     "build:site": "node scripts/build-site.js",
     "build:og": "node scripts/build-og.js",
