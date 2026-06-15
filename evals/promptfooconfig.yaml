@@ -14,8 +14,9 @@
 description: "bluetemberg pack behavioural quality evals"
 
 providers:
-  - id: github:openai/gpt-4o-mini
+  - id: openai:gpt-4o-mini
     config:
+      apiBaseUrl: "https://models.github.ai/orgs/prototypdigital/inference"
       apiKey: "{{env.GITHUB_TOKEN}}"
 
 prompts:
