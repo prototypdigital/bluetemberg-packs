@@ -11,8 +11,8 @@ Use this skill whenever you add or change a cached data fetch (`unstable_cache`)
 
 - Adding/editing an `unstable_cache(..., { tags })` call (typically under `app/`, data utilities, or globals).
 - Adding/editing a Payload `afterChange` / `afterDelete` revalidation hook in a collection or global.
-- Adding a new Payload collection or global that is read on the front end (it needs a revalidation hook).
-- Adding a relationship field whose related doc is rendered inside an already-cached page or global.
+- Introducing a new Payload collection or global that is read on the front end (it needs a revalidation hook).
+- Wiring a relationship field whose related doc is rendered inside an already-cached page or global.
 
 ## Required behavior
 
