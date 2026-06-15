@@ -1,14 +1,14 @@
 name: Bootstrap Publish
 
-# Backfill workflow: publishes every pack in packages/ that doesn't yet exist
-# on npm. Triggered manually from the Actions UI.
+# One-shot workflow to publish packs that don't yet exist on npm.
+# Triggered manually from the Actions UI.
 #
-# OIDC trusted publishing CANNOT create a brand-new package name (npm/cli#8544),
-# so the first publish of a pack must be token-authenticated. This job uses the
-# NPM_TOKEN secret (which can create new names) and signs each publish with
-# provenance. Once a pack exists on npm, its future releases flow through
-# release-please.yml automatically. Re-running this workflow is a no-op for
-# already-published packs (the detect job skips them).
+# For each pack in packages/ that returns 404 from the npm registry,
+# this workflow attempts an OIDC-authenticated publish. If OIDC fails
+# because the package has never existed (no trusted publisher configured),
+# you'll see a 403 in the logs — in that case the pack needs a one-time
+# manual `npm publish -w packages/<name> --access public` from a maintainer
+# machine first.
 
 on:
   workflow_dispatch:
@@ -53,7 +53,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # mint the OIDC token that signs npm provenance
+      id-token: write # OIDC trusted publishing to npm
     strategy:
       fail-fast: false
       matrix:
@@ -70,10 +70,8 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
-      # Provenance generation needs a current npm; the bundled one may be older.
-      # Pin the major so a future npm release can't silently break publishing.
-      - name: Upgrade npm
-        run: npm install -g npm@11
+      - name: Upgrade npm for trusted publishing
+        run: npm install -g npm@latest
 
       - name: Install dependencies
         run: npm ci
@@ -81,5 +79,4 @@ jobs:
       - name: Publish ${{ matrix.path }}
         env:
           PKG_PATH: ${{ matrix.path }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish -w "$PKG_PATH" --provenance --access public

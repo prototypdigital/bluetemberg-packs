@@ -1,6 +1,6 @@
 # Releasing
 
-Every pack publishes to public npm from this repo via GitHub Actions. Versioning, changelogs, tags, GitHub Releases, and publishing are all automated by [release-please](https://github.com/googleapis/release-please).
+Every pack publishes to public npm from this repo via GitHub Actions using [npm Trusted Publishing (OIDC)](https://docs.npmjs.com/trusted-publishers) — no long-lived npm token. Versioning, changelogs, tags, GitHub Releases, and publishing are all automated by [release-please](https://github.com/googleapis/release-please).
 
 You don't bump versions or cut releases by hand. You write [Conventional Commits](https://www.conventionalcommits.org/); release-please does the rest.
 
@@ -20,14 +20,6 @@ flowchart TD
 2. **release-please maintains a single open “Release PR”** that accumulates every pending change, bumps each affected pack's `version`, and updates that pack's `CHANGELOG.md`. Packs you didn't touch are untouched.
 3. **When you merge the Release PR**, release-please creates a Git tag and GitHub Release for each bumped pack (e.g. `bluetemberg-rules-git-v0.2.0`).
 4. **The publish job publishes only the packs that were just released** — not all 41 — each with a signed provenance statement.
-
-## How publishing authenticates
-
-Publishing uses a **granular npm access token** stored as the `NPM_TOKEN` repository (or org) secret. Each publish is still signed with **provenance** via GitHub's OIDC token (`id-token: write`), so consumers get a verifiable link back to the exact commit and workflow run that built the package.
-
-Why a token and not OIDC [trusted publishing](https://docs.npmjs.com/trusted-publishers)? Because **OIDC cannot create a brand-new package name** ([npm/cli#8544](https://github.com/npm/cli/issues/8544)) — a trusted publisher can only be configured on a package that already exists. A token can create new names, so a brand-new pack publishes on its very first release with **zero per-pack setup**. That's the property this monorepo needs: adding packs is routine.
-
-> **npm caps granular tokens at a 90-day lifetime.** Rotate `NPM_TOKEN` before it expires (npm emails a reminder). Rotation is a single action — regenerate the token, update one secret — not per-pack work.
 
 ## Versioning
 
@@ -50,39 +42,33 @@ strategy:
   matrix:
     path: ${{ fromJSON(needs.release-please.outputs.paths_released) }}
 steps:
-  - run: npm install -g npm@11              # pinned npm for provenance
+  - run: npm install -g npm@latest         # Trusted Publishing needs npm >= 11.5.1
   - run: npm ci
-  - env: { NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} }
-    run: npm publish -w "$PKG_PATH" --provenance --access public
+  - run: npm publish -w "$PKG_PATH" --provenance --access public
 ```
 
 ## One-time setup (per the repo owner)
 
-Before the first automated publish, the `NPM_TOKEN` secret must exist:
+Before the first automated publish:
 
-1. **Create a granular access token** on npmjs.com → _Access Tokens_ → _Generate New Token_ → _Granular Access Token_:
-   - **Permissions:** Read and write
-   - **Packages:** All packages (so it can create brand-new pack names)
-   - **Expiration:** up to 90 days (npm's maximum)
-2. **Add it as a secret** named `NPM_TOKEN` (repo or org level):
+1. **Register each pack as a Trusted Publisher** on npmjs.com → each package page → Settings → Trusted Publishers. Point it at this repo (`prototypdigital/bluetemberg-packs`) and the workflow file **`release-please.yml`**.
+2. **Bootstrap any pack that doesn't exist on npm yet.** Trusted Publishing can't create a brand-new package name — it can only publish over an existing one. For each not-yet-published pack, run one initial publish from a maintainer's machine:
 
    ```bash
-   gh secret set NPM_TOKEN --repo prototypdigital/bluetemberg-packs
-   # paste the token when prompted — it never touches your shell history
+   npm publish -w packages/<pack-name> --access public
    ```
 
-3. **Backfill any pack not yet on npm.** Run the **Bootstrap Publish** workflow once (Actions → _Bootstrap Publish_ → _Run workflow_). It detects every pack missing from the registry and publishes it with the token. After that, all releases for every pack flow through `release-please.yml` automatically.
-
-When the token nears expiry, repeat steps 1–2 to rotate it. No other action is needed.
+   After that first publish, all releases for that pack go through CI.
 
 ## Adding a new pack
 
-Add the pack under `packages/`, then register it with release-please so it gets versioned:
+Add the pack under `packages/`, then register it in release-please so it gets versioned:
 
 1. Add `"packages/<name>": {}` to `release-please-config.json`.
 2. Add `"packages/<name>": "0.1.0"` to `.release-please-manifest.json`.
+3. Bootstrap it on npm once (step 2 above).
 
-That's it — no manual npm step. The next release that includes the pack publishes it for the first time via the token (and the `validate` job fails any pack missing from these two files, so you can't forget). See [Contributing](Contributing) for the pack layout.
+See [Contributing](Contributing) for the pack layout.
 
 ## Wiki
 
