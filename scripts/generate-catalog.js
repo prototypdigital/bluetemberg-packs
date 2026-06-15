@@ -110,6 +110,7 @@ function buildEntry(pkgDir) {
       version: pkg.version,
       description: pkg.description ?? '',
       profiles: meta.profiles ?? [],
+      stacks: Array.isArray(meta.stacks) ? meta.stacks.filter((s) => typeof s === 'string') : [],
       universal: meta.universal ?? false,
       kind,
       // Rich items { name, description } — consumed by both the wiki table and
