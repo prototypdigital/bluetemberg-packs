@@ -55,14 +55,28 @@ function snippet(output) {
     }
   }
 
-  const fence = text.match(/```[a-zA-Z0-9]*\n([\s\S]*?)```/);
+  // Collect every fenced block. Models often lead with a ```bash npm install```
+  // line before the real code, so we skip shell blocks and pick the largest
+  // remaining block — that's almost always the actual implementation.
+  const SHELL_LANGS = new Set([
+    'bash', 'sh', 'shell', 'zsh', 'console', 'shell-session', 'powershell', 'ps1', 'bat', 'cmd',
+  ]);
+  const blocks = [];
+  const fenceRe = /```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g;
+  let m;
+  while ((m = fenceRe.exec(text)) !== null) {
+    blocks.push({ lang: (m[1] || '').toLowerCase(), body: m[2] });
+  }
+
   let lang = 'ts';
   let code = text;
-  if (fence) {
-    code = fence[1];
-    const langMatch = text.match(/```([a-zA-Z0-9]+)\n/);
-    if (langMatch) {
-      lang = langMatch[1];
+  if (blocks.length > 0) {
+    const eligible = blocks.filter((b) => !SHELL_LANGS.has(b.lang));
+    const pool = eligible.length > 0 ? eligible : blocks;
+    const chosen = pool.reduce((best, b) => (b.body.length > best.body.length ? b : best));
+    code = chosen.body;
+    if (chosen.lang && !SHELL_LANGS.has(chosen.lang)) {
+      lang = chosen.lang;
     }
   }
 
