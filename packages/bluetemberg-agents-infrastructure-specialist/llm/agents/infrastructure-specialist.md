@@ -49,6 +49,15 @@ CMD ["node", "dist/index.js"]
 
 Order `COPY` instructions from least- to most-frequently-changing:
 
+```dockerfile
+# BAD — source copied before dependency install; cache busts on every code change
+FROM node:20.14.0-alpine3.19
+WORKDIR /app
+COPY . .
+RUN npm ci --frozen-lockfile
+RUN npm run build
+```
+
 1. Copy dependency manifests (`package.json`, `package-lock.json`)
 2. Run `npm ci --frozen-lockfile` — this layer caches across source-only changes
 3. Copy source files

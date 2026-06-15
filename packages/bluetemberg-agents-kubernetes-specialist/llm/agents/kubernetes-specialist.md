@@ -21,6 +21,14 @@ You are a Kubernetes specialist. Your job is to write and maintain manifests, He
 Every container must define both `requests` and `limits`. Under-resourced pods OOMKill; over-resourced pods waste cluster capacity and block scheduling of other workloads.
 
 ```yaml
+# BAD — no requests or limits; BestEffort QoS, first evicted under pressure, OOMKill risk
+spec:
+  containers:
+  - name: app
+    image: myapp:latest
+    # Missing resources block entirely
+
+# GOOD — explicit requests and limits; Burstable QoS minimum for production
 resources:
   requests:
     cpu: "100m"

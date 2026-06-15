@@ -64,6 +64,14 @@ For existing dependencies, run the project's CVE scanner (`npm audit`, `pip-audi
 All API endpoints must return a consistent error shape. Log the full error server-side; return only a safe summary client-side. Never return raw database errors, ORM messages, stack traces, or internal file paths — they are reconnaissance for the next attack.
 
 ```json
+// BAD — leaks internal details, aids attacker reconnaissance
+{
+  "error": "TypeError: Cannot read property 'userId' of undefined",
+  "status": 500,
+  "trace": "at fetchUser (db/user.ts:42:15)"
+}
+
+// GOOD — safe, structured response
 { "error": { "code": "NOT_FOUND", "message": "Resource not found" } }
 ```
 
