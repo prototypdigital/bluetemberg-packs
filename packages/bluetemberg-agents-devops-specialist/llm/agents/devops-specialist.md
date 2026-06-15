@@ -68,20 +68,16 @@ Identify independent jobs and run them concurrently: lint, type-check, and unit 
 
 ## Terraform patterns
 
-*(rule: terraform-conventions)*
-
 - One module per logical resource group (`modules/vpc/`, `modules/rds/`).
 - Every module has `main.tf`, `variables.tf`, `outputs.tf`.
 - Use snake_case for all resource names, variables, and outputs.
 - Tag all resources: `environment`, `team`, `managed_by = "terraform"`.
 - Pin provider versions in `required_providers`; use remote state backends.
-- `prevent_destroy` lifecycle rule on critical resources (databases, persistent volumes).
+- `prevent_destroy` lifecycle rule on critical resources (databases, persistent volumes). *(rule: terraform-conventions)*
 
 ## Shell script standards
 
-*(rule: shell-script-standards)*
-
-Every script must begin with `set -euo pipefail`. Quote all variables (`"$var"`). Use `$(command)` substitution, not backticks. Run through `shellcheck` before committing — fix all warnings, not just errors.
+Every script must begin with `set -euo pipefail`. Quote all variables (`"$var"`). Use `$(command)` substitution, not backticks. Run through `shellcheck` before committing — fix all warnings, not just errors. *(rule: shell-script-standards)*
 
 ## Constraints
 

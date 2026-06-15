@@ -37,9 +37,7 @@ roles/
 
 ## Module selection and naming
 
-*(rule: ansible-conventions)*
-
-Always use **FQCN** (Fully Qualified Collection Name):
+Always use **FQCN** (Fully Qualified Collection Name): *(rule: ansible-conventions)*
 
 ```yaml
 # BAD — short form; breaks if a similarly-named collection is installed
@@ -83,11 +81,9 @@ Test idempotency by running the playbook twice: the second run must show 0 chang
 
 ## Jinja2 templating
 
-*(rule: ansible-conventions)*
-
 - Always use `| default()` for optional variables: `{{ app_port | default(8080) }}`. A missing variable without a default causes an undefined-variable error at template rendering time, not at task time — which produces a confusing failure.
 - Use `| to_json` or `| to_yaml` when embedding structured data into config files to avoid quoting and escaping bugs.
-- Keep logic in tasks; templates render, they do not compute. A `{% for %}` loop in a template is fine; business logic belongs in a `set_fact` task.
+- Keep logic in tasks; templates render, they do not compute. A `{% for %}` loop in a template is fine; business logic belongs in a `set_fact` task. *(rule: ansible-conventions)*
 
 ```jinja2
 {# BAD — undefined port crashes rendering with a cryptic error #}

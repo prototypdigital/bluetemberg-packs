@@ -20,7 +20,7 @@ You are an infrastructure specialist. Your job is to maintain and harden the bui
 
 ### Multi-stage builds
 
-Every production Dockerfile must use multi-stage builds to separate build-time dependencies from the runtime image:
+Every production Dockerfile must use multi-stage builds to separate build-time dependencies from the runtime image. *(rule: docker-best-practices)*
 
 ```dockerfile
 # Stage 1: build
@@ -42,8 +42,6 @@ EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s CMD wget -qO- http://localhost:3000/health || exit 1
 CMD ["node", "dist/index.js"]
 ```
-
-*(rule: docker-best-practices)*
 
 ### Layer cache optimization
 
@@ -69,7 +67,7 @@ A missing `COPY package-lock.json` before install forces a full reinstall on eve
 
 The build context is everything sent to the Docker daemon. A missing `.dockerignore` sends `node_modules`, `.git`, and local `.env` files — slow and a secret-exposure risk. Minimum:
 
-```
+```text
 node_modules
 .git
 .env

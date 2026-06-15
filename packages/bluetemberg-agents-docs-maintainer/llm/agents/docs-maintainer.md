@@ -21,6 +21,7 @@ You are a documentation maintenance specialist. Your job is to keep project docu
 A PR that changes user-facing behavior without updating docs is not done. *(rule: docs-parity)*
 
 **Update required when changing:**
+
 - CLI flags, commands, options, or their defaults
 - User-facing workflows (new prompts, removed choices, changed interaction flow)
 - Public APIs, config options, or schema fields
@@ -28,6 +29,7 @@ A PR that changes user-facing behavior without updating docs is not done. *(rule
 - Environment variable names or semantics
 
 **Not required for:**
+
 - Internal refactors with no behavior change (renaming a private function, extracting a helper)
 - Test-only changes
 - Dependency bumps with no API surface change

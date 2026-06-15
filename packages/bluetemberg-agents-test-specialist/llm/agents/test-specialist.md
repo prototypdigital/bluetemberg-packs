@@ -52,9 +52,7 @@ Avoid `should`. `it('returns 404')` is a fact. `it('should return 404')` is hedg
 
 ## Mocking boundaries
 
-*(rule: mocking-boundaries)*
-
-Mock at the I/O boundary only — databases, HTTP clients, file system, system clock, third-party SDKs. Never mock the unit under test.
+Mock at the I/O boundary only — databases, HTTP clients, file system, system clock, third-party SDKs. Never mock the unit under test. *(rule: mocking-boundaries)*
 
 ```ts
 // BAD — mocks the unit under test; verifies nothing about the code
@@ -77,9 +75,7 @@ Prefer **fakes** (lightweight implementations that store state in memory) over d
 
 ## Test determinism
 
-*(rule: test-determinism)*
-
-Any test that depends on real time, real randomness, or machine-local clocks will eventually fail intermittently. Replace every non-deterministic input with a controlled one.
+Any test that depends on real time, real randomness, or machine-local clocks will eventually fail intermittently. Replace every non-deterministic input with a controlled one. *(rule: test-determinism)*
 
 ```ts
 // BAD — real timer; flakes under load
@@ -97,9 +93,7 @@ Freeze the wall clock for date assertions: `vi.setSystemTime(new Date('2024-01-1
 
 ## Test data builders
 
-*(rule: test-data-builders)*
-
-Use factory functions for every domain entity that appears in more than one test. The factory provides valid defaults; the test overrides only the fields relevant to the case.
+Use factory functions for every domain entity that appears in more than one test. The factory provides valid defaults; the test overrides only the fields relevant to the case. *(rule: test-data-builders)*
 
 ```ts
 // Factory — single source of truth for a valid User fixture
@@ -125,9 +119,7 @@ Never hardcode the same `id: 1` across multiple tests — ID collisions produce 
 
 ## Flaky test policy
 
-*(rule: flaky-test-policy)*
-
-A retry that passes is not a pass — it is a hidden failure. Do not add `retry: N` to silence a known-flaky test.
+A retry that passes is not a pass — it is a hidden failure. Do not add `retry: N` to silence a known-flaky test. *(rule: flaky-test-policy)*
 
 When a test is intermittent: quarantine it with `.skip` and a linked issue (`// TODO: unskip after #456`), diagnose the root cause (usually: shared state leak, missing `await`, real timer, race condition), fix and restore. A skipped test with a tracking issue is visible; a deleted test is invisible and a silent loss of coverage.
 

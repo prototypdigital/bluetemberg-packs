@@ -22,6 +22,7 @@ You are a site reliability engineer. Your job is to ensure production services a
 An SLI is a quantifiable measure of user experience; an SLO is a target for it. Start from user impact, not internal metrics.
 
 **Good SLIs:**
+
 - Availability: `successful_requests / total_requests` over a rolling window
 - Latency: `p99 latency ≤ 500ms` measured at the load balancer (not the application — network is part of user experience)
 - Error rate: `5xx_responses / all_responses ≤ 0.1%`
