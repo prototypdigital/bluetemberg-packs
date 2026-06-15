@@ -16,9 +16,6 @@ jobs:
   eval:
     name: Behavioural quality (advisory)
     runs-on: ubuntu-latest
-    # Non-blocking — results are posted as a PR comment only.
-    # Promote specific tests to blocking once they show <5% flakiness over ~20 runs.
-    continue-on-error: true
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v4
@@ -27,12 +24,16 @@ jobs:
 
       - name: Run promptfoo evals
         uses: promptfoo/promptfoo-action@04839e664f52212b877170219dab0d7ad2bf6440 # v1.3.4
+        # continue-on-error at step level — job exits 0 so the check stays green.
+        # Eval results are posted as a PR comment regardless of pass/fail.
+        # Promote specific tests to blocking by removing this once they show <5% flakiness.
+        continue-on-error: true
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           config: evals/promptfooconfig.yaml
           prompts: 'packages/**/llm/**/*.md'
         env:
-          # GitHub Models uses the built-in GITHUB_TOKEN — no extra secret needed.
-          # If you hit rate limits, add a PAT with models:read scope as GITHUB_TOKEN_MODELS
-          # and set apiKey: "{{env.GITHUB_TOKEN_MODELS}}" in evals/promptfooconfig.yaml.
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Provider: Groq free tier (llama-3.3-70b-versatile).
+          # Add GROQ_API_KEY as a repo secret at Settings → Secrets → Actions.
+          # Free tier: 1000 req/day — sufficient for PR-scoped evals.
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}

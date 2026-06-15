@@ -14,9 +14,9 @@
 description: "bluetemberg pack behavioural quality evals"
 
 providers:
-  - id: github:openai/gpt-4o-mini
+  - id: groq:llama-3.3-70b-versatile
     config:
-      apiKey: "{{env.GITHUB_TOKEN}}"
+      apiKey: "{{env.GROQ_API_KEY}}"
 
 prompts:
   - label: with-rule
