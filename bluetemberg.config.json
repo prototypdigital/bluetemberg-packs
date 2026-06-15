@@ -7,6 +7,7 @@
     "./packages/bluetemberg-agents-ansible-specialist",
     "./packages/bluetemberg-agents-backend-specialist",
     "./packages/bluetemberg-agents-code-reviewer",
+    "./packages/bluetemberg-agents-design-engineer",
     "./packages/bluetemberg-agents-devops-specialist",
     "./packages/bluetemberg-agents-docs-maintainer",
     "./packages/bluetemberg-agents-frontend-specialist",
@@ -15,8 +16,10 @@
     "./packages/bluetemberg-agents-security-specialist",
     "./packages/bluetemberg-agents-sre-specialist",
     "./packages/bluetemberg-agents-test-specialist",
+    "./packages/bluetemberg-rules-accessibility",
     "./packages/bluetemberg-rules-agent-memory",
     "./packages/bluetemberg-rules-context-engineering",
+    "./packages/bluetemberg-rules-design-craft",
     "./packages/bluetemberg-rules-devops",
     "./packages/bluetemberg-rules-docs",
     "./packages/bluetemberg-rules-git",
@@ -32,7 +35,9 @@
     "./packages/bluetemberg-skills-create-pack",
     "./packages/bluetemberg-skills-create-rule",
     "./packages/bluetemberg-skills-create-skill",
+    "./packages/bluetemberg-skills-design-critique",
     "./packages/bluetemberg-skills-docs-upkeep",
+    "./packages/bluetemberg-skills-figma-to-code",
     "./packages/bluetemberg-skills-infrastructure-drift-check",
     "./packages/bluetemberg-skills-migration-safety",
     "./packages/bluetemberg-skills-patterns",
@@ -42,6 +47,7 @@
     "./packages/bluetemberg-skills-stack-change-review",
     "./packages/bluetemberg-skills-config-echo",
     "./packages/bluetemberg-skills-sub-agent-design",
+    "./packages/bluetemberg-skills-visual-direction",
     "./packages/bluetemberg-skills-workspace-hygiene"
   ],
   "marketplace": {
@@ -69,6 +75,12 @@
         "displayName": "DevOps / Platform Engineer",
         "description": "Skills and agents for CI/CD, containers, and infrastructure",
         "profiles": ["devops", "pure-infra"]
+      },
+      {
+        "name": "design-engineer",
+        "displayName": "Design Engineer",
+        "description": "Anti-stock UI craft — design-to-code, visual direction, and design critique",
+        "profiles": ["design-engineer"]
       }
     ]
   },

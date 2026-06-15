@@ -1,10 +1,14 @@
 {
-  "name": "bluetemberg-agents-frontend-specialist",
+  "name": "bluetemberg-rules-accessibility",
   "version": "0.1.0",
-  "description": "Frontend specialist agent for Bluetemberg — UI implementation, design-system, i18n, accessibility.",
+  "description": "Accessibility rules for Bluetemberg — WCAG 2.2 A/AA guidance for semantic HTML, ARIA, keyboard navigation, and more.",
   "keywords": [
     "bluetemberg-pack",
-    "agents"
+    "rules",
+    "accessibility",
+    "a11y",
+    "wcag",
+    "frontend"
   ],
   "author": "Prototyp Digital",
   "license": "MIT",
@@ -19,8 +23,7 @@
     "universal": false,
     "profiles": [
       "frontend",
-      "fullstack",
-      "design-engineer"
+      "fullstack"
     ]
   }
 }

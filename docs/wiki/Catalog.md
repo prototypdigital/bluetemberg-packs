@@ -7,6 +7,21 @@ Item names match filenames in each pack's `llm/<kind>/` directory and are used f
 
 Always-on instructions loaded into every AI session automatically.
 
+### bluetemberg-rules-accessibility
+
+Accessibility rules for Bluetemberg — WCAG 2.2 A/AA guidance for semantic HTML, ARIA, keyboard navigation, and more.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `accessible-forms` | Every form control must have a programmatic label, clear error identification, and grouped fields where appropriate |
+| `aria-only-when-needed` | ARIA is a fallback for when native HTML falls short — never add redundant or conflicting roles |
+| `color-contrast` | Meet WCAG 2.2 AA contrast ratios; never use color as the only visual signal |
+| `focus-management` | Provide visible focus indicators; move focus intentionally on route change and dialog open/close |
+| `keyboard-navigation` | All interactive elements must be reachable and operable by keyboard alone; no keyboard traps |
+| `reduced-motion` | Honor prefers-reduced-motion; never use motion as the sole affordance for a state change |
+| `semantic-html` | Prefer native HTML elements over div+role soup; semantic elements are accessible by default |
+| `text-alternatives` | Provide descriptive alt text for meaningful images; empty alt for decorative; alternatives for icons and media |
+
 ### bluetemberg-rules-agent-memory
 
 Agent memory rules for Bluetemberg — statelessness as a hard constraint, memory provenance, promotion through consolidation, and authority-ranked recall.
@@ -30,6 +45,18 @@ Context engineering rules for Bluetemberg — structuring LLM context, managing 
 | `multi-turn-context-hygiene` | Don't keep talking to a derailed conversation — consolidate the requirements and restart fresh. Multi-turn degradation is large and doesn't self-correct. |
 | `multi-turn-state-management` | Manage state across multi-turn interactions — track what was decided, what changed, and what is still open. |
 | `prompt-structure` | Structure prompts into labeled, delimited sections — separate instructions from data, and keep persistent rules in the system message. |
+
+### bluetemberg-rules-design-craft
+
+Anti-stock design-craft principles for building UI with AI — banned moves, real references, tokens-first, every state.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `anti-stock-defaults` | Decide the visual direction before prompting; AI averages toward stock UI, so name what you want and refuse the safe default. |
+| `banned-moves-first` | Keep a concrete banned-moves list and apply it to every UI build; closing off easy defaults forces something more intentional out. |
+| `design-every-state` | Design and build every screen state — empty, loading, error, success — with real content, never just the default with lorem ipsum. |
+| `references-not-moods` | Anchor visual direction to specific named references, not adjectives; concrete coordinates beat moods the model will average away. |
+| `tokens-before-components` | Lock the visual system (palette, type, spacing) as tokens before building UI, and re-state them every refinement to prevent token drift. |
 
 ### bluetemberg-rules-devops
 
@@ -172,6 +199,14 @@ Code reviewer agent for Bluetemberg — PR review covering patterns, naming, com
 | ----- | ----------- |
 | `code-reviewer` | Reviews pull requests for code quality, patterns, naming, and potential bugs. |
 
+### bluetemberg-agents-design-engineer
+
+Design engineer agent for Bluetemberg — builds UI to a reference section-by-section, holds tokens and banned moves, catches stock drift.
+
+| Agent | Description |
+| ----- | ----------- |
+| `design-engineer` | Builds UI to a design reference section-by-section, holding tokens and banned moves and catching stock drift before it ships. |
+
 ### bluetemberg-agents-devops-specialist
 
 DevOps specialist agent for Bluetemberg — CI/CD pipelines, container optimization, IaC review.
@@ -304,6 +339,14 @@ Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required
 | ----- | ----------- |
 | `create-skill` | Scaffold a new bluetemberg skill in the correct format — frontmatter, five required sections, and sync. |
 
+### bluetemberg-skills-design-critique
+
+Design critique skill for Bluetemberg — multi-lens review, hostile QA, and an impact-ranked fix list for built UI.
+
+| Skill | Description |
+| ----- | ----------- |
+| `design-critique` | Critique built UI across multiple lenses, run hostile QA, and return an impact-ranked fix list — specific issues with locations, not praise. |
+
 ### bluetemberg-skills-docs-upkeep
 
 Docs upkeep skill for Bluetemberg — keep docs aligned with implementation changes.
@@ -311,6 +354,14 @@ Docs upkeep skill for Bluetemberg — keep docs aligned with implementation chan
 | Skill | Description |
 | ----- | ----------- |
 | `docs-upkeep` | Keep canonical documentation aligned with implementation and workflow changes in the same task. |
+
+### bluetemberg-skills-figma-to-code
+
+Figma-to-code skill for Bluetemberg — the section-by-section design-to-code loop with prompt stacking, drift checks, and surgical refinement.
+
+| Skill | Description |
+| ----- | ----------- |
+| `figma-to-code` | Translate a Figma comp or screenshot into working UI, section-by-section, with prompt stacking, drift checks, and surgical refinement. |
 
 ### bluetemberg-skills-infrastructure-drift-check
 
@@ -375,6 +426,14 @@ Sub-agent design skill for Bluetemberg — plan, scope, and implement sub-agent 
 | Skill | Description |
 | ----- | ----------- |
 | `sub-agent-design` | Design a sub-agent system — scope responsibilities, define communication contracts, wire orchestration, and add integration tests. |
+
+### bluetemberg-skills-visual-direction
+
+Visual direction skill for Bluetemberg — explore distinct directions, lock one, and produce a banned-moves list and Design System Document.
+
+| Skill | Description |
+| ----- | ----------- |
+| `visual-direction` | Set a distinctive visual direction before building — explore three options, lock one, and produce a banned-moves list and Design System Document. |
 
 ### bluetemberg-skills-workspace-hygiene
 

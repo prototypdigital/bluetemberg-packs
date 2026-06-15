@@ -19,7 +19,8 @@
     "universal": false,
     "profiles": [
       "frontend",
-      "fullstack"
+      "fullstack",
+      "design-engineer"
     ]
   }
 }
