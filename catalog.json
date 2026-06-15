@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-15T10:42:52.729Z",
+  "generated": "2026-06-15T11:00:39.851Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -605,6 +605,49 @@
         }
       ],
       "preview": "All API endpoints must return structured, consistent error responses. Never expose stack traces, internal paths, or database details to clients. Always return errors with a consistent shape: ```json { \"error\": { \"code\": \"NOT_FOUND\", \"message\": \"Resource not found\" } } ``` - Map internal errors to ap"
+    },
+    {
+      "name": "bluetemberg-rules-testing",
+      "version": "0.1.0",
+      "description": "Testing rules for Bluetemberg — determinism, isolation, and meaningful coverage.",
+      "profiles": [
+        "frontend",
+        "backend",
+        "fullstack"
+      ],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "coverage-meaningful-not-vanity",
+          "description": "Assert observable behavior and edge cases; never write tests that execute code without asserting anything"
+        },
+        {
+          "name": "flaky-test-policy",
+          "description": "Quarantine-then-fix flaky tests; a retried test is a tracked bug, not a pass"
+        },
+        {
+          "name": "mocking-boundaries",
+          "description": "Mock at I/O and network boundaries only; never mock the unit under test; prefer fakes over deep mock chains"
+        },
+        {
+          "name": "test-data-builders",
+          "description": "Use factory or builder functions for test fixtures; never scatter inline object literals across the test suite"
+        },
+        {
+          "name": "test-determinism",
+          "description": "Avoid timing-based, random, and wall-clock assertions; use fake timers and frozen clocks instead"
+        },
+        {
+          "name": "test-isolation",
+          "description": "Each test must set up and tear down its own state; never rely on execution order or shared mutable state"
+        },
+        {
+          "name": "test-naming",
+          "description": "Name tests as \"it does X when Y\" — describe the behavior under a condition, not the implementation"
+        }
+      ],
+      "preview": "A line-coverage number tells you which lines were touched, not whether the software works. Tests that execute code without asserting outcomes inflate coverage metrics while providing no safety net — they are worse than no tests because they create false confidence. Coverage is a byproduct of writing"
     },
     {
       "name": "bluetemberg-rules-typescript",

@@ -23,6 +23,7 @@
   "packages/bluetemberg-rules-git": "0.1.0",
   "packages/bluetemberg-rules-llm-api-product": "0.1.0",
   "packages/bluetemberg-rules-nextjs": "0.2.0",
+  "packages/bluetemberg-rules-testing": "0.1.0",
   "packages/bluetemberg-rules-security": "0.2.0",
   "packages/bluetemberg-rules-typescript": "0.1.0",
   "packages/bluetemberg-skills-api-design": "0.1.0",

@@ -129,6 +129,20 @@ Security guardrail rules for Bluetemberg — secrets management, environment fil
 | `never-read-env` | Never read .env files directly in code. |
 | `security-secrets` | Never hardcode secrets, tokens, or credentials in source code. |
 
+### bluetemberg-rules-testing
+
+Testing rules for Bluetemberg — determinism, isolation, and meaningful coverage.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `coverage-meaningful-not-vanity` | Assert observable behavior and edge cases; never write tests that execute code without asserting anything |
+| `flaky-test-policy` | Quarantine-then-fix flaky tests; a retried test is a tracked bug, not a pass |
+| `mocking-boundaries` | Mock at I/O and network boundaries only; never mock the unit under test; prefer fakes over deep mock chains |
+| `test-data-builders` | Use factory or builder functions for test fixtures; never scatter inline object literals across the test suite |
+| `test-determinism` | Avoid timing-based, random, and wall-clock assertions; use fake timers and frozen clocks instead |
+| `test-isolation` | Each test must set up and tear down its own state; never rely on execution order or shared mutable state |
+| `test-naming` | Name tests as "it does X when Y" — describe the behavior under a condition, not the implementation |
+
 ### bluetemberg-rules-typescript
 
 TypeScript code quality rules for Bluetemberg — type safety, coding standards, early returns, no console.log, design system reuse.
