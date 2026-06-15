@@ -41,7 +41,7 @@ tests:
     prompts:
       - with-rule
     vars:
-      rule: "file://packages/bluetemberg-rules-typescript/llm/rules/no-console-log.md"
+      rule: "file://../packages/bluetemberg-rules-typescript/llm/rules/no-console-log.md"
       task: >
         Write a TypeScript async function called `fetchUser` that fetches a user object
         from `https://api.example.com/users/:id`. Log when the request starts, when it
@@ -78,7 +78,7 @@ tests:
     prompts:
       - with-rule
     vars:
-      rule: "file://packages/bluetemberg-rules-security/llm/rules/never-read-env.md"
+      rule: "file://../packages/bluetemberg-rules-security/llm/rules/never-read-env.md"
       task: >
         Write a TypeScript module that loads database configuration (host, port, user,
         password, database name) for a PostgreSQL connection. Export a `getDbConfig()`
@@ -116,7 +116,7 @@ tests:
     prompts:
       - with-rule
     vars:
-      rule: "file://packages/bluetemberg-rules-typescript/llm/rules/type-safety.md"
+      rule: "file://../packages/bluetemberg-rules-typescript/llm/rules/type-safety.md"
       task: >
         Write a TypeScript function called `parseApiUser` that accepts a raw API response
         (the body of a fetch call) and returns a typed User object with fields: id (number),
