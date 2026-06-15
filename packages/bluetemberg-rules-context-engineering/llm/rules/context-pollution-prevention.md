@@ -22,6 +22,17 @@ Context pollution is when irrelevant, contradictory, or duplicate information cr
 3. After retrieval, extract only the fact needed — discard the scaffolding.
 4. Record where the fact came from (file path + line) in case it needs verification.
 
+## Examples
+
+```text
+// BAD — search from root; loads unrelated matches into context
+grep -r "handleLogin" .
+
+// GOOD — scoped to the known location; retrieves only what's relevant
+grep -r "handleLogin" src/auth/
+# extract only the relevant lines from the matched file
+```
+
 ## Source
 
 Chroma, "Context Rot: How Increasing Input Tokens Impacts LLM Performance," 2025-07 — <https://research.trychroma.com/context-rot>. Across 18 models, performance grows unreliable as input length grows and the presence of distractors degrades accuracy below the distractor-free baseline — empirical backing for actively pruning irrelevant context rather than letting it accumulate.

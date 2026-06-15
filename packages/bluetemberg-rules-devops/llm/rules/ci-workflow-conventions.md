@@ -45,3 +45,26 @@ Write CI/CD workflows that are secure, maintainable, and resistant to supply-cha
 - Use `runner.debug` and `secrets.ACTIONS_STEP_DEBUG` to enable verbose output.
 - Keep workflow logs concise; compress build artifacts to avoid storage costs.
 - Archive test results and coverage reports for trend analysis.
+
+## Examples
+
+```yaml
+# BAD — action pinned to a mutable tag; broad permissions; PAT in secret
+permissions: write-all
+steps:
+  - uses: actions/checkout@v4
+  - run: deploy.sh
+    env:
+      TOKEN: ${{ secrets.DEPLOY_PAT }}
+
+# GOOD — action pinned to SHA; minimal permissions; OIDC token
+permissions:
+  contents: read
+  id-token: write
+steps:
+  - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683  # v4.2.2
+  - uses: aws-actions/configure-aws-credentials@e3dd6a429d7300a6a4c196c26e071d42e0343502
+    with:
+      role-to-assume: ${{ secrets.DEPLOY_ROLE_ARN }}
+      aws-region: eu-west-1
+```

@@ -27,3 +27,33 @@ Keep infrastructure-as-code consistent, readable, and modular.
 - Use `prevent_destroy` lifecycle rules on critical resources.
 - Pin provider versions in `required_providers`.
 - Run `terraform plan` before every apply and review the diff.
+
+## Examples
+
+```hcl
+# BAD — resource in root module, camelCase name, no provider pin, no tags
+resource "aws_s3Bucket" "myBucket" {
+  bucket = "my-app-bucket"
+}
+
+# GOOD — in modules/storage/main.tf, snake_case, provider pinned, tagged
+terraform {
+  required_providers {
+    aws = { source = "hashicorp/aws", version = "~> 5.50" }
+  }
+}
+
+resource "aws_s3_bucket" "app_assets" {
+  bucket = var.bucket_name
+
+  lifecycle {
+    prevent_destroy = true
+  }
+
+  tags = {
+    environment = var.environment
+    team        = var.team
+    managed_by  = "terraform"
+  }
+}
+```

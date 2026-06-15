@@ -42,3 +42,24 @@ One image cannot serve staging and prod. For per-env values (API URLs, DSNs, env
 - Edge runtime and middleware behave like a client bundle: unprefixed env is `undefined`.
 - `publicRuntimeConfig` / `serverRuntimeConfig` — removed in Next.js v16. Never suggest.
 - Tests don't auto-load `.env.local`; use `.env.test` or `loadEnvConfig` from `@next/env`.
+
+## Examples
+
+```ts
+// BAD — secret exposed in bundle; dynamic key silently becomes undefined
+const NEXT_PUBLIC_STRIPE_SECRET = process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY  // exposed!
+const { NEXT_PUBLIC_API_URL } = process.env  // undefined in browser
+
+// BAD — per-environment API URL baked into the build
+// .env.production: NEXT_PUBLIC_API_URL=https://api.prod.example.com
+// One image cannot serve both staging and prod
+
+// GOOD — public non-secret accessed as literal token
+const apiKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY  // OK: intentionally public
+
+// GOOD — per-env URL via Server Component prop (canonical pattern)
+// app/layout.tsx (Server Component)
+export default function Layout({ children }) {
+  return <ClientShell apiUrl={process.env.API_URL}>{children}</ClientShell>
+}
+```

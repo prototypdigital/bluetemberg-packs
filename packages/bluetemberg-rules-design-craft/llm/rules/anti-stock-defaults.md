@@ -14,6 +14,20 @@ Vague prompts make the model average across everything it has seen — rounded c
 - Prefer one opinionated choice over five tasteful, interchangeable ones.
 - The designer directs; the AI builds. Specific direction in, distinctive work out.
 
+## Examples
+
+```text
+// BAD — vague prompt; model will produce a forgettable default
+"Build a clean, modern hero section for a SaaS product."
+→ Result: rounded card, neutral blue, Inter font, subtle gradient
+
+// GOOD — specific direction set before generating
+"Build a hero section in the spirit of early Experimental Jetset — dense grid,
+ black and white only, grotesque type at large size, no decoration.
+ NOT: gradients, rounded corners, or stock photography."
+→ Result: constrained output with a defined point of view
+```
+
 ## Why it matters
 
 "Helpful" defaults are the average of everything the model has seen. Distinctiveness comes from constraint, not from asking nicely. Every other rule in this pack is a way of applying that constraint.

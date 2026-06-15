@@ -26,3 +26,19 @@ supersedes:   <record-id | null>
 ```
 
 The exact schema is yours to choose; the four provenance fields are not optional.
+
+## Examples
+
+```text
+// BAD — memory record with no attribution
+{ fact: "user prefers dark mode" }
+
+// GOOD — memory record with full provenance
+{
+  fact:        "user prefers dark mode",
+  source:      "user-stated",
+  observed_at: "2026-06-15T10:00:00Z",
+  confidence:  "high",
+  supersedes:  null
+}
+```

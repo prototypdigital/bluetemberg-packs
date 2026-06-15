@@ -18,3 +18,19 @@ Before committing any changes, verify the workspace is clean and CI-ready.
 
 This applies to every commit — feature work, refactors, docs, config changes. No exceptions.
 If a formatter or linter config exists in the project, respect it. If `.prettierignore` or `.eslintignore` excludes certain paths, do not force-format those paths.
+
+## Examples
+
+```sh
+# BAD — committing without running any checks
+git add src/api/orders.ts
+git commit -m "feat: add order cancellation"
+→ unformatted code, type error, and lint warning committed
+
+# GOOD — all checks pass before committing
+prettier --write src/api/orders.ts
+eslint src/api/orders.ts --fix
+tsc --noEmit
+git add src/api/orders.ts
+git commit -m "feat(orders): add cancellation endpoint"
+```

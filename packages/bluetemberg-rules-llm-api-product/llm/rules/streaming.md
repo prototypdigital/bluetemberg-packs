@@ -22,6 +22,35 @@ Streaming means tokens reach the user *before* the full response exists, so any 
 - Do not rely solely on streamed deltas for safety gating. If content must be moderated before the user sees it, either don't stream that surface, or stream into a buffer you reveal only after the post-generation check passes.
 - Budget for the fact that full-output moderation scores are a *post*-generation signal; design the UX (e.g. redaction-after, stop-and-retract) accordingly.
 
+## Examples
+
+```ts
+// BAD — parsing JSON from a single delta; crashes mid-stream
+for await (const chunk of stream) {
+  if (chunk.type === 'content_block_delta') {
+    const args = JSON.parse(chunk.delta.partial_json)  // SyntaxError mid-stream
+    callTool(args)
+  }
+}
+
+// GOOD — accumulate fragments, parse only on block_stop
+let buffer = ''
+for await (const chunk of stream) {
+  if (chunk.type === 'content_block_delta' && chunk.delta.type === 'input_json_delta') {
+    buffer += chunk.delta.partial_json
+  }
+  if (chunk.type === 'content_block_stop') {
+    if (stream.finalMessage().stop_reason === 'max_tokens') {
+      handleTruncated()  // buffer is incomplete — don't parse
+    } else {
+      const args = JSON.parse(buffer)
+      callTool(args)
+    }
+    buffer = ''
+  }
+}
+```
+
 ## Sources
 
 Anthropic, "Fine-grained tool streaming" — <https://platform.claude.com/docs/en/agents-and-tools/tool-use/fine-grained-tool-streaming>: streamed tool-input chunks may not be individually valid JSON and must be accumulated; handle `max_tokens` cutoffs. OpenAI, "Streaming responses" — <https://developers.openai.com/api/docs/guides/streaming-responses>: streaming improves perceived latency but complicates moderation because the full output (and its moderation result) is only available after generation completes.

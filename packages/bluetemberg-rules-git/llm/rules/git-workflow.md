@@ -41,3 +41,19 @@ Never push fixes or additions directly onto another open PR's branch. Always ope
 - Resolve any conflicts during the rebase before pushing.
 - Force-push the rebased branch to update the remote: `git push --force-with-lease`.
 - PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/): `type(scope): description`.
+
+## Examples
+
+```sh
+# BAD — pushing directly to main; bad branch name; non-conventional PR title
+git checkout main
+git commit -m "fixed login"
+git push origin main
+
+# GOOD — feature branch with conventional name; rebased before PR
+git checkout -b fix/login-redirect
+git commit -m "fix(auth): redirect to /dashboard after login"
+git fetch origin && git rebase origin/main
+git push --force-with-lease origin fix/login-redirect
+# PR title: fix(auth): redirect to /dashboard after login
+```

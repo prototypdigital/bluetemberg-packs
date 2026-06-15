@@ -18,6 +18,23 @@ The biggest model is not the default-correct choice. Evaluate on the **accuracy-
 - Route on predicted difficulty, with a confidence threshold and a fallback/escalation path to the strong model when the cheap model is uncertain or fails validation.
 - Measure the router itself: track the escalation rate and the quality delta on routed-cheap traffic so a drift in either doesn't silently erode quality or savings.
 
+## Examples
+
+```ts
+// BAD — always routing every request to the most expensive model
+const response = await client.messages.create({
+  model: 'claude-opus-4-8',  // overkill for simple extraction tasks
+  messages: [{ role: 'user', content: 'Extract the date from: "Meeting on June 15"' }],
+})
+
+// GOOD — route by difficulty; reserve strong model for complex tasks
+const difficulty = await router.predict(prompt)  // learned router
+const model = difficulty === 'easy'
+  ? 'claude-haiku-4-5-20251001'   // fast and cheap for simple tasks
+  : 'claude-sonnet-4-6'           // stronger model for complex reasoning
+const response = await client.messages.create({ model, messages })
+```
+
 ## Sources
 
 Kapoor et al., "Holistic Agent Leaderboard (HAL)," 2025-10 — <https://arxiv.org/abs/2510.11977>: agents should be compared on the accuracy–cost Pareto frontier; the most expensive models are rarely Pareto-optimal. Ong et al., "RouteLLM," ICLR 2025 — <https://openreview.net/forum?id=8sSqNntaMr>: a learned strong/weak router achieves >2× cost reduction at ~95% of GPT-4 quality. (Per-benchmark routing figures beyond the >2×/~95% headline are project self-reported; cite only the peer-reviewed headline as fact.)

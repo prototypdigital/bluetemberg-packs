@@ -26,3 +26,18 @@ observation (in-context)
 ```
 
 This mirrors the episodic -> semantic distinction: append-only events stage cheaply; distilled facts are promoted deliberately, deduplicated, and versioned.
+
+## Examples
+
+```text
+// BAD — raw session observation written directly to durable memory
+session: "user said they prefer tabs"
+-> WRITE durable_memory["user.indent"] = "tabs"   // no dedup, no review, no provenance
+
+// GOOD — observation goes through the promotion pipeline
+session: "user said they prefer tabs"
+-> STAGE { fact: "user.indent=tabs", source: user-stated, session_id: abc123 }
+-> CONSOLIDATE (check for contradiction with existing "user.indent=spaces")
+-> REVIEW if it's a core preference
+-> WRITE durable_memory only after ratification
+```

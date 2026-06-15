@@ -45,3 +45,39 @@ Write Kubernetes manifests that are safe, predictable, and production-ready.
 - Use `ConfigMap` for non-sensitive config; reference in env with `envFrom` for cleanliness.
 - Label all resources consistently: `app.kubernetes.io/name`, `app.kubernetes.io/version`, `app.kubernetes.io/managed-by`.
 - Validate manifests with `kubeconform` or `kube-score` before applying.
+
+## Examples
+
+```yaml
+# BAD — no resource limits, no probes, privileged, floating image tag
+containers:
+  - name: api
+    image: myapp:latest
+    securityContext:
+      privileged: true
+
+# GOOD — resource limits, probes, non-root, pinned image
+containers:
+  - name: api
+    image: myapp:1.4.2
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        memory: "256Mi"
+    securityContext:
+      runAsNonRoot: true
+      readOnlyRootFilesystem: true
+      capabilities:
+        drop: [ALL]
+    livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 3000
+      initialDelaySeconds: 10
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 3000
+```

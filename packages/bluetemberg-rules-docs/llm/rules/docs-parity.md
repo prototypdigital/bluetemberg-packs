@@ -22,6 +22,19 @@ When any of the above change:
 2. Update the relevant documentation page if one covers the changed area.
 3. Include the doc update in the same commit as the code change — not a follow-up.
 
+## Examples
+
+```text
+// BAD — new CLI flag added with no README update
+src/cli.ts: added --output-format flag (json | table)
+README.md: still documents only --output flag
+→ Users have no idea the flag exists or how to use it
+
+// GOOD — README updated in the same commit
+src/cli.ts: added --output-format flag (json | table)
+README.md: "## Flags" section updated with --output-format usage
+```
+
 ## When NOT required
 
 - Internal refactors with no behavior change (renaming a variable, extracting a function)

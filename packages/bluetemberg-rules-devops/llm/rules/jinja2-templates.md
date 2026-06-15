@@ -43,3 +43,29 @@ Write Jinja2 templates that are safe, maintainable, and free of undefined variab
 - Use two spaces for indentation, consistent with Ansible.
 - Comment complex template logic; explain *why*, not *what*.
 - Keep template files under 100 lines; extract if longer.
+
+## Examples
+
+```jinja2
+{# BAD — variable used without default; crashes if optional_port is undefined #}
+listen = {{ optional_port }}
+environment = {{ config_dict }}
+
+{# GOOD — safe defaults; structured data serialized with filter #}
+listen = {{ optional_port | default(8080) }}
+environment = {{ config_dict | to_json }}
+```
+
+```jinja2
+{# BAD — complex logic inside the template #}
+{% for item in items %}
+  {% if item.type == "web" and item.enabled %}
+    ...
+  {% endif %}
+{% endfor %}
+
+{# GOOD — filter in the task, template stays declarative #}
+{% for item in web_items %}
+  ...
+{% endfor %}
+```
