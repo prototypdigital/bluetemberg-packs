@@ -23,6 +23,9 @@
     "profiles": [
       "frontend",
       "fullstack"
+    ],
+    "stacks": [
+      "nextjs"
     ]
   }
 }

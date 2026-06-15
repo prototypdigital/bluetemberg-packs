@@ -5,7 +5,7 @@ scope: "**"
 
 # Next.js Server Components
 
-React Server Components (RSC) are the default in Next.js 14+ App Router. Every component in `app/` is a Server Component unless explicitly marked otherwise.
+React Server Components (RSC) are the default in the Next.js App Router (stable since Next.js 13.4). Every component in `app/` is a Server Component unless explicitly marked otherwise.
 
 ## Rules
 

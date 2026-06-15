@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-15T18:18:29.358Z",
+  "generated": "2026-06-15T18:50:37.617Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -10,6 +10,7 @@
         "fullstack",
         "design-engineer"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -27,6 +28,7 @@
       "profiles": [
         "agentic"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -45,6 +47,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -63,6 +66,7 @@
         "backend",
         "fullstack"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -82,6 +86,7 @@
         "backend",
         "fullstack"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -99,6 +104,7 @@
       "profiles": [
         "design-engineer"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -117,6 +123,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -132,6 +139,7 @@
       "version": "0.2.0",
       "description": "Docs maintainer agent for Bluetemberg — documentation synchronization with code changes.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "agents",
       "agents": [
@@ -151,6 +159,7 @@
         "fullstack",
         "design-engineer"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -169,6 +178,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -187,6 +197,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -207,6 +218,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -225,6 +237,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -244,6 +257,7 @@
         "backend",
         "fullstack"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "agents",
       "agents": [
@@ -259,6 +273,7 @@
       "version": "0.1.0",
       "description": "Git guardrails for Bluetemberg — enforce conventional branch names on AI-created worktrees.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "guardrails",
       "guardrails": [
@@ -277,6 +292,7 @@
         "frontend",
         "fullstack"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "rules",
       "rules": [
@@ -322,6 +338,7 @@
       "profiles": [
         "agentic"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "rules",
       "rules": [
@@ -351,6 +368,7 @@
       "profiles": [
         "agentic"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "rules",
       "rules": [
@@ -388,6 +406,7 @@
       "profiles": [
         "design-engineer"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "rules",
       "rules": [
@@ -422,6 +441,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "rules",
       "rules": [
@@ -477,6 +497,7 @@
       "version": "0.2.0",
       "description": "Documentation and diagnostics rules for Bluetemberg — docs parity, post-edit diagnostics, Mermaid diagrams.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "rules",
       "rules": [
@@ -500,6 +521,7 @@
       "version": "0.1.0",
       "description": "Git workflow rules for Bluetemberg — branch protection, naming, PR workflow, git move, pre-commit checks.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "rules",
       "rules": [
@@ -527,6 +549,7 @@
         "fullstack",
         "agentic"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "rules",
       "rules": [
@@ -552,6 +575,9 @@
       "profiles": [
         "frontend",
         "fullstack"
+      ],
+      "stacks": [
+        "nextjs"
       ],
       "universal": false,
       "kind": "rules",
@@ -584,6 +610,7 @@
       "version": "0.2.0",
       "description": "Security guardrail rules for Bluetemberg — secrets management, environment file protection, API error handling.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "rules",
       "rules": [
@@ -615,6 +642,7 @@
         "backend",
         "fullstack"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "rules",
       "rules": [
@@ -649,6 +677,7 @@
         "backend",
         "fullstack"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -667,6 +696,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -686,6 +716,7 @@
         "backend",
         "fullstack"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -707,6 +738,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -722,6 +754,7 @@
       "version": "0.1.0",
       "description": "Meta-skill for scaffolding new bluetemberg agents — frontmatter, scoped tools, responsibilities and constraints, and sync.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "skills",
       "skills": [
@@ -737,6 +770,7 @@
       "version": "0.1.0",
       "description": "Meta-skill for scaffolding a whole new bluetemberg pack — package.json metadata, llm/ layout, catalog registration, and validation.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "skills",
       "skills": [
@@ -752,6 +786,7 @@
       "version": "0.1.0",
       "description": "Meta-skill for scaffolding new bluetemberg rules — frontmatter, the Why/Rules/BAD-GOOD/config/gotchas structure, and sync.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "skills",
       "skills": [
@@ -767,6 +802,7 @@
       "version": "0.1.0",
       "description": "Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required sections, and sync.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "skills",
       "skills": [
@@ -784,6 +820,7 @@
       "profiles": [
         "design-engineer"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -799,6 +836,7 @@
       "version": "0.2.0",
       "description": "Docs upkeep skill for Bluetemberg — keep docs aligned with implementation changes.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "skills",
       "skills": [
@@ -816,6 +854,7 @@
       "profiles": [
         "design-engineer"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -834,6 +873,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -852,6 +892,7 @@
         "backend",
         "fullstack"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -871,6 +912,7 @@
         "backend",
         "fullstack"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -890,6 +932,9 @@
         "fullstack",
         "design-engineer"
       ],
+      "stacks": [
+        "react"
+      ],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -908,6 +953,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -928,6 +974,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -946,6 +993,7 @@
         "devops",
         "pure-infra"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -963,6 +1011,7 @@
       "profiles": [
         "agentic"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -980,6 +1029,7 @@
       "profiles": [
         "design-engineer"
       ],
+      "stacks": [],
       "universal": false,
       "kind": "skills",
       "skills": [
@@ -995,6 +1045,7 @@
       "version": "0.2.0",
       "description": "Workspace hygiene skill for Bluetemberg — clean workspace state during edits.",
       "profiles": [],
+      "stacks": [],
       "universal": true,
       "kind": "skills",
       "skills": [

@@ -1,10 +1,13 @@
 {
-  "name": "bluetemberg-skills-react-patterns",
+  "name": "bluetemberg-skills-payload-cache-revalidation",
   "version": "0.1.0",
-  "description": "React patterns skill for Bluetemberg — component composition, hook extraction, state co-location.",
+  "description": "Payload + Next.js cache revalidation skill for Bluetemberg — a single source of truth for cache tags and the per-locale vs locale-agnostic decision.",
   "keywords": [
     "bluetemberg-pack",
-    "skills"
+    "skills",
+    "payload",
+    "nextjs",
+    "caching"
   ],
   "author": "Prototyp Digital",
   "license": "MIT",
@@ -18,12 +21,11 @@
   "bluetemberg": {
     "universal": false,
     "profiles": [
-      "frontend",
-      "fullstack",
-      "design-engineer"
+      "backend",
+      "fullstack"
     ],
     "stacks": [
-      "react"
+      "payload"
     ]
   }
 }

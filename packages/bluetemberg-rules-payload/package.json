@@ -1,10 +1,13 @@
 {
-  "name": "bluetemberg-skills-react-patterns",
+  "name": "bluetemberg-rules-payload",
   "version": "0.1.0",
-  "description": "React patterns skill for Bluetemberg — component composition, hook extraction, state co-location.",
+  "description": "Payload CMS rules for Bluetemberg — collection structure, snake_case dbName, composable access, field builders, revalidation hooks.",
   "keywords": [
     "bluetemberg-pack",
-    "skills"
+    "rules",
+    "payload",
+    "payloadcms",
+    "backend"
   ],
   "author": "Prototyp Digital",
   "license": "MIT",
@@ -18,12 +21,11 @@
   "bluetemberg": {
     "universal": false,
     "profiles": [
-      "frontend",
-      "fullstack",
-      "design-engineer"
+      "backend",
+      "fullstack"
     ],
     "stacks": [
-      "react"
+      "payload"
     ]
   }
 }
