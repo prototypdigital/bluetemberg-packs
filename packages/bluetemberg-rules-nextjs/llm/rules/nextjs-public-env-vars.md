@@ -1,6 +1,6 @@
 ---
 description: NEXT_PUBLIC_* are inlined into the bundle at build time — never use for secrets or per-environment values.
-scope: "**"
+scope: "**/*.{ts,tsx,js,jsx}"
 ---
 
 # Next.js NEXT_PUBLIC_* env vars
