@@ -18,9 +18,22 @@ In a Payload + Next.js App Router app, cached front-end data only updates when s
 - Bust tags through the shared cache-tag source of truth, not hardcoded strings — see the [`payload-cache-revalidation`](https://www.npmjs.com/package/bluetemberg-skills-payload-cache-revalidation) skill for the tag contract and per-locale vs locale-agnostic decision.
 - A new front-end collection with no hook should fail review — add the hook in the same change that adds the collection.
 
-## Example
+## Examples
 
 ```ts
+// BAD — front-end collection with no revalidation hook: edits never bust the cache until TTL/redeploy
+export const Models: CollectionConfig = {
+  slug: 'models',
+  // no hooks → silent stale content
+}
+
+// BAD — hook present but no disableRevalidate gate and a hardcoded tag string (drifts from the fetcher)
+const revalidateModel: CollectionAfterChangeHook = ({ doc }) => {
+  revalidateTag(`models_${doc.slug}`, 'max') // hardcoded; fires during bulk imports/seeds too
+  return doc
+}
+
+// GOOD — gated on context, published-only, tag built through the shared cacheTags source of truth
 const revalidateModel: CollectionAfterChangeHook = ({ doc, context }) => {
   if (context.disableRevalidate) return doc
   if (doc._status === 'published') revalidateTag(cacheTags.model(doc.slug), 'max')

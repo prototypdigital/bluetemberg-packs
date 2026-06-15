@@ -1,6 +1,6 @@
 ---
 name: payload-cache-revalidation
-description: Standardize Next.js + Payload cache revalidation — one `cacheTags` source of truth, per-locale vs locale-agnostic tags by field localization, and a revalidation hook on every cached collection.
+description: Standardize Next.js + Payload cache revalidation — one `cacheTags` source of truth, per-locale vs locale-agnostic tags, and a revalidation hook on every cached collection.
 ---
 
 # payload-cache-revalidation

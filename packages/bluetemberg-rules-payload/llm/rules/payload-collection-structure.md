@@ -17,9 +17,21 @@ Every public-facing collection (rendered on the front end) should share the same
 - **Slug:** use the shared `slugField()` builder for the URL identifier — consistent validation, formatting, and `dbName`.
 - **Revalidation:** any collection read on the front end needs revalidation hooks — see [`payload-revalidation-hook-required`](payload-revalidation-hook-required).
 
-## Example
+## Examples
 
 ```ts
+// BAD — flat field list, no tabs, hand-rolled slug, no versions, no revalidation hooks
+export const Pages: CollectionConfig = {
+  slug: 'pages',
+  fields: [
+    { name: 'slug', type: 'text' }, // duplicated validation/format per collection
+    { name: 'title', type: 'text' },
+    { name: 'metaTitle', type: 'text' }, // SEO mixed into content, no tab grouping
+  ],
+  // no versions/drafts, no createdBy/updatedBy/publishedAt, no afterChange/afterDelete → stale cache
+}
+
+// GOOD — shared builders, Content/SEO tabs, drafts + scheduled publish, revalidation hooks
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: { read: anyone, update: or(superAdminAccess, marketEditorAccess) },
