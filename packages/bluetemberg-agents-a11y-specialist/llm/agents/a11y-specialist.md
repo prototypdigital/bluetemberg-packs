@@ -34,6 +34,16 @@ Native elements carry built-in accessibility semantics — role, name, keyboard 
 - `<ul>`/`<ol>` for lists; `<table>` with `<th scope>` for tabular data.
 - Do not add redundant roles: `<nav role="navigation">` and `<button role="button">` are both wrong. *(rule: semantic-html)*
 
+```html
+<!-- BAD — redundant ARIA roles on native elements -->
+<nav role="navigation">…</nav>
+<button role="button">Save</button>
+
+<!-- GOOD — native semantics are sufficient; roles are implicit -->
+<nav>…</nav>
+<button>Save</button>
+```
+
 **First rule of ARIA: don't use ARIA if a native HTML element can do the job.** ARIA names, describes, and annotates — it does not add behavior, keyboard interaction, or focus management automatically.
 
 ## Keyboard navigation requirements
@@ -52,6 +62,19 @@ Every action a mouse user can take must also be reachable by keyboard. WCAG 2.1.
 - Custom interactive elements must receive `tabIndex="0"` — never `tabIndex > 0` (breaks DOM order and confuses keyboard users).
 - `pointer-events: none` hides an element from mouse but does not remove it from the tab sequence. Use `tabIndex={-1}` or `disabled` to also exclude from keyboard.
 - `opacity: 0` and CSS transforms do **not** remove from tab sequence — content hidden behind a closed drawer may still receive keyboard focus. `visibility: hidden` does remove from the sequence. *(rule: keyboard-navigation)*
+
+```tsx
+// BAD — opacity hides visually but the element still receives Tab focus
+<div style={{ opacity: 0 }}>Hidden panel content</div>
+
+// BAD — pointer-events: none removes mouse but not keyboard access
+<div style={{ pointerEvents: 'none' }}>Disabled-looking but still focusable</div>
+
+// GOOD — remove from both visual and keyboard flow when closed
+<div hidden>Fully hidden</div>
+// or for animated panels:
+<div tabIndex={isOpen ? 0 : -1} aria-hidden={!isOpen}>Panel content</div>
+```
 
 ## Focus management
 
