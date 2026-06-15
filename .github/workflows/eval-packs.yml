@@ -11,6 +11,7 @@ on:
 permissions:
   contents: read
   pull-requests: write  # promptfoo-action posts a summary comment on the PR
+  models: read          # GitHub Models inference via GITHUB_TOKEN
 
 jobs:
   eval:
@@ -33,7 +34,4 @@ jobs:
           config: evals/promptfooconfig.yaml
           prompts: 'packages/**/llm/**/*.md'
         env:
-          # Provider: Groq free tier (llama-3.3-70b-versatile).
-          # Add GROQ_API_KEY as a repo secret at Settings → Secrets → Actions.
-          # Free tier: 1000 req/day — sufficient for PR-scoped evals.
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
