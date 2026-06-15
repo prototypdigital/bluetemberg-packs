@@ -1,0 +1,32 @@
+reviews:
+  path_instructions:
+    - path: "packages/**/llm/**/*.md"
+      instructions: |
+        Review this file as a prompt-engineering artefact (rule, agent definition, or skill) — not source code.
+
+        Verify all of the following. Flag each violation as a separate comment.
+
+        1. **Example required** — at least one fenced code block with a BAD and a GOOD case must be present.
+           A rule with no example is not actionable enough to ship.
+
+        2. **Actionable** — the rule must tell the model what to DO, not only what to avoid.
+           "Never use X" with no alternative specified fails this check.
+
+        3. **Scope appropriateness** — the `scope` frontmatter glob must match the rule's domain.
+           A TypeScript-only rule must not use `**`. A universal rule must not over-scope to a single extension.
+
+        4. **Description quality** — the `description` frontmatter must be a single sentence under 200 characters
+           that summarises the rule itself (not the pack name or a generic category label).
+
+        5. **No internal contradictions** — the rule must not contradict other rules changed in the same PR.
+           If two rules in the same PR prescribe opposite behaviours for the same situation, flag it.
+
+        6. **Specificity** — rules must be specific enough that a model following them would produce
+           measurably different output. Reject vague aspirational statements like "write clean code"
+           or "follow best practices" without concrete, testable guidance.
+
+        Do NOT flag:
+        - British vs American spelling differences
+        - Heading capitalisation preferences
+        - Whether bullet points end with a full stop
+        - Generic style suggestions without a specific, identified gap in the file

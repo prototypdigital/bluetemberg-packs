@@ -3,3 +3,7 @@ plugins/
 .claude-plugin/
 .worktrees/
 _site/
+
+# promptfoo eval artifacts (generated in CI)
+evals/.eval-results.json
+eval-comment.md

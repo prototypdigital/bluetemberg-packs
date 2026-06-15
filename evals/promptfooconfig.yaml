@@ -1,0 +1,166 @@
+# promptfoo eval suite — bluetemberg pack quality
+#
+# Tests whether each rule actually changes model output in the intended direction.
+# Provider: GitHub Models (free, uses GITHUB_TOKEN already present in Actions).
+#
+# Each rule gets two test cases:
+#   rule-on  — rule injected as system prompt; asserts compliant output
+#   baseline — no system prompt; asserts the model would otherwise violate the rule
+#              (proves the rule is what moved the needle, not model defaults)
+#
+# Run locally: GITHUB_TOKEN=<pat> npx promptfoo eval
+# CI:          .github/workflows/eval-packs.yml runs this on every PR touching packages/**/llm/**/*.md
+
+description: "bluetemberg pack behavioural quality evals"
+
+providers:
+  - id: openai:gpt-4o-mini
+    config:
+      apiBaseUrl: "https://models.github.ai/orgs/prototypdigital/inference"
+      apiKey: "{{env.GITHUB_TOKEN}}"
+
+prompts:
+  - label: with-rule
+    raw: |
+      [
+        {"role": "system", "content": "{{rule}}"},
+        {"role": "user", "content": "{{task}}"}
+      ]
+  - label: no-rule
+    raw: |
+      [{"role": "user", "content": "{{task}}"}]
+
+defaultTest:
+  options:
+    repeat: 3
+    repeatMinPass: 2
+
+tests:
+  # ── bluetemberg-rules-typescript: no-console-log ──────────────────────────
+
+  - description: "no-console-log [rule-on] — fetch function uses logger, not console.*"
+    prompts:
+      - with-rule
+    vars:
+      rule: "file://../packages/bluetemberg-rules-typescript/llm/rules/no-console-log.md"
+      task: >
+        Write a TypeScript async function called `fetchUser` that fetches a user object
+        from `https://api.example.com/users/:id`. Log when the request starts, when it
+        succeeds, and when it fails. Return the parsed user object on success, throw on error.
+    assert:
+      - type: not-contains
+        value: "console.log"
+      - type: not-contains
+        value: "console.error"
+      - type: not-contains
+        value: "console.warn"
+      - type: not-contains
+        value: "console.debug"
+      - type: llm-rubric
+        value: >
+          The code uses a named logger (e.g. logger.info, logger.error, log.warn) for all
+          output rather than any console.* method. It does not import or call console directly.
+
+  - description: "no-console-log [baseline] — without rule, model reaches for console.*"
+    prompts:
+      - no-rule
+    vars:
+      task: >
+        Write a TypeScript async function called `fetchUser` that fetches a user object
+        from `https://api.example.com/users/:id`. Log when the request starts, when it
+        succeeds, and when it fails. Return the parsed user object on success, throw on error.
+    assert:
+      - type: contains
+        value: "console."
+
+  # ── bluetemberg-rules-security: never-read-env ────────────────────────────
+
+  # The task deliberately dangles a .env file in front of the model — the rule
+  # must steer it to process.env anyway ("even when asked by the user").
+  # NOTE: assertions must not naively match ".env", since `process.env` (the
+  # CORRECT pattern) contains that substring. We check for the real violation:
+  # importing dotenv, fs reads, or a quoted ".env" file path.
+
+  - description: "never-read-env [rule-on] — reads process.env even when handed a .env file"
+    prompts:
+      - with-rule
+    vars:
+      rule: "file://../packages/bluetemberg-rules-security/llm/rules/never-read-env.md"
+      task: >
+        Write a TypeScript module that loads database configuration (host, port, user,
+        password, database name) for a PostgreSQL connection. The project keeps its
+        secrets in a `.env` file at the repository root for local development. Export a
+        `getDbConfig()` function that returns the config object.
+    assert:
+      # Deterministic guards catch the obvious file-reading violations; the rubric is the
+      # backstop for subtler fs reads. We intentionally do NOT regex for a quoted ".env"
+      # here — a compliant answer may mention `.env` in a comment, which is fine.
+      - type: not-contains
+        value: "dotenv"
+      - type: not-contains
+        value: "readFileSync"
+      - type: llm-rubric
+        value: >
+          The code reads configuration exclusively from process.env / environment variables.
+          Using process.env is the CORRECT approach and MUST pass. It does NOT import dotenv,
+          does NOT read the .env file from disk (no readFileSync/fs on .env), and uses no
+          file-system operations to load configuration.
+
+  - description: "never-read-env [baseline] — without rule, model reads the .env file directly"
+    prompts:
+      - no-rule
+    vars:
+      task: >
+        Write a TypeScript module that loads database configuration (host, port, user,
+        password, database name) for a PostgreSQL connection. The project keeps its
+        secrets in a `.env` file at the repository root for local development. Export a
+        `getDbConfig()` function that returns the config object.
+    assert:
+      - type: javascript
+        value: |
+          // Without the rule the model tends to read the .env file directly — import
+          // dotenv, call readFileSync, or reference a quoted ".env" path. Bare
+          // process.env does NOT count as a violation.
+          return /dotenv/.test(output) || /readFileSync/.test(output) || /['"`][^'"`]*\.env['"`]/.test(output);
+
+  # ── bluetemberg-rules-typescript: type-safety ─────────────────────────────
+
+  - description: "type-safety [rule-on] — API response parsing uses unknown + type guard, not any"
+    prompts:
+      - with-rule
+    vars:
+      rule: "file://../packages/bluetemberg-rules-typescript/llm/rules/type-safety.md"
+      task: >
+        Write a TypeScript function called `parseApiUser` that accepts a raw API response
+        (the body of a fetch call) and returns a typed User object with fields: id (number),
+        name (string), email (string). Handle the case where the response doesn't match
+        the expected shape.
+    assert:
+      # Note: we do NOT blanket-ban "as any" — a localized `(data as any).id` inside a
+      # type guard (to run typeof/`in` checks) is idiomatic and the rule allows it.
+      # The llm-rubric distinguishes that from an unguarded cast of the whole response.
+      - type: not-contains
+        value: ": any"
+      - type: llm-rubric
+        value: >
+          The TypeScript code uses proper typing: the parsing function accepts `unknown`
+          (not `any`) and narrows it via a type guard or validation before use. There are
+          NO unguarded type assertions that cast the raw response straight to the domain
+          type (e.g. `response as User` without a preceding guard). NOTE: a localized
+          `as any` / `as Record<string, unknown>` used INSIDE a type-guard function to
+          perform typeof or `in` checks is acceptable and must pass.
+
+  - description: "type-safety [baseline] — without rule, model uses any or unguarded assertions"
+    prompts:
+      - no-rule
+    vars:
+      task: >
+        Write a TypeScript function called `parseApiUser` that accepts a raw API response
+        (the body of a fetch call) and returns a typed User object with fields: id (number),
+        name (string), email (string). Handle the case where the response doesn't match
+        the expected shape.
+    assert:
+      - type: javascript
+        value: |
+          // baseline: model commonly uses 'any' or unguarded 'as' without type discipline
+          return output.includes(': any') || output.includes('as any') || /\) as [A-Z]/.test(output);

@@ -1,0 +1,83 @@
+name: Eval packs
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'packages/**/llm/**/*.md'
+      - 'evals/promptfooconfig.yaml'
+      - '.github/scripts/eval-comment.cjs'
+      - '.github/workflows/eval-packs.yml'
+
+permissions:
+  contents: read
+  pull-requests: write  # post the behavioural-contrast comment on the PR
+  models: read          # GitHub Models inference via GITHUB_TOKEN
+
+jobs:
+  eval:
+    name: Behavioural quality (advisory)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+
+      - name: Run promptfoo evals
+        id: eval
+        # continue-on-error keeps the job green — this is advisory. The contrast
+        # comment is posted regardless of pass/fail so reviewers always see it.
+        continue-on-error: true
+        run: |
+          npx --yes promptfoo@0.121.15 eval \
+            --config evals/promptfooconfig.yaml \
+            --output evals/.eval-results.json \
+            --no-table \
+            --no-write \
+            --no-share \
+            --no-progress-bar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PROMPTFOO_DISABLE_TELEMETRY: '1'
+          PROMPTFOO_DISABLE_UPDATE: '1'
+
+      - name: Build showcase comment
+        if: always()
+        run: node .github/scripts/eval-comment.cjs evals/.eval-results.json > eval-comment.md
+        env:
+          GITHUB_SERVER_URL: ${{ github.server_url }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
+
+      - name: Post showcase comment
+        if: always()
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7
+        with:
+          script: |
+            const fs = require('fs');
+            const marker = '<!-- promptfoo-showcase -->';
+            const body = fs.readFileSync('eval-comment.md', 'utf8');
+            const { owner, repo } = context.repo;
+            const issue_number = context.issue.number;
+            if (!issue_number) {
+              core.info('No PR context — skipping comment.');
+              return;
+            }
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner, repo, issue_number, per_page: 100,
+            });
+            const existing = comments.find((c) => c.body && c.body.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({ owner, repo, comment_id: existing.id, body });
+              core.info(`Updated comment ${existing.id}`);
+            } else {
+              await github.rest.issues.createComment({ owner, repo, issue_number, body });
+              core.info('Created new showcase comment');
+            }
