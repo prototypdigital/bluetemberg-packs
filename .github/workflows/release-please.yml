@@ -13,9 +13,12 @@ name: Release Please
 # would re-publish all 41 packs every release and 403 on the already-published
 # ones. Per-path publish is the only correct shape for an incremental monorepo.
 #
-# npm auth: OIDC trusted publishing (no token). The repo owner must register a
-# trusted publisher for each pack on npmjs.com pointing at this repo and this
-# workflow file (release-please.yml). See docs/wiki/Releasing.md.
+# npm auth: a granular access token stored as the NPM_TOKEN secret (read+write,
+# all packages) authenticates publishing. A token — unlike OIDC trusted
+# publishing — can create brand-new package names, so a new pack publishes on
+# its first release with zero per-pack setup. Every publish is still signed with
+# provenance via OIDC (id-token: write). npm caps granular tokens at 90 days —
+# rotate NPM_TOKEN before it expires. See docs/wiki/Releasing.md.
 
 on:
   push:
@@ -51,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # OIDC trusted publishing to npm
+      id-token: write # mint the OIDC token that signs npm provenance
     strategy:
       fail-fast: false
       matrix:
@@ -69,10 +72,10 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
 
-      # OIDC trusted publishing requires npm >= 11.5.1; the bundled npm may be
-      # older. Removing this silently breaks token-less publishing.
-      - name: Upgrade npm for trusted publishing
-        run: npm install -g npm@latest
+      # Provenance generation needs a current npm; the bundled one may be older.
+      # Pin the major so a future npm release can't silently break publishing.
+      - name: Upgrade npm
+        run: npm install -g npm@11
 
       - name: Install dependencies
         run: npm ci
@@ -80,4 +83,5 @@ jobs:
       - name: Publish package
         env:
           PKG_PATH: ${{ matrix.path }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npm publish -w "$PKG_PATH" --provenance --access public
