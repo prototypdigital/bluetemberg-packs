@@ -1,0 +1,33 @@
+reviews:
+  path_instructions:
+    - path: "packages/**/llm/rules/**/*.md"
+      instructions: |
+        LLM Rule Quality — applies only to rule files (llm/rules/**):
+        1. Frontmatter must have a non-empty `description:` field (one-line summary of what the rule enforces).
+        2. Frontmatter must have a `scope:` field with a glob pattern (e.g. `"**"`, `"**/*.ts"`).
+        3. Rule body should be imperative and actionable — avoid long prose explanations.
+        4. No `profiles:`, `name:`, `tools:`, `trigger:`, or `hook_type:` fields (those belong to other file types).
+
+    - path: "packages/**/llm/skills/**/*.md"
+      instructions: |
+        LLM Skill Quality — applies only to skill files (llm/skills/**):
+        1. Frontmatter must have `name:` (kebab-case), `description:` (one-line trigger description), and `profiles:` (array).
+        2. Must have a `## Triggers` section listing conditions that invoke the skill.
+        3. Must have a `## Protocol` section with numbered steps.
+        4. Must have a `## When NOT to use` section.
+        5. Must end with a `## Completion checklist`.
+        6. No `scope:` or `tools:` fields (those belong to rules and agents respectively).
+
+    - path: "packages/**/llm/agents/**/*.md"
+      instructions: |
+        LLM Agent Quality — applies only to agent files (llm/agents/**):
+        1. Frontmatter must have `name:` (kebab-case), `description:` (one-line purpose), and `tools:` (array of allowed tool names).
+        2. System prompt should describe role, not tasks. Instructions should be general, not session-specific.
+        3. No `scope:`, `profiles:`, `trigger:`, or `hook_type:` fields.
+
+    - path: "packages/**/llm/guardrails/**/*.md"
+      instructions: |
+        LLM Guardrail Quality — applies only to guardrail files (llm/guardrails/**):
+        1. Frontmatter must have `description:`, `trigger:` (tool name), `hook_type:` (PreToolUse/PostToolUse), and `profiles:`.
+        2. Must have a `message:` field with a clear, actionable error message for the user.
+        3. No `scope:`, `name:`, or `tools:` fields.
