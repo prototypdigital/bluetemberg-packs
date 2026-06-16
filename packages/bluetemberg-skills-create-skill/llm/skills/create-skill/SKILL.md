@@ -19,8 +19,8 @@ Use this skill when asked to add, create, or write a new skill for the project.
 1. The agent MUST check `llm/skills/` for an existing skill with the same name or purpose before creating anything. If one exists, report it and stop.
 
 2. The agent MUST gather the following before writing any file — if any is unclear from the request, ask:
-   - **name**: kebab-case identifier matching the workflow (e.g. `api-design`, `migration-safety`)
-   - **description**: one tight sentence — dash-separated clauses, imperative voice (mirror existing examples: *"Structured code review — intent-first, diff-focused…"*)
+   - **name**: kebab-case identifier matching the workflow (e.g. `api-design`, `migration-safety`); ≤64 chars, no reserved words (`anthropic`/`claude`)
+   - **description**: the routing signal — `"<What it does>. Use when <trigger contexts>."` in **third person** (never "I…"/"You…"), packed with the keywords a user would actually type (verbs, domain nouns, file extensions). ≤1024 chars. Only `name`+`description` are pre-loaded for auto-invocation, so trigger keywords MUST live here, not only in the body `## Triggers` section. See [Authoring Standards](https://github.com/prototypdigital/bluetemberg-packs/wiki/Authoring-Standards#description--triggering-cross-cutting).
    - **profiles**: which team profiles apply (`frontend`, `backend`, `fullstack`, `devops`, `pure-infra`, `custom`); omit the field entirely if the skill is universal
 
 3. The agent MUST create the file at exactly `llm/skills/{name}/SKILL.md` — never any other path or filename.
@@ -31,16 +31,16 @@ Use this skill when asked to add, create, or write a new skill for the project.
 
    **`## Triggers`** — concrete invocation conditions (phrases, verbs, or measurable thresholds), not vague category names; at least two.
 
-   **`## Protocol`** — the ordered steps the model actually follows, written as numbered `### Step N — …`. This replaces a flat MUST/SHOULD list. It MUST contain:
-   - at least one **decision tree** wherever a branch matters (input → which path), with no dead ends;
-   - at least one **BAD/GOOD example** with concrete code, commands, or output — the wrong form next to the corrected one. (A pure ordered diagnostic like `config-echo` MAY substitute exact commands/templates for a BAD/GOOD pair, but it must still be concrete, not abstract.)
-   - RFC 2119 keywords (MUST/SHOULD/MAY) used inside a step only where authority genuinely varies.
+   **`## Protocol`** — the ordered steps the model actually follows, written as numbered `### Step N — …`. This replaces a flat MUST/SHOULD list. **Calibrate the structure to the task's degrees of freedom:**
+   - **Fragile / deterministic** work (migrations, deploys, destructive ops) → exact steps or commands, a **decision tree** wherever a branch matters (input → which path, no dead ends), and a **BAD/GOOD example** with concrete code or output.
+   - **Open-ended judgment** work (a critique, a design review) → higher-freedom prose. Don't force a contrived decision tree or BAD/GOOD pair where it adds no value; a pure ordered diagnostic like `config-echo` may use exact commands instead.
+   - Use RFC 2119 keywords (MUST/SHOULD/MAY) inside a step only where authority genuinely varies.
 
    **`## Completion checklist`** — tick-off criteria the model can verify (`- [ ] …`), not vague quality statements.
 
    **`## When NOT to use`** — at least one concrete exclusion that exits the skill, to prevent over-firing.
 
-   Aim for ~60–120 lines of actionable content. If the draft restates generic best practice with no protocol, decision tree, or worked example, it is too thin — deepen it, because it adds nothing over the base model's defaults.
+   Be concise: keep `SKILL.md` focused (official ceiling ~500 lines) and push depth into bundled `reference.md` / `examples.md` / `scripts/` linked one level deep rather than inflating one file — ~60–120 lines of dense prose is typical. Too thin (restates generic best practice with no protocol or worked example) and too verbose (over-explains what the model already knows) both fail. For side-effecting skills (deploy/migrate/destructive), set `disable-model-invocation` so they require explicit invocation. Full bar: [Authoring Standards](https://github.com/prototypdigital/bluetemberg-packs/wiki/Authoring-Standards#skills--on-demand-model-invoked-workflows).
 
 5. The agent MUST run `npm run sync:llm-config` after writing the file. This propagates the skill to all platform directories (`.claude/skills/`, `.cursor/skills/`, `.github/skills/`). Do not report the skill as created until sync succeeds.
 

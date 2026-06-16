@@ -10,6 +10,7 @@ This wiki is the contributor- and maintainer-facing documentation. For a quickst
 - [Usage](Usage) — installing packs, overriding rules, troubleshooting
 - [Contributing](Contributing) — add or edit a rule, add a new pack
 - [Releasing](Releasing) — versioning and the npm publish flow
+- [Authoring Standards](Authoring-Standards) — the research-backed quality bar for rules, agents, skills, and guardrails
 - [Research & Sources](Research) — primary sources behind the evidence-backed packs
 
 ## How this relates to Bluetemberg

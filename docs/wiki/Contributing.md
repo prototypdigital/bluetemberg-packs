@@ -51,7 +51,7 @@ Skills and agents are authored with the meta-skills — `create-skill`, `create-
 
 Skills follow the **deep-skill standard**: a step-by-step `## Protocol` (numbered `### Step N`), at least one **decision tree** where a branch matters, at least one **BAD/GOOD** example with concrete code or output, a `## Completion checklist`, and a `## When NOT to use`. Aim for ~60–120 lines of actionable content, and benchmark against `figma-to-code` and `config-echo`. A skill that only restates what a base model already knows (a generic MUST/SHOULD list) is too thin — deepen it or it adds nothing.
 
-Claims that go beyond convention should be traceable to a primary source — see [Research & Sources](Research).
+Every kind has a research-backed quality bar in [Authoring Standards](Authoring-Standards) (rules, agents, skills, guardrails, and the description/triggering rules). Claims that go beyond convention should be traceable to a primary source — see [Research & Sources](Research).
 
 After adding or editing any pack content, run `npm run generate:catalog` then `npm run validate`: the validator now fails if `catalog.json` or the wiki catalog has drifted from the pack frontmatter.
 
