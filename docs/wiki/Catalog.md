@@ -267,7 +267,7 @@ API design skill for Bluetemberg — RESTful conventions, pagination, versioning
 
 | Skill | Description |
 | ----- | ----------- |
-| `api-design` | Design RESTful HTTP API endpoints with a step-by-step naming, pagination, versioning, and error-contract protocol. |
+| `api-design` | Designs and reviews RESTful HTTP API endpoints — resource naming, pagination, error contracts, versioning. Use when creating an endpoint, reviewing an API contract, or vetting a breaking change. |
 
 ### bluetemberg-skills-ci-cd-best-practices
 
@@ -275,7 +275,7 @@ CI/CD best practices skill for Bluetemberg — pipeline optimization and caching
 
 | Skill | Description |
 | ----- | ----------- |
-| `ci-cd-best-practices` | Audit CI/CD pipeline configuration with a step-by-step checklist for caching, version pinning, job ordering, parallelism, and deploy gates. |
+| `ci-cd-best-practices` | Audits CI/CD pipeline config (GitHub Actions, GitLab CI) for SHA pinning, dep caching, deploy gates, parallelism, OIDC. Use when adding or editing workflow files or fixing slow/flaky pipelines. |
 
 ### bluetemberg-skills-code-review
 
@@ -283,7 +283,7 @@ Code review skill for Bluetemberg — structured review checklist for PRs.
 
 | Skill | Description |
 | ----- | ----------- |
-| `code-review` | Structured code review — intent-first, diff-focused, severity-tiered findings with actionable fix suggestions. |
+| `code-review` | Reviews a pull request or code diff before merge — establishes intent, reviews changed lines, reports severity-tiered findings with fixes. Use for PR review or pre-PR self-review. |
 
 ### bluetemberg-skills-config-echo
 
@@ -291,7 +291,7 @@ Config echo skill for Bluetemberg — verifies that synced configuration was act
 
 | Skill | Description |
 | ----- | ----------- |
-| `config-echo` | Verify that bluetemberg configuration was actually loaded by the LLM — recall rules, agents, and skills from session context and cross-reference against disk. |
+| `config-echo` | Verifies bluetemberg config (rules, agents, skills) is loaded in the session by recalling from context and cross-referencing disk. Use after `bluetemberg sync` or when a rule seems ignored. |
 
 ### bluetemberg-skills-create-agent
 
@@ -331,7 +331,7 @@ Design critique skill for Bluetemberg — multi-lens review, hostile QA, and an 
 
 | Skill | Description |
 | ----- | ----------- |
-| `design-critique` | Critique built UI across multiple lenses, run hostile QA, and return an impact-ranked fix list — specific issues with locations, not praise. |
+| `design-critique` | Critiques built UI across accessibility, hierarchy, copy, consistency, and device lenses, runs hostile QA, and returns an impact-ranked fix list. Use before shipping a view or when it feels off. |
 
 ### bluetemberg-skills-docs-upkeep
 
@@ -339,7 +339,7 @@ Docs upkeep skill for Bluetemberg — keep docs aligned with implementation chan
 
 | Skill | Description |
 | ----- | ----------- |
-| `docs-upkeep` | Keep canonical documentation aligned with implementation and workflow changes in the same task. |
+| `docs-upkeep` | Updates affected docs in the same task as code or workflow changes — README, API docs, CLI --help, config, wiki. Use when renaming endpoints, adding flags/config, or fixing stale references. |
 
 ### bluetemberg-skills-figma-to-code
 
@@ -347,7 +347,7 @@ Figma-to-code skill for Bluetemberg — the section-by-section design-to-code lo
 
 | Skill | Description |
 | ----- | ----------- |
-| `figma-to-code` | Translate a Figma comp or screenshot into working UI, section-by-section, with prompt stacking, drift checks, and surgical refinement. |
+| `figma-to-code` | Translates a Figma comp, screenshot, or mockup into working UI/HTML/CSS code section-by-section. Use when building UI from a design reference or when generated UI drifts from the comp. |
 
 ### bluetemberg-skills-infrastructure-drift-check
 
@@ -355,7 +355,7 @@ Infrastructure drift check skill for Bluetemberg — verify IaC state matches de
 
 | Skill | Description |
 | ----- | ----------- |
-| `infrastructure-drift-check` | Verify that declared IaC state matches deployed state — with toolchain-specific detection steps, a BAD/GOOD output comparison, and a merge gate. |
+| `infrastructure-drift-check` | Detects infrastructure drift before merging IaC changes by diffing declared vs deployed state. Use when reviewing or merging Terraform .tf, Ansible, Kubernetes manifests, Helm, or Compose PRs. |
 
 ### bluetemberg-skills-migration-safety
 
@@ -363,7 +363,7 @@ Migration safety skill for Bluetemberg — database migration review and rollbac
 
 | Skill | Description |
 | ----- | ----------- |
-| `migration-safety` | Review database migrations against a zero-downtime rollout checklist — destructive ops, lock analysis, batching, and rollback path. |
+| `migration-safety` | Reviews or writes database schema migrations against a zero-downtime checklist — destructive ops, lock analysis, batching, rollback path. Use when creating or reviewing a migration pre-deploy. |
 
 ### bluetemberg-skills-patterns
 
@@ -371,7 +371,7 @@ Patterns skill for Bluetemberg — apply reusable architecture and coding patter
 
 | Skill | Description |
 | ----- | ----------- |
-| `patterns` | Before introducing any new structure, search the codebase for an existing pattern and align with it — taxonomy, decision tree, and checklist. |
+| `patterns` | Finds and reuses an existing codebase pattern instead of inventing new structure. Use when adding files or abstractions, reviewing folder structure, naming, or module boundaries, or refactoring. |
 
 ### bluetemberg-skills-react-patterns
 
@@ -379,7 +379,7 @@ React patterns skill for Bluetemberg — component composition, hook extraction,
 
 | Skill | Description |
 | ----- | ----------- |
-| `react-patterns` | Apply React composition, co-location, and hook extraction patterns — with decision trees and BAD/GOOD examples — before writing custom solutions. |
+| `react-patterns` | Apply React composition, co-location, hook extraction, and state-placement patterns when writing or reviewing components, hooks, or state. Fixes prop drilling and logic tangled in JSX. |
 
 ### bluetemberg-skills-rollback-plan
 
@@ -387,7 +387,7 @@ Rollback plan skill for Bluetemberg — require tested rollback steps for every 
 
 | Skill | Description |
 | ----- | ----------- |
-| `rollback-plan` | Require and validate a structured rollback plan for every production change — with a complexity decision tree, data-loss check, and PR template. |
+| `rollback-plan` | Require and validate a tested rollback plan before merging production deploy, Kubernetes/Terraform, schema-migration, or version-bump PRs. Adds a complexity tier tree, data-loss check, PR template. |
 
 ### bluetemberg-skills-security-audit
 
@@ -395,7 +395,7 @@ Security audit skill for Bluetemberg — dependency audit, secrets scan, OWASP p
 
 | Skill | Description |
 | ----- | ----------- |
-| `security-audit` | Triage security findings by severity with a concrete detection protocol for secrets, injection, auth, and dependency risks. |
+| `security-audit` | Triages code security findings by severity with detection steps for secrets, injection, auth, input, and dependency risks. Use when reviewing changes pre-deploy or touching auth, input, or uploads. |
 
 ### bluetemberg-skills-stack-change-review
 
@@ -403,7 +403,7 @@ Stack change review skill for Bluetemberg — high-blast-radius infrastructure c
 
 | Skill | Description |
 | ----- | ----------- |
-| `stack-change-review` | Review high-blast-radius infrastructure changes with a risk-tier decision tree, per-change-type protocol, and mandatory runbook checklist. |
+| `stack-change-review` | Reviews high-blast-radius infra diffs (docker-compose, Ansible group_vars, Terraform, k8s, .env) — port, volume, image, and env risks. Use when reviewing changes to deployed infrastructure. |
 
 ### bluetemberg-skills-sub-agent-design
 
@@ -411,7 +411,7 @@ Sub-agent design skill for Bluetemberg — plan, scope, and implement sub-agent 
 
 | Skill | Description |
 | ----- | ----------- |
-| `sub-agent-design` | Design a sub-agent system — scope responsibilities, define typed communication contracts, wire orchestration, and add integration tests. |
+| `sub-agent-design` | Design a multi-agent system — scope responsibilities, define typed input/output contracts, wire orchestration, add tests. Use when one agent is overloaded or work has parallelizable phases. |
 
 ### bluetemberg-skills-visual-direction
 
@@ -419,7 +419,7 @@ Visual direction skill for Bluetemberg — explore distinct directions, lock one
 
 | Skill | Description |
 | ----- | ----------- |
-| `visual-direction` | Set a distinctive visual direction before building — explore three options, lock one, and produce a banned-moves list and Design System Document. |
+| `visual-direction` | Locks a visual direction before a UI build by exploring 3 options, picking one, writing a banned-moves list + Design System Document. Use when UI keeps coming out generic or before a handoff. |
 
 ### bluetemberg-skills-workspace-hygiene
 
@@ -427,7 +427,7 @@ Workspace hygiene skill for Bluetemberg — clean workspace state during edits.
 
 | Skill | Description |
 | ----- | ----------- |
-| `workspace-hygiene` | On-demand workspace audit — review change scope, clean temp artifacts, verify commit focus. |
+| `workspace-hygiene` | Audits the workspace before a commit or PR — confirms diff scope, flags stray console.log/debugger/scratch files and secrets, checks atomic commits. Use after a refactor or before opening a PR. |
 
 ## Guardrails
 

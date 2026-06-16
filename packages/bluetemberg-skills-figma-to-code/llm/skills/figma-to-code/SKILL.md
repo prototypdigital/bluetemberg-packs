@@ -1,6 +1,6 @@
 ---
 name: figma-to-code
-description: Translate a Figma comp or screenshot into working UI, section-by-section, with prompt stacking, drift checks, and surgical refinement.
+description: Translates a Figma comp, screenshot, or mockup into working UI/HTML/CSS code section-by-section. Use when building UI from a design reference or when generated UI drifts from the comp.
 profiles:
   - design-engineer
 ---
@@ -53,6 +53,24 @@ Constraints:
 If something in the reference looks unusual, treat it as intentional — ask me, don't smooth it out.
 ```
 
+## Refinement contrast
+
+BAD — vague and unscoped; the model fills the gap with generic SaaS:
+
+```text
+Make the page look better and build out the rest of it.
+```
+
+GOOD — section-scoped, tokens re-pasted, exact change named:
+
+```text
+[Attach the hero screenshot — exported at 2×]
+
+Match the hero to the comp. Re-apply these tokens (exact values): [paste palette, type scale, spacing, radii].
+Heading is 96px / line-height 0.95 / letter-spacing −2%, left-aligned, full-bleed background.
+Do not touch other sections. Do not add improvements.
+```
+
 ## Drift catalog — check after every two sections
 
 - **Stock drift** — corners rounded that shouldn't be, colors reverted to safer ones, type gone default, shadows or gradients no one asked for, padding gone uniform. Ask: "Has anything drifted toward generic SaaS? Check rounded corners, default colors, normalized spacing, shadows or gradients I didn't ask for." Patch only the drift, with line numbers.
@@ -69,6 +87,13 @@ Climb, don't simplify:
 4. Give a token reference, not just a value.
 5. Re-export the comp at higher resolution.
 6. Annotate the comp directly (arrows, labels: "this gap = 64px") and re-export. The most underused move — try it before giving up.
+
+## Completion checklist
+
+- Every section built and anchored to its own reference image, one section per build.
+- Tokens re-pasted on the final refinement of each section, not just the first build.
+- Drift check run before calling the view done — rounded corners, default colors, normalized spacing.
+- No scope creep: nothing built or added beyond the section that was requested.
 
 ## When NOT to use
 

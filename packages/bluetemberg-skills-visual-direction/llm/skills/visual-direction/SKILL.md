@@ -1,6 +1,6 @@
 ---
 name: visual-direction
-description: Set a distinctive visual direction before building — explore three options, lock one, and produce a banned-moves list and Design System Document.
+description: Locks a visual direction before a UI build by exploring 3 options, picking one, writing a banned-moves list + Design System Document. Use when UI keeps coming out generic or before a handoff.
 profiles:
   - design-engineer
 ---
@@ -62,6 +62,14 @@ enough to generate each screen consistently without defaulting to generic
 SaaS aesthetics. Where anything is too vague to execute, ask me one question at a
 time before writing that section.
 ```
+
+## Completion checklist
+
+- At least 3 genuinely distinct directions were explored — different movements and personalities, not shades of one safe answer.
+- Each direction carries all six attributes: 2-word name, movements it draws on, 5 style descriptors, palette in words, 3 named references, 3 things it would NOT do.
+- One direction is locked and stays locked — drift is corrected against it, never re-litigated.
+- The banned-moves list has 10–15 items and every item is concrete: each passes the specificity test ("no rounded-square icons in pastel boxes," not "no generic icons").
+- A single Design System Document consolidates the locked direction, tokens, banned moves, and per-screen real content — and the build references it.
 
 ## When NOT to use
 

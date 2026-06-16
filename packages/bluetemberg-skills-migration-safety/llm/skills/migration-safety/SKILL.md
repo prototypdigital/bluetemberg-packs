@@ -1,6 +1,6 @@
 ---
 name: migration-safety
-description: Review database migrations against a zero-downtime rollout checklist — destructive ops, lock analysis, batching, and rollback path.
+description: Reviews or writes database schema migrations against a zero-downtime checklist — destructive ops, lock analysis, batching, rollback path. Use when creating or reviewing a migration pre-deploy.
 ---
 
 # migration-safety

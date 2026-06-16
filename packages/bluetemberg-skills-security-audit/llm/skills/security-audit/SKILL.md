@@ -1,6 +1,6 @@
 ---
 name: security-audit
-description: Triage security findings by severity with a concrete detection protocol for secrets, injection, auth, and dependency risks.
+description: Triages code security findings by severity with detection steps for secrets, injection, auth, input, and dependency risks. Use when reviewing changes pre-deploy or touching auth, input, or uploads.
 ---
 
 # security-audit

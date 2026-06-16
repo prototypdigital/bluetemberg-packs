@@ -1,6 +1,6 @@
 ---
 name: config-echo
-description: Verify that bluetemberg configuration was actually loaded by the LLM — recall rules, agents, and skills from session context and cross-reference against disk.
+description: Verifies bluetemberg config (rules, agents, skills) is loaded in the session by recalling from context and cross-referencing disk. Use after `bluetemberg sync` or when a rule seems ignored.
 ---
 
 # config-echo
@@ -66,6 +66,15 @@ If all counts match across all categories, the LLM MUST report: `Configuration f
 - Whether the LLM is correctly *applying* a rule — only whether it was loaded
 - Correctness of rule content or frontmatter
 - Drift between source (`llm/`) and synced outputs — run `bluetemberg sync --check` for that
+
+## Completion checklist
+
+- [ ] Recalled config from session context BEFORE reading any file (step 1)
+- [ ] Listed the rules, agents, and skills actually present in context (step 1)
+- [ ] Cross-referenced the recalled items against disk (steps 2-3)
+- [ ] Flagged on-disk-not-recalled items (added by a later sync; fresh session loads them)
+- [ ] Flagged recalled-not-on-disk items (deleted or pruned; fresh session drops them)
+- [ ] Reported the per-category totals and the pass/fail status string (step 4)
 
 ## When NOT to use
 

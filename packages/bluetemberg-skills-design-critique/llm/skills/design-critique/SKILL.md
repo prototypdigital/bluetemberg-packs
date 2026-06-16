@@ -1,6 +1,6 @@
 ---
 name: design-critique
-description: Critique built UI across multiple lenses, run hostile QA, and return an impact-ranked fix list — specific issues with locations, not praise.
+description: Critiques built UI across accessibility, hierarchy, copy, consistency, and device lenses, runs hostile QA, and returns an impact-ranked fix list. Use before shipping a view or when it feels off.
 profiles:
   - design-engineer
 ---
@@ -35,6 +35,14 @@ Run each in turn, giving the worst few issues per lens with locations:
 5. **Stock-UI drift** — does it feel generic? Compare against the comp / visual direction.
 6. **Device fit** — does it hold on the device the real user actually has, not just a laptop?
 
+Every finding names a location, a measured value, and a fix. Vague is useless:
+
+```text
+BAD:  Contrast looks a bit low on the buttons.
+GOOD: .btn-primary text #8a8a8a on #f0f0f0 = 2.1:1, fails WCAG AA
+      (needs 4.5:1) — darken to #595959.
+```
+
 ## Hostile QA
 
 ```text
@@ -47,6 +55,14 @@ each, name what visibly happens right now (the unhandled case).
 ## Impact-ranked fix list
 
 Close with: of everything raised across the lenses and the break list, the three fixes with the largest visible impact — not the easiest. For each: the issue, the fix, and a rough time estimate. The hard fixes are usually the ones that matter.
+
+## Completion checklist
+
+- Every finding has a location (selector or line number).
+- All six lenses covered.
+- Hostile-QA pass done.
+- Fixes are impact-ranked, not easiest-first.
+- No praise-only output.
 
 ## When NOT to use
 

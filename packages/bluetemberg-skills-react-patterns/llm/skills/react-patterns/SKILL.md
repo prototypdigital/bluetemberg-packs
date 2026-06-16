@@ -1,6 +1,6 @@
 ---
 name: react-patterns
-description: Apply React composition, co-location, and hook extraction patterns — with decision trees and BAD/GOOD examples — before writing custom solutions.
+description: Apply React composition, co-location, hook extraction, and state-placement patterns when writing or reviewing components, hooks, or state. Fixes prop drilling and logic tangled in JSX.
 profiles:
   - frontend
   - fullstack

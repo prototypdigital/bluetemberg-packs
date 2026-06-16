@@ -1,6 +1,6 @@
 ---
 name: rollback-plan
-description: Require and validate a structured rollback plan for every production change — with a complexity decision tree, data-loss check, and PR template.
+description: Require and validate a tested rollback plan before merging production deploy, Kubernetes/Terraform, schema-migration, or version-bump PRs. Adds a complexity tier tree, data-loss check, PR template.
 ---
 
 # rollback-plan

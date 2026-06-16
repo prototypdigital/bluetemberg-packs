@@ -1,6 +1,6 @@
 ---
 name: sub-agent-design
-description: Design a sub-agent system — scope responsibilities, define typed communication contracts, wire orchestration, and add integration tests.
+description: Design a multi-agent system — scope responsibilities, define typed input/output contracts, wire orchestration, add tests. Use when one agent is overloaded or work has parallelizable phases.
 ---
 
 # sub-agent-design
