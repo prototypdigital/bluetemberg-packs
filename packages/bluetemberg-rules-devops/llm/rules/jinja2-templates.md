@@ -10,7 +10,7 @@ profiles:
 
 # Jinja2 templates
 
-Write Jinja2 templates that are safe, maintainable, and free of undefined variable errors.
+An undefined variable aborts the whole play mid-run, and a plaintext secret in a template leaks into rendered files and logs. Guarding optionals with `| default()` and keeping logic out of templates makes failures predictable and reviewable.
 
 ## Variable safety
 

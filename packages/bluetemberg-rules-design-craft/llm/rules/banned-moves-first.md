@@ -17,10 +17,18 @@ Telling the model what *not* to do is the fastest way out of stock output. The m
 ## Examples
 
 ```text
-Banned moves (example):
+// BAD — vague ban; the model can satisfy it and still ship stock UI
+"Don't make it look generic."
+
+// GOOD — concrete banned-moves list, restated in the build prompt
+Banned moves (restate every build):
 - No rounded corners on cards; no drop shadows.
 - No blue as the primary accent.
 - No full-width hero with centered headline + subhead + two buttons.
 - No pill-shaped filled filters.
 - Copy: no "Oops!", no "seamless", no exclamation marks.
 ```
+
+## Why it matters
+
+A vague ban ("nothing generic") is unverifiable and the model routes around it. A concrete list is checkable on review — drop it and the easy defaults creep back in build by build.

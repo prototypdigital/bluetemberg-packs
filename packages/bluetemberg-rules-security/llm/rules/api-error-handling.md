@@ -8,7 +8,7 @@ scope:
 
 # API error handling
 
-All API endpoints must return structured, consistent error responses. Never expose stack traces, internal paths, or database details to clients.
+Leaked stack traces, SQL, or file paths hand attackers a map of your schema, ORM, and directory layout — turning a 500 into reconnaissance for the next exploit. All API endpoints must return structured, consistent error responses and never expose internal details to clients.
 
 ## Response format
 

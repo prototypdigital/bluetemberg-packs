@@ -5,7 +5,7 @@ scope: "**"
 
 # Coding standards
 
-Keep functions and components small, readable, and easy to reason about.
+**Why:** Deeply nested, multi-purpose functions hide bugs and make changes risky; small flat units are testable and reviewable in isolation.
 
 ## Function complexity
 

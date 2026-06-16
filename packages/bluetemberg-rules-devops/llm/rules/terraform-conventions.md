@@ -7,7 +7,7 @@ scope:
 
 # Terraform conventions
 
-Keep infrastructure-as-code consistent, readable, and modular.
+Local state in a shared environment causes conflicting applies that corrupt or destroy live infrastructure, and unpinned providers make `plan` non-reproducible across machines. Run `terraform validate` and `terraform fmt -check` in CI to keep structure and naming consistent.
 
 ## Structure
 

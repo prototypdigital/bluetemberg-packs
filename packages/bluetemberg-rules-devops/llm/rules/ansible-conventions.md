@@ -8,7 +8,7 @@ scope:
 
 # Ansible conventions
 
-Write Ansible roles and playbooks that are idempotent, readable, and maintainable.
+Non-idempotent or unnamed tasks make playbook runs unpredictable: re-runs report false changes, failures are hard to trace, and hardcoded secrets leak into logs and version control. Enforce idempotency in CI with `ansible-lint --profile production`.
 
 ## Modules and naming
 

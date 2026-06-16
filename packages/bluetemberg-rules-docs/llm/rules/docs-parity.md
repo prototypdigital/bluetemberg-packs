@@ -7,6 +7,8 @@ scope: "**"
 
 A PR that changes behavior without updating docs is not done.
 
+**Why:** Docs that lag behind behavior mislead users into using flags, defaults, or APIs that no longer work, and the drift compounds with every unsynced change. Best enforced by a CI check that fails when source under a watched path changes without a matching docs diff; this rule explains why that gate exists.
+
 ## What counts as user-facing
 
 - New or removed CLI flags, commands, or options

@@ -5,7 +5,9 @@ scope: "**"
 
 # Git move
 
-If moving an existing file that is not `git ignored`, use `git mv {source} {dest}`, as this preserves the git history for the file and shows any new diff.
+**Why:** A plain `mv` makes git record a delete + add, so `git log --follow`, `git blame`, and review diffs lose the file's history and show the move as a full rewrite.
+
+When moving or renaming a tracked file (one not covered by `.gitignore`), use `git mv {source} {dest}` instead of `mv`. Git then records a rename and preserves history; any content change shows as a normal diff on top of the rename.
 
 ## Examples
 

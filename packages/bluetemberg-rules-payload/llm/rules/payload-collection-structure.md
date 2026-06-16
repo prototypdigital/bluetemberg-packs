@@ -7,7 +7,9 @@ stacks:
 
 # Payload collection structure
 
-Every public-facing collection (rendered on the front end) should share the same skeleton so editors and code see a predictable shape. Targets Payload 3 (Next-native, Lexical, Drizzle/Postgres).
+Give every public-facing collection (rendered on the front end) the same skeleton. Targets Payload 3 (Next-native, Lexical, Drizzle/Postgres).
+
+Why: divergent shapes force editors and consuming code to special-case each collection, and a missing piece (versions, tracking fields, revalidation) ships as a latent data-loss or stale-content bug.
 
 ## Rules
 

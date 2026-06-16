@@ -97,3 +97,4 @@ function PageLayout({ children }) {
 - `tabIndex={-1}` makes an element programmatically focusable but does not add it to the natural Tab sequence. Use it for elements that receive focus only via script (dialog containers, route headings).
 - Focus trapping inside dialogs should use a library (`focus-trap-react`, Radix, Headless UI) rather than manual `Tab` interception — edge cases (Shadow DOM, portals, dynamic children) are numerous.
 - `autoFocus` on input fields inside dialogs works for the first render but is unreliable for conditionally rendered dialogs; prefer the `useEffect` pattern above.
+- The "no `outline: none` without a replacement" invariant is best caught early in CI — flag bare `outline: none`/`outline: 0` with a stylelint rule (e.g. a `declaration-property-value-disallowed-list` entry) so the replacement style is a conscious choice, not an omission.

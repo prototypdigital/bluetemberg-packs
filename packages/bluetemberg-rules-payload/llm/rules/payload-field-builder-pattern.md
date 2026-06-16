@@ -9,6 +9,8 @@ stacks:
 
 Reusable fields (links, media frames, pricing, SEO groups) live behind **builder functions**, not duplicated inline. This keeps a field's shape defined once and adjustable at each call site.
 
+Why: copy-pasted field definitions drift apart — a fix or `dbName` change lands in one copy and not the others, producing inconsistent schemas and migrations.
+
 ## Rules
 
 - A shared field is exported as a **function** (`link()`, `productFrame()`, `titleFrame()`) that returns a `Field` (or `Field[]`), not a bare object.

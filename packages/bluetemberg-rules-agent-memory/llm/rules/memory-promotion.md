@@ -15,6 +15,8 @@ The dangerous failure mode is not bad retrieval. It is letting a raw session obs
 - Consolidation is the only path that writes durable memory. There is no side door that appends straight to the durable tier.
 - Run consolidation on an explicit trigger (idle, session end, or a record-count threshold), not inline on every observation. Inline promotion is how transient staging noise becomes permanent.
 
+"Consolidation is the only path to durable memory" is a non-negotiable invariant: enforce it with a write-path gate (a guarded store API or CI check that rejects direct durable writes), not prose alone — this rule explains why the gate exists.
+
 ## Promotion pipeline
 
 ```text

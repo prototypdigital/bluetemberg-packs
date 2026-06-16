@@ -9,6 +9,8 @@ stacks:
 
 Access control must read as a declarative composition of named, reusable checkers — not ad-hoc `req.user` inspection scattered across collections.
 
+Why: inline role checks duplicate the same predicate across files, so they drift — one collection gets patched and another silently keeps the old, wrong rule, which is an authorization bug.
+
 ## Rules
 
 - Define one **named `AccessFn` per role/condition** (`superAdminAccess`, `marketEditorAccess`, `authenticated`, `anyone`) in a shared access module. Each wraps a small role predicate; export them for reuse.

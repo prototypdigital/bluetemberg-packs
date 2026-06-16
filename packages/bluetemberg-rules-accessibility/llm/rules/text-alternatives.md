@@ -66,6 +66,7 @@ WCAG 2.2 SC 1.1.1 (Non-text Content, Level A) requires a text alternative for ev
 
 ## Gotchas
 
+- The "every `<img>` needs `alt`" invariant is non-negotiable; enforce it in CI with the `jsx-a11y/alt-text` lint rule rather than relying on review alone.
 - Alt text should not start with "Image of" or "Photo of" — screen readers already announce the element type.
 - An alt identical to a caption or adjacent heading is redundant. If the image adds nothing beyond what surrounding text already says, use `alt=""`.
 - CSS background images convey no information to screen readers at all. Never use a background image to display content that needs a text alternative; use `<img>` instead.

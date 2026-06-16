@@ -5,6 +5,8 @@ scope: "**"
 
 # Early returns
 
+**Why:** Deeply nested `if`/`else` chains make the happy path hard to find and edge cases easy to miss; guard clauses keep the main logic at the top indentation level.
+
 Use early returns and guard clauses to keep control flow flat and readable.
 
 ## Patterns

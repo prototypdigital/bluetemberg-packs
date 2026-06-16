@@ -5,7 +5,9 @@ scope: "**"
 
 # Mermaid diagrams
 
-Prefer Mermaid over ASCII art for all diagrams in documentation.
+Write all documentation diagrams as Mermaid; do not use ASCII art.
+
+**Why:** ASCII art breaks on reflow, is not diffable line-by-line, and does not render as a graphic in GitHub — so diagrams rot silently and reviewers cannot tell what changed.
 
 ## When to use
 

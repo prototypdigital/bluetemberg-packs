@@ -10,7 +10,7 @@ scope:
 
 # Container image pinning
 
-Pin all container image versions to ensure reproducible, predictable deployments.
+Floating tags like `:latest` mean a redeploy can silently pull a different image than the one you tested, breaking production with no code change and no audit trail. Pinning is a non-negotiable invariant — back this rule with a CI grep/lint check (e.g. `grep -rn ':latest'` failing the build) so it cannot regress.
 
 ## Rules
 

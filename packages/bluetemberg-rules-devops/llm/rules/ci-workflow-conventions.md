@@ -9,7 +9,7 @@ scope:
 
 # CI workflow conventions
 
-Write CI/CD workflows that are secure, maintainable, and resistant to supply-chain attacks.
+Mutable action tags and broad permissions let a compromised upstream action or leaked token run arbitrary code with your repo's credentials. SHA pinning and minimal permissions are non-negotiable invariants — enforce them with a CI lint step (e.g. `zizmor` or a `pinned-actions` check) so prose alone is never the only guard.
 
 ## Action and tool pinning
 
