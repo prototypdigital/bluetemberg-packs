@@ -22,6 +22,7 @@
   "packages/bluetemberg-rules-devops": "0.2.0",
   "packages/bluetemberg-rules-docs": "0.2.0",
   "packages/bluetemberg-rules-git": "0.1.0",
+  "packages/bluetemberg-rules-i18n": "0.0.0",
   "packages/bluetemberg-rules-llm-api-product": "0.1.0",
   "packages/bluetemberg-rules-nextjs": "0.2.0",
   "packages/bluetemberg-rules-payload": "0.0.0",
