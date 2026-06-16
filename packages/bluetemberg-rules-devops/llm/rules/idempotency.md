@@ -41,3 +41,28 @@ Every infrastructure operation must be safe to re-run. Running the same task, sc
 
 - Use named volumes with explicit mounts; never rely on anonymous volume state.
 - Service names are stable; renaming a service breaks `docker compose down` on old containers.
+
+## Examples
+
+```yaml
+# BAD — Ansible: shell command that fails on second run; not idempotent
+- name: Create app directory
+  ansible.builtin.command: mkdir /opt/app
+
+# GOOD — Ansible: state-based module; safe to re-run
+- name: Ensure app directory exists
+  ansible.builtin.file:
+    path: /opt/app
+    state: directory
+    mode: "0755"
+```
+
+```sh
+# BAD — shell script: mkdir fails if directory already exists
+mkdir /tmp/workspace
+cp config.json /tmp/workspace/
+
+# GOOD — shell script: idempotent file operations
+mkdir -p /tmp/workspace
+cp -f config.json /tmp/workspace/
+```

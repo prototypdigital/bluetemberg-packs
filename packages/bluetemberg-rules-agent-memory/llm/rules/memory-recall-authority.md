@@ -25,3 +25,18 @@ Relevance tells you a memory is on-topic. Authority tells you whether it is allo
 ```
 
 This is the recall-side companion to memory-promotion: promotion decides what enters durable memory, authority decides what durable memory is allowed to drive.
+
+## Examples
+
+```text
+// BAD — acting on a superseded memory because similarity score is high
+recalled: { fact: "deploy target is staging", authority: superseded, score: 0.97 }
+-> used as binding instruction  // wrong: superseded memory should not guide behavior
+
+// GOOD — filter by authority before acting
+recalled: { fact: "deploy target is staging", authority: superseded, score: 0.97 }
+-> excluded from active context; surfaced only if user asks "what did we once believe?"
+
+recalled: { fact: "deploy target is production", authority: ratified-user-constraint, score: 0.85 }
+-> used to guide behavior despite lower score
+```

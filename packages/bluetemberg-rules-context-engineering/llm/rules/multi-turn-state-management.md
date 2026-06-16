@@ -26,3 +26,19 @@ Decision: skipping format pass — `.prettierignore` excludes `*.generated.ts`
 ```
 
 These become searchable context if the task is resumed or reviewed.
+
+## Examples
+
+```text
+// BAD — implicit state; no record of what was decided or why
+[tool: read src/api/users.ts]
+[tool: read src/api/orders.ts]
+[tool: edit src/api/orders.ts]
+→ No record of why orders.ts was targeted, what was found, or what changed
+
+// GOOD — explicit state log after each significant step
+Step 1 ✓ — read users.ts: auth uses JWT, no session store
+Step 2 ✓ — read orders.ts: missing ownership check on GET /orders/:id
+Decision: targeting orders.ts only (users.ts has no vulnerability)
+Step 3 ✓ — added ownership check at line 42
+```

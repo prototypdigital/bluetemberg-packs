@@ -39,6 +39,20 @@ Every runbook must document:
 - ADRs are immutable once accepted; if a decision is reversed, open a new ADR that supersedes the old one.
 - Link from the relevant infra config (e.g., a comment in `docker-compose.yml`) to the ADR that explains why.
 
+## Examples
+
+```text
+// BAD — infrastructure commit with no runbook update
+commit: "feat: change postgres port from 5432 to 5433"
+→ runbooks/postgres.md still says port 5432
+→ on-call engineer follows stale runbook during incident
+
+// GOOD — runbook updated in the same commit as the infra change
+commit: "feat: change postgres port from 5432 to 5433"
+  docker-compose.yml  ← port updated
+  runbooks/postgres.md ← "Connect: psql -p 5433" updated to match
+```
+
 ## Anti-patterns
 
 - Do not commit infrastructure changes with "TODO: update runbook later."

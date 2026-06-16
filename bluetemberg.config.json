@@ -84,6 +84,24 @@
         "displayName": "Design Engineer",
         "description": "Anti-stock UI craft — design-to-code, visual direction, and design critique",
         "profiles": ["design-engineer"]
+      },
+      {
+        "name": "nextjs",
+        "displayName": "Next.js",
+        "description": "Rules and skills for Next.js App Router projects",
+        "stacks": ["nextjs"]
+      },
+      {
+        "name": "react",
+        "displayName": "React",
+        "description": "Skills for React component and hook patterns",
+        "stacks": ["react"]
+      },
+      {
+        "name": "payload",
+        "displayName": "Payload CMS",
+        "description": "Rules, skills, and agents for Payload CMS projects",
+        "stacks": ["payload"]
       }
     ]
   },

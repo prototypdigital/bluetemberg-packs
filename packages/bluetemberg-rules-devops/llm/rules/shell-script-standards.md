@@ -39,3 +39,27 @@ Write shell scripts that are safe, portable, and easy to debug.
 - Test on both `bash` and `sh` if portability is claimed.
 - For scripts managing infrastructure, test with `set -x` to trace execution.
 - Document required arguments and environment variables at the top of the script.
+
+## Examples
+
+```sh
+# BAD — no shebang, no safety flags, unquoted variable
+deploy() {
+  cp $config /etc/app/
+  service app restart
+}
+
+# GOOD — safety flags, quoted variables, meaningful exit code
+#!/bin/bash
+set -euo pipefail
+
+# Usage: deploy.sh <config-path>
+# Requires: APP_ENV (environment name)
+deploy() {
+  local config="$1"
+  cp -- "$config" /etc/app/
+  systemctl restart app || { echo "Failed to restart app"; exit 1; }
+}
+
+deploy "${1:?config path required}"
+```

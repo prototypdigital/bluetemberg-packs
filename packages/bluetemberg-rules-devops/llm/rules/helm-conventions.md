@@ -39,3 +39,32 @@ Write Helm charts that are safe, reusable, and production-ready by default.
 - Never use `helm upgrade --force`; it deletes and recreates the resource.
 - Set `atomic: true` and `cleanup-on-fail: true` for production installs.
 - Pin chart dependencies in `Chart.lock`; run `helm dependency update` after adding dependencies.
+
+## Examples
+
+```yaml
+# BAD — values.yaml: privileged default, secret in plain text, no required guard
+replicaCount: 1
+securityContext:
+  privileged: true
+database:
+  password: "supersecret"
+
+# GOOD — safe defaults, required guard for mandatory values, existingSecret pattern
+replicaCount: 1
+# securityContext.privileged must never be set to true
+securityContext:
+  runAsNonRoot: true
+  readOnlyRootFilesystem: true
+database:
+  # Supply via --set or an external secret; never commit a real value
+  existingSecret: ""
+  existingSecretKey: "password"
+```
+
+```yaml
+# templates/deployment.yaml — required guard for mandatory value
+image:
+  repository: {{ required "image.repository is required" .Values.image.repository }}
+  tag: {{ .Values.image.tag | quote }}
+```

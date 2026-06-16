@@ -19,6 +19,20 @@ LLMs routinely invent dependencies that do not exist. In a large study of genera
 - Ground suggestions in a **trusted package index** (RAG over a known-good allowlist/registry snapshot) rather than the model's parametric memory.
 - Ask the model to **self-verify** — when prompted to check, models flag their own hallucinated packages over **75%** of the time; self-refinement and retrieval substantially cut the rate.
 
+## Examples
+
+```sh
+# BAD — install a model-suggested package without verification
+npm install requests-oauth   # model suggested it; package does not exist on npm
+# a slopsquatted "requests-oauth" could install and run malicious code silently
+
+# GOOD — verify before installing
+# 1. Check the registry: https://www.npmjs.com/package/requests-oauth → "Not found"
+# 2. Model likely meant: npm install requests-oauthlib (Python) or passport-oauth (Node)
+# 3. Confirm name, owner, download count, and repo before adding to package.json
+npm install passport-oauth   # verified: 350k weekly downloads, maintained, correct repo
+```
+
 ## Source
 
 Spracklen et al., "We Have a Package for You! A Comprehensive Analysis of Package Hallucinations by Code Generating LLMs," *USENIX Security* 2025 — <https://arxiv.org/abs/2406.10279>. The ~5.2% / ~21.7% rates, the reproducibility that enables slopsquatting, and the >75% self-detection / mitigation results are from the paper.

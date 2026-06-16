@@ -30,3 +30,17 @@ Provenance?            see memory-provenance
 ```
 
 `never` is a deliberate choice that must be justified, not a default.
+
+## Examples
+
+```text
+// BAD — relying on the model to "remember" without naming a tier
+"The user prefers pnpm — the model will just remember that."
+
+// GOOD — explicit tier assignment with eviction policy
+What is it?      "user prefers pnpm"
+Must survive?    yes (cross-session preference)
+Tier?            external store (user profile record)
+Eviction?        supersede-on-change (user updates preference)
+Provenance?      user-stated, 2026-06-15
+```

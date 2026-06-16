@@ -41,3 +41,25 @@ Write Ansible roles and playbooks that are idempotent, readable, and maintainabl
 - Use `| to_json` or `| to_yaml` when embedding structured data.
 - Keep logic in tasks; templates render, not compute.
 - All referenced variables must be defined in `defaults/` or `group_vars/`.
+
+## Examples
+
+```yaml
+# BAD — short module name, no task name, hardcoded password, no changed_when
+- copy:
+    src: app.conf
+    dest: /etc/app/app.conf
+- command: echo "password123" | passwd root
+
+# GOOD — FQCN, descriptive name, vault secret, changed_when on command
+- name: Deploy application config
+  ansible.builtin.copy:
+    src: app.conf
+    dest: /etc/app/app.conf
+    mode: "0644"
+
+- name: Set root password from vault
+  ansible.builtin.shell: echo "{{ vault_root_password }}" | passwd root
+  changed_when: false
+  no_log: true
+```

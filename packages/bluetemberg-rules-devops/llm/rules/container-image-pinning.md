@@ -34,3 +34,29 @@ This rule applies everywhere images are referenced:
 - Before committing, verify the pinned version exists in the registry.
 - Use `docker pull image:tag` or check Docker Hub / Quay / ECR to confirm the digest exists.
 - If using digest pins, verify the image is signed and matches your expected content.
+
+## Examples
+
+```yaml
+# BAD — floating tags; breaks on upstream update
+services:
+  db:
+    image: postgres:latest
+  cache:
+    image: redis:main
+
+# GOOD — pinned to specific versions
+services:
+  db:
+    image: postgres:16.3-alpine
+  cache:
+    image: redis:7.2.5-alpine
+```
+
+```dockerfile
+# BAD
+FROM node:latest
+
+# GOOD
+FROM node:20.15.0-alpine3.20
+```

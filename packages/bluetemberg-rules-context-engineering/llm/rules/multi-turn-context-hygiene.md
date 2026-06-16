@@ -14,6 +14,24 @@ Models perform measurably worse when a task is spread across many conversational
 - Watch for early lock-in: if the model made an assumption before it had enough information, correcting it in-place is unreliable. Re-specify from a clean slate.
 - This pairs with [multi-turn-state-management](multi-turn-state-management.md) (track decisions) and [context-pollution-prevention](context-pollution-prevention.md) (drop stale turns) — together they keep a long interaction from accumulating contradictions the model silently carries forward.
 
+## Examples
+
+```text
+// BAD — trying to steer a derailed conversation turn by turn
+Turn 1: "Build a checkout flow."
+Turn 5: "No, I meant with Stripe, not PayPal."
+Turn 8: "Also it needs to handle subscriptions."
+Turn 12: "Wait, go back — the cart shouldn't use local state."
+→ Model keeps building on early wrong assumptions
+
+// GOOD — consolidate and start fresh once requirements are clear
+New conversation:
+"Build a Stripe checkout flow with subscription support.
+ Cart state must live in the server session, not local state.
+ Redirect to /success on completion."
+→ One fully-specified turn; no early lock-in to resolve
+```
+
 ## Source
 
 Laban et al., "LLMs Get Lost in Multi-Turn Conversation," 2025 — <https://arxiv.org/abs/2505.06120>. The ~39% average degradation and the "early assumption, fails to recover" unreliability mechanism are from the paper's six-task evaluation.

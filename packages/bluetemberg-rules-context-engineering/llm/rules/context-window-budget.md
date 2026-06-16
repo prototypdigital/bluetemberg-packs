@@ -24,7 +24,7 @@ Treat the context window as a **finite resource with diminishing marginal return
 
 Anthropic, "Effective context engineering for AI agents," 2025-09 — <https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents>: context "must be treated as a finite resource with diminishing marginal returns"; recall decreases as tokens grow; the just-in-time and compaction tactics are defined there. The recall-degradation effect is independently corroborated across 18 frontier models by Chroma's "Context Rot" study (see [context-pollution-prevention](context-pollution-prevention.md)).
 
-## Anti-patterns
+## Examples
 
 ```text
 // BAD — reads entire 800-line file to find one function
