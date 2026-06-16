@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-payload-cache-revalidation",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Payload + Next.js cache revalidation skill for Bluetemberg — a single source of truth for cache tags and the per-locale vs locale-agnostic decision.",
   "keywords": [
     "bluetemberg-pack",

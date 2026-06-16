@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-k6-load-testing",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "k6 load-testing skill for Bluetemberg — scenario taxonomy, shared config/requests libs, p95 threshold discipline, and __ENV-parametrized suites wired into CI.",
   "keywords": [
     "bluetemberg-pack",

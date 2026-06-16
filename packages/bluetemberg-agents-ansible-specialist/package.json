@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-ansible-specialist",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Ansible specialist agent for Bluetemberg — roles, playbooks, and Jinja2 templates.",
   "keywords": [
     "bluetemberg-pack",

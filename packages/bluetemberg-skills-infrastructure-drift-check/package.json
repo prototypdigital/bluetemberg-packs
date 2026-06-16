@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-infrastructure-drift-check",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Infrastructure drift check skill for Bluetemberg — verify IaC state matches deployed state.",
   "keywords": [
     "bluetemberg-pack",

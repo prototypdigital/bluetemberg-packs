@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-sub-agent-design",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Sub-agent design skill for Bluetemberg — plan, scope, and implement sub-agent architectures.",
   "keywords": [
     "bluetemberg-pack",

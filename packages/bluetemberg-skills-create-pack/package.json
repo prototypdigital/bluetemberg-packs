@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-create-pack",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Meta-skill for scaffolding a whole new bluetemberg pack — package.json metadata, llm/ layout, catalog registration, and validation.",
   "keywords": [
     "bluetemberg-pack",

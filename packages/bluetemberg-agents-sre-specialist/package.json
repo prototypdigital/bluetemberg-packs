@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-sre-specialist",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "SRE specialist agent for Bluetemberg — SLOs, alerting, runbooks, and post-mortems.",
   "keywords": [
     "bluetemberg-pack",

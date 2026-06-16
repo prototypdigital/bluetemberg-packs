@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-payload-specialist",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Payload CMS specialist agent for Bluetemberg — collections, globals, blocks, fields, hooks, access, Lexical, plugins, and the generated types contract.",
   "keywords": [
     "bluetemberg-pack",

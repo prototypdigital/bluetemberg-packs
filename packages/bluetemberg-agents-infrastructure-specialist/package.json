@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-infrastructure-specialist",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Infrastructure specialist agent for Bluetemberg — build, CI, container, deployment config.",
   "keywords": [
     "bluetemberg-pack",

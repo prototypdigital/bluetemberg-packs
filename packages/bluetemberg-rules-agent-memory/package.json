@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-agent-memory",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Agent memory rules for Bluetemberg — statelessness as a hard constraint, memory provenance, promotion through consolidation, and authority-ranked recall.",
   "keywords": [
     "bluetemberg-pack",

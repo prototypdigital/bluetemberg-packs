@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-a11y-specialist",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Accessibility specialist agent for Bluetemberg — WCAG 2.2 A/AA audit and remediation.",
   "keywords": [
     "bluetemberg-pack",

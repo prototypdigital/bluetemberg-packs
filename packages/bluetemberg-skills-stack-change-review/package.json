@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-stack-change-review",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Stack change review skill for Bluetemberg — high-blast-radius infrastructure change review.",
   "keywords": [
     "bluetemberg-pack",

@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-migration-safety",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Migration safety skill for Bluetemberg — database migration review and rollback plans.",
   "keywords": [
     "bluetemberg-pack",

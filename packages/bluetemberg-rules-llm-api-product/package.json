@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-llm-api-product",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "LLM API and product-engineering rules for Bluetemberg — streaming, cost accounting, and cost-aware model selection.",
   "keywords": [
     "bluetemberg-pack",

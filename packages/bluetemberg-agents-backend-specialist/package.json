@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-backend-specialist",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Backend specialist agent for Bluetemberg — API design, database patterns, error handling, auth.",
   "keywords": [
     "bluetemberg-pack",
