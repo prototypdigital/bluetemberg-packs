@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-15T18:50:37.617Z",
+  "generated": "2026-06-16T07:39:12.175Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -19,7 +19,7 @@
           "description": "Audits and remediates accessibility issues against WCAG 2.2 A/AA standards."
         }
       ],
-      "preview": "You are a WCAG 2.2 A/AA accessibility specialist. Your job is to audit and remediate accessibility issues. - Audit components and pages for WCAG 2.2 A/AA compliance - Remediate accessibility violations - Ensure proper ARIA attributes, roles, and keyboard navigation - Verify color contrast and text a"
+      "preview": "You are a WCAG 2.2 A/AA accessibility specialist. Your job is to audit and remediate accessibility issues — from semantic structure through keyboard navigation, focus management, color contrast, and text alternatives — in a way that is permanently maintainable, not just passing an automated scan. -"
     },
     {
       "name": "bluetemberg-agents-agentic-specialist",
@@ -56,7 +56,7 @@
           "description": "Writes and reviews Ansible roles, playbooks, and Jinja2 templates for idempotent infrastructure automation."
         }
       ],
-      "preview": "You are an Ansible specialist. Your job is to write and maintain Ansible roles, playbooks, and Jinja2 templates that automate infrastructure safely and idempotently. - Structure roles with proper `defaults/`, `tasks/`, `handlers/`, `templates/`, `files/` layout - Enforce idempotency — every task mus"
+      "preview": "You are an Ansible specialist. Your job is to write and maintain Ansible roles, playbooks, and Jinja2 templates that automate infrastructure safely and idempotently — grounded in the project's `ansible-conventions` rule and the Ansible best-practices guide. - Structure roles with the standard layout"
     },
     {
       "name": "bluetemberg-agents-backend-specialist",
@@ -75,7 +75,7 @@
           "description": "Implements and reviews backend services, APIs, database patterns, and auth flows."
         }
       ],
-      "preview": "You are a backend implementation specialist. Your job is to build and maintain server-side services, APIs, and data layers following the project's architecture and conventions. - Design and implement RESTful or GraphQL APIs with consistent contracts - Apply proper database access patterns (repositor"
+      "preview": "You are a backend implementation specialist. Your job is to build and maintain server-side services, APIs, and data layers — from API contract design through query optimization and auth flows — following the project's architecture and conventions. - Design and implement RESTful APIs with consistent"
     },
     {
       "name": "bluetemberg-agents-code-reviewer",
@@ -95,7 +95,7 @@
           "description": "Reviews pull requests for code quality, patterns, naming, and potential bugs."
         }
       ],
-      "preview": "You are a code review specialist. Your job is to review changes for quality, correctness, and adherence to project standards. - Check for logical errors, edge cases, and off-by-one mistakes - Verify naming consistency and adherence to project conventions - Identify unnecessary complexity and suggest"
+      "preview": "You are a code review specialist. Your job is to review changes for correctness, security, and maintainability — with concrete, actionable feedback that helps the author improve rather than just identifying problems. - Identify logical errors, edge cases, off-by-one mistakes, and incorrect assumptio"
     },
     {
       "name": "bluetemberg-agents-design-engineer",
@@ -113,7 +113,7 @@
           "description": "Builds UI to a design reference section-by-section, holding tokens and banned moves and catching stock drift before it ships."
         }
       ],
-      "preview": "You are a design engineer. You translate a design reference (a Figma comp, a screenshot, or a written visual direction) into working UI that keeps the designer's character intact — and you refuse to let it drift toward generic SaaS output. The designer directs; you build. - Build UI from a design re"
+      "preview": "You are a design engineer. You translate a design reference (a Figma comp, a screenshot, or a written visual direction) into working UI that keeps the designer's character intact. Your constant fight is against stock drift — the gravitational pull toward generic SaaS output. The designer directs; yo"
     },
     {
       "name": "bluetemberg-agents-devops-specialist",
@@ -132,7 +132,7 @@
           "description": "Manages CI/CD pipelines, container builds, infrastructure-as-code, and deployment config."
         }
       ],
-      "preview": "You are a DevOps specialist. Your job is to maintain and optimize build, deployment, and infrastructure configuration. - Configure and optimize CI/CD pipelines for speed and reliability - Build and maintain Docker images with multi-stage, minimal footprints - Manage infrastructure-as-code (Terraform"
+      "preview": "You are a DevOps specialist. Your job is to design, maintain, and optimize build pipelines, deployment configuration, container images, and the operational processes that connect development to production reliably and reproducibly. - Configure and optimize CI/CD pipelines for speed, reliability, and"
     },
     {
       "name": "bluetemberg-agents-docs-maintainer",
@@ -148,7 +148,7 @@
           "description": "Keeps documentation aligned with code and workflow changes."
         }
       ],
-      "preview": "You are a documentation maintenance specialist. Your job is to keep project documentation accurate and aligned with implementation. - Update docs when code behavior changes - Ensure README and guide accuracy - Maintain consistent doc structure and linking - Remove stale references - Keep docs concis"
+      "preview": "You are a documentation maintenance specialist. Your job is to keep project documentation accurate, complete, and aligned with implementation — treating a stale doc as a bug, not a backlog item. - Update docs when code behavior changes; include the update in the same commit as the code change - Audi"
     },
     {
       "name": "bluetemberg-agents-frontend-specialist",
@@ -168,7 +168,7 @@
           "description": "Implements and refactors frontend UI with reusable, accessible, and testable patterns."
         }
       ],
-      "preview": "You are a frontend implementation specialist. Your job is to implement and refactor frontend UI components following the project's design system and coding standards. - Implement new UI features using existing shared components - Refactor existing components for better reusability and accessibility"
+      "preview": "You are a frontend implementation specialist. Your job is to implement and refactor frontend UI — from component architecture through state management, performance, and SSR correctness — following the project's design system and coding standards. - Implement new UI features using existing shared com"
     },
     {
       "name": "bluetemberg-agents-infrastructure-specialist",
@@ -187,7 +187,7 @@
           "description": "Maintains build, CI, container, and deployment configuration."
         }
       ],
-      "preview": "You are an infrastructure specialist. Your job is to maintain build, CI, container, and deployment configuration. - Maintain Dockerfiles and compose configurations - Configure and optimize CI/CD pipelines - Manage build tooling and dependency configuration - Ensure reproducible and secure builds - P"
+      "preview": "You are an infrastructure specialist. Your job is to maintain and harden the build layer: Dockerfiles, Compose configurations, dependency manifests, build tooling, and the configuration that makes environments reproducible, minimal, and secure. - Maintain Dockerfiles and Compose configurations for d"
     },
     {
       "name": "bluetemberg-agents-kubernetes-specialist",
@@ -206,7 +206,7 @@
           "description": "Writes and reviews Kubernetes manifests, Helm charts, and Kustomize overlays for secure, production-grade deployments."
         }
       ],
-      "preview": "You are a Kubernetes specialist. Your job is to write and maintain Kubernetes manifests, Helm charts, and Kustomize overlays that deploy services safely and reproducibly. - Write Deployments, StatefulSets, Services, Ingress, RBAC, and PodDisruptionBudgets - Design resource requests/limits and autosc"
+      "preview": "You are a Kubernetes specialist. Your job is to write and maintain manifests, Helm charts, and Kustomize overlays that deploy services safely, reproducibly, and with zero-downtime — grounded in the Kubernetes documentation and production operational experience. - Write and review Deployments, Statef"
     },
     {
       "name": "bluetemberg-agents-security-specialist",
@@ -227,7 +227,7 @@
           "description": "Audits code for security vulnerabilities, secrets exposure, and dependency risks."
         }
       ],
-      "preview": "You are a security specialist. Your job is to identify and remediate security vulnerabilities across the codebase. - Audit code for OWASP Top 10 vulnerabilities - Review dependency trees for known CVEs - Identify hardcoded secrets, tokens, and credentials - Verify authentication and authorization im"
+      "preview": "You are a security specialist. Your job is to identify, prioritize, and remediate security vulnerabilities — from injection surfaces and broken auth through supply chain risks and secrets exposure — across the codebase and its dependencies. - Audit code for OWASP Top 10 vulnerabilities with concrete"
     },
     {
       "name": "bluetemberg-agents-sre-specialist",
@@ -246,7 +246,7 @@
           "description": "Designs SLOs, alerts, on-call runbooks, and reliability improvements for production services."
         }
       ],
-      "preview": "You are a site reliability engineer. Your job is to ensure production services are observable, reliable, and operable by an on-call team. - Define Service Level Objectives (SLOs) and the SLIs that measure them - Write Prometheus alert rules, Grafana dashboards, and alerting policies - Author and mai"
+      "preview": "You are a site reliability engineer. Your job is to ensure production services are observable, reliable, and operable — drawing on the principles in the Google SRE Book and the practices a real on-call team needs to respond to incidents without heroics. - Define Service Level Objectives (SLOs) and t"
     },
     {
       "name": "bluetemberg-agents-test-specialist",
@@ -266,7 +266,7 @@
           "description": "Creates, refactors, and stabilizes automated tests with deterministic patterns."
         }
       ],
-      "preview": "You are a testing specialist. Your job is to create, refactor, and stabilize automated tests. - Write unit, integration, and e2e tests - Stabilize flaky tests with deterministic patterns - Ensure adequate test coverage for critical paths - Follow the project's testing conventions - Prefer determinis"
+      "preview": "You are a testing specialist. Your job is to create, refactor, and stabilize automated tests — ensuring the suite is fast, deterministic, and trustworthy. A test that fails intermittently is not a test; it is a scheduled source of confusion. - Write unit, integration, and e2e tests that verify behav"
     },
     {
       "name": "bluetemberg-guardrails-git",
@@ -538,7 +538,7 @@
           "description": "Run formatter, linter, and build checks before every commit."
         }
       ],
-      "preview": "If moving an existing file that is not `git ignored`, use `git mv {source} {dest}`, as this preserves the git history for the file and shows any new diff."
+      "preview": "If moving an existing file that is not `git ignored`, use `git mv {source} {dest}`, as this preserves the git history for the file and shows any new diff. ```sh mv src/utils/format.ts src/lib/format.ts git add . git mv src/utils/format.ts src/lib/format.ts ```"
     },
     {
       "name": "bluetemberg-rules-llm-api-product",
@@ -683,10 +683,10 @@
       "skills": [
         {
           "name": "api-design",
-          "description": "Apply RESTful API design conventions for endpoints, pagination, versioning, and error contracts."
+          "description": "Design RESTful HTTP API endpoints with a step-by-step naming, pagination, versioning, and error-contract protocol."
         }
       ],
-      "preview": "Use this skill when designing new API endpoints or reviewing existing API contracts. - New endpoint or route creation - API contract review or documentation - Pagination, filtering, or sorting implementation 1. The agent MUST follow RESTful resource naming (plural nouns, no verbs in paths). 2. The a"
+      "preview": "Use this skill when designing new HTTP API endpoints or reviewing existing API contracts. - New endpoint or route creation - API contract review or documentation - Pagination, filtering, or sorting implementation - Breaking change review before a version bump - Use plural nouns: `/users`, `/orders`,"
     },
     {
       "name": "bluetemberg-skills-ci-cd-best-practices",
@@ -702,10 +702,10 @@
       "skills": [
         {
           "name": "ci-cd-best-practices",
-          "description": "Optimize CI/CD pipeline configuration for speed, reliability, and caching."
+          "description": "Audit CI/CD pipeline configuration with a step-by-step checklist for caching, version pinning, job ordering, parallelism, and deploy gates."
         }
       ],
-      "preview": "Use this skill when creating or modifying CI/CD pipeline configuration. - New or modified GitHub Actions, GitLab CI, or similar workflow files - Build performance optimization - Adding new jobs, steps, or deployment stages 1. The agent MUST cache dependency installs (npm, pip, etc.) between runs. 2."
+      "preview": "Use this skill when creating or modifying CI/CD pipeline configuration. - New or modified GitHub Actions, GitLab CI, or similar workflow files - Build performance complaints or flaky pipeline investigation - Adding new jobs, steps, or deployment stages Never use `latest` or a mutable tag. Tags can b"
     },
     {
       "name": "bluetemberg-skills-code-review",
@@ -808,7 +808,7 @@
       "skills": [
         {
           "name": "create-skill",
-          "description": "Scaffold a new bluetemberg skill in the correct format — frontmatter, five required sections, and sync."
+          "description": "Scaffold a new bluetemberg skill to the deep-skill standard — a step-by-step Protocol with decision trees, BAD/GOOD examples, and a completion checklist."
         }
       ],
       "preview": "Use this skill when asked to add, create, or write a new skill for the project. - \"add a skill that...\" - \"create a skill for...\" - \"write a skill to...\" - Any request to scaffold a new on-demand workflow for the AI tooling 1. The agent MUST check `llm/skills/` for an existing skill with the same na"
@@ -879,10 +879,10 @@
       "skills": [
         {
           "name": "infrastructure-drift-check",
-          "description": "Verify that declared infrastructure state matches deployed state before merging IaC changes."
+          "description": "Verify that declared IaC state matches deployed state — with toolchain-specific detection steps, a BAD/GOOD output comparison, and a merge gate."
         }
       ],
-      "preview": "Use this skill before merging infrastructure-as-code changes to ensure the declared state is consistent with what is deployed. - Changes to `*.tf` files (Terraform) - Changes to Ansible playbooks or inventory - Changes to Kubernetes manifests (`k8s/`, `manifests/`, `helm/`) - Changes to Docker Compo"
+      "preview": "Use this skill before merging infrastructure-as-code changes to ensure declared state is consistent with what is deployed. - Changes to `*.tf` files (Terraform) - Changes to Ansible playbooks or inventory - Changes to Kubernetes manifests (`k8s/`, `manifests/`, `helm/`) - Changes to Docker Compose f"
     },
     {
       "name": "bluetemberg-skills-migration-safety",
@@ -898,10 +898,10 @@
       "skills": [
         {
           "name": "migration-safety",
-          "description": "Review database migrations for safety, rollback capability, and zero-downtime compatibility."
+          "description": "Review database migrations against a zero-downtime rollout checklist — destructive ops, lock analysis, batching, and rollback path."
         }
       ],
-      "preview": "Use this skill when creating or reviewing database schema migrations. - New migration file creation - Schema change review - Pre-deploy database change validation 1. The agent MUST verify every migration has a corresponding rollback (down migration). 2. The agent MUST flag destructive operations (DR"
+      "preview": "Use this skill when creating or reviewing database schema migrations. Every migration must survive a zero-downtime deploy and have a tested rollback path. - New migration file creation - Schema change review - Pre-deploy database change validation Scan the migration for: - `DROP TABLE`, `DROP COLUMN"
     },
     {
       "name": "bluetemberg-skills-patterns",
@@ -918,10 +918,10 @@
       "skills": [
         {
           "name": "patterns",
-          "description": "Apply reusable architecture and coding patterns from project standards when implementing features or reviewing structure."
+          "description": "Before introducing any new structure, search the codebase for an existing pattern and align with it — taxonomy, decision tree, and checklist."
         }
       ],
-      "preview": "Use this skill when implementing or reviewing feature structure, state placement, and code organization. - New feature implementation that requires architectural decisions - Code review where structure or state placement is in question - Refactoring to align existing code with established patterns 1"
+      "preview": "Use this skill when implementing features, reviewing structure, or deciding how to organize new code. - New feature implementation that requires architectural decisions - Code review where folder structure, naming, or module boundaries are in question - Refactoring to align existing code with establ"
     },
     {
       "name": "bluetemberg-skills-react-patterns",
@@ -940,10 +940,10 @@
       "skills": [
         {
           "name": "react-patterns",
-          "description": "Apply React component patterns — composition, co-location, and hook extraction — before reaching for custom solutions."
+          "description": "Apply React composition, co-location, and hook extraction patterns — with decision trees and BAD/GOOD examples — before writing custom solutions."
         }
       ],
-      "preview": "Use this skill when implementing or reviewing React components, hooks, or state management. - New React component or hook implementation - Component is growing too large or has mixed responsibilities - State is being lifted or passed through multiple layers - A custom hook is being written to wrap b"
+      "preview": "Use this skill when implementing or reviewing React components, hooks, or state management. - New React component or hook implementation - A component exceeds 150 lines or renders more than one logical section - A prop is passed through more than two layers without being used in the middle - Busines"
     },
     {
       "name": "bluetemberg-skills-rollback-plan",
@@ -959,10 +959,10 @@
       "skills": [
         {
           "name": "rollback-plan",
-          "description": "Require an explicit rollback plan for every infrastructure or deployment change before merge."
+          "description": "Require and validate a structured rollback plan for every production change — with a complexity decision tree, data-loss check, and PR template."
         }
       ],
-      "preview": "Use this skill when reviewing infrastructure, deployment, or database changes that affect production systems. Every change must have a tested rollback path. - Changes to deployment manifests (Kubernetes, Docker Compose, Helm values) - Ansible playbooks targeting production inventory - Terraform chan"
+      "preview": "Use this skill when reviewing infrastructure, deployment, or database changes that affect production systems. Every change must have a tested rollback path before merge. - Changes to deployment manifests (Kubernetes, Docker Compose, Helm values) - Ansible playbooks targeting production inventory - T"
     },
     {
       "name": "bluetemberg-skills-security-audit",
@@ -980,10 +980,10 @@
       "skills": [
         {
           "name": "security-audit",
-          "description": "Run a security audit checklist against code changes for secrets, injection, and dependency risks."
+          "description": "Triage security findings by severity with a concrete detection protocol for secrets, injection, auth, and dependency risks."
         }
       ],
-      "preview": "Use this skill when reviewing code for security concerns or before deploying to production. - Pre-release or pre-deploy review - New authentication or authorization code - Code that handles user input, file uploads, or external data 1. The agent MUST check for hardcoded secrets, tokens, and credenti"
+      "preview": "Use this skill when reviewing code changes for security concerns or before deploying to production. Produce a triaged, actionable report — not a raw checklist dump. - Pre-release or pre-deploy review - New authentication, authorization, or session management code - Any code that handles user input,"
     },
     {
       "name": "bluetemberg-skills-stack-change-review",
@@ -999,7 +999,7 @@
       "skills": [
         {
           "name": "stack-change-review",
-          "description": "Review high-blast-radius infrastructure changes for safety before merge."
+          "description": "Review high-blast-radius infrastructure changes with a risk-tier decision tree, per-change-type protocol, and mandatory runbook checklist."
         }
       ],
       "preview": "Use this skill when reviewing changes to critical infrastructure files that affect deployed services. - Changes to `docker-compose*.yml`, `docker-compose*.yml.j2` - Changes to `group_vars/all.yml` or `group_vars/*/*.yml` - Changes to Ansible host inventory files - Changes to `.env` or `.env.j2` file"
@@ -1017,10 +1017,10 @@
       "skills": [
         {
           "name": "sub-agent-design",
-          "description": "Design a sub-agent system — scope responsibilities, define communication contracts, wire orchestration, and add integration tests."
+          "description": "Design a sub-agent system — scope responsibilities, define typed communication contracts, wire orchestration, and add integration tests."
         }
       ],
-      "preview": "Use this skill when you need to break a complex agentic task into a coordinated set of sub-agents with defined responsibilities and communication contracts. - A single agent is doing too many things (context overloads, inconsistent outputs, hard-to-test) - A workflow has parallelizable phases that r"
+      "preview": "Use this skill when breaking a complex agentic task into a coordinated set of sub-agents with defined responsibilities and communication contracts. - A single agent is doing too many things (context overloads, inconsistent outputs, hard-to-test) - A workflow has parallelizable phases with no data de"
     },
     {
       "name": "bluetemberg-skills-visual-direction",

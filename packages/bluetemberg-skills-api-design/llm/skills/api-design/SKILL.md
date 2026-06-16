@@ -69,15 +69,18 @@ GOOD: HTTP 422 {
 
 Standard `type` slugs: `not_found`, `unauthorized`, `forbidden`, `validation_error`, `conflict`, `rate_limited`, `internal_error`. Use these consistently — clients pattern-match on them.
 
+For status codes, `422` is the precise code for a well-formed request that fails semantic/field validation; `400` is also spec-compliant (RFC 9110 scopes it to any "perceived client error", not just malformed syntax). Pick one convention and apply it consistently.
+
 ### Step 4 — Decide on versioning
 
 ```text
 Does the change rename a field, remove an endpoint, or change a field's type?
-  YES → Add /v2/ prefix. Maintain /v1/ until deprecation window closes.
+  YES → Ship a new version (e.g. /v2/ path or a new api-version value).
+        Keep the previous version until the deprecation window closes.
   NO  → No version bump needed. Adding new optional response fields is non-breaking.
 ```
 
-Version in the URL path (`/v1/`), not in headers — headers are invisible to anyone browsing the API.
+Pick one versioning mechanism and apply it consistently with a clear deprecation policy — that consistency is the real consensus, not the mechanism. URL path (`/v1/`) is a common, cache-friendly default for public APIs; header or query-string versioning is equally valid and is what several major APIs use (GitHub and Stripe version via request headers; Azure mandates an `api-version` query parameter). Don't invoke "the REST way" for any one of them — REST's author argues against baking versions into fixed URL hierarchies.
 
 ### Step 5 — Document shapes in the same PR
 

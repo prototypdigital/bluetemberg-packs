@@ -45,6 +45,16 @@ Adding or removing a rule is a `feat`; it changes what consumers get. Tweaking w
 
 You don't bump the pack's `version` yourself — [release-please](Releasing) derives the bump from your commit type and maintains a Release PR. Merging that PR publishes the changed packs.
 
+## Authoring skills and agents
+
+Skills and agents are authored with the meta-skills — `create-skill`, `create-agent`, and `create-pack` — which scaffold the correct frontmatter, body, and sync.
+
+Skills follow the **deep-skill standard**: a step-by-step `## Protocol` (numbered `### Step N`), at least one **decision tree** where a branch matters, at least one **BAD/GOOD** example with concrete code or output, a `## Completion checklist`, and a `## When NOT to use`. Aim for ~60–120 lines of actionable content, and benchmark against `figma-to-code` and `config-echo`. A skill that only restates what a base model already knows (a generic MUST/SHOULD list) is too thin — deepen it or it adds nothing.
+
+Claims that go beyond convention should be traceable to a primary source — see [Research & Sources](Research).
+
+After adding or editing any pack content, run `npm run generate:catalog` then `npm run validate`: the validator now fails if `catalog.json` or the wiki catalog has drifted from the pack frontmatter.
+
 ## Add a new pack
 
 1. Create `packages/bluetemberg-rules-<domain>/` with a `package.json`:

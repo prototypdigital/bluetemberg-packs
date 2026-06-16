@@ -35,8 +35,8 @@ Use this skill when asked to create a new bluetemberg pack (a publishable npm pa
 6. The agent MUST register the pack in `bluetemberg.config.json` by adding `./packages/bluetemberg-{kind}-{topic}` to the `extends` array, keeping the array alphabetically sorted. Validation fails if a package exists but is not listed.
 
 7. The agent MUST run, in order, and not report success until all pass:
-   - `npm run generate:catalog` — regenerate `catalog.json` (and the wiki catalog table)
-   - `npm run validate` — pack-structure and config cross-check
+   - `npm run generate:catalog` — regenerate `catalog.json` and the wiki catalog table (run this BEFORE validate; the validator fails if the catalog is stale)
+   - `npm run validate` — pack-structure, config, release-please, and catalog-freshness cross-check
    - `npm run lint:md` — markdownlint over the new `.md` files
 
 8. The agent MUST NOT mix kinds in one pack (no rules and skills together) and MUST NOT set both `universal: true` and a non-empty `profiles` array.

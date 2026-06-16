@@ -15,21 +15,30 @@ Use this skill when creating or modifying CI/CD pipeline configuration.
 
 ## Protocol
 
-### Step 1 — Pin every version (security + reproducibility)
+### Step 1 — Pin every action to a commit SHA (supply-chain integrity)
 
-Never use `latest` or a floating tag for actions or container images.
+Never use `latest` or a mutable tag. Tags can be silently retargeted to malicious
+code — exactly what happened in the March 2025 `tj-actions/changed-files`
+compromise (CVE-2025-30066), where every version tag was repointed to a commit
+that exfiltrated CI secrets into public logs. A full-length commit SHA is the only
+immutable reference.
+
+GitHub's docs call for SHA-pinning third-party actions; OpenSSF and security
+tooling extend this to **all** actions, including first-party ones like
+`actions/checkout`, since any tag is mutable.
 
 ```yaml
 BAD:
+  - uses: actions/checkout@v4          # mutable tag — can be moved
   - uses: actions/checkout@latest
   - uses: docker://node:latest
 
 GOOD:
-  - uses: actions/checkout@v4.1.1
-  - uses: docker://node:20.12.2-alpine
-  # For third-party actions, pin to a commit SHA:
-  - uses: some-org/some-action@a1b2c3d4e5f6...  # v2.3.1
+  - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+  - uses: docker://node:20.12.2-alpine  # pin images by digest (@sha256:...) in prod
 ```
+
+Pair pinning with Dependabot or Renovate so pinned SHAs still receive security updates.
 
 ### Step 2 — Cache dependency installs
 
@@ -129,15 +138,35 @@ concurrency:
   cancel-in-progress: true
 ```
 
+### Step 7 — Least privilege and secretless auth
+
+GitHub recommends a read-only default token, elevated per-job only where needed, and OIDC instead of long-lived cloud secrets.
+
+```yaml
+permissions:
+  contents: read          # workflow-wide default
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      id-token: write      # only the job that needs OIDC
+```
+
+- Default the `GITHUB_TOKEN` to read-only; grant the minimum extra scope per job.
+- Authenticate to cloud providers with OIDC (short-lived tokens), not secrets stored in the repo.
+
 ## Pipeline audit checklist
 
-- [ ] All action versions and container images are pinned (no `latest`)
+- [ ] Every action is pinned to a full commit SHA (not a tag/`latest`); images pinned by digest in prod
+- [ ] Pinned SHAs are kept current by Dependabot/Renovate
 - [ ] Dependency install steps have a cache configured with a lock-file-hash key
 - [ ] Deploy jobs have `needs:` pointing to lint + typecheck + test
 - [ ] Independent jobs run in parallel (no artificial sequencing)
 - [ ] Path filters skip irrelevant workflows on documentation or unrelated changes
 - [ ] `continue-on-error: true` is not set on any core quality gate job
 - [ ] Concurrency group set to cancel stale runs
+- [ ] Default `GITHUB_TOKEN` is read-only, elevated per-job only where needed
+- [ ] Cloud auth uses OIDC, not long-lived secrets
 
 ## When NOT to use
 

@@ -267,7 +267,7 @@ API design skill for Bluetemberg — RESTful conventions, pagination, versioning
 
 | Skill | Description |
 | ----- | ----------- |
-| `api-design` | Apply RESTful API design conventions for endpoints, pagination, versioning, and error contracts. |
+| `api-design` | Design RESTful HTTP API endpoints with a step-by-step naming, pagination, versioning, and error-contract protocol. |
 
 ### bluetemberg-skills-ci-cd-best-practices
 
@@ -275,7 +275,7 @@ CI/CD best practices skill for Bluetemberg — pipeline optimization and caching
 
 | Skill | Description |
 | ----- | ----------- |
-| `ci-cd-best-practices` | Optimize CI/CD pipeline configuration for speed, reliability, and caching. |
+| `ci-cd-best-practices` | Audit CI/CD pipeline configuration with a step-by-step checklist for caching, version pinning, job ordering, parallelism, and deploy gates. |
 
 ### bluetemberg-skills-code-review
 
@@ -323,7 +323,7 @@ Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required
 
 | Skill | Description |
 | ----- | ----------- |
-| `create-skill` | Scaffold a new bluetemberg skill in the correct format — frontmatter, five required sections, and sync. |
+| `create-skill` | Scaffold a new bluetemberg skill to the deep-skill standard — a step-by-step Protocol with decision trees, BAD/GOOD examples, and a completion checklist. |
 
 ### bluetemberg-skills-design-critique
 
@@ -355,7 +355,7 @@ Infrastructure drift check skill for Bluetemberg — verify IaC state matches de
 
 | Skill | Description |
 | ----- | ----------- |
-| `infrastructure-drift-check` | Verify that declared infrastructure state matches deployed state before merging IaC changes. |
+| `infrastructure-drift-check` | Verify that declared IaC state matches deployed state — with toolchain-specific detection steps, a BAD/GOOD output comparison, and a merge gate. |
 
 ### bluetemberg-skills-migration-safety
 
@@ -363,7 +363,7 @@ Migration safety skill for Bluetemberg — database migration review and rollbac
 
 | Skill | Description |
 | ----- | ----------- |
-| `migration-safety` | Review database migrations for safety, rollback capability, and zero-downtime compatibility. |
+| `migration-safety` | Review database migrations against a zero-downtime rollout checklist — destructive ops, lock analysis, batching, and rollback path. |
 
 ### bluetemberg-skills-patterns
 
@@ -371,7 +371,7 @@ Patterns skill for Bluetemberg — apply reusable architecture and coding patter
 
 | Skill | Description |
 | ----- | ----------- |
-| `patterns` | Apply reusable architecture and coding patterns from project standards when implementing features or reviewing structure. |
+| `patterns` | Before introducing any new structure, search the codebase for an existing pattern and align with it — taxonomy, decision tree, and checklist. |
 
 ### bluetemberg-skills-react-patterns
 
@@ -379,7 +379,7 @@ React patterns skill for Bluetemberg — component composition, hook extraction,
 
 | Skill | Description |
 | ----- | ----------- |
-| `react-patterns` | Apply React component patterns — composition, co-location, and hook extraction — before reaching for custom solutions. |
+| `react-patterns` | Apply React composition, co-location, and hook extraction patterns — with decision trees and BAD/GOOD examples — before writing custom solutions. |
 
 ### bluetemberg-skills-rollback-plan
 
@@ -387,7 +387,7 @@ Rollback plan skill for Bluetemberg — require tested rollback steps for every 
 
 | Skill | Description |
 | ----- | ----------- |
-| `rollback-plan` | Require an explicit rollback plan for every infrastructure or deployment change before merge. |
+| `rollback-plan` | Require and validate a structured rollback plan for every production change — with a complexity decision tree, data-loss check, and PR template. |
 
 ### bluetemberg-skills-security-audit
 
@@ -395,7 +395,7 @@ Security audit skill for Bluetemberg — dependency audit, secrets scan, OWASP p
 
 | Skill | Description |
 | ----- | ----------- |
-| `security-audit` | Run a security audit checklist against code changes for secrets, injection, and dependency risks. |
+| `security-audit` | Triage security findings by severity with a concrete detection protocol for secrets, injection, auth, and dependency risks. |
 
 ### bluetemberg-skills-stack-change-review
 
@@ -403,7 +403,7 @@ Stack change review skill for Bluetemberg — high-blast-radius infrastructure c
 
 | Skill | Description |
 | ----- | ----------- |
-| `stack-change-review` | Review high-blast-radius infrastructure changes for safety before merge. |
+| `stack-change-review` | Review high-blast-radius infrastructure changes with a risk-tier decision tree, per-change-type protocol, and mandatory runbook checklist. |
 
 ### bluetemberg-skills-sub-agent-design
 
@@ -411,7 +411,7 @@ Sub-agent design skill for Bluetemberg — plan, scope, and implement sub-agent 
 
 | Skill | Description |
 | ----- | ----------- |
-| `sub-agent-design` | Design a sub-agent system — scope responsibilities, define communication contracts, wire orchestration, and add integration tests. |
+| `sub-agent-design` | Design a sub-agent system — scope responsibilities, define typed communication contracts, wire orchestration, and add integration tests. |
 
 ### bluetemberg-skills-visual-direction
 
