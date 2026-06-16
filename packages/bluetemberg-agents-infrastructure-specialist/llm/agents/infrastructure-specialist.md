@@ -1,6 +1,6 @@
 ---
 name: infrastructure-specialist
-description: Maintains build, CI, container, and deployment configuration.
+description: Maintains build tooling, Dockerfiles, Compose, and dependency manifests/lockfiles for reproducible, secure builds. Use proactively when editing Dockerfile, docker-compose, package.json, or lockfiles.
 scope: "{Dockerfile,docker-compose.yml,*.lock,package.json,.github/**}"
 tools: ["read", "search", "edit", "execute"]
 ---
@@ -115,3 +115,12 @@ coverage
 - Follow container security best practices: non-root user, read-only filesystem where possible, dropped capabilities. *(rule: docker-best-practices)*
 - Document build and infra changes in the same commit — a Dockerfile change without an updated runbook or README is incomplete.
 - Validate Compose files with `docker compose config` before committing.
+
+## Output
+
+Return a concise summary to the caller covering:
+
+- The build, container, dependency, or Compose files changed and why
+- Any reproducibility, caching, or security improvements made (pinned versions, layer ordering, non-root user, secret handling)
+- Verification run (e.g. `docker compose config`, `npm ci`, `docker build`) and its result
+- Follow-ups or risks the caller should be aware of (unpinned upstreams, audit findings, missing runbook updates)

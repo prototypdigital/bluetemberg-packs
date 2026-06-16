@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-16T11:22:56.472Z",
+  "generated": "2026-06-16T12:12:43.258Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -16,10 +16,10 @@
       "agents": [
         {
           "name": "a11y-specialist",
-          "description": "Audits and remediates accessibility issues against WCAG 2.2 A/AA standards."
+          "description": "Audits WCAG 2.2 A/AA accessibility — semantic HTML, keyboard, focus, contrast, alt text — and reports prioritized fixes. Use proactively for UI components, forms, dialogs, screen-reader review."
         }
       ],
-      "preview": "You are a WCAG 2.2 A/AA accessibility specialist. Your job is to audit and remediate accessibility issues — from semantic structure through keyboard navigation, focus management, color contrast, and text alternatives — in a way that is permanently maintainable, not just passing an automated scan. -"
+      "preview": "You are a WCAG 2.2 A/AA accessibility specialist. Your job is to audit accessibility issues — from semantic structure through keyboard navigation, focus management, color contrast, and text alternatives — and recommend root-cause remediations that are permanently maintainable, not just passing an au"
     },
     {
       "name": "bluetemberg-agents-agentic-specialist",
@@ -34,7 +34,7 @@
       "agents": [
         {
           "name": "agentic-specialist",
-          "description": "Designs and implements agentic system memory, state management, and agent-to-agent communication patterns."
+          "description": "Designs and implements agentic memory, state machines, sub-agent orchestration, and tool-use contracts. Use proactively when building agent loops, persistent memory, handoffs, or tool-call recovery."
         }
       ],
       "preview": "You are a specialist in designing and implementing agentic systems: persistent memory stores, agent state machines, sub-agent orchestration, and tool-use patterns for LLM-powered workflows. - Design agent memory architectures (episodic, semantic, procedural layers) - Implement persistent state using"
@@ -53,7 +53,7 @@
       "agents": [
         {
           "name": "ansible-specialist",
-          "description": "Writes and reviews Ansible roles, playbooks, and Jinja2 templates for idempotent infrastructure automation."
+          "description": "Writes, reviews, and lints Ansible roles, playbooks, and Jinja2 templates for idempotent infra automation. Use proactively when editing anything under roles/, playbooks, ansible.cfg, or inventory."
         }
       ],
       "preview": "You are an Ansible specialist. Your job is to write and maintain Ansible roles, playbooks, and Jinja2 templates that automate infrastructure safely and idempotently — grounded in the project's `ansible-conventions` rule and the Ansible best-practices guide. - Structure roles with the standard layout"
@@ -72,7 +72,7 @@
       "agents": [
         {
           "name": "backend-specialist",
-          "description": "Implements and reviews backend services, APIs, database patterns, and auth flows."
+          "description": "Builds server-side services — REST/GraphQL APIs, database access, auth flows (JWT, RBAC, OAuth/PKCE). Use proactively for API contracts, DB layers, or server auth. Not CMS schemas or security audits."
         }
       ],
       "preview": "You are a backend implementation specialist. Your job is to build and maintain server-side services, APIs, and data layers — from API contract design through query optimization and auth flows — following the project's architecture and conventions. - Design and implement RESTful APIs with consistent"
@@ -92,7 +92,7 @@
       "agents": [
         {
           "name": "code-reviewer",
-          "description": "Reviews pull requests for code quality, patterns, naming, and potential bugs."
+          "description": "Reviews diffs and pull requests for correctness bugs, edge cases, naming, test coverage, and maintainability. Use proactively after code changes. For deep security audits route to security-specialist."
         }
       ],
       "preview": "You are a code review specialist. Your job is to review changes for correctness, security, and maintainability — with concrete, actionable feedback that helps the author improve rather than just identifying problems. - Identify logical errors, edge cases, off-by-one mistakes, and incorrect assumptio"
@@ -110,7 +110,7 @@
       "agents": [
         {
           "name": "design-engineer",
-          "description": "Builds UI to a design reference section-by-section, holding tokens and banned moves and catching stock drift before it ships."
+          "description": "Builds UI from a Figma comp, screenshot, or visual direction section-by-section, holding design tokens and banned moves. Use when turning a design reference into distinct UI or catching stock drift."
         }
       ],
       "preview": "You are a design engineer. You translate a design reference (a Figma comp, a screenshot, or a written visual direction) into working UI that keeps the designer's character intact. Your constant fight is against stock drift — the gravitational pull toward generic SaaS output. The designer directs; yo"
@@ -129,7 +129,7 @@
       "agents": [
         {
           "name": "devops-specialist",
-          "description": "Manages CI/CD pipelines, container builds, infrastructure-as-code, and deployment config."
+          "description": "Designs and optimizes CI/CD pipelines, Docker images, Terraform IaC, deploy safety, and shell scripts. Use proactively when editing .github/workflows, Dockerfile, terraform/, or Makefile."
         }
       ],
       "preview": "You are a DevOps specialist. Your job is to design, maintain, and optimize build pipelines, deployment configuration, container images, and the operational processes that connect development to production reliably and reproducibly. - Configure and optimize CI/CD pipelines for speed, reliability, and"
@@ -145,7 +145,7 @@
       "agents": [
         {
           "name": "docs-maintainer",
-          "description": "Keeps documentation aligned with code and workflow changes."
+          "description": "Updates and audits documentation (README, runbooks, API docs, Mermaid diagrams) to match code, config, and workflow changes. Use proactively after behavior, CLI, API, or schema changes."
         }
       ],
       "preview": "You are a documentation maintenance specialist. Your job is to keep project documentation accurate, complete, and aligned with implementation — treating a stale doc as a bug, not a backlog item. - Update docs when code behavior changes; include the update in the same commit as the code change - Audi"
@@ -165,7 +165,7 @@
       "agents": [
         {
           "name": "frontend-specialist",
-          "description": "Implements and refactors frontend UI with reusable, accessible, and testable patterns."
+          "description": "Implements and refactors React/Next.js UI — components, state, hooks, SSR/hydration, performance, accessibility. Use proactively when building or changing TSX/JSX UI, not for review or backend work."
         }
       ],
       "preview": "You are a frontend implementation specialist. Your job is to implement and refactor frontend UI — from component architecture through state management, performance, and SSR correctness — following the project's design system and coding standards. - Implement new UI features using existing shared com"
@@ -184,7 +184,7 @@
       "agents": [
         {
           "name": "infrastructure-specialist",
-          "description": "Maintains build, CI, container, and deployment configuration."
+          "description": "Maintains build tooling, Dockerfiles, Compose, and dependency manifests/lockfiles for reproducible, secure builds. Use proactively when editing Dockerfile, docker-compose, package.json, or lockfiles."
         }
       ],
       "preview": "You are an infrastructure specialist. Your job is to maintain and harden the build layer: Dockerfiles, Compose configurations, dependency manifests, build tooling, and the configuration that makes environments reproducible, minimal, and secure. - Maintain Dockerfiles and Compose configurations for d"
@@ -203,7 +203,7 @@
       "agents": [
         {
           "name": "kubernetes-specialist",
-          "description": "Writes and reviews Kubernetes manifests, Helm charts, and Kustomize overlays for secure, production-grade deployments."
+          "description": "Writes and reviews Kubernetes manifests, Helm charts, Kustomize overlays — RBAC, probes, resources, security contexts, autoscaling, zero-downtime rollouts. Use proactively when editing k8s YAML."
         }
       ],
       "preview": "You are a Kubernetes specialist. Your job is to write and maintain manifests, Helm charts, and Kustomize overlays that deploy services safely, reproducibly, and with zero-downtime — grounded in the Kubernetes documentation and production operational experience. - Write and review Deployments, Statef"
@@ -224,7 +224,7 @@
       "agents": [
         {
           "name": "security-specialist",
-          "description": "Audits code for security vulnerabilities, secrets exposure, and dependency risks."
+          "description": "Audits code for OWASP Top 10 vulns, injection, broken auth/access control, secrets exposure, and dependency/supply-chain CVEs. MUST BE USED for deep security review. Reports findings, does not edit."
         }
       ],
       "preview": "You are a security specialist. Your job is to identify, prioritize, and remediate security vulnerabilities — from injection surfaces and broken auth through supply chain risks and secrets exposure — across the codebase and its dependencies. - Audit code for OWASP Top 10 vulnerabilities with concrete"
@@ -243,7 +243,7 @@
       "agents": [
         {
           "name": "sre-specialist",
-          "description": "Designs SLOs, alerts, on-call runbooks, and reliability improvements for production services."
+          "description": "Reviews production reliability — SLOs, SLIs, error budgets, alerts, runbooks, post-mortems. Use proactively for on-call, observability, or incident-readiness review, not code or security audits."
         }
       ],
       "preview": "You are a site reliability engineer. Your job is to ensure production services are observable, reliable, and operable — drawing on the principles in the Google SRE Book and the practices a real on-call team needs to respond to incidents without heroics. - Define Service Level Objectives (SLOs) and t"
@@ -263,7 +263,7 @@
       "agents": [
         {
           "name": "test-specialist",
-          "description": "Creates, refactors, and stabilizes automated tests with deterministic patterns."
+          "description": "Writes, refactors, and stabilizes unit/integration/e2e tests, fixes flaky/non-deterministic tests, applies fakes and data builders. Use proactively when adding tests or diagnosing flakiness."
         }
       ],
       "preview": "You are a testing specialist. Your job is to create, refactor, and stabilize automated tests — ensuring the suite is fast, deterministic, and trustworthy. A test that fails intermittently is not a test; it is a scheduled source of confusion. - Write unit, integration, and e2e tests that verify behav"
@@ -282,7 +282,7 @@
           "description": "Enforce conventional branch names before creating a worktree"
         }
       ],
-      "preview": "Blocks AI tools from creating worktrees with auto-generated names (e.g. `claude/some-name`). Requires a branch name in `type/description` format before the worktree is created."
+      "preview": "Blocks AI tools from creating worktrees with auto-generated names (e.g. `claude/some-name`). Requires a branch name in `type/description` format before the worktree is created. This is **deterministic enforcement**, not a prose convention an agent is asked to remember. A rule lives in context and de"
     },
     {
       "name": "bluetemberg-rules-accessibility",
@@ -490,7 +490,7 @@
           "description": "Follow Terraform module structure and naming conventions."
         }
       ],
-      "preview": "Write Ansible roles and playbooks that are idempotent, readable, and maintainable. - Use fully qualified collection names (FQCN): `ansible.builtin.copy` not `copy`. - Every task must have a descriptive `name:`. - Avoid `shell` and `command` modules; prefer native modules. - When `shell`/`command` is"
+      "preview": "Non-idempotent or unnamed tasks make playbook runs unpredictable: re-runs report false changes, failures are hard to trace, and hardcoded secrets leak into logs and version control. Enforce idempotency in CI with `ansible-lint --profile production`. - Use fully qualified collection names (FQCN): `an"
     },
     {
       "name": "bluetemberg-rules-docs",
@@ -514,7 +514,7 @@
           "description": "Run diagnostics and formatter after editing code files."
         }
       ],
-      "preview": "A PR that changes behavior without updating docs is not done. - New or removed CLI flags, commands, or options - Changes to user-facing workflows (new prompts, removed choices, changed defaults) - New or removed public APIs, config options, or schema fields - Changes to output behavior or generated"
+      "preview": "A PR that changes behavior without updating docs is not done. **Why:** Docs that lag behind behavior mislead users into using flags, defaults, or APIs that no longer work, and the drift compounds with every unsynced change. Best enforced by a CI check that fails when source under a watched path chan"
     },
     {
       "name": "bluetemberg-rules-git",
@@ -538,7 +538,7 @@
           "description": "Run formatter, linter, and build checks before every commit."
         }
       ],
-      "preview": "If moving an existing file that is not `git ignored`, use `git mv {source} {dest}`, as this preserves the git history for the file and shows any new diff. ```sh mv src/utils/format.ts src/lib/format.ts git add . git mv src/utils/format.ts src/lib/format.ts ```"
+      "preview": "**Why:** A plain `mv` makes git record a delete + add, so `git log --follow`, `git blame`, and review diffs lose the file's history and show the move as a full rewrite. When moving or renaming a tracked file (one not covered by `.gitignore`), use `git mv {source} {dest}` instead of `mv`. Git then re"
     },
     {
       "name": "bluetemberg-rules-llm-api-product",
@@ -631,7 +631,7 @@
           "description": "Never hardcode secrets, tokens, or credentials in source code."
         }
       ],
-      "preview": "All API endpoints must return structured, consistent error responses. Never expose stack traces, internal paths, or database details to clients. Always return errors with a consistent shape: ```json { \"error\": { \"code\": \"NOT_FOUND\", \"message\": \"Resource not found\" } } ``` - Map internal errors to ap"
+      "preview": "Leaked stack traces, SQL, or file paths hand attackers a map of your schema, ORM, and directory layout — turning a 500 into reconnaissance for the next exploit. All API endpoints must return structured, consistent error responses and never expose internal details to clients. Always return errors wit"
     },
     {
       "name": "bluetemberg-rules-typescript",
@@ -667,7 +667,7 @@
           "description": "Enforce strict type safety — no implicit any, no unguarded assertions."
         }
       ],
-      "preview": "Keep functions and components small, readable, and easy to reason about. - Prefer small, single-purpose functions. - Keep control flow shallow; avoid deep nesting. - Use early returns and guard clauses to reduce `else` blocks. - Extract complex logic into well-named helpers. - Favor descriptive name"
+      "preview": "**Why:** Deeply nested, multi-purpose functions hide bugs and make changes risky; small flat units are testable and reviewable in isolation. - Prefer small, single-purpose functions. - Keep control flow shallow; avoid deep nesting. - Use early returns and guard clauses to reduce `else` blocks. - Ext"
     },
     {
       "name": "bluetemberg-skills-api-design",

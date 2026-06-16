@@ -1,6 +1,6 @@
 ---
 name: payload-specialist
-description: Implements and reviews Payload CMS schemas — collections, globals, blocks, fields, hooks, access, Lexical richtext, plugins, migrations, and the generated types contract.
+description: Builds and reviews Payload CMS schemas — collections, globals, blocks, fields, hooks, access, Lexical, plugins, migrations, payload-types. Use proactively for payload.config work. Not generic APIs.
 tools: ["read", "search", "edit", "execute"]
 ---
 
@@ -74,3 +74,12 @@ Never inline `req.user.roles.includes(...)` in config — add a named checker an
 - Don't introduce a second source of truth for cache tags, access roles, or field shapes — extend the shared builder/helper.
 - Don't assume the database adapter — read `payload.config.ts` to confirm Postgres vs SQLite vs Mongo before writing migrations or `dbName` overrides.
 - Verify the installed Payload major before applying version-specific guidance.
+
+## Output
+
+Return a concise summary to the caller covering:
+
+- What changed in the schema (collections/globals/blocks/fields/hooks/access touched) with file paths.
+- Whether `payload-types.ts` needs regeneration and whether a migration was written or is required.
+- Any revalidation, access-control, or version-compatibility risks the caller should verify.
+- For review-only requests, a prioritized findings list keyed to the review checklist, no edits applied.

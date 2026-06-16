@@ -151,7 +151,7 @@ Accessibility specialist agent for Bluetemberg — WCAG 2.2 A/AA audit and remed
 
 | Agent | Description |
 | ----- | ----------- |
-| `a11y-specialist` | Audits and remediates accessibility issues against WCAG 2.2 A/AA standards. |
+| `a11y-specialist` | Audits WCAG 2.2 A/AA accessibility — semantic HTML, keyboard, focus, contrast, alt text — and reports prioritized fixes. Use proactively for UI components, forms, dialogs, screen-reader review. |
 
 ### bluetemberg-agents-agentic-specialist
 
@@ -159,7 +159,7 @@ Agentic systems specialist agent for Bluetemberg — agent memory design, state 
 
 | Agent | Description |
 | ----- | ----------- |
-| `agentic-specialist` | Designs and implements agentic system memory, state management, and agent-to-agent communication patterns. |
+| `agentic-specialist` | Designs and implements agentic memory, state machines, sub-agent orchestration, and tool-use contracts. Use proactively when building agent loops, persistent memory, handoffs, or tool-call recovery. |
 
 ### bluetemberg-agents-ansible-specialist
 
@@ -167,7 +167,7 @@ Ansible specialist agent for Bluetemberg — roles, playbooks, and Jinja2 templa
 
 | Agent | Description |
 | ----- | ----------- |
-| `ansible-specialist` | Writes and reviews Ansible roles, playbooks, and Jinja2 templates for idempotent infrastructure automation. |
+| `ansible-specialist` | Writes, reviews, and lints Ansible roles, playbooks, and Jinja2 templates for idempotent infra automation. Use proactively when editing anything under roles/, playbooks, ansible.cfg, or inventory. |
 
 ### bluetemberg-agents-backend-specialist
 
@@ -175,7 +175,7 @@ Backend specialist agent for Bluetemberg — API design, database patterns, erro
 
 | Agent | Description |
 | ----- | ----------- |
-| `backend-specialist` | Implements and reviews backend services, APIs, database patterns, and auth flows. |
+| `backend-specialist` | Builds server-side services — REST/GraphQL APIs, database access, auth flows (JWT, RBAC, OAuth/PKCE). Use proactively for API contracts, DB layers, or server auth. Not CMS schemas or security audits. |
 
 ### bluetemberg-agents-code-reviewer
 
@@ -183,7 +183,7 @@ Code reviewer agent for Bluetemberg — PR review covering patterns, naming, com
 
 | Agent | Description |
 | ----- | ----------- |
-| `code-reviewer` | Reviews pull requests for code quality, patterns, naming, and potential bugs. |
+| `code-reviewer` | Reviews diffs and pull requests for correctness bugs, edge cases, naming, test coverage, and maintainability. Use proactively after code changes. For deep security audits route to security-specialist. |
 
 ### bluetemberg-agents-design-engineer
 
@@ -191,7 +191,7 @@ Design engineer agent for Bluetemberg — builds UI to a reference section-by-se
 
 | Agent | Description |
 | ----- | ----------- |
-| `design-engineer` | Builds UI to a design reference section-by-section, holding tokens and banned moves and catching stock drift before it ships. |
+| `design-engineer` | Builds UI from a Figma comp, screenshot, or visual direction section-by-section, holding design tokens and banned moves. Use when turning a design reference into distinct UI or catching stock drift. |
 
 ### bluetemberg-agents-devops-specialist
 
@@ -199,7 +199,7 @@ DevOps specialist agent for Bluetemberg — CI/CD pipelines, container optimizat
 
 | Agent | Description |
 | ----- | ----------- |
-| `devops-specialist` | Manages CI/CD pipelines, container builds, infrastructure-as-code, and deployment config. |
+| `devops-specialist` | Designs and optimizes CI/CD pipelines, Docker images, Terraform IaC, deploy safety, and shell scripts. Use proactively when editing .github/workflows, Dockerfile, terraform/, or Makefile. |
 
 ### bluetemberg-agents-docs-maintainer
 
@@ -207,7 +207,7 @@ Docs maintainer agent for Bluetemberg — documentation synchronization with cod
 
 | Agent | Description |
 | ----- | ----------- |
-| `docs-maintainer` | Keeps documentation aligned with code and workflow changes. |
+| `docs-maintainer` | Updates and audits documentation (README, runbooks, API docs, Mermaid diagrams) to match code, config, and workflow changes. Use proactively after behavior, CLI, API, or schema changes. |
 
 ### bluetemberg-agents-frontend-specialist
 
@@ -215,7 +215,7 @@ Frontend specialist agent for Bluetemberg — UI implementation, design-system, 
 
 | Agent | Description |
 | ----- | ----------- |
-| `frontend-specialist` | Implements and refactors frontend UI with reusable, accessible, and testable patterns. |
+| `frontend-specialist` | Implements and refactors React/Next.js UI — components, state, hooks, SSR/hydration, performance, accessibility. Use proactively when building or changing TSX/JSX UI, not for review or backend work. |
 
 ### bluetemberg-agents-infrastructure-specialist
 
@@ -223,7 +223,7 @@ Infrastructure specialist agent for Bluetemberg — build, CI, container, deploy
 
 | Agent | Description |
 | ----- | ----------- |
-| `infrastructure-specialist` | Maintains build, CI, container, and deployment configuration. |
+| `infrastructure-specialist` | Maintains build tooling, Dockerfiles, Compose, and dependency manifests/lockfiles for reproducible, secure builds. Use proactively when editing Dockerfile, docker-compose, package.json, or lockfiles. |
 
 ### bluetemberg-agents-kubernetes-specialist
 
@@ -231,7 +231,7 @@ Kubernetes specialist agent for Bluetemberg — manifests, Helm charts, Kustomiz
 
 | Agent | Description |
 | ----- | ----------- |
-| `kubernetes-specialist` | Writes and reviews Kubernetes manifests, Helm charts, and Kustomize overlays for secure, production-grade deployments. |
+| `kubernetes-specialist` | Writes and reviews Kubernetes manifests, Helm charts, Kustomize overlays — RBAC, probes, resources, security contexts, autoscaling, zero-downtime rollouts. Use proactively when editing k8s YAML. |
 
 ### bluetemberg-agents-security-specialist
 
@@ -239,7 +239,7 @@ Security specialist agent for Bluetemberg — vulnerability audit, dependency sc
 
 | Agent | Description |
 | ----- | ----------- |
-| `security-specialist` | Audits code for security vulnerabilities, secrets exposure, and dependency risks. |
+| `security-specialist` | Audits code for OWASP Top 10 vulns, injection, broken auth/access control, secrets exposure, and dependency/supply-chain CVEs. MUST BE USED for deep security review. Reports findings, does not edit. |
 
 ### bluetemberg-agents-sre-specialist
 
@@ -247,7 +247,7 @@ SRE specialist agent for Bluetemberg — SLOs, alerting, runbooks, and post-mort
 
 | Agent | Description |
 | ----- | ----------- |
-| `sre-specialist` | Designs SLOs, alerts, on-call runbooks, and reliability improvements for production services. |
+| `sre-specialist` | Reviews production reliability — SLOs, SLIs, error budgets, alerts, runbooks, post-mortems. Use proactively for on-call, observability, or incident-readiness review, not code or security audits. |
 
 ### bluetemberg-agents-test-specialist
 
@@ -255,7 +255,7 @@ Test specialist agent for Bluetemberg — test creation, refactoring, and stabil
 
 | Agent | Description |
 | ----- | ----------- |
-| `test-specialist` | Creates, refactors, and stabilizes automated tests with deterministic patterns. |
+| `test-specialist` | Writes, refactors, and stabilizes unit/integration/e2e tests, fixes flaky/non-deterministic tests, applies fakes and data builders. Use proactively when adding tests or diagnosing flakiness. |
 
 ## Skills
 
