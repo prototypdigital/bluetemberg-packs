@@ -30,6 +30,7 @@
     "packages/bluetemberg-rules-devops": {},
     "packages/bluetemberg-rules-docs": {},
     "packages/bluetemberg-rules-git": {},
+    "packages/bluetemberg-rules-i18n": {},
     "packages/bluetemberg-rules-llm-api-product": {},
     "packages/bluetemberg-rules-nextjs": {},
     "packages/bluetemberg-rules-payload": {},

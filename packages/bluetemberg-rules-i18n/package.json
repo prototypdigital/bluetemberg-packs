@@ -1,0 +1,32 @@
+{
+  "name": "bluetemberg-rules-i18n",
+  "version": "0.1.0",
+  "description": "Internationalization rules for Bluetemberg — next-intl locale routing, Payload localized-field discipline, locale route guards, and message-key conventions.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "i18n",
+    "next-intl",
+    "payload"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack"
+    ],
+    "stacks": [
+      "nextjs",
+      "payload"
+    ]
+  }
+}
