@@ -1,6 +1,6 @@
 ---
 name: create-skill
-description: Scaffold a new bluetemberg skill to the deep-skill standard — a step-by-step Protocol with decision trees, BAD/GOOD examples, and a completion checklist.
+description: Scaffold a new bluetemberg skill to the deep-skill standard — Protocol, decision trees, BAD/GOOD examples, and a completion checklist.
 ---
 
 # create-skill

@@ -323,7 +323,7 @@ Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required
 
 | Skill | Description |
 | ----- | ----------- |
-| `create-skill` | Scaffold a new bluetemberg skill to the deep-skill standard — a step-by-step Protocol with decision trees, BAD/GOOD examples, and a completion checklist. |
+| `create-skill` | Scaffold a new bluetemberg skill to the deep-skill standard — Protocol, decision trees, BAD/GOOD examples, and a completion checklist. |
 
 ### bluetemberg-skills-design-critique
 

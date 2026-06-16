@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-16T07:39:12.175Z",
+  "generated": "2026-06-16T08:17:18.524Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -808,7 +808,7 @@
       "skills": [
         {
           "name": "create-skill",
-          "description": "Scaffold a new bluetemberg skill to the deep-skill standard — a step-by-step Protocol with decision trees, BAD/GOOD examples, and a completion checklist."
+          "description": "Scaffold a new bluetemberg skill to the deep-skill standard — Protocol, decision trees, BAD/GOOD examples, and a completion checklist."
         }
       ],
       "preview": "Use this skill when asked to add, create, or write a new skill for the project. - \"add a skill that...\" - \"create a skill for...\" - \"write a skill to...\" - Any request to scaffold a new on-demand workflow for the AI tooling 1. The agent MUST check `llm/skills/` for an existing skill with the same na"

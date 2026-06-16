@@ -91,6 +91,23 @@ Use the correct `bluetemberg` block for the pack's scope — choose one, never m
 
 ## Examples
 
+The two most common pack-creation mistakes are mixing kinds in one pack and setting both `universal: true` and a non-empty `profiles` array — validation rejects both:
+
+```text
+BAD:  packages/bluetemberg-mixed-tooling/
+        llm/rules/*.md           # rules AND skills in one pack
+        llm/skills/{name}/SKILL.md
+      package.json → "bluetemberg": { "universal": true, "profiles": ["backend"] }
+      -- Two kinds in one pack, and universal:true WITH a non-empty profiles list.
+         The pack can't be categorized or scoped; `npm run validate` fails.
+
+GOOD: packages/bluetemberg-rules-tooling/    # exactly one kind
+        llm/rules/*.md
+      package.json → "bluetemberg": { "universal": false, "profiles": ["backend", "fullstack"] }
+      -- One kind, one scope. Registered in bluetemberg.config.json (alphabetical)
+         and in release-please-config.json + .release-please-manifest.json.
+```
+
 - "Create a testing rules pack for backend and frontend" → `packages/bluetemberg-rules-testing/` with `package.json` (`universal: false`, `profiles: ["frontend", "backend", "fullstack"]`), `llm/rules/*.md` authored per `create-rule`, registered in `bluetemberg.config.json`, catalog regenerated, validate + lint:md green
 - "Scaffold a universal observability skills pack" → `packages/bluetemberg-skills-observability/` with `universal: true`, `profiles: []`, `llm/skills/{name}/SKILL.md`
 
