@@ -41,6 +41,7 @@
     "./packages/bluetemberg-skills-docs-upkeep",
     "./packages/bluetemberg-skills-figma-to-code",
     "./packages/bluetemberg-skills-infrastructure-drift-check",
+    "./packages/bluetemberg-skills-k6-load-testing",
     "./packages/bluetemberg-skills-migration-safety",
     "./packages/bluetemberg-skills-patterns",
     "./packages/bluetemberg-skills-payload-cache-revalidation",
