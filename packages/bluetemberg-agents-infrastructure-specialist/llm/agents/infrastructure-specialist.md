@@ -28,16 +28,17 @@ Every production Dockerfile must use multi-stage builds to separate build-time d
 FROM node:20.14.0-alpine3.19 AS builder
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci --frozen-lockfile
+RUN npm ci
 COPY . .
 RUN npm run build
 
-# Stage 2: runtime — only the output, no dev deps, no source
+# Stage 2: runtime — only the output, production deps, no source
 FROM node:20.14.0-alpine3.19 AS runtime
 RUN addgroup -S app && adduser -S app -G app
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
+COPY package.json package-lock.json ./
+RUN npm ci --omit=dev
 USER app
 EXPOSE 3000
 HEALTHCHECK --interval=30s --timeout=5s CMD wget -qO- http://localhost:3000/health || exit 1
@@ -53,12 +54,22 @@ Order `COPY` instructions from least- to most-frequently-changing:
 FROM node:20.14.0-alpine3.19
 WORKDIR /app
 COPY . .
-RUN npm ci --frozen-lockfile
+RUN npm ci
+RUN npm run build
+```
+
+```dockerfile
+# GOOD — dependency layers stay cached across source-only changes
+FROM node:20.14.0-alpine3.19
+WORKDIR /app
+COPY package.json package-lock.json ./
+RUN npm ci
+COPY . .
 RUN npm run build
 ```
 
 1. Copy dependency manifests (`package.json`, `package-lock.json`)
-2. Run `npm ci --frozen-lockfile` — this layer caches across source-only changes
+2. Run `npm ci` — this layer caches across source-only changes
 3. Copy source files
 4. Run build
 
@@ -80,7 +91,7 @@ coverage
 ## Dependency management
 
 - **Pin exact versions** in production manifests and commit lockfiles. A `^` range with an out-of-date lockfile is an unfrozen build — different machines produce different installs.
-- **Use `npm ci --frozen-lockfile` in CI** (or the equivalent for your package manager). `npm install` in CI is wrong — it can silently update the lockfile.
+- **Use `npm ci` in CI** (or the equivalent for your package manager). `npm install` in CI is wrong — it can silently update the lockfile. (`--frozen-lockfile` is a Yarn/pnpm flag; `npm ci` is inherently frozen.)
 - **Run `npm audit`** (or `pip-audit`, `trivy`) on every CI run; fail the build on critical CVEs before they reach production.
 - **Verify every new dependency exists in the real registry** before adding it — LLMs suggest non-existent packages at a measurable rate (~5.2% for commercial models). Confirm the package name, owner, and download history. *(rule: llm-package-hallucination)*
 
