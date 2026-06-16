@@ -41,6 +41,7 @@
   "packages/bluetemberg-skills-docs-upkeep": "0.2.0",
   "packages/bluetemberg-skills-figma-to-code": "0.0.0",
   "packages/bluetemberg-skills-infrastructure-drift-check": "0.1.0",
+  "packages/bluetemberg-skills-k6-load-testing": "0.0.0",
   "packages/bluetemberg-skills-migration-safety": "0.1.0",
   "packages/bluetemberg-skills-patterns": "0.1.0",
   "packages/bluetemberg-skills-payload-cache-revalidation": "0.0.0",
