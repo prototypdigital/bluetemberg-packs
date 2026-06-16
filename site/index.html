@@ -6,7 +6,7 @@
     <title>Bluetemberg Packs — browse the catalog</title>
     <meta
       name="description"
-      content="Browse every official Bluetemberg pack — rules, agents, skills, and guardrails. Filter by kind, profile, or name, and copy the install command."
+      content="Browse every official Bluetemberg pack — rules, agents, skills, and guardrails. Filter by kind, profile, stack, or name, and copy the install command."
     />
     <link
       rel="canonical"
@@ -570,7 +570,8 @@
         padding: 1px 0 1px 7px;
         white-space: nowrap;
       }
-      .uni-tag {
+      .uni-tag,
+      .stack-tag {
         font-family: var(--mono);
         font-size: 10px;
         letter-spacing: 0.1em;
@@ -778,8 +779,8 @@
         <h1>The pack <em>catalog.</em></h1>
         <p class="lede">
           Every official Bluetemberg pack — rules, agents, skills, and
-          guardrails — from one source of truth. Search by name, filter by kind
-          or team profile, and open any pack on
+          guardrails — from one source of truth. Search by name, filter by kind,
+          team profile, or stack, and open any pack on
           <a
             href="https://www.npmjs.com/search?q=bluetemberg-"
             target="_blank"
@@ -821,6 +822,15 @@
           >
             Universal only
           </button>
+        </div>
+        <div
+          class="filter-row"
+          role="group"
+          aria-label="Filter by stack"
+          id="stack-row"
+        >
+          <span class="filter-key">Stack</span>
+          <div id="stack-filters"></div>
         </div>
         <div class="bundle" id="bundle" aria-live="polite"></div>
       </div>
@@ -910,6 +920,9 @@
         "pure-infra",
         "agentic",
       ];
+      // Canonical stack order; any stack present in the catalog but missing here
+      // is appended. The whole Stack row hides when no pack declares a stack.
+      const STACK_ORDER = ["nextjs", "react", "payload"];
 
       /* Singular noun per kind, for "4 rules" / "1 agent" labels. */
       const ITEM_TERM = {
@@ -922,6 +935,7 @@
       const state = {
         kind: "all",
         profile: "all",
+        stack: "all",
         universal: false,
         query: "",
       };
@@ -961,6 +975,9 @@
         const profile = p.get("profile");
         if (profile === "all" || PROFILE_ORDER.includes(profile))
           state.profile = profile;
+        const stack = p.get("stack");
+        const stacksInCatalog = new Set(PACKS.flatMap((pk) => pk.stacks || []));
+        if (stack === "all" || stacksInCatalog.has(stack)) state.stack = stack;
         state.universal = p.get("universal") === "1";
         state.query = p.get("q") || "";
       }
@@ -969,6 +986,7 @@
         const p = new URLSearchParams();
         if (state.kind !== "all") p.set("kind", state.kind);
         if (state.profile !== "all") p.set("profile", state.profile);
+        if (state.stack !== "all") p.set("stack", state.stack);
         if (state.universal) p.set("universal", "1");
         if (state.query) p.set("q", state.query);
         const qs = p.toString();
@@ -985,7 +1003,7 @@
         const itemText = items
           .map((i) => `${i.name} ${i.description || ""}`)
           .join(" ");
-        return `${pack.name} ${pack.description} ${itemText}`.toLowerCase();
+        return `${pack.name} ${pack.description} ${itemText} ${(pack.stacks || []).join(" ")}`.toLowerCase();
       }
 
       function matches(pack) {
@@ -994,6 +1012,8 @@
           state.profile !== "all" &&
           !(pack.profiles || []).includes(state.profile)
         )
+          return false;
+        if (state.stack !== "all" && !(pack.stacks || []).includes(state.stack))
           return false;
         if (state.universal && !pack.universal) return false;
         if (state.query) {
@@ -1046,6 +1066,7 @@
     </div>
     <div class="pack-aside">
       <span class="kind-tag" style="--kc:${KIND_META[pack.kind].color}">${esc(KIND_META[pack.kind].heading)}</span>
+      ${(pack.stacks || []).map((s) => `<span class="stack-tag">${esc(s)}</span>`).join("")}
       ${pack.universal ? '<span class="uni-tag">Universal</span>' : ""}
     </div>
     ${contents}
@@ -1080,7 +1101,7 @@
         if (visible.length === 0) {
           $list.innerHTML = `<div class="state">
       <h2>Nothing matches that.</h2>
-      <p>No pack fits the current filters. Loosen the kind or profile, clear the search, or reset everything.</p>
+      <p>No pack fits the current filters. Loosen the kind, profile, or stack, clear the search, or reset everything.</p>
       <button class="reset" id="reset">Reset filters</button>
     </div>`;
           return;
@@ -1146,6 +1167,30 @@
             chip(p, { dataset: { filter: "profile", value: p } }),
           );
         }
+
+        // Stack row: only render stacks actually present in the catalog, in
+        // canonical order. Hide the whole row while nothing declares a stack.
+        const stackWrap = document.getElementById("stack-filters");
+        const stackRow = document.getElementById("stack-row");
+        const presentStacks = [...new Set(PACKS.flatMap((p) => p.stacks || []))];
+        if (!presentStacks.length) {
+          stackRow.style.display = "none";
+          return;
+        }
+        stackWrap.style.display = "contents";
+        stackWrap.appendChild(
+          chip("All", { dataset: { filter: "stack", value: "all" } }),
+        );
+        const knownStacks = new Set(STACK_ORDER);
+        const orderedStacks = [
+          ...STACK_ORDER.filter((s) => presentStacks.includes(s)),
+          ...presentStacks.filter((s) => !knownStacks.has(s)).sort(),
+        ];
+        for (const s of orderedStacks) {
+          stackWrap.appendChild(
+            chip(s, { dataset: { filter: "stack", value: s } }),
+          );
+        }
       }
 
       function setActive(filter, value) {
@@ -1160,6 +1205,7 @@
       function syncControls() {
         setActive("kind", state.kind);
         setActive("profile", state.profile);
+        setActive("stack", state.stack);
         $search.value = state.query;
         $universal.setAttribute("aria-pressed", String(state.universal));
       }
@@ -1237,6 +1283,7 @@
         if (e.target.id === "reset") {
           state.kind = "all";
           state.profile = "all";
+          state.stack = "all";
           state.universal = false;
           state.query = "";
           syncControls();
