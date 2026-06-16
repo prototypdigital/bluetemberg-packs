@@ -42,7 +42,10 @@ Use this skill when asked to add, create, or write a new always-on rule for the 
 
    **`## Gotchas`** — edge cases, false-positive traps, or platform-specific caveats, when applicable.
 
-6. The agent MUST keep directives concrete and consequence-driven — no vague guidance ("write clean code"). Every directive should be something a reviewer could check.
+6. The agent MUST keep directives concrete and consequence-driven — no vague guidance ("write clean code"). Every directive should be something a reviewer could check. Specifically:
+   - **Pair every prohibition with the positive replacement** — "read from `process.env`" beside "never read `.env`", not a bare "don't". A prohibition alone leaves the model to guess the substitute.
+   - **Apply the deletion test** to every line: would removing it cause a mistake? If not, cut it — bloated always-on rules get ignored. Prefer many small rules over one long one.
+   - **A rule is advisory, not a guarantee** (instruction-following is ~77% even for strong models). A non-negotiable invariant belongs in a deterministic gate (a guardrail/hook, linter, or CI), with the rule explaining the *why*. Full bar: [Authoring Standards](https://github.com/prototypdigital/bluetemberg-packs/wiki/Authoring-Standards#rules--always-on-passive-context).
 
 7. The agent MUST run `npm run sync:llm-config` (or the project's documented sync command) after writing the file, so the rule propagates to all platform directories (`.claude/rules/`, `.cursor/rules/`, `.github/instructions/`). Do not report the rule as created until sync succeeds.
 

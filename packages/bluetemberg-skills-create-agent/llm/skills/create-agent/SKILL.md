@@ -22,7 +22,7 @@ Use this skill when asked to add, create, or write a new specialist agent (subag
 
 3. The agent MUST gather the following — if any is unclear, ask:
    - **name**: kebab-case identifier matching the role (e.g. `code-reviewer`, `security-specialist`)
-   - **description**: one sentence describing what the agent does and when to delegate to it (this drives automatic delegation, so make the trigger context explicit)
+   - **description**: the delegation trigger — what the agent does **and when to route to it**, in third person with the keywords a user would type. Add a proactive cue (`Use proactively after code changes`, `MUST BE USED for X`) when you want auto-delegation. The description (not the body) drives routing, so make it specific and mutually exclusive from sibling agents. See [Authoring Standards](https://github.com/prototypdigital/bluetemberg-packs/wiki/Authoring-Standards#agents--delegated-specialist-sub-agents).
    - **tools**: the minimal tool set the role needs, as a string array (e.g. `["read", "search"]` for a reviewer; add `"edit"` only if it must modify files, `"execute"` only if it must run commands). Default to least privilege — never grant `edit`/`execute` to a read-only role.
    - **profiles**: which team profiles this agent serves (`frontend`, `backend`, `fullstack`, `devops`, `pure-infra`, `agentic`); omit the field entirely if universal
 
@@ -34,7 +34,9 @@ Use this skill when asked to add, create, or write a new specialist agent (subag
 
    **`## Responsibilities`** — the concrete things this agent does, as a list. Keep it to a single coherent role; a list spanning unrelated domains means it should be two agents.
 
-   **`## Constraints`** — the guardrails: what it must NOT do, where it defers (e.g. "defer formatting to automated tools"), and any hard prohibitions (e.g. "never approve changes with known security vulnerabilities"). Least-privilege intent stated here should match the `tools` array.
+   **`## Constraints`** — the guardrails: what it must NOT do, where it defers (e.g. "defer formatting to automated tools"), and any hard prohibitions (e.g. "never approve changes with known security vulnerabilities"). Least-privilege intent stated here should match the `tools` array (defense in depth — a "never modify files" constraint MUST be backed by omitting `edit`/`execute`).
+
+   **`## Output`** — what the agent returns to the caller (the summary shape / format). A sub-agent reports back a summary, not its full transcript; an explicit return format prevents duplicated or garbled work. For a narrow, read-only, or high-volume role, note that it suits a cheaper/faster model tier.
 
 6. The agent MUST keep tool grants minimal and consistent with the constraints — an agent described as read-only MUST NOT list `edit` or `execute` in `tools`.
 
@@ -47,7 +49,7 @@ Use this skill when asked to add, create, or write a new specialist agent (subag
 ```markdown
 ---
 name: {kebab-case-name}
-description: {What it does and when to delegate to it.}
+description: {What it does} — use when {trigger context}. {Optional: Use proactively for X.}
 tools: ["read", "search"]
 profiles:           # omit this block entirely if universal
   - backend
@@ -65,7 +67,11 @@ You are a {role}. Your job is to {focused mandate}.
 ## Constraints
 
 - {What it must not do / where it defers}
-- {Hard prohibition}
+- {Hard prohibition — backed by the tools allowlist}
+
+## Output
+
+- {What the agent returns to the caller — the summary shape}
 ```
 
 ## Examples
