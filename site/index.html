@@ -166,7 +166,7 @@
       }
 
       :focus-visible {
-        outline: 2px solid var(--accent);
+        outline: 2px solid var(--accent-ink);
         outline-offset: 2px;
       }
 
@@ -272,16 +272,98 @@
         font-weight: 500;
       }
 
-      .filter-row {
+      /* Command row — search stays primary; Kind is a stable segmented strip and
+         everything else collapses behind Refine, so the resting bar never grows. */
+      .command-row {
         display: flex;
         align-items: center;
+        gap: 16px;
+      }
+      .kind-seg {
+        display: inline-flex;
+        border: var(--hairline);
+      }
+      .kind-seg .seg {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--muted);
+        padding: 5px 13px;
+        border-left: var(--hairline);
+        transition:
+          color 0.12s,
+          background-color 0.12s;
+      }
+      .kind-seg .seg:first-child {
+        border-left: none;
+      }
+      .kind-seg .seg:hover {
+        color: var(--ink);
+      }
+      .kind-seg .seg[aria-pressed="true"] {
+        color: var(--ink-bright);
+        background: color-mix(in srgb, var(--accent) 18%, transparent);
+        box-shadow: inset 0 -2px 0 var(--accent-ink);
+      }
+      .refine-btn {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        border: var(--hairline);
+        padding: 5px 12px;
+        margin-left: auto;
+        display: inline-flex;
+        align-items: center;
         gap: 8px;
+        transition:
+          color 0.12s,
+          border-color 0.12s;
+      }
+      .refine-btn:hover {
+        color: var(--ink);
+        border-color: var(--muted);
+      }
+      .refine-btn[aria-expanded="true"] {
+        color: var(--ink-bright);
+        border-color: var(--accent);
+      }
+      .refine-btn .chev {
+        transition: transform 0.15s;
+      }
+      .refine-btn[aria-expanded="true"] .chev {
+        transform: rotate(90deg);
+      }
+      .rf-badge {
+        font-size: 10px;
+        color: var(--ink-bright);
+        background: color-mix(in srgb, var(--accent) 22%, transparent);
+        padding: 1px 6px;
+      }
+      .rf-badge[hidden] {
+        display: none;
+      }
+      /* Inline refine panel — a bordered block, never a floating sidebar. */
+      .refine-panel {
+        margin-top: 12px;
+        border: var(--hairline);
+        background: var(--bg-2);
+        padding: 14px 16px;
+        display: grid;
+        gap: 12px;
+      }
+      .refine-panel[hidden] {
+        display: none;
+      }
+      .rf-block {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
         flex-wrap: wrap;
       }
-      .filter-row + .filter-row {
-        margin-top: 9px;
-      }
-      .filter-key {
+      .rf-key {
         font-family: var(--mono);
         font-size: 10px;
         letter-spacing: 0.13em;
@@ -289,6 +371,133 @@
         color: var(--muted);
         width: 58px;
         flex-shrink: 0;
+        padding-top: 6px;
+      }
+      .rf-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        flex: 1;
+        min-width: 0;
+      }
+      .rf-narrow {
+        flex-basis: 100%;
+        background: var(--bg);
+        border: var(--hairline);
+        color: var(--ink);
+        font-family: var(--mono);
+        font-size: 11px;
+        padding: 5px 9px;
+        outline: none;
+        margin-bottom: 4px;
+      }
+      .rf-narrow:focus {
+        border-color: var(--accent);
+      }
+      .rf-narrow[hidden] {
+        display: none;
+      }
+      /* Live per-value count on each panel chip. */
+      .chip .sc {
+        margin-left: 7px;
+        font-size: 10px;
+        color: var(--muted);
+      }
+      .chip[aria-pressed="true"] .sc {
+        color: var(--accent-ink);
+      }
+      .sc:empty {
+        display: none;
+      }
+      /* Marginalia — active filters stay legible even when the panel is closed. */
+      .active-line {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 11px;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--muted);
+      }
+      .active-line[hidden] {
+        display: none;
+      }
+      .active-line .lead {
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+      .token {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border: var(--hairline);
+        color: var(--ink);
+        padding: 2px 4px 2px 9px;
+        letter-spacing: 0.04em;
+      }
+      .token .tk {
+        color: var(--muted);
+      }
+      .token .tx {
+        border-left: var(--hairline);
+        padding: 1px 8px;
+        color: var(--muted);
+        transition:
+          color 0.12s,
+          background-color 0.12s;
+      }
+      .token .tx:hover {
+        color: var(--ink-bright);
+        background: var(--bg);
+      }
+      .active-line .clear-all {
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        border-bottom: 1px solid transparent;
+      }
+      .active-line .clear-all:hover {
+        color: var(--ink-bright);
+        border-bottom-color: var(--accent);
+      }
+      @media (max-width: 560px) {
+        .command-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .kind-seg {
+          display: flex;
+        }
+        .kind-seg .seg {
+          flex: 1;
+          text-align: center;
+          padding: 13px 3px;
+          font-size: 10px;
+          letter-spacing: 0.01em;
+        }
+        .refine-btn {
+          margin-left: 0;
+          justify-content: center;
+          padding: 13px 12px;
+        }
+        .rf-block {
+          flex-direction: column;
+          gap: 6px;
+        }
+        .rf-key {
+          width: auto;
+          padding-top: 0;
+        }
+        .rf-chips .chip {
+          padding: 9px 11px;
+        }
+        .token {
+          padding: 2px 4px 2px 11px;
+        }
+        .token .tx {
+          padding: 9px 12px;
+        }
       }
       .chip {
         font-family: var(--mono);
@@ -805,39 +1014,68 @@
             class="search"
             type="search"
             id="search"
-            placeholder="search by name, description, or item…"
+            placeholder="search packs, items, or stacks…"
             autocomplete="off"
             spellcheck="false"
-            aria-label="Search packs by name, description, or item"
+            aria-label="Search packs by name, description, item, or stack"
           />
           <span class="count" aria-live="polite"
             ><strong id="count">—</strong> showing</span
           >
         </div>
-        <div class="filter-row" role="group" aria-label="Filter by kind">
-          <span class="filter-key">Kind</span>
-          <div id="kind-filters"></div>
-        </div>
-        <div class="filter-row" role="group" aria-label="Filter by profile">
-          <span class="filter-key">Profile</span>
-          <div id="profile-filters"></div>
+        <div class="command-row">
+          <div
+            class="kind-seg"
+            role="group"
+            aria-label="Filter by kind"
+            id="kind-filters"
+          ></div>
           <button
-            class="chip toggle"
-            id="universal"
-            data-toggle="universal"
-            aria-pressed="false"
+            class="refine-btn"
+            id="refine-toggle"
+            aria-expanded="false"
+            aria-controls="refine-panel"
           >
-            Universal only
+            Refine<span class="rf-badge" id="refine-badge" hidden>0</span>
+            <span class="chev" aria-hidden="true">▸</span>
           </button>
         </div>
-        <div
-          class="filter-row"
-          role="group"
-          aria-label="Filter by stack"
-          id="stack-row"
-        >
-          <span class="filter-key">Stack</span>
-          <div id="stack-filters"></div>
+        <div class="active-line" id="active-line" hidden></div>
+        <div class="refine-panel" id="refine-panel" hidden>
+          <div class="rf-block" role="group" aria-label="Filter by profile">
+            <span class="rf-key">Profile</span>
+            <div class="rf-chips" id="profile-filters"></div>
+          </div>
+          <div
+            class="rf-block"
+            role="group"
+            aria-label="Filter by stack"
+            id="stack-row"
+          >
+            <span class="rf-key">Stack</span>
+            <input
+              class="rf-narrow"
+              id="stack-narrow"
+              type="text"
+              placeholder="narrow…"
+              aria-label="Narrow the stack list"
+              autocomplete="off"
+              spellcheck="false"
+              hidden
+            />
+            <div class="rf-chips" id="stack-filters"></div>
+          </div>
+          <div class="rf-block" role="group" aria-label="Options">
+            <span class="rf-key">Options</span>
+            <button
+              class="chip toggle"
+              id="universal"
+              data-toggle="universal"
+              aria-pressed="false"
+            >
+              Universal only
+            </button>
+          </div>
         </div>
         <div class="bundle" id="bundle" aria-live="polite"></div>
       </div>
@@ -849,7 +1087,14 @@
            with the full pack list so search engines and link unfurlers that
            don't run JS still see every pack. -->
       <noscript>
-        <div class="wrap"><!--PACKS--></div>
+        <div class="wrap">
+          <p class="state">
+            This catalog is interactive — enable JavaScript to search and filter,
+            or browse every pack on
+            <a href="https://www.npmjs.com/search?q=bluetemberg-">npm</a>.
+          </p>
+          <!--PACKS-->
+        </div>
       </noscript>
     </main>
 
@@ -932,6 +1177,7 @@
         "devops",
         "pure-infra",
         "agentic",
+        "design-engineer",
       ];
       // Canonical stack order; any stack present in the catalog but missing here
       // is appended. The whole Stack row hides when no pack declares a stack.
@@ -985,11 +1231,15 @@
         const p = new URLSearchParams(location.search);
         const kind = p.get("kind");
         if (kind === "all" || KIND_ORDER.includes(kind)) state.kind = kind;
+        const profilesInCatalog = new Set([
+          ...PROFILE_ORDER,
+          ...PACKS.flatMap((pk) => pk.profiles || []),
+        ]);
         const profile = p.get("profile");
-        if (profile === "all" || PROFILE_ORDER.includes(profile))
+        if (profile === "all" || profilesInCatalog.has(profile))
           state.profile = profile;
-        const stack = p.get("stack");
         const stacksInCatalog = new Set(PACKS.flatMap((pk) => pk.stacks || []));
+        const stack = p.get("stack");
         if (stack === "all" || stacksInCatalog.has(stack)) state.stack = stack;
         state.universal = p.get("universal") === "1";
         state.query = p.get("q") || "";
@@ -1019,14 +1269,22 @@
         return `${pack.name} ${pack.description} ${itemText} ${(pack.stacks || []).join(" ")}`.toLowerCase();
       }
 
-      function matches(pack) {
-        if (state.kind !== "all" && pack.kind !== state.kind) return false;
+      /* matchesExcept ignores one facet's own constraint, so the panel chips can
+         show how many packs each value would yield given the OTHER active filters. */
+      function matchesExcept(pack, except) {
+        if (except !== "kind" && state.kind !== "all" && pack.kind !== state.kind)
+          return false;
         if (
+          except !== "profile" &&
           state.profile !== "all" &&
           !(pack.profiles || []).includes(state.profile)
         )
           return false;
-        if (state.stack !== "all" && !(pack.stacks || []).includes(state.stack))
+        if (
+          except !== "stack" &&
+          state.stack !== "all" &&
+          !(pack.stacks || []).includes(state.stack)
+        )
           return false;
         if (state.universal && !pack.universal) return false;
         if (state.query) {
@@ -1036,6 +1294,8 @@
         }
         return true;
       }
+
+      const matches = (pack) => matchesExcept(pack, "");
 
       function packCard(pack) {
         const npm = `https://www.npmjs.com/package/${encodeURIComponent(pack.name)}`;
@@ -1051,7 +1311,7 @@
         const cmd = installCmd(pack.name);
         const install = isInstallable(pack)
           ? `<div class="install"><code class="cmd">${esc(cmd)}</code><button class="copy" data-copy="${esc(cmd)}" aria-label="Copy install command for ${esc(pack.name)}">Copy</button></div>`
-          : `<span class="soon">not yet on npm — coming soon</span>`;
+          : `<span class="soon">not yet published to npm</span>`;
 
         const term = ITEM_TERM[pack.kind] || "item";
         const countLabel = `${items.length} ${term}${items.length === 1 ? "" : "s"}`;
@@ -1106,16 +1366,40 @@
       <button class="copy-bundle" data-copy="${esc(cmd)}">Copy install for all ${n}</button>`;
       }
 
+      /* Live per-value counts on the panel chips — each shows how many packs it
+         would yield given the other active filters (standard faceted count). */
+      function updateCounts() {
+        const axis = { profile: "profiles", stack: "stacks" };
+        for (const facet of ["profile", "stack"]) {
+          document.querySelectorAll(`#${facet}-filters .chip`).forEach((c) => {
+            const v = c.dataset.value;
+            const n = PACKS.filter(
+              (p) =>
+                matchesExcept(p, facet) &&
+                (v === "all" || (p[axis[facet]] || []).includes(v)),
+            ).length;
+            const sc = c.querySelector(".sc");
+            if (sc) sc.textContent = String(n);
+          });
+        }
+      }
+
       function render() {
         const visible = PACKS.filter(matches);
         $count.textContent = visible.length;
+        updateCounts();
         renderBundle(visible);
 
         if (visible.length === 0) {
-          $list.innerHTML = `<div class="state">
+          $list.innerHTML = PACKS.length
+            ? `<div class="state">
       <h2>Nothing matches that.</h2>
-      <p>No pack fits the current filters. Loosen the kind, profile, or stack, clear the search, or reset everything.</p>
+      <p>No pack fits these filters. Loosen one, or clear them all.</p>
       <button class="reset" id="reset">Reset filters</button>
+    </div>`
+            : `<div class="state">
+      <h2>The catalog is empty.</h2>
+      <p>No packs were found in the catalog — it may not have been generated yet. Run <code>npm run build:site</code>, or browse every pack on <a href="https://www.npmjs.com/search?q=bluetemberg-" target="_blank" rel="noopener">npm</a>.</p>
     </div>`;
           return;
         }
@@ -1141,48 +1425,48 @@
         $list.innerHTML = html;
       }
 
-      /* ---- filter chip construction ---- */
-      function chip(label, { pressed = false, dataset = {} } = {}) {
+      /* ---- control construction ---- mk builds a Kind segment or a panel chip;
+         chips carry a .sc span for the live count. */
+      function mk(cls, label, dataset, withCount) {
         const btn = document.createElement("button");
-        btn.className = "chip";
+        btn.className = cls;
         btn.textContent = label;
-        btn.setAttribute("aria-pressed", String(pressed));
+        btn.setAttribute("aria-pressed", "false");
         for (const [k, v] of Object.entries(dataset)) btn.dataset[k] = v;
+        if (withCount) {
+          const sc = document.createElement("span");
+          sc.className = "sc";
+          sc.setAttribute("aria-hidden", "true");
+          btn.appendChild(sc);
+        }
         return btn;
       }
 
       function buildFilters() {
         const kindWrap = document.getElementById("kind-filters");
-        const profWrap = document.getElementById("profile-filters");
-        kindWrap.style.display = profWrap.style.display = "contents";
-
-        kindWrap.appendChild(
-          chip("All", { dataset: { filter: "kind", value: "all" } }),
-        );
+        kindWrap.appendChild(mk("seg", "All", { filter: "kind", value: "all" }, false));
         for (const k of KIND_ORDER) {
           kindWrap.appendChild(
-            chip(KIND_META[k].heading, {
-              dataset: { filter: "kind", value: k },
-            }),
+            mk("seg", KIND_META[k].heading, { filter: "kind", value: k }, false),
           );
         }
+
+        const profWrap = document.getElementById("profile-filters");
         profWrap.appendChild(
-          chip("All", { dataset: { filter: "profile", value: "all" } }),
+          mk("chip", "All", { filter: "profile", value: "all" }, true),
         );
         // PROFILE_ORDER fixes the canonical order; append any profile present in
         // the catalog but missing from that list so it stays filterable.
-        const known = new Set(PROFILE_ORDER);
-        const extra = [...new Set(PACKS.flatMap((p) => p.profiles || []))]
-          .filter((p) => !known.has(p))
+        const knownP = new Set(PROFILE_ORDER);
+        const extraP = [...new Set(PACKS.flatMap((p) => p.profiles || []))]
+          .filter((p) => !knownP.has(p))
           .sort();
-        for (const p of [...PROFILE_ORDER, ...extra]) {
-          profWrap.appendChild(
-            chip(p, { dataset: { filter: "profile", value: p } }),
-          );
+        for (const p of [...PROFILE_ORDER, ...extraP]) {
+          profWrap.appendChild(mk("chip", p, { filter: "profile", value: p }, true));
         }
 
-        // Stack row: only render stacks actually present in the catalog, in
-        // canonical order. Hide the whole row while nothing declares a stack.
+        // Stack: only render stacks present in the catalog, canonical order first.
+        // Hide the whole block until something declares a stack.
         const stackWrap = document.getElementById("stack-filters");
         const stackRow = document.getElementById("stack-row");
         const presentStacks = [...new Set(PACKS.flatMap((p) => p.stacks || []))];
@@ -1190,37 +1474,83 @@
           stackRow.style.display = "none";
           return;
         }
-        stackWrap.style.display = "contents";
         stackWrap.appendChild(
-          chip("All", { dataset: { filter: "stack", value: "all" } }),
+          mk("chip", "All", { filter: "stack", value: "all" }, true),
         );
-        const knownStacks = new Set(STACK_ORDER);
-        const orderedStacks = [
+        const knownS = new Set(STACK_ORDER);
+        const orderedS = [
           ...STACK_ORDER.filter((s) => presentStacks.includes(s)),
-          ...presentStacks.filter((s) => !knownStacks.has(s)).sort(),
+          ...presentStacks.filter((s) => !knownS.has(s)).sort(),
         ];
-        for (const s of orderedStacks) {
-          stackWrap.appendChild(
-            chip(s, { dataset: { filter: "stack", value: s } }),
-          );
+        for (const s of orderedS) {
+          stackWrap.appendChild(mk("chip", s, { filter: "stack", value: s }, true));
         }
+        // Once the stack list gets long, reveal a type-to-narrow input
+        // (transient — never serialized to state or the URL).
+        if (orderedS.length > 8)
+          document.getElementById("stack-narrow").hidden = false;
       }
 
       function setActive(filter, value) {
-        document
-          .querySelectorAll(`.chip[data-filter="${filter}"]`)
-          .forEach((c) => {
-            c.setAttribute("aria-pressed", String(c.dataset.value === value));
-          });
+        document.querySelectorAll(`[data-filter="${filter}"]`).forEach((c) => {
+          c.setAttribute("aria-pressed", String(c.dataset.value === value));
+        });
       }
 
-      /* Reflect the current state object onto the controls (used on load + reset). */
+      /* ---- active-filter marginalia + Refine badge ---- */
+      function activeFacets() {
+        const a = [];
+        if (state.kind !== "all")
+          a.push({ f: "kind", label: "kind", val: state.kind });
+        if (state.profile !== "all")
+          a.push({ f: "profile", label: "profile", val: state.profile });
+        if (state.stack !== "all")
+          a.push({ f: "stack", label: "stack", val: state.stack });
+        if (state.universal)
+          a.push({ f: "universal", label: "", val: "universal only" });
+        return a;
+      }
+
+      function renderActiveLine() {
+        const line = document.getElementById("active-line");
+        const facets = activeFacets();
+        if (!facets.length) {
+          line.hidden = true;
+          line.innerHTML = "";
+          return;
+        }
+        const tokens = facets
+          .map(({ f, label, val }) => {
+            const aria = label
+              ? `Remove ${label} filter: ${val}`
+              : "Remove universal-only filter";
+            return `<span class="token"><span class="tk">${label ? esc(label) + ":" : ""}</span>${esc(val)}<button class="tx" data-clear="${f}" aria-label="${esc(aria)}">✕</button></span>`;
+          })
+          .join("");
+        line.innerHTML = `<span class="lead">Filters —</span>${tokens}<button class="clear-all" data-clear="all">clear all</button>`;
+        line.hidden = false;
+      }
+
+      function refineBadge() {
+        const n =
+          (state.profile !== "all" ? 1 : 0) +
+          (state.stack !== "all" ? 1 : 0) +
+          (state.universal ? 1 : 0);
+        const badge = document.getElementById("refine-badge");
+        badge.textContent = String(n);
+        badge.hidden = n === 0;
+      }
+
+      /* Single reconciler — projects state onto the strip, panel chips, search,
+         badge, and marginalia. Every mutation routes through here. */
       function syncControls() {
         setActive("kind", state.kind);
         setActive("profile", state.profile);
         setActive("stack", state.stack);
         $search.value = state.query;
         $universal.setAttribute("aria-pressed", String(state.universal));
+        renderActiveLine();
+        refineBadge();
       }
 
       /* ---- clipboard with inline feedback ---- */
@@ -1263,17 +1593,67 @@
         render();
       });
 
+      // Stack type-to-narrow — hides non-matching stack chips as you type.
+      // Transient: never written to state or the URL.
+      document.getElementById("stack-narrow").addEventListener("input", (e) => {
+        const q = e.target.value.trim().toLowerCase();
+        document.querySelectorAll("#stack-filters .chip").forEach((c) => {
+          if (c.dataset.value === "all") return;
+          c.hidden = q !== "" && !c.dataset.value.toLowerCase().includes(q);
+        });
+      });
+
       document.addEventListener("click", (e) => {
         const copyBtn = e.target.closest("[data-copy]");
         if (copyBtn) {
           copyText(copyBtn.dataset.copy, copyBtn);
           return;
         }
-        const filterBtn = e.target.closest(".chip[data-filter]");
+        const refineToggle = e.target.closest("#refine-toggle");
+        if (refineToggle) {
+          const open = refineToggle.getAttribute("aria-expanded") === "true";
+          refineToggle.setAttribute("aria-expanded", String(!open));
+          const panel = document.getElementById("refine-panel");
+          panel.hidden = open;
+          if (!open) {
+            const first = panel.querySelector(".chip, .rf-narrow:not([hidden])");
+            if (first) first.focus();
+          } else {
+            refineToggle.focus();
+          }
+          return;
+        }
+        const clr = e.target.closest("[data-clear]");
+        if (clr) {
+          const f = clr.dataset.clear;
+          if (f === "all") {
+            state.kind = "all";
+            state.profile = "all";
+            state.stack = "all";
+            state.universal = false;
+            state.query = "";
+          } else if (f === "universal") {
+            state.universal = false;
+          } else {
+            state[f] = "all";
+          }
+          syncControls();
+          writeURL();
+          render();
+          // The clicked ✕ was just destroyed by the marginalia rerender — keep
+          // keyboard focus somewhere useful instead of dropping it to <body>.
+          const line = document.getElementById("active-line");
+          const next =
+            line && !line.hidden
+              ? line.querySelector(".tx, .clear-all")
+              : document.getElementById("refine-toggle");
+          if (next) next.focus();
+          return;
+        }
+        const filterBtn = e.target.closest("[data-filter]");
         if (filterBtn) {
-          const { filter, value } = filterBtn.dataset;
-          state[filter] = value;
-          setActive(filter, value);
+          state[filterBtn.dataset.filter] = filterBtn.dataset.value;
+          syncControls();
           writeURL();
           render();
           return;
@@ -1281,7 +1661,7 @@
         const toggle = e.target.closest('[data-toggle="universal"]');
         if (toggle) {
           state.universal = !state.universal;
-          toggle.setAttribute("aria-pressed", String(state.universal));
+          syncControls();
           writeURL();
           render();
           return;
@@ -1305,7 +1685,7 @@
         }
       });
 
-      /* ---- keyboard: "/" focuses search, Esc clears then blurs ---- */
+      /* ---- keyboard: "/" focuses search, Esc closes the panel / clears search ---- */
       document.addEventListener("keydown", (e) => {
         const tag = (e.target.tagName || "").toLowerCase();
         const typing = tag === "input" || tag === "textarea";
@@ -1314,14 +1694,28 @@
           $search.focus();
           return;
         }
-        if (e.key === "Escape" && e.target === $search) {
-          if ($search.value) {
-            $search.value = "";
-            state.query = "";
-            writeURL();
-            render();
-          } else {
-            $search.blur();
+        if (e.key === "Escape") {
+          const panel = document.getElementById("refine-panel");
+          const toggle = document.getElementById("refine-toggle");
+          if (
+            panel &&
+            !panel.hidden &&
+            (panel.contains(e.target) || e.target === toggle)
+          ) {
+            toggle.setAttribute("aria-expanded", "false");
+            panel.hidden = true;
+            toggle.focus();
+            return;
+          }
+          if (e.target === $search) {
+            if ($search.value) {
+              $search.value = "";
+              state.query = "";
+              writeURL();
+              render();
+            } else {
+              $search.blur();
+            }
           }
         }
       });
@@ -1341,6 +1735,8 @@
       }
 
       async function load() {
+        $count.textContent = "…";
+        $list.innerHTML = `<div class="state"><p>Loading the catalog…</p></div>`;
         try {
           const res = await fetch("./catalog.json", { cache: "no-cache" });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1352,6 +1748,7 @@
           buildFilters();
           syncControls();
           render();
+          writeURL(); // reflect sanitized state — drop any bogus ?param
           document.getElementById("gen").textContent =
             `${PACKS.length} packs · catalog generated ${fmtDate(data.generated)}`;
         } catch (err) {
