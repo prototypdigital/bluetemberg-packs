@@ -1,5 +1,5 @@
 {
-  "platforms": ["claude-marketplace"],
+  "platforms": ["claude", "claude-marketplace"],
   "source": "llm",
   "extends": [
     "./packages/bluetemberg-agents-a11y-specialist",

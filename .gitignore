@@ -4,3 +4,10 @@ plugins/
 .worktrees/
 .claire/
 _site/
+
+# Dogfooding: generated native Claude Code output from `bluetemberg sync`.
+# Source of truth is packages/*/llm/; these are regenerated on `npm install`
+# (postinstall) and are not committed — same treatment as plugins/.
+.claude/rules/
+.claude/agents/
+.claude/skills/
