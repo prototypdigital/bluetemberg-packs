@@ -9,7 +9,7 @@ scope:
 
 # Helm conventions
 
-Write Helm charts that are safe, reusable, and production-ready by default.
+Unsafe chart defaults (plaintext secrets, `privileged: true`, missing `required` guards) ship straight to whoever installs the chart, and `helm upgrade --force` can delete data-holding resources mid-upgrade. Gate installs with `helm lint` in CI.
 
 ## Chart structure
 

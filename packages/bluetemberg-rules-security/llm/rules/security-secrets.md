@@ -5,7 +5,7 @@ scope: "**"
 
 # Security — secrets management
 
-Secrets, tokens, API keys, and connection strings must never appear in source code.
+A secret committed to git lives in history forever — bots scrape public and leaked repos within minutes, so a single hardcoded key can mean account takeover or a compromised production database even after you delete the line. Secrets, tokens, API keys, and connection strings must never appear in source code.
 
 ## Rules
 
@@ -15,6 +15,8 @@ Secrets, tokens, API keys, and connection strings must never appear in source co
 - Rotate any secret that was accidentally committed, even after removal.
 - Keep `.env.example` with variable names but no real values.
 - Flag hardcoded strings that look like tokens, passwords, or connection strings in code review.
+
+This is a non-negotiable invariant: back it with a secret-scanning gate (pre-commit hook or CI step such as gitleaks/trufflehog) that blocks the commit — a prose rule alone cannot guarantee no secret slips through.
 
 ## Examples
 

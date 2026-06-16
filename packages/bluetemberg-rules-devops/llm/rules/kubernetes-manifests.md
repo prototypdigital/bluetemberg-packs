@@ -11,7 +11,7 @@ scope:
 
 # Kubernetes manifests
 
-Write Kubernetes manifests that are safe, predictable, and production-ready.
+Missing resource limits let one pod starve a node; missing probes leave dead pods serving traffic; privileged or root containers turn a compromise into a node takeover. Validate manifests in CI with `kubeconform` or `kube-score` so these gaps fail the build, not production.
 
 ## Resource requirements
 

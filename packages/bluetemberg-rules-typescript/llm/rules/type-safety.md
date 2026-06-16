@@ -5,7 +5,7 @@ scope: "**"
 
 # Type safety
 
-Maintain strict type safety across the codebase.
+**Why:** `any` and unchecked `as` assertions silence the compiler, letting type errors reach runtime as crashes the type system was meant to catch.
 
 ## Rules
 
@@ -28,3 +28,5 @@ if (isUser(data)) {
   const name = data.name;
 }
 ```
+
+`strict` mode and the no-`any` ban are deterministic invariants; enforce them with `tsconfig` `strict: true` and ESLint `@typescript-eslint/no-explicit-any` in CI rather than this prose alone.

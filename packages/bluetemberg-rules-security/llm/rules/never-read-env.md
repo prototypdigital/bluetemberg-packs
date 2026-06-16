@@ -5,7 +5,15 @@ scope: "**"
 
 # Never read .env
 
-You are required to NEVER read from any `.env` files directly in the code even during development or testing or even when asked by the user.
+Parsing `.env` from disk couples code to a file that does not exist in production (where secrets come from the runtime, a vault, or CI), so the code silently breaks once deployed — and a stray `fs.readFileSync('.env')` can ship the raw secret file into logs or bundles.
+
+## Rules
+
+- Read every secret and config value from `process.env` (e.g. `process.env.API_KEY`), never by opening, reading, or parsing a `.env` file in code.
+- Let the runtime or a startup loader (`dotenv/config`, the platform) populate `process.env` — do not call `fs.readFileSync('.env')`, `fs.readFile`, or glob for `.env*` at runtime.
+- This holds during development and testing and even when a user asks for it; there is no exception.
+
+Enforce deterministically with a lint rule or pre-commit/CI grep that fails on `readFile`/`open` of a `.env` path — prose alone will not catch every case.
 
 ## Examples
 

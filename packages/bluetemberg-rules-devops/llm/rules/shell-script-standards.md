@@ -7,7 +7,7 @@ scope:
 
 # Shell script standards
 
-Write shell scripts that are safe, portable, and easy to debug.
+Without `set -euo pipefail` and quoting, a script keeps running after a failed command and an unset or word-split variable can delete or overwrite the wrong path. Run `shellcheck` in CI so these footguns fail the build, not production.
 
 ## Safety and error handling
 

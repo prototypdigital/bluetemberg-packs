@@ -7,6 +7,8 @@ scope: "**"
 
 After each code edit, run file-scoped diagnostics for edited files.
 
+**Why:** Type errors and unformatted code committed silently fail CI later, forcing a context-switch back to code you have already moved on from. Catching them at edit time is far cheaper. This is best enforced by a PostToolUse hook or pre-commit lint; the rule explains why it matters when no hook is configured.
+
 - Run the project formatter on edited files (e.g. `prettier --write`).
 - Treat diagnostics findings from edited files as required follow-up before unrelated work.
 - Preserve file scope by default; do not broaden to whole-project scans unless asked.

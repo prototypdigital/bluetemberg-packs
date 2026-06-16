@@ -70,4 +70,5 @@ function Panel({ children, onClose }) {
 
 - `pointer-events: none` hides an element from mouse but does not remove it from the tab sequence. Use `tabIndex={-1}` or `disabled` to also exclude it from keyboard navigation.
 - CSS `visibility: hidden` removes from tab sequence; `opacity: 0` does not. Content hidden behind a closed drawer may still receive keyboard focus if it is only visually hidden via opacity or transform.
+- The "no positive `tabIndex`" invariant is non-negotiable; enforce it in CI with the `jsx-a11y/tabindex-no-positive` lint rule rather than relying on review alone.
 - Skip navigation links (`<a href="#main-content">Skip to main content</a>`) must be the first focusable element on every page. They may be visually hidden until focused.

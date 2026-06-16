@@ -5,7 +5,9 @@ scope: "**"
 
 # Pre-commit checks
 
-Before committing any changes, verify the workspace is clean and CI-ready.
+**Why:** Commits that fail formatting, lint, or build turn into red CI runs and noisy follow-up "fix lint" commits; catching them locally keeps history clean and the branch mergeable.
+
+Before committing any changes, verify the workspace is clean and CI-ready. This is a non-negotiable gate — back it with a pre-commit hook (e.g. husky + lint-staged) or required CI checks, since prose alone won't catch every commit.
 
 ## Required steps
 

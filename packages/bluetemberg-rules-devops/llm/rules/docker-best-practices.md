@@ -9,7 +9,7 @@ scope:
 
 # Docker best practices
 
-Build secure, minimal, and reproducible container images.
+Root-running, bloated, or cache-unfriendly images widen the attack surface, slow every build and pull, and turn a container escape into host compromise. These constraints are checkable in a Dockerfile linter (e.g. `hadolint`) — wire it into CI.
 
 ## Rules
 

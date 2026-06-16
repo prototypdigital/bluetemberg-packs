@@ -25,7 +25,7 @@ confidence:   high                    # high | medium | low
 supersedes:   <record-id | null>
 ```
 
-The exact schema is yours to choose; the four provenance fields are not optional.
+The exact schema is yours to choose; the four provenance fields are not optional. Because this is a hard schema invariant, enforce it with a write-time validation gate (schema check or CI) that rejects records missing any of the four fields — do not rely on this prose alone.
 
 ## Examples
 

@@ -5,6 +5,8 @@ scope: "**/*.{tsx,jsx,svelte,vue}"
 
 # Design system usage
 
+**Why:** Bespoke components and hardcoded values drift from the design system, breaking visual consistency and theming (dark mode, tokens) and duplicating maintenance.
+
 When building new features or screens:
 
 - Reuse existing shared UI components before introducing new bespoke ones.

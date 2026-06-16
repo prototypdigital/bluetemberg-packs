@@ -48,3 +48,7 @@ describe('processPayment', () => {
   })
 })
 ```
+
+## Enforcement
+
+Naming conventions are best enforced by lint, not review memory: enable `eslint-plugin-jest`/`vitest` rules `valid-title` and `no-restricted-syntax` to reject titles starting with `should`, `test_`, or that merely restate the function name. A lint gate catches drift the moment it lands; a prose rule does not.

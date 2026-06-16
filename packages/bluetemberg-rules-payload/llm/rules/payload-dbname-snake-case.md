@@ -17,6 +17,8 @@ stacks:
 - Keep it short — Postgres identifiers cap at 63 characters; abbreviate long group names (`pay_opts`, not `payment_options_configuration`).
 - Never set a `dbName` containing `-`. If the field `name` is itself kebab-style, rename the `name` first, then derive `dbName`.
 
+This is a mechanical, code-checkable invariant — best enforced by a lint rule or CI check on `dbName` literals, not relied on as prose alone.
+
 ## Examples
 
 ```ts

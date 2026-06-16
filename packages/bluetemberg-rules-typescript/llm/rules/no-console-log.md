@@ -29,3 +29,5 @@ CLI entry points and files whose sole purpose is user-facing terminal output may
 
 - `console.*` calls leak implementation details and unstructured output into production.
 - A logger allows log-level filtering, structured metadata, and integration with observability tooling.
+
+This is a deterministic invariant; enforce it with the ESLint `no-console` rule in CI rather than relying on this prose alone.

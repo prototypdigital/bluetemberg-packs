@@ -9,7 +9,11 @@ Inlined into bundles at `next build` by textual substitution on `process.env.NEX
 
 ## Never `NEXT_PUBLIC_` a secret
 
-Block if the name matches `(SECRET|TOKEN|PRIVATE|SERVICE_ROLE|PASSWORD|ADMIN)`, or the value looks like `sk_*`, `eyJ` (JWT), `postgres://`, `mongodb://`, `-----BEGIN`. Sentry DSN is intentionally public (OK); Sentry source-map auth token is not. Internal hostnames (`*.svc.cluster.local`) leak infra topology.
+A `NEXT_PUBLIC_`-prefixed secret is permanently baked into shipped client JS — anyone can read it from the browser; rotation is the only fix.
+
+Reject the name if it matches `(SECRET|TOKEN|PRIVATE|SERVICE_ROLE|PASSWORD|ADMIN)`, or the value looks like `sk_*`, `eyJ` (JWT), `postgres://`, `mongodb://`, `-----BEGIN`. Use an unprefixed name instead and read it server-side. Sentry DSN is intentionally public (OK); Sentry source-map auth token is not. Internal hostnames (`*.svc.cluster.local`) leak infra topology.
+
+This is a deterministic, safety-critical check — enforce it with a lint/CI gate (e.g. grep `NEXT_PUBLIC_` assignments against the patterns above), not prose alone.
 
 ## Access must be the literal token
 

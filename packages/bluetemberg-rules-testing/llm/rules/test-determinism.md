@@ -49,3 +49,7 @@ it('stamps the created_at field', () => {
   vi.useRealTimers()
 })
 ```
+
+## Enforcement
+
+This is a mechanical invariant — best enforced by config/CI, not prose alone. Set `restoreMocks: true` / `unstubGlobals: true` in the test runner config so leaked fake timers cannot corrupt later tests, and add a lint rule (e.g. ESLint `no-restricted-syntax`) banning `Date.now()`, `Math.random()`, and real `setTimeout` waits inside test files.

@@ -59,3 +59,7 @@ it('persists the order', async () => {
   expect(order).toBeDefined()
 })
 ```
+
+## Enforcement
+
+Isolation is a mechanical invariant — pin it in config so a forgotten `afterEach` cannot silently leak state: set `restoreMocks: true` (and `clearMocks: true`) globally, and run the suite with a randomized test order (`--sequence.shuffle` in Vitest, `--randomize` in Jest) in CI so order-dependent failures surface immediately instead of hiding behind a stable local order.

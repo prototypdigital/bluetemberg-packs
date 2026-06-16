@@ -45,3 +45,7 @@ it('syncs the feed', async () => {
   expect(feedStore.items).toHaveLength(10)
 })
 ```
+
+## Enforcement
+
+"No retry-to-green" is a non-negotiable invariant — enforce it in CI rather than trusting reviewers to spot a `retry:` flag: keep the global runner retry count at `0` and add a lint/grep gate that fails the build on per-test `retry`/`{ retry: n }` options. Track each quarantined test with a required linked issue so skipped-and-forgotten tests cannot accumulate.
