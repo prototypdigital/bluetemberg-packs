@@ -1,6 +1,6 @@
 ---
 name: patterns
-description: Before introducing any new structure, search the codebase for an existing pattern and align with it — taxonomy, decision tree, and checklist.
+description: Finds and reuses an existing codebase pattern instead of inventing new structure. Use when adding files or abstractions, reviewing folder structure, naming, or module boundaries, or refactoring.
 ---
 
 # patterns

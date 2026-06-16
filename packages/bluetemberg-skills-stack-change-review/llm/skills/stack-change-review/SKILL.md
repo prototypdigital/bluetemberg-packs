@@ -1,6 +1,6 @@
 ---
 name: stack-change-review
-description: Review high-blast-radius infrastructure changes with a risk-tier decision tree, per-change-type protocol, and mandatory runbook checklist.
+description: Reviews high-blast-radius infra diffs (docker-compose, Ansible group_vars, Terraform, k8s, .env) — port, volume, image, and env risks. Use when reviewing changes to deployed infrastructure.
 ---
 
 # stack-change-review

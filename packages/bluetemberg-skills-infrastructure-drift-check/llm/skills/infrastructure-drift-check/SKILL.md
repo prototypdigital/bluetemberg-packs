@@ -1,6 +1,6 @@
 ---
 name: infrastructure-drift-check
-description: Verify that declared IaC state matches deployed state — with toolchain-specific detection steps, a BAD/GOOD output comparison, and a merge gate.
+description: Detects infrastructure drift before merging IaC changes by diffing declared vs deployed state. Use when reviewing or merging Terraform .tf, Ansible, Kubernetes manifests, Helm, or Compose PRs.
 ---
 
 # infrastructure-drift-check

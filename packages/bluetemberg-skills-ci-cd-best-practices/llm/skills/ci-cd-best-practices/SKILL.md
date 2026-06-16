@@ -1,6 +1,6 @@
 ---
 name: ci-cd-best-practices
-description: Audit CI/CD pipeline configuration with a step-by-step checklist for caching, version pinning, job ordering, parallelism, and deploy gates.
+description: Audits CI/CD pipeline config (GitHub Actions, GitLab CI) for SHA pinning, dep caching, deploy gates, parallelism, OIDC. Use when adding or editing workflow files or fixing slow/flaky pipelines.
 ---
 
 # ci-cd-best-practices

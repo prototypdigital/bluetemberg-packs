@@ -1,6 +1,6 @@
 ---
 name: code-review
-description: Structured code review — intent-first, diff-focused, severity-tiered findings with actionable fix suggestions.
+description: Reviews a pull request or code diff before merge — establishes intent, reviews changed lines, reports severity-tiered findings with fixes. Use for PR review or pre-PR self-review.
 ---
 
 # code-review
@@ -63,6 +63,16 @@ When the change under review was produced by an LLM (or an agent), add these che
 - **Verify every new dependency exists.** Generated code may import hallucinated packages; confirm any added dependency is the real, intended package before approving (see the security pack's package-hallucination / slopsquatting rule).
 
 Sources: TiCoder (IEEE TSE 2024, <https://arxiv.org/abs/2404.10100>) and "Revisiting Self-Debugging" (<https://arxiv.org/abs/2501.12793>) for test-signal validity; MT-Sec (NeurIPS 2025, <https://arxiv.org/abs/2510.13859>) for diff-vs-whole-program correctness and security in multi-turn generation.
+
+## Completion checklist
+
+- [ ] Stated the PR intent in one sentence before reading any code.
+- [ ] Reviewed the diff (`git diff origin/main..HEAD`), not full files.
+- [ ] Every finding has a Conventional-Comments label, a `file:line` reference, and a concrete consequence.
+- [ ] Covered the categories in priority order: correctness, security, error handling, API contracts, performance, tests.
+- [ ] Wrote a summary that restates the intent, counts findings by severity, and gives a merge verdict.
+- [ ] Cited exactly one specific `praise` (file and line, not generic).
+- [ ] For AI-generated changes, ran the three extra checks: distrust self-generated tests, re-check current-state security on multi-turn edits, verify every new dependency exists.
 
 ## When NOT to use
 

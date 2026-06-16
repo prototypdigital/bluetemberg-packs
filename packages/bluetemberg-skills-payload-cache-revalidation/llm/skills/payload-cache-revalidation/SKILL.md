@@ -1,6 +1,6 @@
 ---
 name: payload-cache-revalidation
-description: Standardize Next.js + Payload cache revalidation — one `cacheTags` source of truth, per-locale vs locale-agnostic tags, and a revalidation hook on every cached collection.
+description: Standardizes Next.js + Payload cache revalidation — a cacheTags source of truth, per-locale vs locale-agnostic tags, hooks per cached collection. Use when editing unstable_cache or revalidation hooks.
 ---
 
 # payload-cache-revalidation
@@ -49,6 +49,14 @@ unstable_cache(fn, ['configurator', slug, locale], { tags: [cacheTags.configurat
 revalidateTag(cacheTags.model(doc.slug), 'max')                        // locale-agnostic: one call
 for (const code of locales) revalidateTag(cacheTags.configurator(doc.slug, code), 'max') // per-locale
 ```
+
+## Completion checklist
+
+- [ ] Tag built via a `cacheTags` builder, never a hardcoded string
+- [ ] The same `cacheTags` entry referenced on producer (fetch `tags`) and consumer (hook `revalidateTag`)
+- [ ] Locale scope chosen by what the page renders (locale in `unstable_cache` keyParts iff the tag is per-locale)
+- [ ] Every front-end-read collection/global has an `afterChange`/`afterDelete` hook gated on `context.disableRevalidate`
+- [ ] `cacheTags` contract test updated if a builder changed
 
 ## When NOT to use
 

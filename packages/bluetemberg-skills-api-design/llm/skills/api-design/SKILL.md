@@ -1,6 +1,6 @@
 ---
 name: api-design
-description: Design RESTful HTTP API endpoints with a step-by-step naming, pagination, versioning, and error-contract protocol.
+description: Designs and reviews RESTful HTTP API endpoints — resource naming, pagination, error contracts, versioning. Use when creating an endpoint, reviewing an API contract, or vetting a breaking change.
 ---
 
 # api-design

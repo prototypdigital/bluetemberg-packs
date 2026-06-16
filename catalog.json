@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-16T08:17:18.524Z",
+  "generated": "2026-06-16T11:22:56.472Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -683,7 +683,7 @@
       "skills": [
         {
           "name": "api-design",
-          "description": "Design RESTful HTTP API endpoints with a step-by-step naming, pagination, versioning, and error-contract protocol."
+          "description": "Designs and reviews RESTful HTTP API endpoints — resource naming, pagination, error contracts, versioning. Use when creating an endpoint, reviewing an API contract, or vetting a breaking change."
         }
       ],
       "preview": "Use this skill when designing new HTTP API endpoints or reviewing existing API contracts. - New endpoint or route creation - API contract review or documentation - Pagination, filtering, or sorting implementation - Breaking change review before a version bump - Use plural nouns: `/users`, `/orders`,"
@@ -702,7 +702,7 @@
       "skills": [
         {
           "name": "ci-cd-best-practices",
-          "description": "Audit CI/CD pipeline configuration with a step-by-step checklist for caching, version pinning, job ordering, parallelism, and deploy gates."
+          "description": "Audits CI/CD pipeline config (GitHub Actions, GitLab CI) for SHA pinning, dep caching, deploy gates, parallelism, OIDC. Use when adding or editing workflow files or fixing slow/flaky pipelines."
         }
       ],
       "preview": "Use this skill when creating or modifying CI/CD pipeline configuration. - New or modified GitHub Actions, GitLab CI, or similar workflow files - Build performance complaints or flaky pipeline investigation - Adding new jobs, steps, or deployment stages Never use `latest` or a mutable tag. Tags can b"
@@ -722,7 +722,7 @@
       "skills": [
         {
           "name": "code-review",
-          "description": "Structured code review — intent-first, diff-focused, severity-tiered findings with actionable fix suggestions."
+          "description": "Reviews a pull request or code diff before merge — establishes intent, reviews changed lines, reports severity-tiered findings with fixes. Use for PR review or pre-PR self-review."
         }
       ],
       "preview": "Use this skill when reviewing a pull request or a set of code changes before merge. - Pull request review (any size) - Post-implementation self-review before opening a PR - Peer review requested by a teammate 1. The agent MUST establish intent before reading any code — run `git log --oneline origin/"
@@ -744,7 +744,7 @@
       "skills": [
         {
           "name": "config-echo",
-          "description": "Verify that bluetemberg configuration was actually loaded by the LLM — recall rules, agents, and skills from session context and cross-reference against disk."
+          "description": "Verifies bluetemberg config (rules, agents, skills) is loaded in the session by recalling from context and cross-referencing disk. Use after `bluetemberg sync` or when a rule seems ignored."
         }
       ],
       "preview": "Use this skill to confirm what bluetemberg configuration the LLM has in its active session context, and to verify it matches what is on disk. - After running `bluetemberg sync` to confirm the LLM picked up the changes - When a rule does not seem to be taking effect - Onboarding a new team member — c"
@@ -826,7 +826,7 @@
       "skills": [
         {
           "name": "design-critique",
-          "description": "Critique built UI across multiple lenses, run hostile QA, and return an impact-ranked fix list — specific issues with locations, not praise."
+          "description": "Critiques built UI across accessibility, hierarchy, copy, consistency, and device lenses, runs hostile QA, and returns an impact-ranked fix list. Use before shipping a view or when it feels off."
         }
       ],
       "preview": "Use this skill when a view or flow is built and needs an honest, multi-angle review before it ships — the pass that finds what is wrong, where, and what to fix first. - A view or flow is functionally built and ready for a quality pass - Before shipping, deploying, or presenting a design - The work \""
@@ -842,10 +842,10 @@
       "skills": [
         {
           "name": "docs-upkeep",
-          "description": "Keep canonical documentation aligned with implementation and workflow changes in the same task."
+          "description": "Updates affected docs in the same task as code or workflow changes — README, API docs, CLI --help, config, wiki. Use when renaming endpoints, adding flags/config, or fixing stale references."
         }
       ],
-      "preview": "Use this skill when code or workflow changes affect documented behavior. - Code change that alters documented behavior or public API - New feature, endpoint, or configuration option that needs documentation - Workflow, CI, or deployment process change 1. The agent MUST update affected docs in the sa"
+      "preview": "Use this skill when code or workflow changes affect documented behavior. - Code change that alters documented behavior or public API - New feature, endpoint, or configuration option that needs documentation - Workflow, CI, or deployment process change ```text Does the change alter a documented surfa"
     },
     {
       "name": "bluetemberg-skills-figma-to-code",
@@ -860,7 +860,7 @@
       "skills": [
         {
           "name": "figma-to-code",
-          "description": "Translate a Figma comp or screenshot into working UI, section-by-section, with prompt stacking, drift checks, and surgical refinement."
+          "description": "Translates a Figma comp, screenshot, or mockup into working UI/HTML/CSS code section-by-section. Use when building UI from a design reference or when generated UI drifts from the comp."
         }
       ],
       "preview": "Use this skill when translating a design reference — a Figma comp, an exported screenshot, or an approved mockup — into working HTML/CSS/component code while keeping the designer's character intact. - A Figma frame or screenshot needs to become real UI - A design reference exists and the build must"
@@ -879,7 +879,7 @@
       "skills": [
         {
           "name": "infrastructure-drift-check",
-          "description": "Verify that declared IaC state matches deployed state — with toolchain-specific detection steps, a BAD/GOOD output comparison, and a merge gate."
+          "description": "Detects infrastructure drift before merging IaC changes by diffing declared vs deployed state. Use when reviewing or merging Terraform .tf, Ansible, Kubernetes manifests, Helm, or Compose PRs."
         }
       ],
       "preview": "Use this skill before merging infrastructure-as-code changes to ensure declared state is consistent with what is deployed. - Changes to `*.tf` files (Terraform) - Changes to Ansible playbooks or inventory - Changes to Kubernetes manifests (`k8s/`, `manifests/`, `helm/`) - Changes to Docker Compose f"
@@ -898,7 +898,7 @@
       "skills": [
         {
           "name": "migration-safety",
-          "description": "Review database migrations against a zero-downtime rollout checklist — destructive ops, lock analysis, batching, and rollback path."
+          "description": "Reviews or writes database schema migrations against a zero-downtime checklist — destructive ops, lock analysis, batching, rollback path. Use when creating or reviewing a migration pre-deploy."
         }
       ],
       "preview": "Use this skill when creating or reviewing database schema migrations. Every migration must survive a zero-downtime deploy and have a tested rollback path. - New migration file creation - Schema change review - Pre-deploy database change validation Scan the migration for: - `DROP TABLE`, `DROP COLUMN"
@@ -918,7 +918,7 @@
       "skills": [
         {
           "name": "patterns",
-          "description": "Before introducing any new structure, search the codebase for an existing pattern and align with it — taxonomy, decision tree, and checklist."
+          "description": "Finds and reuses an existing codebase pattern instead of inventing new structure. Use when adding files or abstractions, reviewing folder structure, naming, or module boundaries, or refactoring."
         }
       ],
       "preview": "Use this skill when implementing features, reviewing structure, or deciding how to organize new code. - New feature implementation that requires architectural decisions - Code review where folder structure, naming, or module boundaries are in question - Refactoring to align existing code with establ"
@@ -940,7 +940,7 @@
       "skills": [
         {
           "name": "react-patterns",
-          "description": "Apply React composition, co-location, and hook extraction patterns — with decision trees and BAD/GOOD examples — before writing custom solutions."
+          "description": "Apply React composition, co-location, hook extraction, and state-placement patterns when writing or reviewing components, hooks, or state. Fixes prop drilling and logic tangled in JSX."
         }
       ],
       "preview": "Use this skill when implementing or reviewing React components, hooks, or state management. - New React component or hook implementation - A component exceeds 150 lines or renders more than one logical section - A prop is passed through more than two layers without being used in the middle - Busines"
@@ -959,7 +959,7 @@
       "skills": [
         {
           "name": "rollback-plan",
-          "description": "Require and validate a structured rollback plan for every production change — with a complexity decision tree, data-loss check, and PR template."
+          "description": "Require and validate a tested rollback plan before merging production deploy, Kubernetes/Terraform, schema-migration, or version-bump PRs. Adds a complexity tier tree, data-loss check, PR template."
         }
       ],
       "preview": "Use this skill when reviewing infrastructure, deployment, or database changes that affect production systems. Every change must have a tested rollback path before merge. - Changes to deployment manifests (Kubernetes, Docker Compose, Helm values) - Ansible playbooks targeting production inventory - T"
@@ -980,7 +980,7 @@
       "skills": [
         {
           "name": "security-audit",
-          "description": "Triage security findings by severity with a concrete detection protocol for secrets, injection, auth, and dependency risks."
+          "description": "Triages code security findings by severity with detection steps for secrets, injection, auth, input, and dependency risks. Use when reviewing changes pre-deploy or touching auth, input, or uploads."
         }
       ],
       "preview": "Use this skill when reviewing code changes for security concerns or before deploying to production. Produce a triaged, actionable report — not a raw checklist dump. - Pre-release or pre-deploy review - New authentication, authorization, or session management code - Any code that handles user input,"
@@ -999,7 +999,7 @@
       "skills": [
         {
           "name": "stack-change-review",
-          "description": "Review high-blast-radius infrastructure changes with a risk-tier decision tree, per-change-type protocol, and mandatory runbook checklist."
+          "description": "Reviews high-blast-radius infra diffs (docker-compose, Ansible group_vars, Terraform, k8s, .env) — port, volume, image, and env risks. Use when reviewing changes to deployed infrastructure."
         }
       ],
       "preview": "Use this skill when reviewing changes to critical infrastructure files that affect deployed services. - Changes to `docker-compose*.yml`, `docker-compose*.yml.j2` - Changes to `group_vars/all.yml` or `group_vars/*/*.yml` - Changes to Ansible host inventory files - Changes to `.env` or `.env.j2` file"
@@ -1017,7 +1017,7 @@
       "skills": [
         {
           "name": "sub-agent-design",
-          "description": "Design a sub-agent system — scope responsibilities, define typed communication contracts, wire orchestration, and add integration tests."
+          "description": "Design a multi-agent system — scope responsibilities, define typed input/output contracts, wire orchestration, add tests. Use when one agent is overloaded or work has parallelizable phases."
         }
       ],
       "preview": "Use this skill when breaking a complex agentic task into a coordinated set of sub-agents with defined responsibilities and communication contracts. - A single agent is doing too many things (context overloads, inconsistent outputs, hard-to-test) - A workflow has parallelizable phases with no data de"
@@ -1035,7 +1035,7 @@
       "skills": [
         {
           "name": "visual-direction",
-          "description": "Set a distinctive visual direction before building — explore three options, lock one, and produce a banned-moves list and Design System Document."
+          "description": "Locks a visual direction before a UI build by exploring 3 options, picking one, writing a banned-moves list + Design System Document. Use when UI keeps coming out generic or before a handoff."
         }
       ],
       "preview": "Use this skill at the start of a design build, before any component is written, to lock the personality so everything built afterward inherits it. This is what stops the build from drifting to stock — the constraint layer the rest of the work references. - A new project or screen is starting and the"
@@ -1051,7 +1051,7 @@
       "skills": [
         {
           "name": "workspace-hygiene",
-          "description": "On-demand workspace audit — review change scope, clean temp artifacts, verify commit focus."
+          "description": "Audits the workspace before a commit or PR — confirms diff scope, flags stray console.log/debugger/scratch files and secrets, checks atomic commits. Use after a refactor or before opening a PR."
         }
       ],
       "preview": "Use this skill for an on-demand audit of workspace state before committing or opening a pull request. > **Note:** Formatting, linting, and build checks are handled by the always-on `pre-commit-checks` and `post-edit-diagnostics` rules. This skill covers the manual review steps that those rules canno"
