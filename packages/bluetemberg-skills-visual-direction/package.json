@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-visual-direction",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Visual direction skill for Bluetemberg — explore distinct directions, lock one, and produce a banned-moves list and Design System Document.",
   "keywords": [
     "bluetemberg-pack",
