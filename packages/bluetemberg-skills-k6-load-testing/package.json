@@ -1,0 +1,29 @@
+{
+  "name": "bluetemberg-skills-k6-load-testing",
+  "version": "0.1.0",
+  "description": "k6 load-testing skill for Bluetemberg — scenario taxonomy, shared config/requests libs, p95 threshold discipline, and __ENV-parametrized suites wired into CI.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "k6",
+    "load-testing",
+    "performance"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "backend",
+      "fullstack",
+      "devops"
+    ]
+  }
+}
