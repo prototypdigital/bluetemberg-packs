@@ -35,8 +35,8 @@ Use this skill when asked to create a new bluetemberg pack (a publishable npm pa
 6. The agent MUST register the pack in `bluetemberg.config.json` by adding `./packages/bluetemberg-{kind}-{topic}` to the `extends` array, keeping the array alphabetically sorted. Validation fails if a package exists but is not listed.
 
 7. The agent MUST run, in order, and not report success until all pass:
-   - `npm run generate:catalog` — regenerate `catalog.json` (and the wiki catalog table)
-   - `npm run validate` — pack-structure and config cross-check
+   - `npm run generate:catalog` — regenerate `catalog.json` and the wiki catalog table (run this BEFORE validate; the validator fails if the catalog is stale)
+   - `npm run validate` — pack-structure, config, release-please, and catalog-freshness cross-check
    - `npm run lint:md` — markdownlint over the new `.md` files
 
 8. The agent MUST NOT mix kinds in one pack (no rules and skills together) and MUST NOT set both `universal: true` and a non-empty `profiles` array.
@@ -90,6 +90,23 @@ Use the correct `bluetemberg` block for the pack's scope — choose one, never m
 ```
 
 ## Examples
+
+The two most common pack-creation mistakes are mixing kinds in one pack and setting both `universal: true` and a non-empty `profiles` array — validation rejects both:
+
+```text
+BAD:  packages/bluetemberg-mixed-tooling/
+        llm/rules/*.md           # rules AND skills in one pack
+        llm/skills/{name}/SKILL.md
+      package.json → "bluetemberg": { "universal": true, "profiles": ["backend"] }
+      -- Two kinds in one pack, and universal:true WITH a non-empty profiles list.
+         The pack can't be categorized or scoped; `npm run validate` fails.
+
+GOOD: packages/bluetemberg-rules-tooling/    # exactly one kind
+        llm/rules/*.md
+      package.json → "bluetemberg": { "universal": false, "profiles": ["backend", "fullstack"] }
+      -- One kind, one scope. Registered in bluetemberg.config.json (alphabetical)
+         and in release-please-config.json + .release-please-manifest.json.
+```
 
 - "Create a testing rules pack for backend and frontend" → `packages/bluetemberg-rules-testing/` with `package.json` (`universal: false`, `profiles: ["frontend", "backend", "fullstack"]`), `llm/rules/*.md` authored per `create-rule`, registered in `bluetemberg.config.json`, catalog regenerated, validate + lint:md green
 - "Scaffold a universal observability skills pack" → `packages/bluetemberg-skills-observability/` with `universal: true`, `profiles: []`, `llm/skills/{name}/SKILL.md`

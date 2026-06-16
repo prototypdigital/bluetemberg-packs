@@ -184,6 +184,76 @@ console.log('\n[3] Release-please registration integrity');
   }
 }
 
+// ─── 4. Catalog freshness ─────────────────────────────────────────────────────
+// catalog.json (and the generated wiki Catalog) is derived from each pack's
+// package.json description and each content file's frontmatter description. If a
+// pack's frontmatter changes but `npm run generate:catalog` is not re-run, the
+// catalog drifts (the PR-that-renamed-descriptions-but-not-the-catalog case).
+// This check recomputes the expected description/items for every pack ALREADY in
+// catalog.json and fails on drift. It is deterministic — reads files only, no
+// npm/network, and ignores the `generated` timestamp + `preview` field. Logic
+// mirrors scripts/generate-catalog.js so it can't false-positive.
+console.log('\n[4] Catalog freshness (catalog.json ↔ pack frontmatter)');
+{
+  const catalogPath = path.join(ROOT, 'catalog.json');
+  if (!fs.existsSync(catalogPath)) {
+    fail('catalog.json not found — run `npm run generate:catalog`');
+  } else {
+    const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+
+    const parseDesc = (content) => {
+      const m = content.match(/^---\n([\s\S]*?)---\n/);
+      if (!m) return '';
+      const d = m[1].match(/^description:\s*(.+)$/m);
+      return d ? d[1].trim() : '';
+    };
+    const inferKind = (name) => {
+      if (name.includes('-rules-')) return 'rules';
+      if (name.includes('-agents-')) return 'agents';
+      if (name.includes('-skills-')) return 'skills';
+      if (name.includes('-guardrails-')) return 'guardrails';
+      return 'rules';
+    };
+    const listItems = (pkgDir, kind) => {
+      const dir = path.join(pkgDir, 'llm', kind);
+      if (!fs.existsSync(dir)) return [];
+      const out = [];
+      for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+        if (e.isFile() && e.name.endsWith('.md')) {
+          out.push({ name: e.name.replace(/\.md$/, ''), description: parseDesc(fs.readFileSync(path.join(dir, e.name), 'utf8')) });
+        } else if (e.isDirectory()) {
+          const skillFile = path.join(dir, e.name, 'SKILL.md');
+          if (fs.existsSync(skillFile)) out.push({ name: e.name, description: parseDesc(fs.readFileSync(skillFile, 'utf8')) });
+        }
+      }
+      return out.sort((a, b) => a.name.localeCompare(b.name));
+    };
+    const norm = (arr) => JSON.stringify((arr || []).map((i) => [i.name, i.description]));
+
+    for (const pack of catalog.packs || []) {
+      const pkgDir = path.join(ROOT, 'packages', pack.name);
+      const pkgJsonPath = path.join(pkgDir, 'package.json');
+      if (!fs.existsSync(pkgJsonPath)) {
+        fail(`catalog.json lists "${pack.name}" but packages/${pack.name}/package.json is missing — run \`npm run generate:catalog\``);
+        continue;
+      }
+      const pkg = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf8'));
+      const kind = inferKind(pack.name);
+      let entryOk = true;
+
+      if ((pkg.description ?? '') !== (pack.description ?? '')) {
+        fail(`${pack.name}: catalog description is stale — run \`npm run generate:catalog\``);
+        entryOk = false;
+      }
+      if (norm(listItems(pkgDir, kind)) !== norm(pack[kind])) {
+        fail(`${pack.name}: catalog ${kind} items/descriptions are stale — run \`npm run generate:catalog\``);
+        entryOk = false;
+      }
+      if (entryOk) pass(`${pack.name} catalog entry matches frontmatter`);
+    }
+  }
+}
+
 // ─── Result ───────────────────────────────────────────────────────────────────
 console.log(`\n${errors === 0 ? '✅ All checks passed.' : `❌ ${errors} error(s) found.`}\n`);
 process.exit(errors > 0 ? 1 : 0);

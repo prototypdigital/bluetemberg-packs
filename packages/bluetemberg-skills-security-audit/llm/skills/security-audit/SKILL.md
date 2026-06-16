@@ -57,7 +57,7 @@ Path traversal:
 
 - Every route that modifies data requires an authenticated session check.
 - Authorization checks use the server-side session, not a client-supplied ID.
-- Password comparison uses a constant-time function — never `===`.
+- Passwords are stored hashed with a slow KDF (argon2id / bcrypt / scrypt) and verified with the library's `verify` function (constant-time internally) — never compare passwords with `==`/`===`. Use a raw constant-time compare (`crypto.timingSafeEqual`, `hmac.compare_digest`) only for fixed-length secrets: API tokens, session IDs, HMAC/signature digests.
 
 ```text
 BAD:  if (req.body.userId === adminId) { /* grant admin access */ }

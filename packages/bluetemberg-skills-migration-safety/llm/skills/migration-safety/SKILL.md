@@ -44,30 +44,37 @@ DDL that takes a full table lock on a table under concurrent writes will cause d
 Is the table written to by live production traffic (orders, users, events)?
   YES → Check lock safety of the operation:
 
-  Adding NOT NULL column WITHOUT a default
-    → EXCLUSIVE LOCK (blocks all writes until complete) — NOT safe on large tables
-    → Instead: add nullable first, backfill, then add constraint in a later migration
+  Adding a NOT NULL column WITH a NON-VOLATILE default (a constant, or an
+  IMMUTABLE/STABLE expression — now() counts as stable), Postgres 11+
+    → Metadata-only: no table rewrite. Still takes a brief ACCESS EXCLUSIVE lock
+      to update the catalog, so set a short lock_timeout on a hot table.
 
-  Adding NOT NULL column WITH a default (Postgres 11+)
-    → Metadata-only change — safe
+  Adding a NOT NULL column WITH a VOLATILE default (clock_timestamp(), random())
+    → Full table + index REWRITE — NOT safe on a large table.
 
-  Adding nullable column → safe
+  Adding a nullable column → metadata-only, safe.
 
-  CREATE INDEX (no CONCURRENTLY) → EXCLUSIVE LOCK — NOT safe on hot table
-  CREATE INDEX CONCURRENTLY     → safe (slower, no lock, cannot run in a transaction block)
+  CREATE INDEX (no CONCURRENTLY)
+    → SHARE lock: blocks writes (INSERT/UPDATE/DELETE) but allows reads — NOT safe on a hot table.
+  CREATE INDEX CONCURRENTLY
+    → Does not block writes (slower, two scans, cannot run in a transaction block;
+      a failed build leaves an INVALID index that must be dropped and rebuilt).
 
-BAD:  ALTER TABLE orders ADD COLUMN priority INTEGER NOT NULL;
-      -- Blocks all writes until the ALTER completes on a large table
+BAD:  ALTER TABLE orders ADD COLUMN priority INTEGER NOT NULL DEFAULT random();
+      -- VOLATILE default forces a full table rewrite, locking out the table on a large dataset.
 
-GOOD: ALTER TABLE orders ADD COLUMN priority INTEGER;
-      -- Nullable first; add NOT NULL constraint in a subsequent migration after backfill
+GOOD: ALTER TABLE orders ADD COLUMN priority INTEGER NOT NULL DEFAULT 0;
+      -- Non-volatile default is metadata-only in PG 11+ (pre-11: add nullable, backfill, then constrain).
 ```
 
 ### Step 3 — Data migration batching
 
 ```text
-Row count < 10 000  → single-statement update acceptable
-Row count ≥ 10 000  → MUST batch to avoid replication lag and table locks
+Row count < ~10k  → single-statement update is usually fine
+Row count ≳ ~10k  → batch it to avoid replication lag and long locks
+                    (heuristic — tune to row width + index structure; GitLab caps
+                     loop batches at ~10k. Prefer "each batch < a few seconds"
+                     over a fixed row count.)
 ```
 
 ```sql
