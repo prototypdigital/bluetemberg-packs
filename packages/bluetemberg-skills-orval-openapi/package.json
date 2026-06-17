@@ -1,0 +1,28 @@
+{
+  "name": "bluetemberg-skills-orval-openapi",
+  "version": "0.1.0",
+  "description": "Orval OpenAPI client-generation skill for Bluetemberg — the build:api pipeline, tags-split output, the custom fetch mutator, and never hand-editing generated files.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "orval",
+    "openapi",
+    "backend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "backend",
+      "fullstack"
+    ]
+  }
+}

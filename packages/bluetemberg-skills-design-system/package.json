@@ -1,0 +1,32 @@
+{
+  "name": "bluetemberg-skills-design-system",
+  "version": "0.1.0",
+  "description": "Design-system reuse skill for Bluetemberg — reach for shadcn/Radix primitives, cn()/cva() composition, and asChild polymorphism before bespoke UI.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "shadcn",
+    "radix",
+    "frontend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack",
+      "design-engineer"
+    ],
+    "stacks": [
+      "react"
+    ]
+  }
+}

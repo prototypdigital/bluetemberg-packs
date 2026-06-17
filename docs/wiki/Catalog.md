@@ -96,6 +96,17 @@ Git workflow rules for Bluetemberg — branch protection, naming, PR workflow, g
 | `git-workflow` | Branch protection, branch naming, and PR workflow rules. |
 | `pre-commit-checks` | Run formatter, linter, and build checks before every commit. |
 
+### bluetemberg-rules-i18n
+
+Internationalization rules for Bluetemberg — next-intl locale routing, Payload localized-field discipline, locale route guards, and message-key conventions.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `i18n-locale-routing` | Configure next-intl routing in one place — an explicit locales list, a single fallback locale, a deliberate localePrefix strategy, and a typed pathnames map. Never detect locales ad hoc. |
+| `i18n-message-key-discipline` | Use static, namespaced next-intl message keys present in every locale file before use. Never build keys by string concatenation — it defeats type-checking and silently misses translations. |
+| `i18n-payload-localized-fields` | In Payload, set localized:true only on display content; never on slugs, dbNames, relation IDs, or enums. Configure a fallbackLocale so empty translations degrade instead of rendering blank. |
+| `i18n-route-guard` | In [locale] route segments, validate the locale param against the Locale union and call notFound() for unknown locales — never render with the fallback silently. Type the param, don't accept string. |
+
 ### bluetemberg-rules-llm-api-product
 
 LLM API and product-engineering rules for Bluetemberg — streaming, cost accounting, and cost-aware model selection.
@@ -112,11 +123,26 @@ Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.
 
 | Rule | Enforces |
 | ---- | -------- |
+| `nextjs-app-router-params` | Always await params/searchParams (they are Promises in Next.js 15+); default a missing locale to the fallback and return notFound() for invalid locale/slug |
 | `nextjs-data-fetching` | Prefer fetch with cache options in Server Components over useEffect + API calls |
+| `nextjs-force-static` | Content pages export const dynamic = 'force-static' with an empty generateStaticParams() for on-demand ISR; never fetch inside the component body |
 | `nextjs-image-optimization` | Always use next/image; never raw img tags |
 | `nextjs-metadata` | Define metadata/generateMetadata per page; never use <Head> in App Router |
 | `nextjs-public-env-vars` | NEXT_PUBLIC_* are inlined into the bundle at build time — never use for secrets or per-environment values. |
 | `nextjs-server-components` | Default to React Server Components; use 'use client' only at leaf interactive nodes |
+| `nextjs-server-only-boundary` | Use import 'server-only' in modules that must never reach the browser; add 'use client' only when a component genuinely needs browser APIs, events, or state |
+
+### bluetemberg-rules-payload
+
+Payload CMS rules for Bluetemberg — collection structure, snake_case dbName, composable access, field builders, revalidation hooks.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `payload-collection-structure` | Public Payload 3 collections follow a consistent shape — tracking fields, Content/SEO tabs, drafts with scheduled publish, and a slug field. |
+| `payload-composable-access` | Build Payload access control from named role-checker functions composed with or()/and() — never inline role checks in collection config. |
+| `payload-dbname-snake-case` | Custom Payload `dbName` overrides must be snake_case — lowercase letters, digits, underscores only. |
+| `payload-field-builder-pattern` | Share Payload fields through builder functions that accept { overrides } and deep-merge onto a base config — never copy-paste field definitions. |
+| `payload-revalidation-hook-required` | Every Payload collection/global read on the front end needs afterChange/afterDelete revalidation hooks gated on context.disableRevalidate — no hook means a cache that silently never busts. |
 
 ### bluetemberg-rules-security
 
@@ -128,6 +154,45 @@ Security guardrail rules for Bluetemberg — secrets management, environment fil
 | `llm-package-hallucination` | Verify every LLM-suggested dependency exists in the registry before installing — hallucinated package names are a real supply-chain attack surface (slopsquatting). |
 | `never-read-env` | Never read .env files directly in code. |
 | `security-secrets` | Never hardcode secrets, tokens, or credentials in source code. |
+
+### bluetemberg-rules-skeletor-authoring
+
+Rules for contributing to @prototyp/skeletor for Bluetemberg — style-prop pipeline, polymorphic spacing, component structure, RN Animated, context defaults, and type derivation.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `skeletor-animation` | Skeletor animations use React Native's built-in Animated API (never Reanimated), default native true, return useRef(create...).current for ref stability, and expose forward/backward/reset. |
+| `skeletor-context-defaults` | Skeletor component defaults resolve from useSkeletor(); new global defaults go in SkeletorConfig + SkeletorDefaults; props always win over context; no hardcoded magic values in component bodies. |
+| `skeletor-spacing` | Skeletor spacing props (margins/paddings/gap) are polymorphic — scalar, tuple, four-side tuple, or object — and must normalize through the existing normalize-* helpers, never hand-rolled shorthand. |
+| `skeletor-structure` | Every skeletor component gets its own folder with an index.ts barrel, internal elements get a displayName, and all cross-module imports are relative — never bare utils/models/components/hooks. |
+| `skeletor-style-props` | Skeletor primitives accept a typed style-prop intersection, convert via extractSkeletorStyleProperties + memoizeStyle, and apply styles in canonical order — never StyleSheet.create in a body. |
+| `skeletor-types` | Derive skeletor types via template-literal/mapped/Extract over RN types, not hand-maintained unions; keep Font ambient; no any without a biome-ignore, no as without a comment. |
+
+### bluetemberg-rules-skeletor-consumer
+
+Rules for consuming @prototyp/skeletor in React Native apps — Block/Text/Screen primitives, SkeletorProvider config, animation hooks, and skeleform forms over raw RN primitives.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `skeletor-animations` | Build animations with skeletor's animate hooks (useAnimateSequence/Parallel/Stagger, useAnimationTimeline, useLoopAnimation) and apply them via the animations prop on Block/Text, not raw Animated. |
+| `skeletor-forms` | Manage RN form state and validation with skeleform's useForm/useFormUtils (from @prototyp/skeletor) instead of re-implementing controlled state with per-field useState and ad-hoc validation. |
+| `skeletor-primitives` | In @prototyp/skeletor apps, use Block and Text instead of raw View/ScrollView/Text, and express spacing/flex/size/border through skeletor style props rather than inline StyleSheet.create. |
+| `skeletor-provider` | Wrap the app root in SkeletorProvider once, declare the Font union in @types/Font.d.ts, and set defaultFont/defaultFontSize/defaultTextColor and status-bar defaults there, not per component. |
+| `skeletor-screen` | Wrap every full-screen view in skeletor's Screen (not SafeAreaView + manual StatusBar); use hideTopSafeArea/hideBottomSafeArea for modals and statusBarType/statusBarBackground per screen. |
+
+### bluetemberg-rules-testing
+
+Testing rules for Bluetemberg — determinism, isolation, and meaningful coverage.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `coverage-meaningful-not-vanity` | Assert observable behavior and edge cases; never write tests that execute code without asserting anything |
+| `flaky-test-policy` | Quarantine-then-fix flaky tests; a retried test is a tracked bug, not a pass |
+| `mocking-boundaries` | Mock at I/O and network boundaries only; never mock the unit under test; prefer fakes over deep mock chains |
+| `test-data-builders` | Use factory or builder functions for test fixtures; never scatter inline object literals across the test suite |
+| `test-determinism` | Avoid timing-based, random, and wall-clock assertions; use fake timers and frozen clocks instead |
+| `test-isolation` | Each test must set up and tear down its own state; never rely on execution order or shared mutable state |
+| `test-naming` | Name tests as "it does X when Y" — describe the behavior under a condition, not the implementation |
 
 ### bluetemberg-rules-typescript
 
@@ -233,6 +298,14 @@ Kubernetes specialist agent for Bluetemberg — manifests, Helm charts, Kustomiz
 | ----- | ----------- |
 | `kubernetes-specialist` | Writes and reviews Kubernetes manifests, Helm charts, Kustomize overlays — RBAC, probes, resources, security contexts, autoscaling, zero-downtime rollouts. Use proactively when editing k8s YAML. |
 
+### bluetemberg-agents-payload-specialist
+
+Payload CMS specialist agent for Bluetemberg — collections, globals, blocks, fields, hooks, access, Lexical, plugins, and the generated types contract.
+
+| Agent | Description |
+| ----- | ----------- |
+| `payload-specialist` | Builds and reviews Payload CMS schemas — collections, globals, blocks, fields, hooks, access, Lexical, plugins, migrations, payload-types. Use proactively for payload.config work. Not generic APIs. |
+
 ### bluetemberg-agents-security-specialist
 
 Security specialist agent for Bluetemberg — vulnerability audit, dependency scanning, secrets.
@@ -240,6 +313,14 @@ Security specialist agent for Bluetemberg — vulnerability audit, dependency sc
 | Agent | Description |
 | ----- | ----------- |
 | `security-specialist` | Audits code for OWASP Top 10 vulns, injection, broken auth/access control, secrets exposure, and dependency/supply-chain CVEs. MUST BE USED for deep security review. Reports findings, does not edit. |
+
+### bluetemberg-agents-skeletor-specialist
+
+Skeletor specialist agent for Bluetemberg — covers both consuming the public API (Block/Screen/Text, SkeletorProvider, animation hooks, skeleform) and authoring library internals (style-prop pipeline, memoizeStyle, Biome, release-please).
+
+| Agent | Description |
+| ----- | ----------- |
+| `skeletor-specialist` | @prototyp/skeletor expert — consumer API (Block/Text/Screen, provider, animation hooks) and library internals (style-prop pipeline, memoizeStyle, Biome, release-please). Use for any skeletor work. |
 
 ### bluetemberg-agents-sre-specialist
 
@@ -357,6 +438,14 @@ Infrastructure drift check skill for Bluetemberg — verify IaC state matches de
 | ----- | ----------- |
 | `infrastructure-drift-check` | Detects infrastructure drift before merging IaC changes by diffing declared vs deployed state. Use when reviewing or merging Terraform .tf, Ansible, Kubernetes manifests, Helm, or Compose PRs. |
 
+### bluetemberg-skills-k6-load-testing
+
+k6 load-testing skill for Bluetemberg — scenario taxonomy, shared config/requests libs, p95 threshold discipline, and __ENV-parametrized suites wired into CI.
+
+| Skill | Description |
+| ----- | ----------- |
+| `k6-load-testing` | Standardizes k6 load tests — scenario taxonomy, shared config/requests libs, baseline-driven p95 thresholds, __ENV parametrization, and a CI smoke gate. Use when writing or editing k6 scripts. |
+
 ### bluetemberg-skills-migration-safety
 
 Migration safety skill for Bluetemberg — database migration review and rollback plans.
@@ -372,6 +461,14 @@ Patterns skill for Bluetemberg — apply reusable architecture and coding patter
 | Skill | Description |
 | ----- | ----------- |
 | `patterns` | Finds and reuses an existing codebase pattern instead of inventing new structure. Use when adding files or abstractions, reviewing folder structure, naming, or module boundaries, or refactoring. |
+
+### bluetemberg-skills-payload-cache-revalidation
+
+Payload + Next.js cache revalidation skill for Bluetemberg — a single source of truth for cache tags and the per-locale vs locale-agnostic decision.
+
+| Skill | Description |
+| ----- | ----------- |
+| `payload-cache-revalidation` | Standardizes Next.js + Payload cache revalidation — a cacheTags source of truth, per-locale vs locale-agnostic tags, hooks per cached collection. Use when editing unstable_cache or revalidation hooks. |
 
 ### bluetemberg-skills-react-patterns
 
@@ -396,6 +493,15 @@ Security audit skill for Bluetemberg — dependency audit, secrets scan, OWASP p
 | Skill | Description |
 | ----- | ----------- |
 | `security-audit` | Triages code security findings by severity with detection steps for secrets, injection, auth, input, and dependency risks. Use when reviewing changes pre-deploy or touching auth, input, or uploads. |
+
+### bluetemberg-skills-skeletor-authoring
+
+Skills for scaffolding @prototyp/skeletor primitives and hooks for Bluetemberg — folder + barrel + extract/memoize/displayName, and ref-stable RN Animated hooks.
+
+| Skill | Description |
+| ----- | ----------- |
+| `new-skeletor-hook` | Scaffold a skeletor use* animation hook — ref-stable via useRef(builder).current, built on RN Animated (never Reanimated), typed from Animation.ts. Use when adding a hook to the skeletor library. |
+| `new-skeletor-primitive` | Scaffold a skeletor primitive (Block/Text-shaped) — own folder, typed style-prop intersection, extract + memoizeStyle, displayName, index.ts barrel. Use when adding a skeletor component. |
 
 ### bluetemberg-skills-stack-change-review
 

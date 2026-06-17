@@ -1,0 +1,31 @@
+{
+  "name": "bluetemberg-skills-payload-blocks",
+  "version": "0.1.0",
+  "description": "Payload CMS block-system skill for Bluetemberg — the co-located config.ts + Component.tsx pattern and the registry-dispatch RenderBlocks convention.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "payload",
+    "blocks",
+    "frontend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack"
+    ],
+    "stacks": [
+      "payload"
+    ]
+  }
+}
