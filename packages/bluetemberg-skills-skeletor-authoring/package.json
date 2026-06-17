@@ -1,0 +1,31 @@
+{
+  "name": "bluetemberg-skills-skeletor-authoring",
+  "version": "0.1.0",
+  "description": "Skills for scaffolding @prototyp/skeletor primitives and hooks for Bluetemberg — folder + barrel + extract/memoize/displayName, and ref-stable RN Animated hooks.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "skeletor",
+    "react-native",
+    "frontend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack"
+    ],
+    "stacks": [
+      "skeletor"
+    ]
+  }
+}
