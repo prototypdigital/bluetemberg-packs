@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-skeletor-authoring",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Skills for scaffolding @prototyp/skeletor primitives and hooks for Bluetemberg — folder + barrel + extract/memoize/displayName, and ref-stable RN Animated hooks.",
   "keywords": [
     "bluetemberg-pack",
