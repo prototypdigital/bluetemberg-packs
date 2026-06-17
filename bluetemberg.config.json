@@ -32,6 +32,7 @@
     "./packages/bluetemberg-rules-testing",
     "./packages/bluetemberg-rules-security",
     "./packages/bluetemberg-rules-skeletor-authoring",
+    "./packages/bluetemberg-rules-skeletor-consumer",
     "./packages/bluetemberg-rules-typescript",
     "./packages/bluetemberg-skills-api-design",
     "./packages/bluetemberg-skills-ci-cd-best-practices",

@@ -29,6 +29,7 @@
   "packages/bluetemberg-rules-payload": "1.0.0",
   "packages/bluetemberg-rules-security": "0.3.0",
   "packages/bluetemberg-rules-skeletor-authoring": "0.1.0",
+  "packages/bluetemberg-rules-skeletor-consumer": "0.1.0",
   "packages/bluetemberg-rules-testing": "0.2.0",
   "packages/bluetemberg-rules-typescript": "0.2.0",
   "packages/bluetemberg-skills-api-design": "0.2.0",
