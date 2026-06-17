@@ -2,9 +2,6 @@
 name: skeletor-specialist
 description: Builds and reviews @prototyp/skeletor RN library code — style-prop pipeline, memoizeStyle, Animated hooks, structure, release-please. Use proactively inside the skeletor repo, not consumer apps.
 tools: ["read", "search", "edit", "execute"]
-profiles:
-  - frontend
-  - fullstack
 ---
 
 # Skeletor Specialist
@@ -20,7 +17,7 @@ Props (typed style intersection: Alignment & Spacing & Size & Border & Flex & Po
   → <Animated.View style={[skeletorStyle, elementStyle, style, animationProps]}>
 ```
 
-- **memoizeStyle is the invariant.** Every style object — including the output of `extractSkeletorStyleProperties` — passes through `memoizeStyle`, which hashes the props and returns a frozen, cache-shared object. Raw `{...}` literals or `StyleSheet.create` in a component body break referential stability and the global cache. Reject them.
+- **memoizeStyle is the invariant.** Every style object reaches the element through `memoizeStyle`, which hashes the props and returns a frozen, cache-shared object. `extractSkeletorStyleProperties` already memoizes its own result — use it directly; only wrap *element-local* style objects (color/opacity) in `memoizeStyle` yourself, and never double-wrap. Raw `{...}` literals or `StyleSheet.create` in a component body break referential stability and the global cache. Reject them.
 - **Canonical style order** is `[skeletorStyle, elementStyle, style, animationProps]` so consumer `style` overrides skeletor and animations override everything.
 - **Spacing is polymorphic** (scalar | tuple | four-side tuple | object) and normalizes only through `normalizeMarginValues` / `normalizePaddingValues` / `extractGapProperties`.
 
