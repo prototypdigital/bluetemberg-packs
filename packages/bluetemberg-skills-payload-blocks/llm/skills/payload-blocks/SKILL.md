@@ -22,8 +22,8 @@ Every block lives in `src/blocks/{Domain}/{BlockName}/` and is exactly two files
 
 ```text
 src/blocks/Models/CallToAction/
-  config.ts          → Payload schema: slug, interfaceName, fields, optional admin.images
-  CallToAction.tsx   → React component, props = the generated block interface
+  config.ts               → Payload schema: slug, interfaceName, fields, optional admin.images
+  CallToActionBlock.tsx   → React component (name suffixed `Block`), props = the generated block interface
 ```
 
 - `config.ts` MUST set `interfaceName` so Payload generates a named type the component imports.
@@ -79,7 +79,7 @@ A nested block defined inside a parent's `config.ts` keeps its schema there; its
 
 ## Completion checklist
 
-- [ ] Block is exactly `config.ts` + `{BlockName}.tsx`, co-located in `src/blocks/{Domain}/{BlockName}/`
+- [ ] Block is exactly `config.ts` + `{BlockName}Block.tsx`, co-located in `src/blocks/{Domain}/{BlockName}/`
 - [ ] `config.ts` declares `slug` and `interfaceName`; the component is typed from that interface
 - [ ] Component renders injected props only — no `fetch`/local-API calls inside a block
 - [ ] New block registered in the page's `blockComponents` map; dispatch uses the `blockType in blockComponents` guard + `@ts-expect-error` spread

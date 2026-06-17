@@ -34,23 +34,27 @@ unstable_cache(fn, ['model', slug, locale, depth], { tags: [`model_${slug}_${loc
 unstable_cache(fn, ['model', slug, locale, depth], { tags: [cacheTags.model(slug, locale)] })
 ```
 
-### Step 2 — Revalidate directly in the hook, not via HTTP
+### Step 2 — Pick the revalidation mechanism by what you're invalidating
 
-Call `revalidateTag(cacheTags.x(...))` directly from the Payload hook / server action. Reaching for an HTTP round-trip to a `/revalidate` endpoint only makes sense when invalidation must cross a process boundary that does not share the cache store.
+Two legitimate patterns coexist — choose by whether you're busting a tag in-process or revalidating a path, possibly triggered from another service.
 
 ```text
-Same process & shared cache store?
-  YES → call revalidateTag() directly
-  NO  → call the revalidate endpoint (document why the boundary exists)
+Tag-based, same process (Payload hook / server action)?
+  → call revalidateTag(cacheTags.x(...)) directly (e.g. globals & collection hooks)
+Path-based revalidation, or triggered from a separate service (the API backend)?
+  → POST to an /api/revalidate route that calls revalidatePath(...)
+    (e.g. a triggerRevalidate(paths) helper) — document the boundary that requires HTTP
 ```
+
+Prefer a direct `revalidateTag` for tagged in-process caches; reach for the HTTP `/api/revalidate` endpoint when you revalidate by path or when a process that doesn't share the cache store (a separate backend) must trigger Next to revalidate.
 
 ### Step 3 — Cache handler: Redis in prod, LRU fallback, singleton
 
 The ISR cache handler is shared across requests — instantiate it once.
 
-- Production uses Redis via `CACHE_URL`; fall back to an in-memory LRU when it is absent (local/dev).
+- Production uses Redis via `CACHE_URL`; fall back to an in-memory LRU when it is absent (local/dev) — e.g. `@fortedigital/nextjs-cache-handler` with `redis-strings` + `local-lru`.
 - Build the client through a singleton so each lambda/worker reuses one connection.
-- Wire it in `next.config.js`: set `cacheHandler` to the module and `cacheMaxMemorySize: 0` to disable Next's default in-memory cache (the handler owns caching).
+- Wire it in `next.config.js`: set `cacheHandler` to the module and gate `cacheMaxMemorySize` to `0` in production only (`process.env.NODE_ENV === 'production' ? 0 : undefined`) so the handler owns caching in prod while dev keeps Next's default in-memory cache.
 
 ### Step 4 — Pick the render mode by how the data changes
 
@@ -76,7 +80,7 @@ const src = `${media.url}?v=${encodeURIComponent(media.updatedAt)}`
 - [ ] Everything that varies the output is in `keyParts`; tags are scoped to what one edit should invalidate (no over-specific tags)
 - [ ] Tag strings built through the shared `cacheTags` source of truth, never hardcoded
 - [ ] `revalidateTag` called directly unless a process boundary genuinely requires an endpoint
-- [ ] Cache handler is a singleton: Redis via `CACHE_URL` with LRU fallback; `cacheMaxMemorySize: 0` set
+- [ ] Cache handler is a singleton: Redis via `CACHE_URL` with LRU fallback; `cacheMaxMemorySize` gated to `0` in production
 - [ ] Render mode matches data volatility (`force-static` + tags for CMS content, not `force-dynamic`)
 - [ ] Cached media URLs carry an `updatedAt` cache-buster
 

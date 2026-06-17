@@ -130,19 +130,7 @@ Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.
 | `nextjs-metadata` | Define metadata/generateMetadata per page; never use <Head> in App Router |
 | `nextjs-public-env-vars` | NEXT_PUBLIC_* are inlined into the bundle at build time — never use for secrets or per-environment values. |
 | `nextjs-server-components` | Default to React Server Components; use 'use client' only at leaf interactive nodes |
-| `nextjs-server-only-boundary` | Use import 'server-only' in modules that must never reach the browser; add 'use client' only when a component genuinely needs browser APIs, events, or state |
-
-### bluetemberg-rules-payload
-
-Payload CMS rules for Bluetemberg — collection structure, snake_case dbName, composable access, field builders, revalidation hooks.
-
-| Rule | Enforces |
-| ---- | -------- |
-| `payload-collection-structure` | Public Payload 3 collections follow a consistent shape — tracking fields, Content/SEO tabs, drafts with scheduled publish, and a slug field. |
-| `payload-composable-access` | Build Payload access control from named role-checker functions composed with or()/and() — never inline role checks in collection config. |
-| `payload-dbname-snake-case` | Custom Payload `dbName` overrides must be snake_case — lowercase letters, digits, underscores only. |
-| `payload-field-builder-pattern` | Share Payload fields through builder functions that accept { overrides } and deep-merge onto a base config — never copy-paste field definitions. |
-| `payload-revalidation-hook-required` | Every Payload collection/global read on the front end needs afterChange/afterDelete revalidation hooks gated on context.disableRevalidate — no hook means a cache that silently never busts. |
+| `nextjs-server-only-boundary` | Default to Server Components and put 'use client' only on the smallest interactive leaf; guard secret-bearing server modules with import 'server-only' |
 
 ### bluetemberg-rules-payload
 
@@ -318,6 +306,14 @@ Payload CMS specialist agent for Bluetemberg — collections, globals, blocks, f
 | ----- | ----------- |
 | `payload-specialist` | Builds and reviews Payload CMS schemas — collections, globals, blocks, fields, hooks, access, Lexical, plugins, migrations, payload-types. Use proactively for payload.config work. Not generic APIs. |
 
+### bluetemberg-agents-pr-reviewer
+
+Headless PR reviewer agent for Bluetemberg — fetches PR context with gh, posts a comment-only review with Conventional Comments findings.
+
+| Agent | Description |
+| ----- | ----------- |
+| `pr-reviewer` | Headless PR reviewer — fetches PR context via gh, reviews intent-first with Conventional Comments findings, posts one comment-only review. Never approves. For in-session review use code-reviewer. |
+
 ### bluetemberg-agents-security-specialist
 
 Security specialist agent for Bluetemberg — vulnerability audit, dependency scanning, secrets.
@@ -325,6 +321,14 @@ Security specialist agent for Bluetemberg — vulnerability audit, dependency sc
 | Agent | Description |
 | ----- | ----------- |
 | `security-specialist` | Audits code for OWASP Top 10 vulns, injection, broken auth/access control, secrets exposure, and dependency/supply-chain CVEs. MUST BE USED for deep security review. Reports findings, does not edit. |
+
+### bluetemberg-agents-session-auditor
+
+Session auditor agent for Bluetemberg — token-spend and harness-usage retrospective over Claude Code session transcripts.
+
+| Agent | Description |
+| ----- | ----------- |
+| `session-auditor` | Audits a Claude Code session transcript for token spend and harness-usage quality — wasted calls, missed delegation, cache misses — and writes a graded retrospective. Use after a session ends. |
 
 ### bluetemberg-agents-skeletor-specialist
 
@@ -482,6 +486,14 @@ Payload + Next.js cache revalidation skill for Bluetemberg — a single source o
 | ----- | ----------- |
 | `payload-cache-revalidation` | Standardizes Next.js + Payload cache revalidation — a cacheTags source of truth, per-locale vs locale-agnostic tags, hooks per cached collection. Use when editing unstable_cache or revalidation hooks. |
 
+### bluetemberg-skills-pr-review-loop
+
+PR review loop skill for Bluetemberg — wire automated comment-only PR reviews via a GitHub Actions backstop and a local PostToolUse hook.
+
+| Skill | Description |
+| ----- | ----------- |
+| `pr-review-loop` | Wires automated comment-only PR reviews — a GitHub Actions backstop on every PR push plus a local hook that reviews PRs the moment an agent opens them. Use when setting up automated PR review. |
+
 ### bluetemberg-skills-react-patterns
 
 React patterns skill for Bluetemberg — component composition, hook extraction, state co-location.
@@ -505,6 +517,14 @@ Security audit skill for Bluetemberg — dependency audit, secrets scan, OWASP p
 | Skill | Description |
 | ----- | ----------- |
 | `security-audit` | Triages code security findings by severity with detection steps for secrets, injection, auth, input, and dependency risks. Use when reviewing changes pre-deploy or touching auth, input, or uploads. |
+
+### bluetemberg-skills-session-retrospective
+
+Session retrospective skill for Bluetemberg — deterministic jq token/tool analysis of a Claude Code transcript plus a judged, severity-ordered process retrospective.
+
+| Skill | Description |
+| ----- | ----------- |
+| `session-retrospective` | Audits a Claude Code session — deterministic jq analysis of token spend and tool usage, then a judged retrospective in .claude/retrospectives/. Use after a task or when a session felt expensive. |
 
 ### bluetemberg-skills-skeletor-authoring
 
