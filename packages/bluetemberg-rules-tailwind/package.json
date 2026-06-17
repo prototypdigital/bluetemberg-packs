@@ -1,0 +1,31 @@
+{
+  "name": "bluetemberg-rules-tailwind",
+  "version": "0.1.0",
+  "description": "Tailwind CSS v4 rules for Bluetemberg — @theme token discipline, fluid typography, OKLch colors, and single-source breakpoints.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "tailwind",
+    "css",
+    "frontend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack"
+    ],
+    "stacks": [
+      "tailwind"
+    ]
+  }
+}

@@ -1,9 +1,9 @@
 {
-  "generated": "2026-06-17T11:13:54.342Z",
+  "generated": "2026-06-17T19:03:17.152Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Accessibility specialist agent for Bluetemberg — WCAG 2.2 A/AA audit and remediation.",
       "profiles": [
         "frontend",
@@ -23,7 +23,7 @@
     },
     {
       "name": "bluetemberg-agents-agentic-specialist",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Agentic systems specialist agent for Bluetemberg — agent memory design, state management, orchestration patterns.",
       "profiles": [
         "agentic"
@@ -41,7 +41,7 @@
     },
     {
       "name": "bluetemberg-agents-ansible-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Ansible specialist agent for Bluetemberg — roles, playbooks, and Jinja2 templates.",
       "profiles": [
         "devops",
@@ -60,7 +60,7 @@
     },
     {
       "name": "bluetemberg-agents-backend-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Backend specialist agent for Bluetemberg — API design, database patterns, error handling, auth.",
       "profiles": [
         "backend",
@@ -79,7 +79,7 @@
     },
     {
       "name": "bluetemberg-agents-code-reviewer",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Code reviewer agent for Bluetemberg — PR review covering patterns, naming, complexity, tests.",
       "profiles": [
         "frontend",
@@ -99,7 +99,7 @@
     },
     {
       "name": "bluetemberg-agents-design-engineer",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "description": "Design engineer agent for Bluetemberg — builds UI to a reference section-by-section, holds tokens and banned moves, catches stock drift.",
       "profiles": [
         "design-engineer"
@@ -117,7 +117,7 @@
     },
     {
       "name": "bluetemberg-agents-devops-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "DevOps specialist agent for Bluetemberg — CI/CD pipelines, container optimization, IaC review.",
       "profiles": [
         "devops",
@@ -136,7 +136,7 @@
     },
     {
       "name": "bluetemberg-agents-docs-maintainer",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Docs maintainer agent for Bluetemberg — documentation synchronization with code changes.",
       "profiles": [],
       "stacks": [],
@@ -152,7 +152,7 @@
     },
     {
       "name": "bluetemberg-agents-frontend-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Frontend specialist agent for Bluetemberg — UI implementation, design-system, i18n, accessibility.",
       "profiles": [
         "frontend",
@@ -172,7 +172,7 @@
     },
     {
       "name": "bluetemberg-agents-infrastructure-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Infrastructure specialist agent for Bluetemberg — build, CI, container, deployment config.",
       "profiles": [
         "devops",
@@ -191,7 +191,7 @@
     },
     {
       "name": "bluetemberg-agents-kubernetes-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Kubernetes specialist agent for Bluetemberg — manifests, Helm charts, Kustomize overlays.",
       "profiles": [
         "devops",
@@ -209,8 +209,29 @@
       "preview": "You are a Kubernetes specialist. Your job is to write and maintain manifests, Helm charts, and Kustomize overlays that deploy services safely, reproducibly, and with zero-downtime — grounded in the Kubernetes documentation and production operational experience. - Write and review Deployments, Statef"
     },
     {
+      "name": "bluetemberg-agents-payload-specialist",
+      "version": "1.0.0",
+      "description": "Payload CMS specialist agent for Bluetemberg — collections, globals, blocks, fields, hooks, access, Lexical, plugins, and the generated types contract.",
+      "profiles": [
+        "backend",
+        "fullstack"
+      ],
+      "stacks": [
+        "payload"
+      ],
+      "universal": false,
+      "kind": "agents",
+      "agents": [
+        {
+          "name": "payload-specialist",
+          "description": "Builds and reviews Payload CMS schemas — collections, globals, blocks, fields, hooks, access, Lexical, plugins, migrations, payload-types. Use proactively for payload.config work. Not generic APIs."
+        }
+      ],
+      "preview": "You are a specialist in Payload CMS (v3 — the Next-native era). Your domain is the `buildConfig()` schema and everything it composes: collections, globals, blocks, fields, hooks, access control, the Lexical editor, plugins, database adapters, and the generated `payload-types.ts` contract. Assume Pay"
+    },
+    {
       "name": "bluetemberg-agents-security-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Security specialist agent for Bluetemberg — vulnerability audit, dependency scanning, secrets.",
       "profiles": [
         "backend",
@@ -230,8 +251,30 @@
       "preview": "You are a security specialist. Your job is to identify, prioritize, and remediate security vulnerabilities — from injection surfaces and broken auth through supply chain risks and secrets exposure — across the codebase and its dependencies. - Audit code for OWASP Top 10 vulnerabilities with concrete"
     },
     {
+      "name": "bluetemberg-agents-skeletor-specialist",
+      "version": "0.2.0",
+      "description": "Skeletor specialist agent for Bluetemberg — covers both consuming the public API (Block/Screen/Text, SkeletorProvider, animation hooks, skeleform) and authoring library internals (style-prop pipeline, memoizeStyle, Biome, release-please).",
+      "profiles": [
+        "frontend",
+        "fullstack"
+      ],
+      "stacks": [
+        "skeletor",
+        "react-native"
+      ],
+      "universal": false,
+      "kind": "agents",
+      "agents": [
+        {
+          "name": "skeletor-specialist",
+          "description": "@prototyp/skeletor expert — consumer API (Block/Text/Screen, provider, animation hooks) and library internals (style-prop pipeline, memoizeStyle, Biome, release-please). Use for any skeletor work."
+        }
+      ],
+      "preview": "You are a `@prototyp/skeletor` specialist covering two domains: **consuming** the library in RN apps (choosing the right primitive, wiring up the provider, building animations) and **authoring** the library itself (style-prop pipeline, memoizeStyle invariant, Biome toolchain, release-please flow). E"
+    },
+    {
       "name": "bluetemberg-agents-sre-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "SRE specialist agent for Bluetemberg — SLOs, alerting, runbooks, and post-mortems.",
       "profiles": [
         "devops",
@@ -250,7 +293,7 @@
     },
     {
       "name": "bluetemberg-agents-test-specialist",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Test specialist agent for Bluetemberg — test creation, refactoring, and stabilization.",
       "profiles": [
         "frontend",
@@ -270,7 +313,7 @@
     },
     {
       "name": "bluetemberg-guardrails-git",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Git guardrails for Bluetemberg — enforce conventional branch names on AI-created worktrees.",
       "profiles": [],
       "stacks": [],
@@ -286,7 +329,7 @@
     },
     {
       "name": "bluetemberg-rules-accessibility",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Accessibility rules for Bluetemberg — WCAG 2.2 A/AA guidance for semantic HTML, ARIA, keyboard navigation, and more.",
       "profiles": [
         "frontend",
@@ -333,7 +376,7 @@
     },
     {
       "name": "bluetemberg-rules-agent-memory",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Agent memory rules for Bluetemberg — statelessness as a hard constraint, memory provenance, promotion through consolidation, and authority-ranked recall.",
       "profiles": [
         "agentic"
@@ -363,7 +406,7 @@
     },
     {
       "name": "bluetemberg-rules-context-engineering",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Context engineering rules for Bluetemberg — structuring LLM context, managing token budgets, avoiding context pollution.",
       "profiles": [
         "agentic"
@@ -401,7 +444,7 @@
     },
     {
       "name": "bluetemberg-rules-design-craft",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "description": "Anti-stock design-craft principles for building UI with AI — banned moves, real references, tokens-first, every state.",
       "profiles": [
         "design-engineer"
@@ -435,7 +478,7 @@
     },
     {
       "name": "bluetemberg-rules-devops",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Infrastructure rules for Bluetemberg — Docker, Terraform, Ansible, Kubernetes, Helm, CI/CD, shell scripts, and idempotency.",
       "profiles": [
         "devops",
@@ -494,7 +537,7 @@
     },
     {
       "name": "bluetemberg-rules-docs",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Documentation and diagnostics rules for Bluetemberg — docs parity, post-edit diagnostics, Mermaid diagrams.",
       "profiles": [],
       "stacks": [],
@@ -518,7 +561,7 @@
     },
     {
       "name": "bluetemberg-rules-git",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Git workflow rules for Bluetemberg — branch protection, naming, PR workflow, git move, pre-commit checks.",
       "profiles": [],
       "stacks": [],
@@ -541,8 +584,42 @@
       "preview": "**Why:** A plain `mv` makes git record a delete + add, so `git log --follow`, `git blame`, and review diffs lose the file's history and show the move as a full rewrite. When moving or renaming a tracked file (one not covered by `.gitignore`), use `git mv {source} {dest}` instead of `mv`. Git then re"
     },
     {
+      "name": "bluetemberg-rules-i18n",
+      "version": "1.0.0",
+      "description": "Internationalization rules for Bluetemberg — next-intl locale routing, Payload localized-field discipline, locale route guards, and message-key conventions.",
+      "profiles": [
+        "frontend",
+        "fullstack"
+      ],
+      "stacks": [
+        "nextjs",
+        "payload"
+      ],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "i18n-locale-routing",
+          "description": "Configure next-intl routing in one place — an explicit locales list, a single fallback locale, a deliberate localePrefix strategy, and a typed pathnames map. Never detect locales ad hoc."
+        },
+        {
+          "name": "i18n-message-key-discipline",
+          "description": "Use static, namespaced next-intl message keys present in every locale file before use. Never build keys by string concatenation — it defeats type-checking and silently misses translations."
+        },
+        {
+          "name": "i18n-payload-localized-fields",
+          "description": "In Payload, set localized:true only on display content; never on slugs, dbNames, relation IDs, or enums. Configure a fallbackLocale so empty translations degrade instead of rendering blank."
+        },
+        {
+          "name": "i18n-route-guard",
+          "description": "In [locale] route segments, validate the locale param against the Locale union and call notFound() for unknown locales — never render with the fallback silently. Type the param, don't accept string."
+        }
+      ],
+      "preview": "Locale routing scattered across middleware, layouts, and link helpers drifts: a locale added in one place but not another produces 404s, untranslated pages, or links that drop the prefix. Define it once and import it everywhere. - Declare the supported `locales` array and the single `defaultLocale`"
+    },
+    {
       "name": "bluetemberg-rules-llm-api-product",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "LLM API and product-engineering rules for Bluetemberg — streaming, cost accounting, and cost-aware model selection.",
       "profiles": [
         "backend",
@@ -570,7 +647,7 @@
     },
     {
       "name": "bluetemberg-rules-nextjs",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.",
       "profiles": [
         "frontend",
@@ -583,8 +660,16 @@
       "kind": "rules",
       "rules": [
         {
+          "name": "nextjs-app-router-params",
+          "description": "Always await params/searchParams (they are Promises in Next.js 15+); default a missing locale to the fallback and return notFound() for invalid locale/slug"
+        },
+        {
           "name": "nextjs-data-fetching",
           "description": "Prefer fetch with cache options in Server Components over useEffect + API calls"
+        },
+        {
+          "name": "nextjs-force-static",
+          "description": "Content pages export const dynamic = 'force-static' with an empty generateStaticParams() for on-demand ISR; never fetch inside the component body"
         },
         {
           "name": "nextjs-image-optimization",
@@ -601,13 +686,54 @@
         {
           "name": "nextjs-server-components",
           "description": "Default to React Server Components; use 'use client' only at leaf interactive nodes"
+        },
+        {
+          "name": "nextjs-server-only-boundary",
+          "description": "Default to Server Components and put 'use client' only on the smallest interactive leaf; guard secret-bearing server modules with import 'server-only'"
         }
       ],
-      "preview": "In App Router, data fetching belongs in Server Components using async/await with the extended `fetch` API. `useEffect` + client-side API calls add a waterfall (page load → render → fetch → render again) and send a round-trip that a Server Component can eliminate entirely. - **Fetch data in Server Co"
+      "preview": "In Next.js 15+, `params` and `searchParams` are Promises. Reading a property without `await` yields `undefined` (or a runtime warning), so the page renders with missing data instead of failing loudly. Unvalidated locale/slug values then render empty or wrong pages instead of a proper 404. - `await p"
+    },
+    {
+      "name": "bluetemberg-rules-payload",
+      "version": "1.0.0",
+      "description": "Payload CMS rules for Bluetemberg — collection structure, snake_case dbName, composable access, field builders, revalidation hooks.",
+      "profiles": [
+        "backend",
+        "fullstack"
+      ],
+      "stacks": [
+        "payload"
+      ],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "payload-collection-structure",
+          "description": "Public Payload 3 collections follow a consistent shape — tracking fields, Content/SEO tabs, drafts with scheduled publish, and a slug field."
+        },
+        {
+          "name": "payload-composable-access",
+          "description": "Build Payload access control from named role-checker functions composed with or()/and() — never inline role checks in collection config."
+        },
+        {
+          "name": "payload-dbname-snake-case",
+          "description": "Custom Payload `dbName` overrides must be snake_case — lowercase letters, digits, underscores only."
+        },
+        {
+          "name": "payload-field-builder-pattern",
+          "description": "Share Payload fields through builder functions that accept { overrides } and deep-merge onto a base config — never copy-paste field definitions."
+        },
+        {
+          "name": "payload-revalidation-hook-required",
+          "description": "Every Payload collection/global read on the front end needs afterChange/afterDelete revalidation hooks gated on context.disableRevalidate — no hook means a cache that silently never busts."
+        }
+      ],
+      "preview": "Give every public-facing collection (rendered on the front end) the same skeleton. Targets Payload 3 (Next-native, Lexical, Drizzle/Postgres). Why: divergent shapes force editors and consuming code to special-case each collection, and a missing piece (versions, tracking fields, revalidation) ships a"
     },
     {
       "name": "bluetemberg-rules-security",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Security guardrail rules for Bluetemberg — secrets management, environment file protection, API error handling.",
       "profiles": [],
       "stacks": [],
@@ -634,8 +760,130 @@
       "preview": "Leaked stack traces, SQL, or file paths hand attackers a map of your schema, ORM, and directory layout — turning a 500 into reconnaissance for the next exploit. All API endpoints must return structured, consistent error responses and never expose internal details to clients. Always return errors wit"
     },
     {
+      "name": "bluetemberg-rules-skeletor-authoring",
+      "version": "0.2.0",
+      "description": "Rules for contributing to @prototyp/skeletor for Bluetemberg — style-prop pipeline, polymorphic spacing, component structure, RN Animated, context defaults, and type derivation.",
+      "profiles": [
+        "frontend",
+        "fullstack"
+      ],
+      "stacks": [
+        "skeletor"
+      ],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "skeletor-animation",
+          "description": "Skeletor animations use React Native's built-in Animated API (never Reanimated), default native true, return useRef(create...).current for ref stability, and expose forward/backward/reset."
+        },
+        {
+          "name": "skeletor-context-defaults",
+          "description": "Skeletor component defaults resolve from useSkeletor(); new global defaults go in SkeletorConfig + SkeletorDefaults; props always win over context; no hardcoded magic values in component bodies."
+        },
+        {
+          "name": "skeletor-spacing",
+          "description": "Skeletor spacing props (margins/paddings/gap) are polymorphic — scalar, tuple, four-side tuple, or object — and must normalize through the existing normalize-* helpers, never hand-rolled shorthand."
+        },
+        {
+          "name": "skeletor-structure",
+          "description": "Every skeletor component gets its own folder with an index.ts barrel, internal elements get a displayName, and all cross-module imports are relative — never bare utils/models/components/hooks."
+        },
+        {
+          "name": "skeletor-style-props",
+          "description": "Skeletor primitives accept a typed style-prop intersection, convert via extractSkeletorStyleProperties + memoizeStyle, and apply styles in canonical order — never StyleSheet.create in a body."
+        },
+        {
+          "name": "skeletor-types",
+          "description": "Derive skeletor types via template-literal/mapped/Extract over RN types, not hand-maintained unions; keep Font ambient; no any without a biome-ignore, no as without a comment."
+        }
+      ],
+      "preview": "Skeletor builds its animation layer on React Native's built-in `Animated` API. Pulling in Reanimated, or returning a fresh animation object each render, breaks the library's zero-extra-dependency promise and causes animations to restart on every re-render. - Use RN's built-in `Animated` (`Animated.t"
+    },
+    {
+      "name": "bluetemberg-rules-skeletor-consumer",
+      "version": "0.2.0",
+      "description": "Rules for consuming @prototyp/skeletor in React Native apps — Block/Text/Screen primitives, SkeletorProvider config, animation hooks, and skeleform forms over raw RN primitives.",
+      "profiles": [
+        "frontend",
+        "fullstack"
+      ],
+      "stacks": [
+        "react-native"
+      ],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "skeletor-animations",
+          "description": "Build animations with skeletor's animate hooks (useAnimateSequence/Parallel/Stagger, useAnimationTimeline, useLoopAnimation) and apply them via the animations prop on Block/Text, not raw Animated."
+        },
+        {
+          "name": "skeletor-forms",
+          "description": "Manage RN form state and validation with skeleform's useForm/useFormUtils (from @prototyp/skeletor) instead of re-implementing controlled state with per-field useState and ad-hoc validation."
+        },
+        {
+          "name": "skeletor-primitives",
+          "description": "In @prototyp/skeletor apps, use Block and Text instead of raw View/ScrollView/Text, and express spacing/flex/size/border through skeletor style props rather than inline StyleSheet.create."
+        },
+        {
+          "name": "skeletor-provider",
+          "description": "Wrap the app root in SkeletorProvider once, declare the Font union in @types/Font.d.ts, and set defaultFont/defaultFontSize/defaultTextColor and status-bar defaults there, not per component."
+        },
+        {
+          "name": "skeletor-screen",
+          "description": "Wrap every full-screen view in skeletor's Screen (not SafeAreaView + manual StatusBar); use hideTopSafeArea/hideBottomSafeArea for modals and statusBarType/statusBarBackground per screen."
+        }
+      ],
+      "preview": "Skeletor's animation helpers compile element animations, run them on the native driver, and hand `Block`/`Text` an `animations` prop ready to interpolate. Hand-rolling `Animated.Value` + `Animated.timing`/`Animated.sequence` re-implements that boilerplate, is easy to get wrong on the native driver,"
+    },
+    {
+      "name": "bluetemberg-rules-testing",
+      "version": "0.2.0",
+      "description": "Testing rules for Bluetemberg — determinism, isolation, and meaningful coverage.",
+      "profiles": [
+        "frontend",
+        "backend",
+        "fullstack"
+      ],
+      "stacks": [],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "coverage-meaningful-not-vanity",
+          "description": "Assert observable behavior and edge cases; never write tests that execute code without asserting anything"
+        },
+        {
+          "name": "flaky-test-policy",
+          "description": "Quarantine-then-fix flaky tests; a retried test is a tracked bug, not a pass"
+        },
+        {
+          "name": "mocking-boundaries",
+          "description": "Mock at I/O and network boundaries only; never mock the unit under test; prefer fakes over deep mock chains"
+        },
+        {
+          "name": "test-data-builders",
+          "description": "Use factory or builder functions for test fixtures; never scatter inline object literals across the test suite"
+        },
+        {
+          "name": "test-determinism",
+          "description": "Avoid timing-based, random, and wall-clock assertions; use fake timers and frozen clocks instead"
+        },
+        {
+          "name": "test-isolation",
+          "description": "Each test must set up and tear down its own state; never rely on execution order or shared mutable state"
+        },
+        {
+          "name": "test-naming",
+          "description": "Name tests as \"it does X when Y\" — describe the behavior under a condition, not the implementation"
+        }
+      ],
+      "preview": "A line-coverage number tells you which lines were touched, not whether the software works. Tests that execute code without asserting outcomes inflate coverage metrics while providing no safety net — they are worse than no tests because they create false confidence. Coverage is a byproduct of writing"
+    },
+    {
       "name": "bluetemberg-rules-typescript",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "TypeScript code quality rules for Bluetemberg — type safety, coding standards, early returns, no console.log, design system reuse.",
       "profiles": [
         "frontend",
@@ -671,7 +919,7 @@
     },
     {
       "name": "bluetemberg-skills-api-design",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "API design skill for Bluetemberg — RESTful conventions, pagination, versioning.",
       "profiles": [
         "backend",
@@ -690,7 +938,7 @@
     },
     {
       "name": "bluetemberg-skills-ci-cd-best-practices",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "CI/CD best practices skill for Bluetemberg — pipeline optimization and caching strategies.",
       "profiles": [
         "devops",
@@ -709,7 +957,7 @@
     },
     {
       "name": "bluetemberg-skills-code-review",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Code review skill for Bluetemberg — structured review checklist for PRs.",
       "profiles": [
         "frontend",
@@ -729,7 +977,7 @@
     },
     {
       "name": "bluetemberg-skills-config-echo",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Config echo skill for Bluetemberg — verifies that synced configuration was actually loaded by the LLM.",
       "profiles": [
         "frontend",
@@ -767,7 +1015,7 @@
     },
     {
       "name": "bluetemberg-skills-create-pack",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Meta-skill for scaffolding a whole new bluetemberg pack — package.json metadata, llm/ layout, catalog registration, and validation.",
       "profiles": [],
       "stacks": [],
@@ -799,7 +1047,7 @@
     },
     {
       "name": "bluetemberg-skills-create-skill",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required sections, and sync.",
       "profiles": [],
       "stacks": [],
@@ -815,7 +1063,7 @@
     },
     {
       "name": "bluetemberg-skills-design-critique",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "description": "Design critique skill for Bluetemberg — multi-lens review, hostile QA, and an impact-ranked fix list for built UI.",
       "profiles": [
         "design-engineer"
@@ -833,7 +1081,7 @@
     },
     {
       "name": "bluetemberg-skills-docs-upkeep",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Docs upkeep skill for Bluetemberg — keep docs aligned with implementation changes.",
       "profiles": [],
       "stacks": [],
@@ -849,7 +1097,7 @@
     },
     {
       "name": "bluetemberg-skills-figma-to-code",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "description": "Figma-to-code skill for Bluetemberg — the section-by-section design-to-code loop with prompt stacking, drift checks, and surgical refinement.",
       "profiles": [
         "design-engineer"
@@ -867,7 +1115,7 @@
     },
     {
       "name": "bluetemberg-skills-infrastructure-drift-check",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Infrastructure drift check skill for Bluetemberg — verify IaC state matches deployed state.",
       "profiles": [
         "devops",
@@ -885,8 +1133,28 @@
       "preview": "Use this skill before merging infrastructure-as-code changes to ensure declared state is consistent with what is deployed. - Changes to `*.tf` files (Terraform) - Changes to Ansible playbooks or inventory - Changes to Kubernetes manifests (`k8s/`, `manifests/`, `helm/`) - Changes to Docker Compose f"
     },
     {
+      "name": "bluetemberg-skills-k6-load-testing",
+      "version": "1.0.0",
+      "description": "k6 load-testing skill for Bluetemberg — scenario taxonomy, shared config/requests libs, p95 threshold discipline, and __ENV-parametrized suites wired into CI.",
+      "profiles": [
+        "backend",
+        "fullstack",
+        "devops"
+      ],
+      "stacks": [],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "k6-load-testing",
+          "description": "Standardizes k6 load tests — scenario taxonomy, shared config/requests libs, baseline-driven p95 thresholds, __ENV parametrization, and a CI smoke gate. Use when writing or editing k6 scripts."
+        }
+      ],
+      "preview": "Use this skill when you add or change a k6 load test — a new scenario, a threshold, a request helper, or the CI wiring that runs them. The goal: one shared config/requests layer feeds every scenario, thresholds come from measured baselines rather than guesses, and the suite is parametrized by enviro"
+    },
+    {
       "name": "bluetemberg-skills-migration-safety",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Migration safety skill for Bluetemberg — database migration review and rollback plans.",
       "profiles": [
         "backend",
@@ -905,7 +1173,7 @@
     },
     {
       "name": "bluetemberg-skills-patterns",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Patterns skill for Bluetemberg — apply reusable architecture and coding patterns.",
       "profiles": [
         "frontend",
@@ -924,8 +1192,29 @@
       "preview": "Use this skill when implementing features, reviewing structure, or deciding how to organize new code. - New feature implementation that requires architectural decisions - Code review where folder structure, naming, or module boundaries are in question - Refactoring to align existing code with establ"
     },
     {
+      "name": "bluetemberg-skills-payload-cache-revalidation",
+      "version": "1.0.0",
+      "description": "Payload + Next.js cache revalidation skill for Bluetemberg — a single source of truth for cache tags and the per-locale vs locale-agnostic decision.",
+      "profiles": [
+        "backend",
+        "fullstack"
+      ],
+      "stacks": [
+        "payload"
+      ],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "payload-cache-revalidation",
+          "description": "Standardizes Next.js + Payload cache revalidation — a cacheTags source of truth, per-locale vs locale-agnostic tags, hooks per cached collection. Use when editing unstable_cache or revalidation hooks."
+        }
+      ],
+      "preview": "Use this skill whenever you add or change a cached data fetch (`unstable_cache`) or a Payload revalidation hook in a Payload CMS + Next.js App Router project. The goal: the producer (the fetch that sets `tags`) and the consumer (the hook that calls `revalidateTag`) can never drift apart, and a tag's"
+    },
+    {
       "name": "bluetemberg-skills-react-patterns",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "React patterns skill for Bluetemberg — component composition, hook extraction, state co-location.",
       "profiles": [
         "frontend",
@@ -947,7 +1236,7 @@
     },
     {
       "name": "bluetemberg-skills-rollback-plan",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Rollback plan skill for Bluetemberg — require tested rollback steps for every production change.",
       "profiles": [
         "devops",
@@ -966,7 +1255,7 @@
     },
     {
       "name": "bluetemberg-skills-security-audit",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Security audit skill for Bluetemberg — dependency audit, secrets scan, OWASP patterns.",
       "profiles": [
         "backend",
@@ -986,8 +1275,33 @@
       "preview": "Use this skill when reviewing code changes for security concerns or before deploying to production. Produce a triaged, actionable report — not a raw checklist dump. - Pre-release or pre-deploy review - New authentication, authorization, or session management code - Any code that handles user input,"
     },
     {
+      "name": "bluetemberg-skills-skeletor-authoring",
+      "version": "0.2.0",
+      "description": "Skills for scaffolding @prototyp/skeletor primitives and hooks for Bluetemberg — folder + barrel + extract/memoize/displayName, and ref-stable RN Animated hooks.",
+      "profiles": [
+        "frontend",
+        "fullstack"
+      ],
+      "stacks": [
+        "skeletor"
+      ],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "new-skeletor-hook",
+          "description": "Scaffold a skeletor use* animation hook — ref-stable via useRef(builder).current, built on RN Animated (never Reanimated), typed from Animation.ts. Use when adding a hook to the skeletor library."
+        },
+        {
+          "name": "new-skeletor-primitive",
+          "description": "Scaffold a skeletor primitive (Block/Text-shaped) — own folder, typed style-prop intersection, extract + memoizeStyle, displayName, index.ts barrel. Use when adding a skeletor component."
+        }
+      ],
+      "preview": "Use this skill when adding a `use*` hook to the `@prototyp/skeletor` library, so it matches the existing `useAnimateSequence` / `useLoopAnimation` / `useAnimationTimeline` shape. - \"add a skeletor hook\" / \"scaffold a `use*` animation hook\" - A new file is about to be created under `src/hooks/` in th"
+    },
+    {
       "name": "bluetemberg-skills-stack-change-review",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Stack change review skill for Bluetemberg — high-blast-radius infrastructure change review.",
       "profiles": [
         "devops",
@@ -1006,7 +1320,7 @@
     },
     {
       "name": "bluetemberg-skills-sub-agent-design",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Sub-agent design skill for Bluetemberg — plan, scope, and implement sub-agent architectures.",
       "profiles": [
         "agentic"
@@ -1024,7 +1338,7 @@
     },
     {
       "name": "bluetemberg-skills-visual-direction",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "description": "Visual direction skill for Bluetemberg — explore distinct directions, lock one, and produce a banned-moves list and Design System Document.",
       "profiles": [
         "design-engineer"
@@ -1042,7 +1356,7 @@
     },
     {
       "name": "bluetemberg-skills-workspace-hygiene",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Workspace hygiene skill for Bluetemberg — clean workspace state during edits.",
       "profiles": [],
       "stacks": [],
