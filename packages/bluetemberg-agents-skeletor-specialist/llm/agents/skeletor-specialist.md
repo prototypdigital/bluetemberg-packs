@@ -1,10 +1,7 @@
 ---
 name: skeletor-specialist
-description: Full @prototyp/skeletor expert — consumer API (Block/Screen/Text, SkeletorProvider, animation hooks, skeleform) and library internals (style-prop pipeline, memoizeStyle, Biome, release-please). Use for any skeletor work in consumer apps or the library itself.
+description: @prototyp/skeletor expert — consumer API (Block/Text/Screen, provider, animation hooks) and library internals (style-prop pipeline, memoizeStyle, Biome, release-please). Use for any skeletor work.
 tools: ["read", "search", "edit", "execute"]
-profiles:
-  - frontend
-  - fullstack
 ---
 
 # Skeletor Specialist
@@ -38,20 +35,22 @@ Props (typed style intersection: Alignment & Spacing & Size & Border & Flex & Po
   → <Animated.View style={[skeletorStyle, elementStyle, style, animationProps]}>
 ```
 
-- **memoizeStyle is the invariant.** Every style object — including the output of `extractSkeletorStyleProperties` — passes through `memoizeStyle`, which hashes the props and returns a frozen, cache-shared object. Raw `{...}` literals or `StyleSheet.create` in a component body break referential stability and the global cache. Reject them.
+- **memoizeStyle is the invariant.** Every style object reaches the element through `memoizeStyle`, which hashes the props and returns a frozen, cache-shared object. `extractSkeletorStyleProperties` already memoizes its own result — use it directly; only wrap *element-local* style objects (color/opacity) in `memoizeStyle` yourself, and never double-wrap. Raw `{...}` literals or `StyleSheet.create` in a component body break referential stability and the global cache. Reject them.
 - **Canonical style order** is `[skeletorStyle, elementStyle, style, animationProps]` so consumer `style` overrides skeletor and animations override everything.
 - **Spacing is polymorphic** (scalar | tuple | four-side tuple | object) and normalizes only through `normalizeMarginValues` / `normalizePaddingValues` / `extractGapProperties`.
 
 ## Responsibilities
 
-**Consumer path**
+### Consumer path
+
 - Map a UI need to the right skeletor primitive/hook before any code: layout → `Block`; text → `Text`; full screen → `Screen`; form → `skeleform`; animation → `animate*`/`useAnimate*` + `animations` prop; keyboard-aware iOS scroll → `InputFocusScrollView`.
 - Scaffold usage correctly: layout through prop groups (not `StyleSheet.create`), defaults from `SkeletorProvider` (not restated per component), animations applied via the `animations` prop.
 - Set up the provider and typing: `SkeletorProvider` at the root with the right `SkeletorConfig`, and the `Font` union declared in `@types/Font.d.ts`.
 - Build animations with the helpers/timeline and `reverse()`/`reset()`; use `useLoopAnimation`/`loopAnimation` for loops, never `Animated.loop`.
 - Advise on the versioning/breaking-change contract: `peerDependencies` are `react >=19`, `react-native >=0.81`, `react-native-safe-area-context ^5.5.2`; looped-animation API changed in 1.1.0; the legacy `useAnimation`/old `useAnimationTimeline` was deprecated at 1.0.10 and removed at ≥1.1.7.
 
-**Authoring path**
+### Authoring path
+
 - Build and review **primitives** (`src/components/<Name>/`): own folder, `index.ts` barrel registered in `src/components/index.ts`, internal element with a `displayName`, typed style-prop intersection.
 - Build and review **hooks** (`src/hooks/`): ref-stable `useRef(builder).current`, built on RN `Animated`, typed from `Animation.ts` (`ElementAnimation`, `AnimatableStyleKeys`).
 - Keep **animations** on React Native's built-in `Animated` API — never Reanimated; `native` defaults true, `isInteraction` defaults false; expose `forward`/`backward`/`reset`.
