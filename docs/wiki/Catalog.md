@@ -123,11 +123,26 @@ Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.
 
 | Rule | Enforces |
 | ---- | -------- |
+| `nextjs-app-router-params` | Always await params/searchParams (they are Promises in Next.js 15+); default a missing locale to the fallback and return notFound() for invalid locale/slug |
 | `nextjs-data-fetching` | Prefer fetch with cache options in Server Components over useEffect + API calls |
+| `nextjs-force-static` | Content pages export const dynamic = 'force-static' with an empty generateStaticParams() for on-demand ISR; never fetch inside the component body |
 | `nextjs-image-optimization` | Always use next/image; never raw img tags |
 | `nextjs-metadata` | Define metadata/generateMetadata per page; never use <Head> in App Router |
 | `nextjs-public-env-vars` | NEXT_PUBLIC_* are inlined into the bundle at build time — never use for secrets or per-environment values. |
 | `nextjs-server-components` | Default to React Server Components; use 'use client' only at leaf interactive nodes |
+| `nextjs-server-only-boundary` | Use import 'server-only' in modules that must never reach the browser; add 'use client' only when a component genuinely needs browser APIs, events, or state |
+
+### bluetemberg-rules-payload
+
+Payload CMS rules for Bluetemberg — collection structure, snake_case dbName, composable access, field builders, revalidation hooks.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `payload-collection-structure` | Public Payload 3 collections follow a consistent shape — tracking fields, Content/SEO tabs, drafts with scheduled publish, and a slug field. |
+| `payload-composable-access` | Build Payload access control from named role-checker functions composed with or()/and() — never inline role checks in collection config. |
+| `payload-dbname-snake-case` | Custom Payload `dbName` overrides must be snake_case — lowercase letters, digits, underscores only. |
+| `payload-field-builder-pattern` | Share Payload fields through builder functions that accept { overrides } and deep-merge onto a base config — never copy-paste field definitions. |
+| `payload-revalidation-hook-required` | Every Payload collection/global read on the front end needs afterChange/afterDelete revalidation hooks gated on context.disableRevalidate — no hook means a cache that silently never busts. |
 
 ### bluetemberg-rules-payload
 

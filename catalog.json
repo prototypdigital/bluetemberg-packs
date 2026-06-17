@@ -660,8 +660,16 @@
       "kind": "rules",
       "rules": [
         {
+          "name": "nextjs-app-router-params",
+          "description": "Always await params/searchParams (they are Promises in Next.js 15+); default a missing locale to the fallback and return notFound() for invalid locale/slug"
+        },
+        {
           "name": "nextjs-data-fetching",
           "description": "Prefer fetch with cache options in Server Components over useEffect + API calls"
+        },
+        {
+          "name": "nextjs-force-static",
+          "description": "Content pages export const dynamic = 'force-static' with an empty generateStaticParams() for on-demand ISR; never fetch inside the component body"
         },
         {
           "name": "nextjs-image-optimization",
@@ -678,9 +686,50 @@
         {
           "name": "nextjs-server-components",
           "description": "Default to React Server Components; use 'use client' only at leaf interactive nodes"
+        },
+        {
+          "name": "nextjs-server-only-boundary",
+          "description": "Use import 'server-only' in modules that must never reach the browser; add 'use client' only when a component genuinely needs browser APIs, events, or state"
         }
       ],
-      "preview": "In App Router, data fetching belongs in Server Components using async/await with the extended `fetch` API. `useEffect` + client-side API calls add a waterfall (page load → render → fetch → render again) and send a round-trip that a Server Component can eliminate entirely. - **Fetch data in Server Co"
+      "preview": "In Next.js 15+, `params` and `searchParams` are Promises. Reading a property without `await` yields `undefined` (or a runtime warning), so the page renders with missing data instead of failing loudly. Unvalidated locale/slug values then render empty or wrong pages instead of a proper 404. - `await p"
+    },
+    {
+      "name": "bluetemberg-rules-payload",
+      "version": "1.0.0",
+      "description": "Payload CMS rules for Bluetemberg — collection structure, snake_case dbName, composable access, field builders, revalidation hooks.",
+      "profiles": [
+        "backend",
+        "fullstack"
+      ],
+      "stacks": [
+        "payload"
+      ],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "payload-collection-structure",
+          "description": "Public Payload 3 collections follow a consistent shape — tracking fields, Content/SEO tabs, drafts with scheduled publish, and a slug field."
+        },
+        {
+          "name": "payload-composable-access",
+          "description": "Build Payload access control from named role-checker functions composed with or()/and() — never inline role checks in collection config."
+        },
+        {
+          "name": "payload-dbname-snake-case",
+          "description": "Custom Payload `dbName` overrides must be snake_case — lowercase letters, digits, underscores only."
+        },
+        {
+          "name": "payload-field-builder-pattern",
+          "description": "Share Payload fields through builder functions that accept { overrides } and deep-merge onto a base config — never copy-paste field definitions."
+        },
+        {
+          "name": "payload-revalidation-hook-required",
+          "description": "Every Payload collection/global read on the front end needs afterChange/afterDelete revalidation hooks gated on context.disableRevalidate — no hook means a cache that silently never busts."
+        }
+      ],
+      "preview": "Give every public-facing collection (rendered on the front end) the same skeleton. Targets Payload 3 (Next-native, Lexical, Drizzle/Postgres). Why: divergent shapes force editors and consuming code to special-case each collection, and a missing piece (versions, tracking fields, revalidation) ships a"
     },
     {
       "name": "bluetemberg-rules-payload",

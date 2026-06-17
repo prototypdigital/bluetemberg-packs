@@ -1,0 +1,31 @@
+{
+  "name": "bluetemberg-skills-payload-migrations",
+  "version": "0.1.0",
+  "description": "Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrite, paired .ts/.json snapshots, and gated destructive changes.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "payload",
+    "migrations",
+    "backend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "backend",
+      "fullstack"
+    ],
+    "stacks": [
+      "payload"
+    ]
+  }
+}
