@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-skeletor-consumer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Rules for consuming @prototyp/skeletor in React Native apps — Block/Text/Screen primitives, SkeletorProvider config, animation hooks, and skeleform forms over raw RN primitives.",
   "keywords": [
     "bluetemberg-pack",

@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-skeletor-authoring",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Rules for contributing to @prototyp/skeletor for Bluetemberg — style-prop pipeline, polymorphic spacing, component structure, RN Animated, context defaults, and type derivation.",
   "keywords": [
     "bluetemberg-pack",
