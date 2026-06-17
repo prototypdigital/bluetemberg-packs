@@ -21,15 +21,16 @@ Hardcoded color/spacing/size values scattered across class names and inline styl
 .hero { background: #0a2540; }
 /* <div className="bg-[#0a2540] text-[17px]"> */
 
-/* GOOD — tokens in @theme, expressed in OKLch */
+/* GOOD — tokens in @theme, expressed in OKLch (shadcn-style semantic names) */
 @theme {
-  --color-brand: oklch(0.28 0.07 250);
-  --text-body: 1.0625rem;
+  --color-primary: oklch(0.6448 0.2228 26.84);
+  --color-muted-foreground: oklch(0.552 0.016 285.938);
 }
-/* <div className="bg-brand text-body"> */
+/* <div className="bg-primary text-muted-foreground"> */
 ```
 
 ## Gotchas
 
 - Tailwind 4's arbitrary-value syntax (`bg-[#...]`, `p-[13px]`) is the escape hatch this rule closes — treat any `[...]` literal in a class as a missing token.
 - Converting an existing hex palette: use a hex→OKLch tool once at token-definition time; don't leave both representations in the file.
+- shadcn setups often define raw semantic tokens (`--primary`) in `:root` and map them into Tailwind's color namespace with `@theme inline { --color-primary: var(--primary); }` — the generated utility (`bg-primary`) is still what you reference in markup.

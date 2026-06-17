@@ -130,7 +130,7 @@ Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.
 | `nextjs-metadata` | Define metadata/generateMetadata per page; never use <Head> in App Router |
 | `nextjs-public-env-vars` | NEXT_PUBLIC_* are inlined into the bundle at build time — never use for secrets or per-environment values. |
 | `nextjs-server-components` | Default to React Server Components; use 'use client' only at leaf interactive nodes |
-| `nextjs-server-only-boundary` | Use import 'server-only' in modules that must never reach the browser; add 'use client' only when a component genuinely needs browser APIs, events, or state |
+| `nextjs-server-only-boundary` | Default to Server Components and put 'use client' only on the smallest interactive leaf; guard secret-bearing server modules with import 'server-only' |
 
 ### bluetemberg-rules-payload
 

@@ -1,42 +1,42 @@
 ---
-description: Use import 'server-only' in modules that must never reach the browser; add 'use client' only when a component genuinely needs browser APIs, events, or state
+description: Default to Server Components and put 'use client' only on the smallest interactive leaf; guard secret-bearing server modules with import 'server-only'
 scope: "**/*.{ts,tsx}"
 ---
 
-# Next.js server-only boundary
+# Next.js server/client boundary
 
-Server-only code (auth secrets, email transport, DB clients) that gets imported into a client component is silently bundled into the browser, leaking secrets and bloating the bundle. Conversely, a stray `'use client'` opts an otherwise-static subtree into client rendering for no reason. Both boundaries should be explicit and minimal.
+A `'use client'` directive placed high in the tree drags its whole import subtree into the browser bundle; a secret-bearing module with no guard can be imported into a Client Component and leak into that bundle. Keep the boundary explicit and as low in the tree as possible.
 
 ## Rules
 
-- Add `import 'server-only'` at the top of any module that must never run in the browser (secrets, server SDK clients, privileged data access). It turns an accidental client import into a build error.
-- Add `'use client'` only when the component genuinely needs browser APIs, event handlers, or `useState`/`useEffect` — keep it on the smallest leaf, not a whole page.
-- Default to Server Components; push `'use client'` down the tree so server data fetching and static rendering stay above the boundary.
+- **Default to Server Components.** Add `'use client'` only on the smallest leaf that genuinely needs browser APIs, event handlers, or `useState`/`useEffect` — never on a whole page or layout to satisfy one interactive control. Push the directive down so data fetching and static rendering stay above the boundary.
+- **Guard modules that must never reach the browser with `import 'server-only'`.** Any module that reads a secret or constructs a server SDK/DB client (auth config, OAuth/Cognito, email transport, DB access) should have `import 'server-only'` at the top — it turns an accidental Client Component import into a build error instead of a silent secret leak. This is the belt-and-suspenders complement to keeping the module out of client code in the first place.
+- **Install the `server-only` package** — it works by throwing when bundled for the browser; a comment that merely says "server only" does nothing.
 
 ## Examples
 
-```ts
-// BAD — server module with no guard; importing it from a client component leaks the secret into the bundle
-export const oauth = createOAuthClient(process.env.OAUTH_SECRET!)
-
-// GOOD — 'server-only' makes a browser import fail at build time
-import 'server-only'
-export const oauth = createOAuthClient(getRequiredEnv('OAUTH_SECRET'))
-```
-
 ```tsx
-// BAD — whole page is a client component just for one interactive button
+// BAD — whole page is a Client Component just for one interactive button
 'use client'
 export default function ProductPage({ product }) { /* fetch + render + a button */ }
 
-// GOOD — page stays a Server Component; only the interactive leaf is a client component
+// GOOD — page stays a Server Component; only the interactive leaf opts in
 export default function ProductPage({ product }) {
   return <><ProductInfo product={product} /><AddToCartButton id={product.id} /></>
 }
 // AddToCartButton.tsx → 'use client'
 ```
 
+```ts
+// BAD — module reads secrets but has no guard; a stray client import leaks them into the bundle
+export const config = { clientSecret: getRequiredEnv('COGNITO_CLIENT_SECRET') }
+
+// GOOD — 'server-only' makes any browser-bound import fail at build time
+import 'server-only'
+export const config = { clientSecret: getRequiredEnv('COGNITO_CLIENT_SECRET') }
+```
+
 ## Gotchas
 
-- `server-only` and `client-only` are real npm packages — install them; they work by throwing in the wrong environment.
-- A file with `'use client'` makes every module it imports part of the client bundle too; the boundary is transitive downward.
+- `'use client'` is transitive downward: every module a Client Component imports becomes part of the client bundle, so a misplaced directive pulls far more than the one file into the browser.
+- Server Components are the default — most files need **no** directive. Reach for `'use client'` only at an interaction boundary, and `import 'server-only'` only where a leak would be a real secret/bundle hazard.

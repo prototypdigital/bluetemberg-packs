@@ -1,5 +1,5 @@
 {
-  "generated": "2026-06-17T16:33:05.741Z",
+  "generated": "2026-06-17T19:03:17.152Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -689,7 +689,7 @@
         },
         {
           "name": "nextjs-server-only-boundary",
-          "description": "Use import 'server-only' in modules that must never reach the browser; add 'use client' only when a component genuinely needs browser APIs, events, or state"
+          "description": "Default to Server Components and put 'use client' only on the smallest interactive leaf; guard secret-bearing server modules with import 'server-only'"
         }
       ],
       "preview": "In Next.js 15+, `params` and `searchParams` are Promises. Reading a property without `await` yields `undefined` (or a runtime warning), so the page renders with missing data instead of failing loudly. Unvalidated locale/slug values then render empty or wrong pages instead of a proper 404. - `await p"
