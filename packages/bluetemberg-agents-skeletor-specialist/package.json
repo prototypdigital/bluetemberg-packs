@@ -1,0 +1,31 @@
+{
+  "name": "bluetemberg-agents-skeletor-specialist",
+  "version": "0.1.0",
+  "description": "Skeletor library specialist agent for Bluetemberg — style-prop pipeline, memoizeStyle invariant, RN Animated conventions, release-please flow, and submodule layout.",
+  "keywords": [
+    "bluetemberg-pack",
+    "agents",
+    "skeletor",
+    "react-native",
+    "frontend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack"
+    ],
+    "stacks": [
+      "skeletor"
+    ]
+  }
+}
