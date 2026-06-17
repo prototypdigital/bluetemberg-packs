@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-accessibility",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Accessibility rules for Bluetemberg — WCAG 2.2 A/AA guidance for semantic HTML, ARIA, keyboard navigation, and more.",
   "keywords": [
     "bluetemberg-pack",

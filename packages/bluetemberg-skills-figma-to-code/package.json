@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-figma-to-code",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Figma-to-code skill for Bluetemberg — the section-by-section design-to-code loop with prompt stacking, drift checks, and surgical refinement.",
   "keywords": [
     "bluetemberg-pack",

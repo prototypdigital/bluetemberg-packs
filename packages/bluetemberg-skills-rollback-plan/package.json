@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-rollback-plan",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Rollback plan skill for Bluetemberg — require tested rollback steps for every production change.",
   "keywords": [
     "bluetemberg-pack",

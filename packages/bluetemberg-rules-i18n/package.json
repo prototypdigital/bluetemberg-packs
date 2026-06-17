@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-i18n",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Internationalization rules for Bluetemberg — next-intl locale routing, Payload localized-field discipline, locale route guards, and message-key conventions.",
   "keywords": [
     "bluetemberg-pack",

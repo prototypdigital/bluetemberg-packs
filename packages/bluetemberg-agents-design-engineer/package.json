@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-design-engineer",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Design engineer agent for Bluetemberg — builds UI to a reference section-by-section, holds tokens and banned moves, catches stock drift.",
   "keywords": [
     "bluetemberg-pack",

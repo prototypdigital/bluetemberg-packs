@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-create-skill",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required sections, and sync.",
   "keywords": [
     "bluetemberg-pack",
