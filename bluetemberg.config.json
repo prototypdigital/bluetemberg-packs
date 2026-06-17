@@ -15,6 +15,7 @@
     "./packages/bluetemberg-agents-kubernetes-specialist",
     "./packages/bluetemberg-agents-payload-specialist",
     "./packages/bluetemberg-agents-security-specialist",
+    "./packages/bluetemberg-agents-skeletor-specialist",
     "./packages/bluetemberg-agents-sre-specialist",
     "./packages/bluetemberg-agents-test-specialist",
     "./packages/bluetemberg-rules-accessibility",
@@ -30,6 +31,8 @@
     "./packages/bluetemberg-rules-payload",
     "./packages/bluetemberg-rules-testing",
     "./packages/bluetemberg-rules-security",
+    "./packages/bluetemberg-rules-skeletor-authoring",
+    "./packages/bluetemberg-rules-skeletor-consumer",
     "./packages/bluetemberg-rules-typescript",
     "./packages/bluetemberg-skills-api-design",
     "./packages/bluetemberg-skills-ci-cd-best-practices",
@@ -49,6 +52,7 @@
     "./packages/bluetemberg-skills-react-patterns",
     "./packages/bluetemberg-skills-rollback-plan",
     "./packages/bluetemberg-skills-security-audit",
+    "./packages/bluetemberg-skills-skeletor-authoring",
     "./packages/bluetemberg-skills-stack-change-review",
     "./packages/bluetemberg-skills-config-echo",
     "./packages/bluetemberg-skills-sub-agent-design",
@@ -104,6 +108,12 @@
         "displayName": "Payload CMS",
         "description": "Rules, skills, and agents for Payload CMS projects",
         "stacks": ["payload"]
+      },
+      {
+        "name": "skeletor",
+        "displayName": "Skeletor",
+        "description": "Rules, skills, and an agent for contributing to the @prototyp/skeletor React Native library",
+        "stacks": ["skeletor"]
       }
     ]
   },

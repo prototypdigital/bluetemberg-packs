@@ -1,0 +1,32 @@
+{
+  "name": "bluetemberg-agents-skeletor-specialist",
+  "version": "0.1.0",
+  "description": "Skeletor specialist agent for Bluetemberg — covers both consuming the public API (Block/Screen/Text, SkeletorProvider, animation hooks, skeleform) and authoring library internals (style-prop pipeline, memoizeStyle, Biome, release-please).",
+  "keywords": [
+    "bluetemberg-pack",
+    "agents",
+    "skeletor",
+    "react-native",
+    "frontend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack"
+    ],
+    "stacks": [
+      "skeletor",
+      "react-native"
+    ]
+  }
+}
