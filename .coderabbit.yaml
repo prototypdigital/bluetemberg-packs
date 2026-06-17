@@ -14,8 +14,8 @@ reviews:
         1. Frontmatter must have `name:` (kebab-case), `description:` (one-line trigger description), and `profiles:` (array).
         2. Must have a `## Triggers` section listing conditions that invoke the skill.
         3. Must have a `## Protocol` section with numbered steps.
-        4. Must have a `## When NOT to use` section.
-        5. Must end with a `## Completion checklist`.
+        4. Must have a `## Completion checklist` section.
+        5. Must end with a `## When NOT to use` section (always after the completion checklist).
         6. No `scope:` or `tools:` fields (those belong to rules and agents respectively).
 
     - path: "packages/**/llm/agents/**/*.md"
