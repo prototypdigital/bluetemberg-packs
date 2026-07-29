@@ -1,0 +1,28 @@
+{
+  "name": "bluetemberg-skills-talk-deck",
+  "version": "0.1.0",
+  "description": "Build an evidence-backed conference deck from a research pack for Bluetemberg — Slidev scaffold, generated figures, demo risk triage.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "presentation",
+    "slidev",
+    "conference"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "agentic",
+      "design-engineer"
+    ]
+  }
+}
