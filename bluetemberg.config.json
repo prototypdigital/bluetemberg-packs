@@ -60,6 +60,10 @@
     "./packages/bluetemberg-skills-workspace-hygiene"
   ],
   "marketplace": {
+    "owner": {
+      "name": "prototypdigital",
+      "url": "https://github.com/prototypdigital"
+    },
     "plugins": [
       {
         "name": "frontend",
