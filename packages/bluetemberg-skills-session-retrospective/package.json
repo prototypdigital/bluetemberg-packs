@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-session-retrospective",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Session retrospective skill for Bluetemberg — deterministic jq token/tool analysis of a Claude Code transcript plus a judged, severity-ordered process retrospective.",
   "keywords": [
     "bluetemberg-pack",
