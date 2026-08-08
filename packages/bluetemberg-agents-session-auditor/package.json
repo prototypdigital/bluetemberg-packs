@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-session-auditor",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Session auditor agent for Bluetemberg — token-spend and harness-usage retrospective over Claude Code session transcripts.",
   "keywords": [
     "bluetemberg-pack",
