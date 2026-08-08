@@ -103,10 +103,10 @@ Every finding must cite a number from Step 2. Improvements must be actionable ne
 
 To run this on every session automatically, copy the canonical reference implementation from [prototypdigital/bluetemberg](https://github.com/prototypdigital/bluetemberg) on `main` rather than reinventing it: `.claude/hooks/spawn-session-audit.sh` (the hook entry — gates and detaches) and `.claude/hooks/run-session-audit.sh` (the worker — runs the Step 2 analysis and the judged pass). Shipped in [#231](https://github.com/prototypdigital/bluetemberg/pull/231).
 
-`SessionEnd` hooks share a **1.5 s budget** — never run the analysis synchronously. The entry script gates on cheap, deterministic checks before detaching:
+`SessionEnd` hooks share a **1.5 s budget** — never run the analysis synchronously. The entry script performs cheap, deterministic checks before detaching:
 
 - Skip `reason == "clear"` — a deliberately discarded session has nothing worth auditing.
-- Skip sessions under ~5 assistant turns — nothing to grade yet.
+- Skip if the transcript path, session id, or cwd is missing from the hook input.
 - Skip if `.claude/retrospectives/<session-id>.md` already exists — one retrospective per session.
 
 then hands off and exits 0 immediately:
@@ -116,9 +116,9 @@ nohup "$hook_dir/run-session-audit.sh" "$transcript" "$session_id" "$cwd" >/dev/
 disown
 ```
 
-The worker runs the Step 2 jq analysis, then a cheap headless judge (`claude -p --model haiku`) fed the stats and truncated user prompts — **never the raw JSONL** (cost, size, and the fact that the transcript format is officially internal and version-unstable all argue against it). Sandbox the judge call itself: `--tools ""` and `--strict-mcp-config` (the transcript's own prompt text reaches the judge's input, so a prompt-injected session shouldn't be able to make it call anything), `--max-turns 1`, and a `--max-budget-usd` ceiling. As with the pr-reviewer's cost comment, gate on the JSON result's `.is_error == false` rather than exit status or non-empty stdout — `claude -p` reports `subtype: "success"` even on an auth failure, with the error text sitting in `.result`.
+The triviality gate — skipping sessions under ~5 assistant turns, since there's nothing to grade yet — lives in the worker, not the entry script: counting turns means reading the transcript, and that's too slow for the entry script's 1.5 s budget. The worker runs the Step 2 jq analysis, then a cheap headless judge (`claude -p --model haiku`) fed the stats and truncated user prompts — **never the raw JSONL** (cost, size, and the fact that the transcript format is officially internal and version-unstable all argue against it). Sandbox the judge call itself: `--tools ""` and `--strict-mcp-config` (the transcript's own prompt text reaches the judge's input, so a prompt-injected session shouldn't be able to make it call anything), `--max-turns 1`, and a `--max-budget-usd` ceiling. As with the pr-reviewer's cost comment, gate on the JSON result's `.is_error == false` rather than exit status or non-empty stdout — `claude -p` reports `subtype: "success"` even on an auth failure, with the error text sitting in `.result`.
 
-Add the hook to the project's `llm/hooks.claude.json` (create it if it doesn't exist — see [prototypdigital/bluetemberg#225](https://github.com/prototypdigital/bluetemberg/issues/225), shipped in engine 0.9.0):
+Merge this `SessionEnd` entry into the project's `llm/hooks.claude.json` as a sibling of whatever's already there (only create the file fresh if it doesn't exist yet — see [prototypdigital/bluetemberg#225](https://github.com/prototypdigital/bluetemberg/issues/225), shipped in engine 0.9.0). Copying the block below over an existing file instead of merging it will silently drop other event keys — e.g. a `PostToolUse` entry from the `pr-review-loop` skill:
 
 ```json
 {
@@ -148,7 +148,7 @@ For a continuous dashboard instead of per-session reports, Claude Code's OpenTel
 - [ ] All five jq analyses run; numbers captured
 - [ ] Findings severity-ordered, each citing a metric
 - [ ] Retrospective written to `.claude/retrospectives/<session-id>.md` with a grade and at least one "went well"
-- [ ] If asked for automation: hook entry gates (clear/trivial/dedup) and detaches to a worker (`nohup … &`), never synchronous; worker gates the judge's JSON result on `.is_error == false`
+- [ ] If asked for automation: hook entry gates clear/missing-input/dedup and detaches to a worker (`nohup … &`), never synchronous; the worker gates trivial sessions (<5 assistant turns) and the judge's JSON result on `.is_error == false`
 
 ## When NOT to use
 
