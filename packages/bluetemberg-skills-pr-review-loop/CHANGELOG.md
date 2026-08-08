@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-pr-review-loop-v0.2.0...bluetemberg-skills-pr-review-loop-v0.2.1) (2026-08-08)
+
+
+### Bug Fixes
+
+* **packs:** address CodeRabbit findings on PR [#100](https://github.com/prototypdigital/bluetemberg-packs/issues/100) ([b069061](https://github.com/prototypdigital/bluetemberg-packs/commit/b06906108bb4b176007d324c15826463076bd152))
+
 ## [0.2.0](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-pr-review-loop-v0.1.0...bluetemberg-skills-pr-review-loop-v0.2.0) (2026-08-08)
 
 

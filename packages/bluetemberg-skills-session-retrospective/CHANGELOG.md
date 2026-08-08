@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-session-retrospective-v1.0.0...bluetemberg-skills-session-retrospective-v1.0.1) (2026-08-08)
+
+
+### Bug Fixes
+
+* **packs:** address CodeRabbit findings on PR [#100](https://github.com/prototypdigital/bluetemberg-packs/issues/100) ([b069061](https://github.com/prototypdigital/bluetemberg-packs/commit/b06906108bb4b176007d324c15826463076bd152))
+
 ## 1.0.0 (2026-08-08)
 
 
