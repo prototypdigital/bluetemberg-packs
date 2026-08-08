@@ -1,0 +1,25 @@
+{
+  "name": "bluetemberg-skills-session-retrospective",
+  "version": "0.1.0",
+  "description": "Session retrospective skill for Bluetemberg — deterministic jq token/tool analysis of a Claude Code transcript plus a judged, severity-ordered process retrospective.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "session-audit",
+    "token-usage",
+    "retrospective"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": true,
+    "profiles": []
+  }
+}

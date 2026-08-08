@@ -1,0 +1,25 @@
+{
+  "name": "bluetemberg-agents-session-auditor",
+  "version": "0.1.0",
+  "description": "Session auditor agent for Bluetemberg — token-spend and harness-usage retrospective over Claude Code session transcripts.",
+  "keywords": [
+    "bluetemberg-pack",
+    "agents",
+    "session-audit",
+    "token-usage",
+    "retrospective"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": true,
+    "profiles": []
+  }
+}
