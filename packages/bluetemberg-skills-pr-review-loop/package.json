@@ -1,0 +1,27 @@
+{
+  "name": "bluetemberg-skills-pr-review-loop",
+  "version": "0.1.0",
+  "description": "PR review loop skill for Bluetemberg — wire automated comment-only PR reviews via a GitHub Actions backstop and a local PostToolUse hook.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "backend",
+      "fullstack",
+      "devops"
+    ]
+  }
+}
