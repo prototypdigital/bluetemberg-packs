@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-agents-security-specialist-v0.2.0...bluetemberg-agents-security-specialist-v0.2.1) (2026-08-25)
+
+
+### Bug Fixes
+
+* list Prototyp Digital under contributors, not maintainer twice ([1afbb43](https://github.com/prototypdigital/bluetemberg-packs/commit/1afbb43cf9190d1b004215aca9bfc06389aeb4c9))
+
 ## [0.2.0](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-agents-security-specialist-v0.1.0...bluetemberg-agents-security-specialist-v0.2.0) (2026-06-16)
 
 

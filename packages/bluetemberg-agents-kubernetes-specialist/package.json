@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-kubernetes-specialist",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Kubernetes specialist agent for Bluetemberg — manifests, Helm charts, Kustomize overlays.",
   "keywords": [
     "bluetemberg-pack",

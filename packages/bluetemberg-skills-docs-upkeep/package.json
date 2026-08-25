@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-docs-upkeep",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Docs upkeep skill for Bluetemberg — keep docs aligned with implementation changes.",
   "keywords": [
     "bluetemberg-pack",
