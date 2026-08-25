@@ -65,12 +65,16 @@ After adding or editing any pack content, run `npm run generate:catalog` then `n
      "version": "0.1.0",
      "description": "<Domain> rules for Bluetemberg — <short summary>.",
      "keywords": ["bluetemberg-pack", "rules", "<domain>"],
-     "author": "Prototyp Digital",
+     "author": "Josip Ravas (https://github.com/jravas)",
+     "contributors": ["Prototyp Digital (https://prototyp.digital)"],
      "license": "MIT",
      "repository": {
        "type": "git",
-       "url": "https://github.com/prototypdigital/bluetemberg-rules.git"
+       "url": "git+https://github.com/prototypdigital/bluetemberg-packs.git",
+       "directory": "packages/bluetemberg-rules-<domain>"
      },
+     "bugs": { "url": "https://github.com/prototypdigital/bluetemberg-packs/issues" },
+     "homepage": "https://prototypdigital.github.io/bluetemberg-packs/",
      "files": ["llm/"]
    }
    ```

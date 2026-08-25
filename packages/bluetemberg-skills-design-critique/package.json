@@ -7,15 +7,21 @@
     "skills",
     "design"
   ],
-  "author": "Prototyp Digital",
+  "author": "Josip Ravas (https://github.com/jravas)",
   "contributors": [
-    "Marko Kolić (https://github.com/marko-prototyp)"
+    "Marko Kolić (https://github.com/marko-prototyp)",
+    "Prototyp Digital (https://prototyp.digital)"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+    "url": "git+https://github.com/prototypdigital/bluetemberg-packs.git",
+    "directory": "packages/bluetemberg-skills-design-critique"
   },
+  "bugs": {
+    "url": "https://github.com/prototypdigital/bluetemberg-packs/issues"
+  },
+  "homepage": "https://prototypdigital.github.io/bluetemberg-packs/",
   "files": [
     "llm/"
   ],
