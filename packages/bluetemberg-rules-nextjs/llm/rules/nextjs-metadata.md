@@ -43,9 +43,11 @@ export default function AboutPage() { ... }
 // GOOD — dynamic metadata from fetched data
 // app/products/[id]/page.tsx
 import type { Metadata } from 'next'
-type ProductPageProps = { params: { id: string } }
+// params is a Promise since Next.js 15; sync access was removed in 16
+type ProductPageProps = { params: Promise<{ id: string }> }
 export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
-  const product = await fetchProduct(params.id)
+  const { id } = await params
+  const product = await fetchProduct(id)
   return {
     title: product.name,
     description: product.description,

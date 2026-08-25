@@ -40,7 +40,9 @@ export function AddToCartButton() {
 // app/products/[id]/page.tsx — stays a Server Component
 import { AddToCartButton } from '@/components/AddToCartButton'
 export default async function ProductPage({ params }) {
-  const product = await fetchProduct(params.id)
+  // params is a Promise since Next.js 15; sync access was removed in 16
+  const { id } = await params
+  const product = await fetchProduct(id)
   return (
     <main>
       <h1>{product.name}</h1>
