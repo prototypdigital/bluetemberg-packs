@@ -918,14 +918,16 @@
         display: flex;
         gap: 20px;
       }
-      .foot nav a {
+      .foot nav a,
+      .foot .gen a {
         color: var(--muted);
         border-bottom: 1px solid transparent;
         transition:
           color 0.12s,
           border-color 0.12s;
       }
-      .foot nav a:hover {
+      .foot nav a:hover,
+      .foot .gen a:hover {
         color: var(--ink-bright);
         border-bottom-color: var(--accent);
       }
@@ -1111,6 +1113,15 @@
         "
       >
         <span class="gen" id="gen"></span>
+        <span class="gen"
+          >maintained by
+          <a
+            href="https://github.com/jravas"
+            target="_blank"
+            rel="noopener"
+            >Josip Ravas</a
+          ></span
+        >
         <nav>
           <a
             href="https://github.com/prototypdigital/bluetemberg-packs"

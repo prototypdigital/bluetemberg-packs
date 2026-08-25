@@ -135,6 +135,14 @@ Each package is published independently to npm but versioned and released from t
 
 Pack content is plain Markdown with frontmatter — no build step. To add or change something, edit the `.md` file in the relevant pack and open a PR. See the [Contributing guide](https://github.com/prototypdigital/bluetemberg-packs/wiki/Contributing) for the full workflow.
 
+## Maintainer
+
+Bluetemberg packs are written and maintained by
+[Josip Ravas](https://github.com/jravas) — DevOps & Architecture Lead at
+PROTOTYP.
+
+Pack contributions welcome — see the [Contributing guide](https://github.com/prototypdigital/bluetemberg-packs/wiki/Contributing).
+
 ## License
 
 [MIT](LICENSE) © Prototyp Digital

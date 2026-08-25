@@ -7,15 +7,21 @@
     "agents",
     "design"
   ],
-  "author": "Prototyp Digital",
+  "author": "Josip Ravas (https://github.com/jravas)",
   "contributors": [
-    "Marko Kolić (https://github.com/marko-prototyp)"
+    "Marko Kolić (https://github.com/marko-prototyp)",
+    "Josip Ravas (https://github.com/jravas)"
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+    "url": "git+https://github.com/prototypdigital/bluetemberg-packs.git",
+    "directory": "packages/bluetemberg-agents-design-engineer"
   },
+  "bugs": {
+    "url": "https://github.com/prototypdigital/bluetemberg-packs/issues"
+  },
+  "homepage": "https://prototypdigital.github.io/bluetemberg-packs/",
   "files": [
     "llm/"
   ],

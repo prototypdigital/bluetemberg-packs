@@ -9,12 +9,20 @@
     "token-usage",
     "retrospective"
   ],
-  "author": "Prototyp Digital",
+  "author": "Josip Ravas (https://github.com/jravas)",
+  "contributors": [
+    "Josip Ravas (https://github.com/jravas)"
+  ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+    "url": "git+https://github.com/prototypdigital/bluetemberg-packs.git",
+    "directory": "packages/bluetemberg-skills-session-retrospective"
   },
+  "bugs": {
+    "url": "https://github.com/prototypdigital/bluetemberg-packs/issues"
+  },
+  "homepage": "https://prototypdigital.github.io/bluetemberg-packs/",
   "files": [
     "llm/"
   ],
