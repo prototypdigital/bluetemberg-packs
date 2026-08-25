@@ -1,6 +1,7 @@
 ---
 name: session-retrospective
 description: Audits a Claude Code session — deterministic jq analysis of token spend and tool usage, then a judged retrospective in .claude/retrospectives/. Use after a task or when a session felt expensive.
+profiles: []
 ---
 
 # session-retrospective
