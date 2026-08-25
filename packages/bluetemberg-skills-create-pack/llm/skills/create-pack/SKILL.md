@@ -28,7 +28,7 @@ Use this skill when asked to create a new bluetemberg pack (a publishable npm pa
    - `package.json` (see template)
    - `llm/{kind}/...` — `llm/rules/*.md`, `llm/agents/*.md`, or `llm/skills/{name}/SKILL.md` depending on kind
 
-4. The agent MUST write a `package.json` matching the house conventions exactly: `version` `0.1.0`, `keywords` including `"bluetemberg-pack"` and the kind, `author` `"Josip Ravas (https://github.com/jravas)"`, `contributors` `["Josip Ravas (https://github.com/jravas)"]`, `license` `"MIT"`, the shared `repository` (with `directory` set to `packages/bluetemberg-{kind}-{topic}`), `bugs`, `homepage`, `files: ["llm/"]`, and a `bluetemberg` block with `universal` and `profiles`.
+4. The agent MUST write a `package.json` matching the house conventions exactly: `version` `0.1.0`, `keywords` including `"bluetemberg-pack"` and the kind, `author` `"Josip Ravas (https://github.com/jravas)"`, `contributors` `["Prototyp Digital (https://prototyp.digital)"]`, `license` `"MIT"`, the shared `repository` (with `directory` set to `packages/bluetemberg-{kind}-{topic}`), `bugs`, `homepage`, `files: ["llm/"]`, and a `bluetemberg` block with `universal` and `profiles`.
 
 5. The agent MUST author at least one real content file using the matching meta-skill conventions — `create-rule` for rules, `create-agent` for agents, `create-skill` for skills. An empty pack must not be created.
 
@@ -54,7 +54,7 @@ Use the correct `bluetemberg` block for the pack's scope — choose one, never m
   "description": "{One sentence} for Bluetemberg.",
   "keywords": ["bluetemberg-pack", "{kind}"],
   "author": "Josip Ravas (https://github.com/jravas)",
-  "contributors": ["Josip Ravas (https://github.com/jravas)"],
+  "contributors": ["Prototyp Digital (https://prototyp.digital)"],
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -80,7 +80,7 @@ Use the correct `bluetemberg` block for the pack's scope — choose one, never m
   "description": "{One sentence} for Bluetemberg.",
   "keywords": ["bluetemberg-pack", "{kind}"],
   "author": "Josip Ravas (https://github.com/jravas)",
-  "contributors": ["Josip Ravas (https://github.com/jravas)"],
+  "contributors": ["Prototyp Digital (https://prototyp.digital)"],
   "license": "MIT",
   "repository": {
     "type": "git",

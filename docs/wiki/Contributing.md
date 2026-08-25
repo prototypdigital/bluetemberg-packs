@@ -66,7 +66,7 @@ After adding or editing any pack content, run `npm run generate:catalog` then `n
      "description": "<Domain> rules for Bluetemberg — <short summary>.",
      "keywords": ["bluetemberg-pack", "rules", "<domain>"],
      "author": "Josip Ravas (https://github.com/jravas)",
-     "contributors": ["Josip Ravas (https://github.com/jravas)"],
+     "contributors": ["Prototyp Digital (https://prototyp.digital)"],
      "license": "MIT",
      "repository": {
        "type": "git",
