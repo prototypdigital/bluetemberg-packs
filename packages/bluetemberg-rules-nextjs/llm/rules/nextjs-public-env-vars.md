@@ -43,7 +43,7 @@ One image cannot serve staging and prod. For per-env values (API URLs, DSNs, env
 
 - Unprefixed `process.env.X` in `'use client'` → `""` (empty string, not undefined). Falsy checks silently pass.
 - `typeof window` guards do NOT prevent inlining. Use `import 'server-only'` / `'client-only'`.
-- Edge runtime and middleware behave like a client bundle: unprefixed env is `undefined`.
+- Edge runtime code behaves like a client bundle: unprefixed env is `undefined` at runtime. In Next.js < 16 that includes all of `middleware.ts` (always edge). In Next.js >= 16, `proxy.ts` (the replacement for the deprecated `middleware.ts`) runs only in the Node.js runtime — unprefixed `process.env` works normally there; only code still on `middleware.ts` or opted into `runtime = 'edge'` keeps the edge behavior.
 - `publicRuntimeConfig` / `serverRuntimeConfig` — removed in Next.js v16. Never suggest.
 - Tests don't auto-load `.env.local`; use `.env.test` or `loadEnvConfig` from `@next/env`.
 
