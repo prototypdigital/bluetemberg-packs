@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.3.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-rules-nextjs-v0.3.0...bluetemberg-rules-nextjs-v0.3.1) (2026-08-25)
+
+
+### Bug Fixes
+
+* list Prototyp Digital under contributors, not maintainer twice ([1afbb43](https://github.com/prototypdigital/bluetemberg-packs/commit/1afbb43cf9190d1b004215aca9bfc06389aeb4c9))
+* **rules-nextjs:** version-scope stale Next.js claims for Next 16 ([051f7d0](https://github.com/prototypdigital/bluetemberg-packs/commit/051f7d02a979c5a66fde383d439ee84455114e62))
+* **rules-nextjs:** version-scope stale Next.js claims for Next 16 ([b19ae9b](https://github.com/prototypdigital/bluetemberg-packs/commit/b19ae9bb208f843228e992b170c7c489934cef34))
+
 ## [0.3.0](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-rules-nextjs-v0.2.0...bluetemberg-rules-nextjs-v0.3.0) (2026-06-16)
 
 

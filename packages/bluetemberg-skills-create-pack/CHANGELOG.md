@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-create-pack-v0.2.0...bluetemberg-skills-create-pack-v0.2.1) (2026-08-25)
+
+
+### Bug Fixes
+
+* correct stale contributors template in docs and create-pack skill ([cc7d21b](https://github.com/prototypdigital/bluetemberg-packs/commit/cc7d21b462f7129a24de2152651dec283bf8cfd1))
+* list Prototyp Digital under contributors, not maintainer twice ([1afbb43](https://github.com/prototypdigital/bluetemberg-packs/commit/1afbb43cf9190d1b004215aca9bfc06389aeb4c9))
+
 ## [0.2.0](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-create-pack-v0.1.0...bluetemberg-skills-create-pack-v0.2.0) (2026-06-16)
 
 

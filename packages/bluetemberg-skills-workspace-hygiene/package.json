@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-workspace-hygiene",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Workspace hygiene skill for Bluetemberg — clean workspace state during edits.",
   "keywords": [
     "bluetemberg-pack",
