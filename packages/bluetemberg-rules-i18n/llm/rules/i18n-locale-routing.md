@@ -42,6 +42,6 @@ export default createMiddleware(routing)
 
 ## Gotchas
 
-- In Next.js >= 16 the routing file is `src/proxy.ts` — `proxy.ts` was called `middleware.ts` up until Next.js 16, and the `createMiddleware` import and default export are unchanged. `middleware.ts` still runs on Next.js 16 but is deprecated (and stays on the edge runtime). Never place this file at `middleware.ts` in a repo that already has `proxy.ts`.
+- In Next.js >= 16 the routing file is `src/proxy.ts` — `proxy.ts` was called `middleware.ts` up until Next.js 16, and the `createMiddleware` import and default export are unchanged. `middleware.ts` still runs on Next.js 16 but is deprecated (it defaults to the edge runtime, with a Node.js runtime opt-in since Next.js 15.5; `proxy.ts` is Node.js-only). Never place this file at `middleware.ts` in a repo that already has `proxy.ts`.
 - The `matcher` must exclude `/api`, `/_next`, and static assets, or it will rewrite asset/API requests and break them.
 - `defaultLocale` with `localePrefix: 'as-needed'` means the default locale has no prefix — make sure route guards and canonical URLs account for both the prefixed and unprefixed form.
