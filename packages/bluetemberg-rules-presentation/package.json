@@ -1,0 +1,28 @@
+{
+  "name": "bluetemberg-rules-presentation",
+  "version": "0.1.0",
+  "description": "Evidence-backed presentation rules for Bluetemberg — citation hygiene, measure-don't-proxy, correction logs, chart integrity, slide density.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "presentation",
+    "data-viz",
+    "evidence"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "agentic",
+      "design-engineer"
+    ]
+  }
+}

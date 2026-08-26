@@ -29,6 +29,7 @@
   "packages/bluetemberg-rules-llm-api-product": "0.2.0",
   "packages/bluetemberg-rules-nextjs": "0.3.0",
   "packages/bluetemberg-rules-payload": "1.0.0",
+  "packages/bluetemberg-rules-presentation": "0.1.0",
   "packages/bluetemberg-rules-security": "0.3.0",
   "packages/bluetemberg-rules-skeletor-authoring": "0.2.0",
   "packages/bluetemberg-rules-skeletor-consumer": "0.2.0",
@@ -58,6 +59,7 @@
   "packages/bluetemberg-skills-skeletor-authoring": "0.2.0",
   "packages/bluetemberg-skills-stack-change-review": "0.2.0",
   "packages/bluetemberg-skills-sub-agent-design": "0.2.0",
+  "packages/bluetemberg-skills-talk-deck": "0.1.0",
   "packages/bluetemberg-skills-visual-direction": "1.0.0",
   "packages/bluetemberg-skills-workspace-hygiene": "0.3.0"
 }
