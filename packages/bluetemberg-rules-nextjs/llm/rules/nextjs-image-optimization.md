@@ -10,8 +10,8 @@ scope: "**"
 ## Rules
 
 - **Always import `Image` from `next/image`** and use it instead of `<img>`.
-- **Provide `width` and `height` for remote/string sources** (or `fill` + a positioned parent) to prevent layout shift. Static imports infer dimensions automatically; never omit both for non-static sources.
-- **Use `fill` with `sizes`** for responsive images that take a percentage of their container.
+- **Prefer explicit `width` + `height` + `className="object-cover"`** for remote/string sources to prevent layout shift. Static imports infer dimensions automatically; never omit both for non-static sources.
+- **Avoid the `fill` prop without an explicit, written justification.** `fill` opts out of automatic resizing (the image is sized by CSS, so Next can't pick an optimal intrinsic size) — reach for it only when the container's dimensions are genuinely unknown at author time, and always pair it with `sizes` and a positioned parent.
 - **Set `priority` on above-the-fold images** (hero, LCP candidate) to preload them.
 - **Never use raw `<img>`** in application code. The only acceptable exception is inside SVG markup or third-party embed iframes.
 
@@ -25,15 +25,13 @@ scope: "**"
 import Image from 'next/image'
 <Image src="/hero.jpg" alt="Hero" width={1200} height={600} priority />
 
-// GOOD — fills its container (parent must be position: relative with a height)
+// GOOD — preferred: explicit dimensions + object-cover
+<Image src="/banner.jpg" alt="Banner" width={1600} height={400} className="object-cover" />
+
+// ACCEPTABLE — `fill` only when the container size is genuinely unknown at author time;
+// requires `sizes` + a positioned parent, and a comment justifying why width/height won't do
 <div className="relative h-64 w-full">
-  <Image
-    src="/banner.jpg"
-    alt="Banner"
-    fill
-    sizes="100vw"
-    className="object-cover"
-  />
+  <Image src="/banner.jpg" alt="Banner" fill sizes="100vw" className="object-cover" />
 </div>
 
 // GOOD — remote image (must be whitelisted in next.config.js remotePatterns)

@@ -1,0 +1,28 @@
+{
+  "name": "bluetemberg-skills-integration-safety",
+  "version": "0.1.0",
+  "description": "Third-party integration-safety skill for Bluetemberg — lazy init, getRequiredEnv, safeParse over parse, fire-and-forget analytics, and safe widget script injection.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "integration",
+    "resilience",
+    "backend"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "backend",
+      "fullstack"
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "bluetemberg-skills-nextjs-caching",
+  "version": "0.1.0",
+  "description": "Next.js caching & ISR skill for Bluetemberg — unstable_cache keyParts vs tags discipline, revalidateTag call sites, and the ISR cache handler.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "nextjs",
+    "caching",
+    "isr"
+  ],
+  "author": "Prototyp Digital",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prototypdigital/bluetemberg-packs.git"
+  },
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack"
+    ],
+    "stacks": [
+      "nextjs"
+    ]
+  }
+}
