@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-27T13:37:01.306Z",
+  "generated": "2026-08-27T13:58:55.692Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -499,6 +499,10 @@
           "description": "Keep a concrete banned-moves list and apply it to every UI build; closing off easy defaults forces something more intentional out."
         },
         {
+          "name": "contrast-claims-go-stale",
+          "description": "A contrast ratio written beside a token is a claim about one specific hex; recompute it whenever the hex changes, never carry it over."
+        },
+        {
           "name": "design-every-state",
           "description": "Design and build every screen state — empty, loading, error, success — with real content, never just the default with lorem ipsum."
         },
@@ -586,6 +590,10 @@
           "description": "Keep documentation in sync with every user-facing change."
         },
         {
+          "name": "format-then-regenerate",
+          "description": "Formatting a generator's source files invalidates its output; run the formatter first, regenerate second, and check the pair in CI."
+        },
+        {
           "name": "mermaid-diagrams",
           "description": "Use Mermaid diagrams instead of ASCII art."
         },
@@ -622,7 +630,7 @@
     },
     {
       "name": "bluetemberg-rules-i18n",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Internationalization rules for Bluetemberg — next-intl locale routing, Payload localized-field discipline, locale route guards, and message-key conventions.",
       "profiles": [
         "frontend",

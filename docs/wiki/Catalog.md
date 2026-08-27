@@ -54,6 +54,7 @@ Anti-stock design-craft principles for building UI with AI — banned moves, rea
 | ---- | -------- |
 | `anti-stock-defaults` | Decide the visual direction before prompting; AI averages toward stock UI, so name what you want and refuse the safe default. |
 | `banned-moves-first` | Keep a concrete banned-moves list and apply it to every UI build; closing off easy defaults forces something more intentional out. |
+| `contrast-claims-go-stale` | A contrast ratio written beside a token is a claim about one specific hex; recompute it whenever the hex changes, never carry it over. |
 | `design-every-state` | Design and build every screen state — empty, loading, error, success — with real content, never just the default with lorem ipsum. |
 | `references-not-moods` | Anchor visual direction to specific named references, not adjectives; concrete coordinates beat moods the model will average away. |
 | `tokens-before-components` | Lock the visual system (palette, type, spacing) as tokens before building UI, and re-state them every refinement to prevent token drift. |
@@ -83,6 +84,7 @@ Documentation and diagnostics rules for Bluetemberg — docs parity, post-edit d
 | Rule | Enforces |
 | ---- | -------- |
 | `docs-parity` | Keep documentation in sync with every user-facing change. |
+| `format-then-regenerate` | Formatting a generator's source files invalidates its output; run the formatter first, regenerate second, and check the pair in CI. |
 | `mermaid-diagrams` | Use Mermaid diagrams instead of ASCII art. |
 | `post-edit-diagnostics` | Run diagnostics and formatter after editing code files. |
 
