@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-rules-i18n-v1.0.1...bluetemberg-rules-i18n-v1.0.2) (2026-08-26)
+
+
+### Bug Fixes
+
+* **rules-i18n:** version-scope middleware.ts vs proxy.ts for Next 16 ([a81b19b](https://github.com/prototypdigital/bluetemberg-packs/commit/a81b19b73fc53669c7bdbb181a80611c5ffb8c32))
+
 ## [1.0.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-rules-i18n-v1.0.0...bluetemberg-rules-i18n-v1.0.1) (2026-08-25)
 
 
