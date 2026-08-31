@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-27T13:37:01.306Z",
+  "generated": "2026-08-31T09:17:42.632Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -622,7 +622,7 @@
     },
     {
       "name": "bluetemberg-rules-i18n",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Internationalization rules for Bluetemberg — next-intl locale routing, Payload localized-field discipline, locale route guards, and message-key conventions.",
       "profiles": [
         "frontend",
@@ -875,6 +875,39 @@
       "preview": "Skeletor's animation helpers compile element animations, run them on the native driver, and hand `Block`/`Text` an `animations` prop ready to interpolate. Hand-rolling `Animated.Value` + `Animated.timing`/`Animated.sequence` re-implements that boilerplate, is easy to get wrong on the native driver,"
     },
     {
+      "name": "bluetemberg-rules-tailwind",
+      "version": "0.1.0",
+      "description": "Tailwind CSS v4 rules for Bluetemberg — @theme token discipline, fluid typography, OKLch colors, and single-source breakpoints.",
+      "profiles": [
+        "frontend",
+        "fullstack"
+      ],
+      "stacks": [
+        "tailwind"
+      ],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "tailwind-breakpoints-single-source",
+          "description": "Define breakpoints once in a single cssVariables.js export and import them; never hardcode pixel breakpoint values as magic numbers in JS"
+        },
+        {
+          "name": "tailwind-custom-utilities",
+          "description": "Define custom Tailwind utilities with @utility and custom variants with @custom-variant; never hand-roll a global class or duplicate the utility inline"
+        },
+        {
+          "name": "tailwind-fluid-typography",
+          "description": "Use fluid utilities (fl-text-{mobile}/{desktop}, fl-py-{mobile}/{desktop}) for body and heading copy and section spacing; never fixed text-/py- steps"
+        },
+        {
+          "name": "tailwind-theme-tokens",
+          "description": "Define every Tailwind design token as a CSS variable in the @theme block (colors in OKLch); never hardcode values in class names or inline styles"
+        }
+      ],
+      "preview": "When a breakpoint width lives both in the Tailwind theme and as a literal `768` in a `matchMedia`/resize handler, the two drift the moment one changes — JS reacts at a different width than CSS lays out. A single exported `cssVariables.js` keeps the CSS theme and JS logic reading the same numbers. -"
+    },
+    {
       "name": "bluetemberg-rules-testing",
       "version": "0.2.1",
       "description": "Testing rules for Bluetemberg — determinism, isolation, and meaningful coverage.",
@@ -1117,6 +1150,28 @@
       "preview": "Use this skill when a view or flow is built and needs an honest, multi-angle review before it ships — the pass that finds what is wrong, where, and what to fix first. - A view or flow is functionally built and ready for a quality pass - Before shipping, deploying, or presenting a design - The work \""
     },
     {
+      "name": "bluetemberg-skills-design-system",
+      "version": "0.1.0",
+      "description": "Design-system reuse skill for Bluetemberg — reach for shadcn/Radix primitives, cn()/cva() composition, and asChild polymorphism before bespoke UI.",
+      "profiles": [
+        "frontend",
+        "fullstack",
+        "design-engineer"
+      ],
+      "stacks": [
+        "react"
+      ],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "design-system",
+          "description": "Reuse shadcn/Radix before bespoke UI: components/ui first, Radix for interactive elements, cn()/cva() for variants, asChild for polymorphism. Use when building or reviewing a UI component."
+        }
+      ],
+      "preview": "Use this skill when building or reviewing a UI component in a shadcn + Radix codebase. The goal: reuse the existing system before inventing markup, lean on Radix for interaction/accessibility, and compose classes and variants through the house utilities instead of ad-hoc strings. This extends the `d"
+    },
+    {
       "name": "bluetemberg-skills-docs-upkeep",
       "version": "0.3.1",
       "description": "Docs upkeep skill for Bluetemberg — keep docs aligned with implementation changes.",
@@ -1170,6 +1225,25 @@
       "preview": "Use this skill before merging infrastructure-as-code changes to ensure declared state is consistent with what is deployed. - Changes to `*.tf` files (Terraform) - Changes to Ansible playbooks or inventory - Changes to Kubernetes manifests (`k8s/`, `manifests/`, `helm/`) - Changes to Docker Compose f"
     },
     {
+      "name": "bluetemberg-skills-integration-safety",
+      "version": "0.1.0",
+      "description": "Third-party integration-safety skill for Bluetemberg — lazy init, getRequiredEnv, safeParse over parse, fire-and-forget analytics, and safe widget script injection.",
+      "profiles": [
+        "backend",
+        "fullstack"
+      ],
+      "stacks": [],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "integration-safety",
+          "description": "Safe third-party integrations: lazy init, getRequiredEnv, safeParse over parse, best-effort analytics, resilient widget scripts, hardened cookies. Use when integrating an external service."
+        }
+      ],
+      "preview": "Use this skill when wiring a third-party service into a Next.js app: an OAuth/Cognito client, a SOAP endpoint, a captcha or financing widget, an SMTP sender, or any external API. The goal: env and config resolve at runtime not build time, external responses can never throw mid-flow, analytics/widget"
+    },
+    {
       "name": "bluetemberg-skills-k6-load-testing",
       "version": "1.0.1",
       "description": "k6 load-testing skill for Bluetemberg — scenario taxonomy, shared config/requests libs, p95 threshold discipline, and __ENV-parametrized suites wired into CI.",
@@ -1209,6 +1283,46 @@
       "preview": "Use this skill when creating or reviewing database schema migrations. Every migration must survive a zero-downtime deploy and have a tested rollback path. - New migration file creation - Schema change review - Pre-deploy database change validation Scan the migration for: - `DROP TABLE`, `DROP COLUMN"
     },
     {
+      "name": "bluetemberg-skills-nextjs-caching",
+      "version": "0.1.0",
+      "description": "Next.js caching & ISR skill for Bluetemberg — unstable_cache keyParts vs tags discipline, revalidateTag call sites, and the ISR cache handler.",
+      "profiles": [
+        "frontend",
+        "fullstack"
+      ],
+      "stacks": [
+        "nextjs"
+      ],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "nextjs-caching",
+          "description": "Next.js caching/ISR: unstable_cache keyParts vs tags, direct revalidateTag, the ISR cache handler, force-static vs force-dynamic. Use when editing unstable_cache, revalidateTag, or render mode."
+        }
+      ],
+      "preview": "Use this skill when you touch the Next.js framework caching layer: an `unstable_cache` call, a `revalidateTag` site, the ISR cache handler, a page's `dynamic`/`revalidate` export, or a cached media URL. This is the **framework** layer — distinct from `payload-cache-revalidation`, which owns the Payl"
+    },
+    {
+      "name": "bluetemberg-skills-orval-openapi",
+      "version": "0.1.0",
+      "description": "Orval OpenAPI client-generation skill for Bluetemberg — the build:api pipeline, tags-split output, the custom fetch mutator, and never hand-editing generated files.",
+      "profiles": [
+        "backend",
+        "fullstack"
+      ],
+      "stacks": [],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "orval-openapi",
+          "description": "Orval OpenAPI client generation: the build:api pipeline, custom fetch mutator, never hand-edit generated files, use generated hooks/types. Use when a backend API changes or editing orval.config."
+        }
+      ],
+      "preview": "Use this skill when working with an Orval-generated API client: after a backend API changes, when editing `orval.config.ts` or the fetch mutator, or when consuming generated React Query hooks and types. The goal: generated code is regenerated, never hand-edited, every request goes through the shared"
+    },
+    {
       "name": "bluetemberg-skills-patterns",
       "version": "0.2.1",
       "description": "Patterns skill for Bluetemberg — apply reusable architecture and coding patterns.",
@@ -1227,6 +1341,27 @@
         }
       ],
       "preview": "Use this skill when implementing features, reviewing structure, or deciding how to organize new code. - New feature implementation that requires architectural decisions - Code review where folder structure, naming, or module boundaries are in question - Refactoring to align existing code with establ"
+    },
+    {
+      "name": "bluetemberg-skills-payload-blocks",
+      "version": "0.1.0",
+      "description": "Payload CMS block-system skill for Bluetemberg — the co-located config.ts + Component.tsx pattern and the registry-dispatch RenderBlocks convention.",
+      "profiles": [
+        "frontend",
+        "fullstack"
+      ],
+      "stacks": [
+        "payload"
+      ],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "payload-blocks",
+          "description": "Payload block system: co-located config.ts + Component.tsx and the registry-dispatch RenderBlocks convention. Use when adding, editing, or rendering a Payload block or RenderBlocks dispatcher."
+        }
+      ],
+      "preview": "Use this skill when you add, edit, or render a Payload CMS block. A block is always two co-located files — a Payload schema and a React component — and is rendered through a registry dispatcher, never a hand-rolled `switch`. The goal: every block looks the same on disk, the renderer maps `blockType"
     },
     {
       "name": "bluetemberg-skills-payload-cache-revalidation",
@@ -1248,6 +1383,27 @@
         }
       ],
       "preview": "Use this skill whenever you add or change a cached data fetch (`unstable_cache`) or a Payload revalidation hook in a Payload CMS + Next.js App Router project. The goal: the producer (the fetch that sets `tags`) and the consumer (the hook that calls `revalidateTag`) can never drift apart, and a tag's"
+    },
+    {
+      "name": "bluetemberg-skills-payload-migrations",
+      "version": "0.1.0",
+      "description": "Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrite, paired .ts/.json snapshots, and gated destructive changes.",
+      "profiles": [
+        "backend",
+        "fullstack"
+      ],
+      "stacks": [
+        "payload"
+      ],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "payload-migrations",
+          "description": "Payload migration workflow: generate not hand-write, commit the paired .ts/.json snapshot, never edit generated types, gate destructive ops. Use when editing src/migrations/ or a schema field."
+        }
+      ],
+      "preview": "Use this skill whenever a schema-affecting change lands in a Payload CMS project — a new collection, a new/renamed/removed field, a changed column type — or whenever a file under `src/migrations/` is added, edited, or reviewed. The goal: the migration history stays a faithful, replayable record of t"
     },
     {
       "name": "bluetemberg-skills-pr-review-loop",
