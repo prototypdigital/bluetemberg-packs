@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-31T11:25:07.028Z",
+  "generated": "2026-08-31T11:32:34.402Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -795,7 +795,7 @@
       "rules": [
         {
           "name": "github-full-urls",
-          "description": "Link to PRs and issues with full GitHub URLs, never the owner/repo#123 shorthand."
+          "description": "Link to PRs and issues with full GitHub URLs, never owner/repo#123 shorthand as the link itself (plain-prose cross-repo mentions may still use it)."
         }
       ],
       "preview": "The `owner/repo#123` shorthand only becomes a clickable link inside GitHub's own UI, and only within that same repository. In a chat response, a commit message, a doc, or a cross-repo reference it renders as inert plain text, forcing the reader to reconstruct the URL by hand. - Link to PRs and issue"
