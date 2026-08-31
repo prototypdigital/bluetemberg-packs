@@ -9,7 +9,7 @@ A `Co-Authored-By` trailer or a "Generated with Claude Code" footer turns every 
 
 ## Rules
 
-- Do not add `Co-Authored-By:` trailers naming an AI agent, model, or assistant to commit messages.
+- Do not add `Co-Authored-By:` trailers naming an AI agent, model, or assistant to commit messages, PR descriptions, or PR/issue comments.
 - Do not add "🤖 Generated with Claude Code" (or any equivalent tool-attribution footer/banner) to commit messages, PR descriptions, or PR comments.
 - This applies to every persisted artifact: commits, PR titles/descriptions, PR/issue comments, and generated files that get committed — not just the commit message.
 - If a project or user explicitly asks for attribution to be included, that overrides this rule for that project — but the default, absent that instruction, is no residue.
