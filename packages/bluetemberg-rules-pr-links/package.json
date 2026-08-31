@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-pr-links",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "GitHub PR and issue link formatting rules for Bluetemberg — full URLs over owner/repo#123 shorthand.",
   "keywords": [
     "bluetemberg-pack",
