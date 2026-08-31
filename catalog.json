@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-31T11:12:18.296Z",
+  "generated": "2026-08-31T11:25:07.028Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -1440,7 +1440,7 @@
     {
       "name": "bluetemberg-skills-pr-review-loop",
       "version": "0.2.1",
-      "description": "PR review loop skill for Bluetemberg — wire an automated comment-only PR review via a local PostToolUse hook only, no GitHub Actions workflow.",
+      "description": "PR review loop skill for Bluetemberg — wire an automated comment-only PR review via a local PostToolUse hook.",
       "profiles": [
         "frontend",
         "backend",
@@ -1453,10 +1453,10 @@
       "skills": [
         {
           "name": "pr-review-loop",
-          "description": "Wires an automated comment-only PR review via a local PostToolUse hook that reviews a PR the moment an agent opens it. Local-only — no GitHub Actions workflow. Use when setting up automated PR review."
+          "description": "Wires an automated comment-only PR review via a local PostToolUse hook that reviews a PR the moment an agent opens it. Use when setting up automated PR review."
         }
       ],
-      "preview": "Use this skill when wiring automated PR review into a project: the moment an agent session opens a pull request, it gets a prompt, comment-only review from a headless agent, without a human having to ask for one. This is a **local-only** loop: a `PostToolUse` hook fires the instant `gh pr create` su"
+      "preview": "Use this skill when wiring automated PR review into a project: the moment an agent session opens a pull request, it gets a prompt, comment-only review from a headless agent, without a human having to ask for one. A `PostToolUse` hook fires the instant `gh pr create` succeeds inside an agent session"
     },
     {
       "name": "bluetemberg-skills-react-patterns",

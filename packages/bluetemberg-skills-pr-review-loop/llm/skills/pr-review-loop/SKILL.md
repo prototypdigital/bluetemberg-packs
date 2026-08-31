@@ -1,6 +1,6 @@
 ---
 name: pr-review-loop
-description: Wires an automated comment-only PR review via a local PostToolUse hook that reviews a PR the moment an agent opens it. Local-only — no GitHub Actions workflow. Use when setting up automated PR review.
+description: Wires an automated comment-only PR review via a local PostToolUse hook that reviews a PR the moment an agent opens it. Use when setting up automated PR review.
 profiles:
   - frontend
   - backend
@@ -12,13 +12,13 @@ profiles:
 
 Use this skill when wiring automated PR review into a project: the moment an agent session opens a pull request, it gets a prompt, comment-only review from a headless agent, without a human having to ask for one.
 
-This is a **local-only** loop: a `PostToolUse` hook fires the instant `gh pr create` succeeds inside an agent session. There is no GitHub Actions workflow and no CI-level backstop — nothing runs on GitHub's own infrastructure, and no repository secret is required. A PR opened any other way (the GitHub web UI, another tool, a teammate without this hook configured locally) gets no automated review from this loop.
+A `PostToolUse` hook fires the instant `gh pr create` succeeds inside an agent session — no repository secret, nothing running on GitHub's own infrastructure. See "When NOT to use" for what that trades away.
 
 Install this pack alongside its companion, `bluetemberg-agents-pr-reviewer`, and point the hook's prompt at that agent's review protocol so authors get one consistent review voice.
 
 ## Triggers
 
-- Setting up automated PR review for a repository, without adding a GitHub Actions workflow
+- Setting up automated PR review for a repository
 - An agent workflow that opens PRs and needs same-session review feedback
 - Migrating ad-hoc "please review my PR" prompts into a standing loop
 
@@ -38,7 +38,7 @@ The reviewer starts the moment `gh pr create` succeeds inside an agent session. 
 3. **Detach and exit 0 immediately.** `PostToolUse` hooks block the authoring session's turn. The hook only gates and hands off to a worker script — `nohup run-pr-review.sh "$pr_url" ... & disown`, then `exit 0` — so the authoring session never waits on the review, and the worker (which runs the reviewer, then posts the cost comment below) has no time pressure of its own.
 4. **Enforce comment-only at the tool boundary, not just in the prompt.** The worker exports `EXPECTED_PR_URL` before invoking the reviewer, and grants only `Bash(gh pr view:*),Bash(gh pr diff:*),Bash(<path-to-post-review-comment.sh>:*),Read,Grep,Glob`. Do not grant raw `Bash(gh pr review:*)` or `Bash(gh api:*)` — those permit `--approve` and arbitrary API calls, which the reviewer's own credentials (the developer's authenticated `gh` session, typically broader than a CI job's scoped token) can act on if a malicious diff prompt-injects the model. `post-review-comment.sh` refuses to act on any `<pr-url>` that doesn't match `EXPECTED_PR_URL`, so a prompt-injected diff can't even redirect comments to a different PR in the repo. This also removes recursion risk: the reviewer can't run `gh pr create`.
 5. **Post a cost comment.** After the reviewer's session ends, the worker reads its `total_cost_usd` from the JSON result and posts `Automated review cost: $X.XX (N turns)` directly via `gh pr comment` — fixed template, no model-generated text, so posting it outside the wrapper carries none of the wrapper's risk — so the review layer's own cost is visible where the review lands. Gate this parse-and-post step on `.is_error == false` in the JSON output: on an auth failure `claude -p` still reports `subtype: "success"` with the error text in `.result` and cost `0` — exit status alone doesn't distinguish a real run from a failed one. This gate applies only to the cost comment: the review itself is posted mid-session by the reviewer calling `post-review-comment.sh`, before the worker's `claude -p` call returns and the final JSON result (with its `.is_error` field) even exists.
-6. **Degrade silently.** If `claude` or `jq` is not installed, or no PR URL can be found, exit 0 without complaint. There is no CI-level backstop here — a skipped run means that PR gets no automated review at all, so keep the local `claude`/`jq` toolchain working on every machine this hook is expected to fire on.
+6. **Degrade silently.** If `claude` or `jq` is not installed, or no PR URL can be found, exit 0 without complaint. A skipped run means that PR gets no review at all, so keep the local `claude`/`jq` toolchain working on every machine this hook is expected to fire on.
 
 Merge this `PostToolUse` entry into the project's `llm/hooks.claude.json` as a sibling of whatever's already there (only create the file fresh if it doesn't exist yet — see [prototypdigital/bluetemberg#225](https://github.com/prototypdigital/bluetemberg/issues/225), shipped in engine 0.9.0). Copying the block below over an existing file instead of merging it will silently drop other event keys — e.g. a `SessionEnd` entry from the `session-retrospective` skill:
 
@@ -79,7 +79,6 @@ The hook's prompt must enforce this policy:
 - [ ] Local hook (entry + detached worker) and `post-review-comment.sh` committed and registered under `PostToolUse` → `Bash` in `llm/hooks.claude.json`, synced into `.claude/settings.json`, detaching and exiting 0 immediately.
 - [ ] Reviewer tools scoped with `--allowedTools` — no edit tools, no `gh pr create`, no raw `gh pr review:*` / `gh api:*` (writes go through the wrapper only, pinned via `EXPECTED_PR_URL`).
 - [ ] Policy verified in the hook's prompt: comment-only, paginated dedupe with a commit-baseline marker, one summary, automated sign-off line.
-- [ ] No GitHub Actions workflow, no repository secret — confirm nothing was added under `.github/workflows/` for this loop.
 
 ## When NOT to use
 

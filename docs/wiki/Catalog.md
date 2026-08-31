@@ -563,11 +563,11 @@ Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrit
 
 ### bluetemberg-skills-pr-review-loop
 
-PR review loop skill for Bluetemberg — wire an automated comment-only PR review via a local PostToolUse hook only, no GitHub Actions workflow.
+PR review loop skill for Bluetemberg — wire an automated comment-only PR review via a local PostToolUse hook.
 
 | Skill | Description |
 | ----- | ----------- |
-| `pr-review-loop` | Wires an automated comment-only PR review via a local PostToolUse hook that reviews a PR the moment an agent opens it. Local-only — no GitHub Actions workflow. Use when setting up automated PR review. |
+| `pr-review-loop` | Wires an automated comment-only PR review via a local PostToolUse hook that reviews a PR the moment an agent opens it. Use when setting up automated PR review. |
 
 ### bluetemberg-skills-react-patterns
 
