@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-nextjs-caching",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Next.js caching & ISR skill for Bluetemberg — unstable_cache keyParts vs tags discipline, revalidateTag call sites, and the ISR cache handler.",
   "keywords": [
     "bluetemberg-pack",

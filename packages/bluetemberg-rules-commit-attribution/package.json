@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-commit-attribution",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts.",
   "keywords": [
     "bluetemberg-pack",

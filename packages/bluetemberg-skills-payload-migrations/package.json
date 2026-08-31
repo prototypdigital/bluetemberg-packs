@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-payload-migrations",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrite, paired .ts/.json snapshots, and gated destructive changes.",
   "keywords": [
     "bluetemberg-pack",
