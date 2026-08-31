@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-tailwind",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Tailwind CSS v4 rules for Bluetemberg — @theme token discipline, fluid typography, OKLch colors, and single-source breakpoints.",
   "keywords": [
     "bluetemberg-pack",
