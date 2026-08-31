@@ -180,6 +180,17 @@ Rules for consuming @prototyp/skeletor in React Native apps — Block/Text/Scree
 | `skeletor-provider` | Wrap the app root in SkeletorProvider once, declare the Font union in @types/Font.d.ts, and set defaultFont/defaultFontSize/defaultTextColor and status-bar defaults there, not per component. |
 | `skeletor-screen` | Wrap every full-screen view in skeletor's Screen (not SafeAreaView + manual StatusBar); use hideTopSafeArea/hideBottomSafeArea for modals and statusBarType/statusBarBackground per screen. |
 
+### bluetemberg-rules-tailwind
+
+Tailwind CSS v4 rules for Bluetemberg — @theme token discipline, fluid typography, OKLch colors, and single-source breakpoints.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `tailwind-breakpoints-single-source` | Define breakpoints once in a single cssVariables.js export and import them; never hardcode pixel breakpoint values as magic numbers in JS |
+| `tailwind-custom-utilities` | Define custom Tailwind utilities with @utility and custom variants with @custom-variant; never hand-roll a global class or duplicate the utility inline |
+| `tailwind-fluid-typography` | Use fluid utilities (fl-text-{mobile}/{desktop}, fl-py-{mobile}/{desktop}) for body and heading copy and section spacing; never fixed text-/py- steps |
+| `tailwind-theme-tokens` | Define every Tailwind design token as a CSS variable in the @theme block (colors in OKLch); never hardcode values in class names or inline styles |
+
 ### bluetemberg-rules-testing
 
 Testing rules for Bluetemberg — determinism, isolation, and meaningful coverage.
@@ -430,6 +441,14 @@ Design critique skill for Bluetemberg — multi-lens review, hostile QA, and an 
 | ----- | ----------- |
 | `design-critique` | Critiques built UI across accessibility, hierarchy, copy, consistency, and device lenses, runs hostile QA, and returns an impact-ranked fix list. Use before shipping a view or when it feels off. |
 
+### bluetemberg-skills-design-system
+
+Design-system reuse skill for Bluetemberg — reach for shadcn/Radix primitives, cn()/cva() composition, and asChild polymorphism before bespoke UI.
+
+| Skill | Description |
+| ----- | ----------- |
+| `design-system` | Reuse shadcn/Radix before bespoke UI: components/ui first, Radix for interactive elements, cn()/cva() for variants, asChild for polymorphism. Use when building or reviewing a UI component. |
+
 ### bluetemberg-skills-docs-upkeep
 
 Docs upkeep skill for Bluetemberg — keep docs aligned with implementation changes.
@@ -454,6 +473,14 @@ Infrastructure drift check skill for Bluetemberg — verify IaC state matches de
 | ----- | ----------- |
 | `infrastructure-drift-check` | Detects infrastructure drift before merging IaC changes by diffing declared vs deployed state. Use when reviewing or merging Terraform .tf, Ansible, Kubernetes manifests, Helm, or Compose PRs. |
 
+### bluetemberg-skills-integration-safety
+
+Third-party integration-safety skill for Bluetemberg — lazy init, getRequiredEnv, safeParse over parse, fire-and-forget analytics, and safe widget script injection.
+
+| Skill | Description |
+| ----- | ----------- |
+| `integration-safety` | Safe third-party integrations: lazy init, getRequiredEnv, safeParse over parse, best-effort analytics, resilient widget scripts, hardened cookies. Use when integrating an external service. |
+
 ### bluetemberg-skills-k6-load-testing
 
 k6 load-testing skill for Bluetemberg — scenario taxonomy, shared config/requests libs, p95 threshold discipline, and __ENV-parametrized suites wired into CI.
@@ -470,6 +497,22 @@ Migration safety skill for Bluetemberg — database migration review and rollbac
 | ----- | ----------- |
 | `migration-safety` | Reviews or writes database schema migrations against a zero-downtime checklist — destructive ops, lock analysis, batching, rollback path. Use when creating or reviewing a migration pre-deploy. |
 
+### bluetemberg-skills-nextjs-caching
+
+Next.js caching & ISR skill for Bluetemberg — unstable_cache keyParts vs tags discipline, revalidateTag call sites, and the ISR cache handler.
+
+| Skill | Description |
+| ----- | ----------- |
+| `nextjs-caching` | Next.js caching/ISR: unstable_cache keyParts vs tags, direct revalidateTag, the ISR cache handler, force-static vs force-dynamic. Use when editing unstable_cache, revalidateTag, or render mode. |
+
+### bluetemberg-skills-orval-openapi
+
+Orval OpenAPI client-generation skill for Bluetemberg — the build:api pipeline, tags-split output, the custom fetch mutator, and never hand-editing generated files.
+
+| Skill | Description |
+| ----- | ----------- |
+| `orval-openapi` | Orval OpenAPI client generation: the build:api pipeline, custom fetch mutator, never hand-edit generated files, use generated hooks/types. Use when a backend API changes or editing orval.config. |
+
 ### bluetemberg-skills-patterns
 
 Patterns skill for Bluetemberg — apply reusable architecture and coding patterns.
@@ -478,6 +521,14 @@ Patterns skill for Bluetemberg — apply reusable architecture and coding patter
 | ----- | ----------- |
 | `patterns` | Finds and reuses an existing codebase pattern instead of inventing new structure. Use when adding files or abstractions, reviewing folder structure, naming, or module boundaries, or refactoring. |
 
+### bluetemberg-skills-payload-blocks
+
+Payload CMS block-system skill for Bluetemberg — the co-located config.ts + Component.tsx pattern and the registry-dispatch RenderBlocks convention.
+
+| Skill | Description |
+| ----- | ----------- |
+| `payload-blocks` | Payload block system: co-located config.ts + Component.tsx and the registry-dispatch RenderBlocks convention. Use when adding, editing, or rendering a Payload block or RenderBlocks dispatcher. |
+
 ### bluetemberg-skills-payload-cache-revalidation
 
 Payload + Next.js cache revalidation skill for Bluetemberg — a single source of truth for cache tags and the per-locale vs locale-agnostic decision.
@@ -485,6 +536,14 @@ Payload + Next.js cache revalidation skill for Bluetemberg — a single source o
 | Skill | Description |
 | ----- | ----------- |
 | `payload-cache-revalidation` | Standardizes Next.js + Payload cache revalidation — a cacheTags source of truth, per-locale vs locale-agnostic tags, hooks per cached collection. Use when editing unstable_cache or revalidation hooks. |
+
+### bluetemberg-skills-payload-migrations
+
+Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrite, paired .ts/.json snapshots, and gated destructive changes.
+
+| Skill | Description |
+| ----- | ----------- |
+| `payload-migrations` | Payload migration workflow: generate not hand-write, commit the paired .ts/.json snapshot, never edit generated types, gate destructive ops. Use when editing src/migrations/ or a schema field. |
 
 ### bluetemberg-skills-pr-review-loop
 

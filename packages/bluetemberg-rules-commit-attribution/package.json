@@ -1,0 +1,32 @@
+{
+  "name": "bluetemberg-rules-commit-attribution",
+  "version": "0.1.0",
+  "description": "Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "git",
+    "attribution"
+  ],
+  "author": "Josip Ravas (https://github.com/jravas)",
+  "contributors": [
+    "Prototyp Digital (https://prototyp.digital)"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prototypdigital/bluetemberg-packs.git",
+    "directory": "packages/bluetemberg-rules-commit-attribution"
+  },
+  "bugs": {
+    "url": "https://github.com/prototypdigital/bluetemberg-packs/issues"
+  },
+  "homepage": "https://prototypdigital.github.io/bluetemberg-packs/",
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": true,
+    "profiles": []
+  }
+}
