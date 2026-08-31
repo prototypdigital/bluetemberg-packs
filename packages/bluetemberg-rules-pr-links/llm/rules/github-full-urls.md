@@ -1,5 +1,5 @@
 ---
-description: Link to PRs and issues with full GitHub URLs, never the owner/repo#123 shorthand.
+description: Link to PRs and issues with full GitHub URLs, never owner/repo#123 shorthand as the link itself (plain-prose cross-repo mentions may still use it).
 scope: "**"
 ---
 
@@ -12,15 +12,17 @@ The `owner/repo#123` shorthand only becomes a clickable link inside GitHub's own
 - Link to PRs and issues with the full URL — `https://github.com/owner/repo/pull/123` or `https://github.com/owner/repo/issues/123` — not the `owner/repo#123` shorthand.
 - Never assume a default `owner/repo`. Take it from the repository actually being discussed (its git remote, or the one named in the request).
 - Never write a bare reference like `PR #123` or `#123` with no repo context — it's ambiguous outside the one page it was written on.
-- When a short in-line mention of a PR/issue in a *different* repo is unavoidable, qualify it as `owner/repo#123` in plain prose, not as the link itself — the full URL remains the link.
+- When a short in-line mention of a PR/issue in a _different_ repo is unavoidable, qualify it as `owner/repo#123` in plain prose, not as the link itself — the full URL remains the link.
 
 ## Examples
 
 ```md
 <!-- BAD — shorthand doesn't render outside GitHub's own UI, and the repo is assumed -->
+
 See #123 for context, discussed further in prototypdigital/bluetemberg-packs#106.
 
 <!-- GOOD — full URL, works everywhere it's read -->
+
 See [#123](https://github.com/prototypdigital/bluetemberg-packs/pull/123) for context,
 discussed further in [prototypdigital/bluetemberg-packs#106](https://github.com/prototypdigital/bluetemberg-packs/pull/106).
 ```

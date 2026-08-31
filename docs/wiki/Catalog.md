@@ -33,6 +33,14 @@ Agent memory rules for Bluetemberg — statelessness as a hard constraint, memor
 | `memory-provenance` | Every durable memory carries provenance — source, time, confidence, and whether it was user-stated or agent-inferred. No silent writes. |
 | `memory-recall-authority` | Rank recalled memory by authority, not only relevance — and never let stale, contradicted, or superseded memory present as a current constraint. |
 
+### bluetemberg-rules-commit-attribution
+
+Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `no-agent-attribution` | Never leave AI agent-attribution residue in commits, PRs, or other persisted artifacts. |
+
 ### bluetemberg-rules-context-engineering
 
 Context engineering rules for Bluetemberg — structuring LLM context, managing token budgets, avoiding context pollution.
@@ -143,6 +151,14 @@ Payload CMS rules for Bluetemberg — collection structure, snake_case dbName, c
 | `payload-dbname-snake-case` | Custom Payload `dbName` overrides must be snake_case — lowercase letters, digits, underscores only. |
 | `payload-field-builder-pattern` | Share Payload fields through builder functions that accept { overrides } and deep-merge onto a base config — never copy-paste field definitions. |
 | `payload-revalidation-hook-required` | Every Payload collection/global read on the front end needs afterChange/afterDelete revalidation hooks gated on context.disableRevalidate — no hook means a cache that silently never busts. |
+
+### bluetemberg-rules-pr-links
+
+GitHub PR and issue link formatting rules for Bluetemberg — full URLs over owner/repo#123 shorthand.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `github-full-urls` | Link to PRs and issues with full GitHub URLs, never owner/repo#123 shorthand as the link itself (plain-prose cross-repo mentions may still use it). |
 
 ### bluetemberg-rules-security
 
@@ -547,11 +563,11 @@ Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrit
 
 ### bluetemberg-skills-pr-review-loop
 
-PR review loop skill for Bluetemberg — wire automated comment-only PR reviews via a GitHub Actions backstop and a local PostToolUse hook.
+PR review loop skill for Bluetemberg — wire an automated comment-only PR review via a local PostToolUse hook.
 
 | Skill | Description |
 | ----- | ----------- |
-| `pr-review-loop` | Wires automated comment-only PR reviews — a GitHub Actions backstop on every PR push plus a local hook that reviews PRs the moment an agent opens them. Use when setting up automated PR review. |
+| `pr-review-loop` | Wires an automated comment-only PR review via a local PostToolUse hook that reviews a PR the moment an agent opens it. Use when setting up automated PR review. |
 
 ### bluetemberg-skills-react-patterns
 

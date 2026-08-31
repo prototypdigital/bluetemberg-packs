@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-31T09:17:42.632Z",
+  "generated": "2026-08-31T11:43:52.964Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -442,6 +442,22 @@
       "preview": "An LLM call is stateless. Nothing carries between turns except what you put back into the context window. Continuity is an engineering decision, not a model feature — and provider-managed memory APIs delegate the storage, not the decision. - For every piece of state, decide explicitly whether it mus"
     },
     {
+      "name": "bluetemberg-rules-commit-attribution",
+      "version": "0.2.0",
+      "description": "Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts.",
+      "profiles": [],
+      "stacks": [],
+      "universal": true,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "no-agent-attribution",
+          "description": "Never leave AI agent-attribution residue in commits, PRs, or other persisted artifacts."
+        }
+      ],
+      "preview": "A `Co-Authored-By` trailer or a \"Generated with Claude Code\" footer turns every commit and PR into a visible record of which tool wrote it. That's noise the project didn't ask for, it clutters `git log` and PR history for every future reader, and it's rarely something a team decides on a commit-by-c"
+    },
+    {
       "name": "bluetemberg-rules-context-engineering",
       "version": "0.3.1",
       "description": "Context engineering rules for Bluetemberg — structuring LLM context, managing token budgets, avoiding context pollution.",
@@ -684,7 +700,7 @@
     },
     {
       "name": "bluetemberg-rules-nextjs",
-      "version": "0.3.1",
+      "version": "0.4.0",
       "description": "Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.",
       "profiles": [
         "frontend",
@@ -767,6 +783,22 @@
         }
       ],
       "preview": "Give every public-facing collection (rendered on the front end) the same skeleton. Targets Payload 3 (Next-native, Lexical, Drizzle/Postgres). Why: divergent shapes force editors and consuming code to special-case each collection, and a missing piece (versions, tracking fields, revalidation) ships a"
+    },
+    {
+      "name": "bluetemberg-rules-pr-links",
+      "version": "0.2.0",
+      "description": "GitHub PR and issue link formatting rules for Bluetemberg — full URLs over owner/repo#123 shorthand.",
+      "profiles": [],
+      "stacks": [],
+      "universal": true,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "github-full-urls",
+          "description": "Link to PRs and issues with full GitHub URLs, never owner/repo#123 shorthand as the link itself (plain-prose cross-repo mentions may still use it)."
+        }
+      ],
+      "preview": "The `owner/repo#123` shorthand only becomes a clickable link inside GitHub's own UI, and only within that same repository. In a chat response, a commit message, a doc, or a cross-repo reference it renders as inert plain text, forcing the reader to reconstruct the URL by hand. - Link to PRs and issue"
     },
     {
       "name": "bluetemberg-rules-security",
@@ -876,7 +908,7 @@
     },
     {
       "name": "bluetemberg-rules-tailwind",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Tailwind CSS v4 rules for Bluetemberg — @theme token discipline, fluid typography, OKLch colors, and single-source breakpoints.",
       "profiles": [
         "frontend",
@@ -1151,7 +1183,7 @@
     },
     {
       "name": "bluetemberg-skills-design-system",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Design-system reuse skill for Bluetemberg — reach for shadcn/Radix primitives, cn()/cva() composition, and asChild polymorphism before bespoke UI.",
       "profiles": [
         "frontend",
@@ -1226,7 +1258,7 @@
     },
     {
       "name": "bluetemberg-skills-integration-safety",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Third-party integration-safety skill for Bluetemberg — lazy init, getRequiredEnv, safeParse over parse, fire-and-forget analytics, and safe widget script injection.",
       "profiles": [
         "backend",
@@ -1284,7 +1316,7 @@
     },
     {
       "name": "bluetemberg-skills-nextjs-caching",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Next.js caching & ISR skill for Bluetemberg — unstable_cache keyParts vs tags discipline, revalidateTag call sites, and the ISR cache handler.",
       "profiles": [
         "frontend",
@@ -1305,7 +1337,7 @@
     },
     {
       "name": "bluetemberg-skills-orval-openapi",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Orval OpenAPI client-generation skill for Bluetemberg — the build:api pipeline, tags-split output, the custom fetch mutator, and never hand-editing generated files.",
       "profiles": [
         "backend",
@@ -1344,7 +1376,7 @@
     },
     {
       "name": "bluetemberg-skills-payload-blocks",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Payload CMS block-system skill for Bluetemberg — the co-located config.ts + Component.tsx pattern and the registry-dispatch RenderBlocks convention.",
       "profiles": [
         "frontend",
@@ -1386,7 +1418,7 @@
     },
     {
       "name": "bluetemberg-skills-payload-migrations",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "description": "Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrite, paired .ts/.json snapshots, and gated destructive changes.",
       "profiles": [
         "backend",
@@ -1408,7 +1440,7 @@
     {
       "name": "bluetemberg-skills-pr-review-loop",
       "version": "0.2.1",
-      "description": "PR review loop skill for Bluetemberg — wire automated comment-only PR reviews via a GitHub Actions backstop and a local PostToolUse hook.",
+      "description": "PR review loop skill for Bluetemberg — wire an automated comment-only PR review via a local PostToolUse hook.",
       "profiles": [
         "frontend",
         "backend",
@@ -1421,10 +1453,10 @@
       "skills": [
         {
           "name": "pr-review-loop",
-          "description": "Wires automated comment-only PR reviews — a GitHub Actions backstop on every PR push plus a local hook that reviews PRs the moment an agent opens them. Use when setting up automated PR review."
+          "description": "Wires an automated comment-only PR review via a local PostToolUse hook that reviews a PR the moment an agent opens it. Use when setting up automated PR review."
         }
       ],
-      "preview": "Use this skill when wiring automated PR reviews into a project: every opened or updated pull request gets a prompt, comment-only review from a headless agent, without a human having to ask for one. The loop has two triggers that complement each other: - **GitHub Actions backstop** — machine-independ"
+      "preview": "Use this skill when wiring automated PR review into a project: the moment an agent session opens a pull request, it gets a prompt, comment-only review from a headless agent, without a human having to ask for one. A `PostToolUse` hook fires the instant `gh pr create` succeeds inside an agent session"
     },
     {
       "name": "bluetemberg-skills-react-patterns",

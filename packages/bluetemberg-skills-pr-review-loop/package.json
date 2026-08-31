@@ -1,7 +1,7 @@
 {
   "name": "bluetemberg-skills-pr-review-loop",
   "version": "0.2.1",
-  "description": "PR review loop skill for Bluetemberg — wire automated comment-only PR reviews via a GitHub Actions backstop and a local PostToolUse hook.",
+  "description": "PR review loop skill for Bluetemberg — wire an automated comment-only PR review via a local PostToolUse hook.",
   "keywords": [
     "bluetemberg-pack",
     "skills"
