@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-config-echo",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Config echo skill for Bluetemberg — verifies that synced configuration was actually loaded by the LLM.",
   "keywords": [
     "bluetemberg-pack",
