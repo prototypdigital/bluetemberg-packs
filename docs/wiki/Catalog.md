@@ -158,7 +158,7 @@ GitHub PR and issue link formatting rules for Bluetemberg — full URLs over own
 
 | Rule | Enforces |
 | ---- | -------- |
-| `github-full-urls` | Link to PRs and issues with full GitHub URLs, never the owner/repo#123 shorthand. |
+| `github-full-urls` | Link to PRs and issues with full GitHub URLs, never owner/repo#123 shorthand as the link itself (plain-prose cross-repo mentions may still use it). |
 
 ### bluetemberg-rules-security
 
