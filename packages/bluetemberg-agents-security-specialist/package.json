@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-agents-security-specialist",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Security specialist agent for Bluetemberg — vulnerability audit, dependency scanning, secrets.",
   "keywords": [
     "bluetemberg-pack",

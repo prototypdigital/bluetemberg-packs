@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-create-agent",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Meta-skill for scaffolding new bluetemberg agents — frontmatter, scoped tools, responsibilities and constraints, and sync.",
   "keywords": [
     "bluetemberg-pack",

@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-integration-safety",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Third-party integration-safety skill for Bluetemberg — lazy init, getRequiredEnv, safeParse over parse, fire-and-forget analytics, and safe widget script injection.",
   "keywords": [
     "bluetemberg-pack",

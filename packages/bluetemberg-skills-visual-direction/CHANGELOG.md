@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-visual-direction-v1.0.1...bluetemberg-skills-visual-direction-v1.0.2) (2026-09-30)
+
+
+### Bug Fixes
+
+* **deps:** resolve npm audit advisories ([7c1832e](https://github.com/prototypdigital/bluetemberg-packs/commit/7c1832e1c8c2b73ec49e1373f4b8cb84d0ee5aa6))
+
 ## [1.0.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-visual-direction-v1.0.0...bluetemberg-skills-visual-direction-v1.0.1) (2026-08-25)
 
 

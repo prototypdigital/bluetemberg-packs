@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-payload",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Payload CMS rules for Bluetemberg — collection structure, snake_case dbName, composable access, field builders, revalidation hooks.",
   "keywords": [
     "bluetemberg-pack",
