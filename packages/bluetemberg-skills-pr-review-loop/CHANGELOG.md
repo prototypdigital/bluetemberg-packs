@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.2.2](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-pr-review-loop-v0.2.1...bluetemberg-skills-pr-review-loop-v0.2.2) (2026-09-30)
+
+
+### Bug Fixes
+
+* **deps:** resolve npm audit advisories ([7c1832e](https://github.com/prototypdigital/bluetemberg-packs/commit/7c1832e1c8c2b73ec49e1373f4b8cb84d0ee5aa6))
+* **pr-review-loop:** drop the GitHub Actions backstop ([d3f1a20](https://github.com/prototypdigital/bluetemberg-packs/commit/d3f1a20e86687c606016b02d1cb38abb8946fb96))
+* **pr-review-loop:** drop the GitHub Actions backstop ([5c79481](https://github.com/prototypdigital/bluetemberg-packs/commit/5c79481afdf5f3daa46db2b5b07993cf8a0b8dfd))
+
 ## [0.2.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-pr-review-loop-v0.2.0...bluetemberg-skills-pr-review-loop-v0.2.1) (2026-08-25)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-pr-review-loop",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "PR review loop skill for Bluetemberg — wire automated comment-only PR reviews via a local PostToolUse hook, without touching CI/CD.",
   "keywords": [
     "bluetemberg-pack",
