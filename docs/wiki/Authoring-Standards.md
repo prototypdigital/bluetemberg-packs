@@ -60,6 +60,7 @@ A guardrail is **enforcement** (code decides; the model gets no vote), versus a 
 5. **Actionable, model-directed block message.** State what was rejected, why, and the exact next action — the message is fed back to the model to adjust its plan. ([Claude Code](https://code.claude.com/docs/en/hooks-guide)) ✅
 6. **Escalate irreversible actions to human approval**, not a binary deny (force-push, history rewrite, deletes, financial writes). ([OpenAI — Guardrails & human review](https://developers.openai.com/api/docs/guides/agents/guardrails-approvals)) ✅
 7. **Test both paths before shipping** — prove it blocks the bad case *and* allows the good case, including the error/edge path. ([Anthropic — Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)) ✅
+8. **`check.field` is a path into the full hook input**, not into the tool's arguments. The hook reads `.<field>` from the JSON on stdin, and Claude Code nests tool arguments under `tool_input` — so the `EnterWorktree` `name` argument is `tool_input.name`. A bare `name` always reads empty, and with `not_empty: true` that blocks every call. ([Claude Code — hooks reference](https://code.claude.com/docs/en/hooks)) ✅
 
 ## Description & triggering (cross-cutting)
 
