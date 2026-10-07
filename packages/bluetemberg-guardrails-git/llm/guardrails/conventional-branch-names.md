@@ -3,7 +3,7 @@ description: Enforce conventional branch names before creating a worktree
 trigger: EnterWorktree
 hook_type: PreToolUse
 check:
-  field: name
+  field: tool_input.name
   not_empty: true
   not_matches: '^claude/'
 message: 'EnterWorktree requires a conventional branch name. Call EnterWorktree again with name="type/description" (e.g. feat/my-feature). Ask the user what the branch should be called if unclear. Types: feat fix chore refactor docs test'
@@ -32,7 +32,8 @@ way each time, regardless of what the model believes it should do.
 
 The check allows only the known-good conventional shape and rejects everything else:
 
-- The `name` field must be present and non-empty (`not_empty: true`).
+- The `tool_input.name` field (the `EnterWorktree` call's `name` argument) must be present
+  and non-empty (`not_empty: true`).
 - The auto-generated `claude/` prefix is explicitly rejected (`not_matches: '^claude/'`),
   which is the failure mode this guardrail exists to catch.
 
