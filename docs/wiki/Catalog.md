@@ -648,11 +648,12 @@ Hook-based constraints that fire automatically during AI operations.
 
 ### bluetemberg-guardrails-git
 
-Git guardrails for Bluetemberg — enforce conventional branch names on AI-created worktrees.
+Git guardrails for Bluetemberg — enforce conventional branch names on AI-created worktrees, and block commit messages that start with a task ID.
 
 | Guardrail | Description |
 | --------- | ----------- |
 | `conventional-branch-names` | Enforce conventional branch names before creating a worktree |
+| `no-task-id-in-commits` | Block a git commit whose message starts with a tracker task ID like [PROJ-123] |
 
 ## Overriding a rule
 
