@@ -11,12 +11,12 @@
     "generate:catalog": "node scripts/generate-catalog.js",
     "build:site": "node scripts/build-site.js",
     "build:og": "node scripts/build-og.js",
-    "lint:md": "markdownlint-cli2 \"packages/**/llm/**/*.md\""
+    "lint:md": "markdownlint \"packages/**/llm/**/*.md\""
   },
   "devDependencies": {
     "@commitlint/cli": "^19.0.0",
     "@commitlint/config-conventional": "^19.0.0",
     "bluetemberg": "^0.6.0",
-    "markdownlint-cli2": "^0.23.2"
+    "markdownlint-cli": "^0.49.1"
   }
 }
