@@ -1,7 +1,7 @@
 {
   "name": "bluetemberg-guardrails-git",
   "version": "0.2.2",
-  "description": "Git guardrails for Bluetemberg — enforce conventional branch names on AI-created worktrees.",
+  "description": "Git guardrails for Bluetemberg — enforce conventional branch names on AI-created worktrees, and block commit messages that start with a task ID.",
   "keywords": [
     "bluetemberg-pack",
     "guardrails",

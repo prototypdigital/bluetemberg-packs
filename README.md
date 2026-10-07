@@ -41,7 +41,7 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 
 | Package | Guardrails |
 | ------- | ---------- |
-| [`bluetemberg-guardrails-git`](https://www.npmjs.com/package/bluetemberg-guardrails-git) | `conventional-branch-names` — block AI-generated worktree branch names, require `type/description` |
+| [`bluetemberg-guardrails-git`](https://www.npmjs.com/package/bluetemberg-guardrails-git) | `conventional-branch-names` — block AI-generated worktree branch names, require `type/description`; `no-task-id-in-commits` — block a `git commit` whose message starts with a task ID like `[PROJ-123]` |
 
 Guardrails are declarative hook definitions: Bluetemberg translates them into platform-native enforcement (e.g. Claude Code `PreToolUse` hooks in `.claude/settings.json`).
 
