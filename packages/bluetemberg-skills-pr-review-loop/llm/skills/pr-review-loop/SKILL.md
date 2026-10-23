@@ -32,7 +32,7 @@ Install this pack alongside its companion, `bluetemberg-agents-pr-reviewer`, and
 
 ## Part 1 — Local PostToolUse hook
 
-The reviewer starts the moment `gh pr create` succeeds inside an agent session. The canonical reference implementation lives in [prototypdigital/bluetemberg](https://github.com/prototypdigital/bluetemberg) on `main` — `.claude/hooks/spawn-pr-review.sh` (the hook entry), `.claude/hooks/run-pr-review.sh` (the detached worker), and `.claude/hooks/post-review-comment.sh` (the posting wrapper) — copy these rather than reinventing them. (Introduced in [#226](https://github.com/prototypdigital/bluetemberg/pull/226); hardened with the `EXPECTED_PR_URL` pin and split into hook+worker in [#231](https://github.com/prototypdigital/bluetemberg/pull/231) — the file paths are the stable reference, not a specific PR diff.) The pattern:
+The reviewer starts the moment `gh pr create` succeeds inside an agent session. The scripts ship with this skill under `scripts/`: `spawn-pr-review.sh` (the hook entry), `run-pr-review.sh` (the detached worker), `read-pr-context.sh` (the pinned reader) and `post-review-comment.sh` (the posting wrapper). `bluetemberg sync` (engine 0.14 or later) copies them next to the skill in every output, so the hook points at `.claude/skills/pr-review-loop/scripts/spawn-pr-review.sh` and there is nothing to copy by hand. If `.claude/skills/` is not committed, run `sync` on each clone before relying on the hook. (The scripts came out of [#226](https://github.com/prototypdigital/bluetemberg/pull/226), [#231](https://github.com/prototypdigital/bluetemberg/pull/231) and [#255](https://github.com/prototypdigital/bluetemberg/pull/255) in the engine repo; this pack is now their home.) The pattern:
 
 1. **Match precisely.** A `PostToolUse` hook with matcher `Bash` reads the hook input from stdin and word-boundary-matches `gh pr create` in `tool_input.command`, so compound commands (`git push && gh pr create ...`) match but `echo "gh pr create"` lookalikes are the author's problem, not a trigger.
 2. **Extract the PR URL** from the hook's `tool_response` — a successful `gh pr create` always prints it; no URL means the command failed or only mentioned `gh pr create`, so nothing spawns. Extraction takes the *first* GitHub PR URL anywhere in the response, so a compound command whose earlier half also prints one (e.g. `gh pr comment 42 --body "see .../pull/7" && gh pr create`) can hand the worker the wrong PR — `EXPECTED_PR_URL` pins every write to whatever URL was extracted, it doesn't verify that URL belongs to *this* `gh pr create` call. Keep `gh pr create` as its own command in agent-authored workflows rather than chaining it after other `gh`/`git` output.
@@ -52,7 +52,7 @@ Merge this `PostToolUse` entry into the project's `llm/hooks.claude.json` as a s
         "hooks": [
           {
             "type": "command",
-            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/hooks/spawn-pr-review.sh",
+            "command": "\"$CLAUDE_PROJECT_DIR\"/.claude/skills/pr-review-loop/scripts/spawn-pr-review.sh",
             "timeout": 30
           }
         ]
@@ -77,7 +77,7 @@ The hook's prompt must enforce this policy:
 ## Completion checklist
 
 - [ ] `bluetemberg-agents-pr-reviewer` installed alongside this skill — the hook drives its review protocol.
-- [ ] Local hook (entry + detached worker) and `post-review-comment.sh` committed and registered under `PostToolUse` → `Bash` in `llm/hooks.claude.json`, synced into `.claude/settings.json`, detaching and exiting 0 immediately.
+- [ ] `PostToolUse` → `Bash` entry pointing at the synced `.claude/skills/pr-review-loop/scripts/spawn-pr-review.sh` registered in `llm/hooks.claude.json` and synced into `.claude/settings.json`; the entry detaches and exits 0 immediately.
 - [ ] Reviewer tools scoped with `--allowedTools` — no edit tools, no `gh pr create`, no raw `gh pr review:*` / `gh api:*` (writes go through the wrapper only, pinned via `EXPECTED_PR_URL`).
 - [ ] Policy verified in the hook prompt: comment-only, paginated dedupe with a commit-baseline marker, one summary, automated sign-off line.
 - [ ] No files under `.github/workflows/` added or changed.
