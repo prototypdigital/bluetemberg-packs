@@ -56,7 +56,7 @@ jobs:
         run: node .github/scripts/validate-packs.cjs
 
       - name: Lint markdown
-        run: npx markdownlint-cli2 "packages/**/llm/**/*.md"
+        run: npm run lint:md
 
       - name: Audit dependencies
         run: npm audit --audit-level=high
