@@ -35,7 +35,7 @@ Agent memory rules for Bluetemberg — statelessness as a hard constraint, memor
 
 ### bluetemberg-rules-commit-attribution
 
-Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts.
+Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts. Opt-in: disclosing AI authorship is an org policy, and this rule conflicts with rulesets that require attribution.
 
 | Rule | Enforces |
 | ---- | -------- |

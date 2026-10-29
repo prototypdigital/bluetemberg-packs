@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-22T12:50:07.659Z",
+  "generated": "2026-10-29T11:41:23.095Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
@@ -277,7 +277,7 @@
       "description": "Session auditor agent for Bluetemberg — token-spend and harness-usage retrospective over Claude Code session transcripts.",
       "profiles": [],
       "stacks": [],
-      "universal": true,
+      "universal": false,
       "kind": "agents",
       "agents": [
         {
@@ -444,10 +444,10 @@
     {
       "name": "bluetemberg-rules-commit-attribution",
       "version": "0.2.1",
-      "description": "Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts.",
+      "description": "Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts. Opt-in: disclosing AI authorship is an org policy, and this rule conflicts with rulesets that require attribution.",
       "profiles": [],
       "stacks": [],
-      "universal": true,
+      "universal": false,
       "kind": "rules",
       "rules": [
         {
@@ -790,7 +790,7 @@
       "description": "GitHub PR and issue link formatting rules for Bluetemberg — full URLs over owner/repo#123 shorthand.",
       "profiles": [],
       "stacks": [],
-      "universal": true,
+      "universal": false,
       "kind": "rules",
       "rules": [
         {
@@ -1526,7 +1526,7 @@
       "description": "Session retrospective skill for Bluetemberg — deterministic jq token/tool analysis of a Claude Code transcript plus a judged, severity-ordered process retrospective.",
       "profiles": [],
       "stacks": [],
-      "universal": true,
+      "universal": false,
       "kind": "skills",
       "skills": [
         {
