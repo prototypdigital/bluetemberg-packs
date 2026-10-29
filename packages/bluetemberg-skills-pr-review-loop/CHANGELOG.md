@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.0](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-pr-review-loop-v0.2.2...bluetemberg-skills-pr-review-loop-v0.3.0) (2026-10-29)
+
+
+### Features
+
+* **pr-review-loop:** release the hook scripts bundled under the skill ([8479163](https://github.com/prototypdigital/bluetemberg-packs/commit/8479163cd2fcb341966107257f52e503f08708d8))
+* **pr-review-loop:** release the hook scripts bundled under the skill ([1a4d4b8](https://github.com/prototypdigital/bluetemberg-packs/commit/1a4d4b87286c6376016d91ca9c413cd59f25f58a))
+
 ## [0.2.2](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-pr-review-loop-v0.2.1...bluetemberg-skills-pr-review-loop-v0.2.2) (2026-09-30)
 
 
