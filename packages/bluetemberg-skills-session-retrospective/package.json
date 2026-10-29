@@ -27,7 +27,7 @@
     "llm/"
   ],
   "bluetemberg": {
-    "universal": true,
+    "universal": false,
     "profiles": []
   }
 }
