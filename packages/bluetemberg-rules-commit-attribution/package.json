@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-commit-attribution",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts. Opt-in: disclosing AI authorship is an org policy, and this rule conflicts with rulesets that require attribution.",
   "keywords": [
     "bluetemberg-pack",

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.2.2](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-rules-commit-attribution-v0.2.1...bluetemberg-rules-commit-attribution-v0.2.2) (2026-10-29)
+
+
+### Bug Fixes
+
+* **packs:** make the attribution, PR-link and session-audit packs opt-in ([304eb6a](https://github.com/prototypdigital/bluetemberg-packs/commit/304eb6a415e4d03192293d9847267d72f02be138))
+* **packs:** make the attribution, PR-link and session-audit packs opt-in ([271a3a1](https://github.com/prototypdigital/bluetemberg-packs/commit/271a3a13cf1073f479c5cf38f609585bac71d1dd)), closes [#118](https://github.com/prototypdigital/bluetemberg-packs/issues/118)
+
 ## [0.2.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-rules-commit-attribution-v0.2.0...bluetemberg-rules-commit-attribution-v0.2.1) (2026-09-30)
 
 
