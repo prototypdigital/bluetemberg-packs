@@ -70,6 +70,39 @@ Add the pack under `packages/`, then register it in release-please so it gets ve
 
 See [Contributing](Contributing) for the pack layout.
 
+## Claude marketplace sync
+
+`.github/workflows/sync-marketplace.yml` runs on every merge to `main` that touches `packages/**` or `bluetemberg.config.json`, and can also be started by hand (`workflow_dispatch`). It runs `bluetemberg sync` and pushes the generated `plugins/` and `.claude-plugin/` to the marketplace repo named by the `MARKETPLACE_REPO` repository variable (`prototypdigital/claude-marketplace`). It skips the push when sync produced no output or nothing changed.
+
+The push authenticates over SSH with a **deploy key**, not a personal access token, so it can't silently expire:
+
+- The repository secret **`MARKETPLACE_DEPLOY_KEY`** in this repo holds the private ed25519 key.
+- Its public half is a **write-enabled deploy key** on the marketplace repo.
+
+When a sync run fails, a `report` job opens an issue labelled `marketplace-sync-failure` (or comments on the open one). The first green run closes it.
+
+### Setting up or rotating the deploy key
+
+Run these as a repo owner. Rotating is the same steps; remove the old deploy key from the marketplace repo afterwards.
+
+```bash
+ssh-keygen -t ed25519 -N "" -C packs-marketplace-sync -f marketplace_deploy_key
+```
+
+```bash
+gh repo deploy-key add marketplace_deploy_key.pub --repo prototypdigital/claude-marketplace --allow-write --title "packs marketplace sync"
+```
+
+```bash
+gh secret set MARKETPLACE_DEPLOY_KEY --repo prototypdigital/bluetemberg-packs < marketplace_deploy_key
+```
+
+```bash
+rm marketplace_deploy_key marketplace_deploy_key.pub
+```
+
+Then start the workflow by hand (Actions → Sync Claude Marketplace → Run workflow) to confirm the push works.
+
 ## Wiki
 
 This wiki is generated from `docs/wiki/*.md` in the repo. `.github/workflows/sync-wiki.yml` pushes any change under `docs/wiki/` to the GitHub Wiki on merge to `main` — edit the Markdown here, not the wiki directly.
