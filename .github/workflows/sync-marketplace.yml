@@ -29,11 +29,14 @@ jobs:
       - name: Generate marketplace output
         run: npx -y bluetemberg sync
 
+      - name: Load marketplace deploy key
+        uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
+        with:
+          ssh-private-key: ${{ secrets.MARKETPLACE_DEPLOY_KEY }}
+
       - name: Push to claude-marketplace repo
-        env:
-          MARKETPLACE_PUSH_TOKEN: ${{ secrets.MARKETPLACE_PUSH_TOKEN }}
         run: |
-          git clone "https://x-access-token:${MARKETPLACE_PUSH_TOKEN}@github.com/${{ vars.MARKETPLACE_REPO }}.git" /tmp/marketplace
+          git clone "git@github.com:${{ vars.MARKETPLACE_REPO }}.git" /tmp/marketplace
 
           # Abort if sync produced no output — do not wipe the marketplace with empty dirs
           if [ ! -d plugins ] || [ ! -d .claude-plugin ]; then
@@ -56,3 +59,47 @@ jobs:
             git commit -m "sync: update from ${{ github.repository }}@${{ github.sha }}"
             git push
           fi
+
+  report:
+    name: report result
+    needs: sync
+    if: ${{ always() && (needs.sync.result == 'success' || needs.sync.result == 'failure') }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RESULT: ${{ needs.sync.result }}
+      RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      LABEL: marketplace-sync-failure
+    steps:
+      - name: Open, update, or close the tracking issue
+        run: |
+          set -euo pipefail
+
+          gh label create "$LABEL" --color B60205 \
+            --description "Sync Claude Marketplace workflow is failing" 2>/dev/null || true
+
+          OPEN=$(gh issue list --label "$LABEL" --state open --json number --jq '.[0].number // empty')
+
+          if [ "$RESULT" = "success" ]; then
+            if [ -n "$OPEN" ]; then
+              gh issue comment "$OPEN" --body "Green again: $RUN_URL"
+              gh issue close "$OPEN" --reason completed
+            fi
+            exit 0
+          fi
+
+          if [ -n "$OPEN" ]; then
+            gh issue comment "$OPEN" --body "Still failing: $RUN_URL"
+            exit 0
+          fi
+
+          gh issue create --label "$LABEL" \
+            --title "Marketplace sync failing: claude-marketplace is not being updated" \
+            --body "The Sync Claude Marketplace workflow failed, so the Claude marketplace repo is not receiving pack changes.
+
+          Run: $RUN_URL
+
+          If the push step failed, check the MARKETPLACE_DEPLOY_KEY secret and the deploy key on the marketplace repo (see the Releasing wiki page). This issue stays open while the sync is red, gets a comment on each failed run, and closes itself on the first green run."
