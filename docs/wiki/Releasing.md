@@ -47,28 +47,46 @@ steps:
   - run: npm publish -w "$PKG_PATH" --provenance --access public
 ```
 
-## One-time setup (per the repo owner)
+## Trusted publishers
 
-Before the first automated publish:
+Every pack that exists on npm has a trusted publisher pointing at this repo (`prototypdigital/bluetemberg-packs`) and the workflow file **`release-please.yml`**. That is the only way releases authenticate; there is no publish token.
 
-1. **Register each pack as a Trusted Publisher** on npmjs.com → each package page → Settings → Trusted Publishers. Point it at this repo (`prototypdigital/bluetemberg-packs`) and the workflow file **`release-please.yml`**.
-2. **Bootstrap any pack that doesn't exist on npm yet.** Trusted Publishing can't create a brand-new package name — it can only publish over an existing one. For each not-yet-published pack, run one initial publish from a maintainer's machine:
-
-   ```bash
-   npm publish -w packages/<pack-name> --access public
-   ```
-
-   After that first publish, all releases for that pack go through CI.
+Trusted Publishing can only publish over a package that already exists, so a brand-new pack is created by staging instead (below).
 
 ## Adding a new pack
 
-Add the pack under `packages/`, then register it in release-please so it gets versioned:
+1. Add the pack under `packages/` (see [Contributing](Contributing) for the layout) and register it with release-please:
+   - add `"packages/<name>": {}` to `release-please-config.json`
+   - add `"packages/<name>": "0.1.0"` to `.release-please-manifest.json`
+2. **Merge.** `.github/workflows/stage-new-packs.yml` runs on any merge that touches a `packages/*/package.json`, finds packs missing from npm, and runs `npm stage publish` for each with the stage-only token. npm creates the package with a public `0.0.0-stage` placeholder and holds the real first version in the staged queue.
+3. **A maintainer approves the first version** with 2FA, on npmjs.com (package → **Staged Packages** → **Approve**) or from the CLI:
 
-1. Add `"packages/<name>": {}` to `release-please-config.json`.
-2. Add `"packages/<name>": "0.1.0"` to `.release-please-manifest.json`.
-3. Bootstrap it on npm once (step 2 above).
+   ```bash
+   npm stage list <name>
+   npm stage approve <stage-id>
+   ```
 
-See [Contributing](Contributing) for the pack layout.
+4. **The maintainer adds the trusted publisher** (needs npm ≥ 11.15.0 and 2FA):
+
+   ```bash
+   npm trust github <name> --repo prototypdigital/bluetemberg-packs --file release-please.yml --allow-publish --yes
+   ```
+
+   A new trusted-publisher configuration **expires if it doesn't complete a publish within 2 days**. Run this step shortly before merging the Release PR that releases the pack. If it expired, `npm trust list <name>`, `npm trust revoke <name> --id=<id>`, and add it again.
+
+Steps 3 and 4 can't be automated: npm requires an interactive 2FA challenge for approving staged versions and for changing trusted-publisher configuration, and no token can bypass it.
+
+### Stage-only token
+
+The repository secret **`NPM_STAGE_TOKEN`** is an npm granular access token with the **"Read and write (stage only)"** permission, created by a maintainer with 2FA enabled. It can't publish directly: npm rejects `npm publish` with it, so a leaked token can only queue versions that still need a maintainer's approval. It can still move dist-tags and deprecate versions, so treat it as a write secret.
+
+Granular write tokens expire. When you create or rotate it, note the expiry date and replace it before then:
+
+```bash
+gh secret set NPM_STAGE_TOKEN --repo prototypdigital/bluetemberg-packs
+```
+
+The old `NPM_TOKEN` secret (a bypass-2FA publish token) is no longer used by any workflow. npm removes direct publishing from bypass-2FA tokens in January 2027; revoke it on npmjs.com and delete the secret.
 
 ## Claude marketplace sync
 
