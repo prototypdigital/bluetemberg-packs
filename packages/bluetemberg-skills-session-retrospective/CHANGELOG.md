@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-session-retrospective-v1.0.3...bluetemberg-skills-session-retrospective-v1.1.0) (2026-11-04)
+
+
+### Features
+
+* limit the PR-review loop and session-audit packs to Claude Code ([0e66ccc](https://github.com/prototypdigital/bluetemberg-packs/commit/0e66ccc3dbb92f1099579a652d12943a509b14d3))
+* limit the PR-review loop and session-audit packs to Claude Code ([b2e82d2](https://github.com/prototypdigital/bluetemberg-packs/commit/b2e82d2ea47e250e00625c8a191a563f97e68414)), closes [#120](https://github.com/prototypdigital/bluetemberg-packs/issues/120)
+
 ## [1.0.3](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-session-retrospective-v1.0.2...bluetemberg-skills-session-retrospective-v1.0.3) (2026-10-29)
 
 

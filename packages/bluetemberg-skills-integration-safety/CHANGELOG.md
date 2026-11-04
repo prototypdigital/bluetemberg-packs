@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.1](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-integration-safety-v0.3.0...bluetemberg-skills-integration-safety-v0.3.1) (2026-11-04)
+
+
+### Bug Fixes
+
+* quote skill and agent descriptions that are not valid YAML ([655ac41](https://github.com/prototypdigital/bluetemberg-packs/commit/655ac41c8d0c32b10423f6e170d549c96343fa12))
+* quote skill and agent descriptions that are not valid YAML ([2424f7a](https://github.com/prototypdigital/bluetemberg-packs/commit/2424f7a9a1c9974d935d2b1c7a2614ded24bb7f5))
+
 ## [0.3.0](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-skills-integration-safety-v0.2.0...bluetemberg-skills-integration-safety-v0.3.0) (2026-09-30)
 
 
