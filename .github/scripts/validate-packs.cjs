@@ -108,6 +108,48 @@ console.log('\n[1] Config integrity (bluetemberg.config.json ↔ packages/)');
   }
 }
 
+// ─── 2a. Frontmatter checker self-test ───────────────────────────────────────
+// Every pack file is clean, so step [2] alone can't show the checker still
+// catches anything. These samples pin what it must reject and accept; a
+// regression in scripts/frontmatter.cjs fails here instead of passing silently.
+console.log('\n[2a] Frontmatter checker self-test');
+{
+  const doc = (body) => `---\nname: x\n${body}\n---\n`;
+  const mustReject = [
+    'description: Next.js caching: ISR and tags',
+    'description: @prototyp/skeletor expert',
+    'description: [WIP] Does things',
+    'description: | Does things',
+    'description: , oops',
+    'description: Ends with colon:',
+    'description: "unclosed',
+    'description: "bad \\q escape"',
+    'description: drops # the rest',
+    'description: Foo\ndescription: Bar',
+    'description:foo',
+    '\tdescription: tabbed',
+  ];
+  const mustAccept = [
+    'description: "Next.js caching: ISR and tags"',
+    "description: 'it''s fine: really'",
+    'description: plain text, with commas (and parens) 100%',
+    'description: x:y and http://a.b/c',
+    'tools: ["read", "search"]',
+    'description: >-\n  Folded text',
+    'stacks:\n  payload: ">=3 <4"',
+  ];
+  for (const body of mustReject) {
+    if (frontmatterErrors(doc(body)).length === 0) fail(`self-test: checker accepted invalid frontmatter ${JSON.stringify(body)}`);
+  }
+  for (const body of mustAccept) {
+    const errs = frontmatterErrors(doc(body));
+    if (errs.length > 0) fail(`self-test: checker rejected valid frontmatter ${JSON.stringify(body)}: ${errs[0]}`);
+  }
+  const read = readScalar(doc('description: "a: b \\"q\\" \\x41"'), 'description');
+  if (read !== 'a: b "q" A') fail(`self-test: readScalar unquoted to ${JSON.stringify(read)}`);
+  pass(`checker rejects ${mustReject.length} invalid and accepts ${mustAccept.length} valid samples`);
+}
+
 // ─── 2. Frontmatter validation ────────────────────────────────────────────────
 console.log('\n[2] Frontmatter validation');
 {
