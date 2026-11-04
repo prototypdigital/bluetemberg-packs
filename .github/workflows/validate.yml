@@ -55,6 +55,13 @@ jobs:
       - name: Validate packs (frontmatter, config integrity)
         run: node .github/scripts/validate-packs.cjs
 
+      # The same content scan `bluetemberg add/install` runs on every download. Running it here
+      # catches a blocking pattern (leaked credential, secret exfiltration, hidden Unicode text,
+      # instructions to disable guardrails) before publish instead of at a consumer's install.
+      # Warnings are printed for review and do not fail the job.
+      - name: Content security scan
+        run: npx bluetemberg scan packages/*
+
       - name: Lint markdown
         run: npm run lint:md
 

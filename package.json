@@ -11,6 +11,7 @@
   "scripts": {
     "postinstall": "bluetemberg sync --silent || true",
     "validate": "node .github/scripts/validate-packs.cjs",
+    "scan": "bluetemberg scan packages/*",
     "generate:catalog": "node scripts/generate-catalog.js",
     "build:site": "node scripts/build-site.js",
     "build:og": "node scripts/build-og.js",
