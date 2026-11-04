@@ -57,6 +57,8 @@ Every kind has a research-backed quality bar in [Authoring Standards](Authoring-
 
 After adding or editing any pack content, run `npm run generate:catalog` then `npm run validate`: the validator now fails if `catalog.json` or the wiki catalog has drifted from the pack frontmatter.
 
+`generate:catalog` checks each pack on the npm registry and leaves out only packs npm says aren't published: a 404, or a package whose versions were all unpublished. It logs each one as `excluded <pack>: not published on npm (<reason>)`. Network errors, timeouts, 429s, 5xx responses and malformed responses are retried with backoff. If a pack still can't be checked, the script exits 1 and writes neither `catalog.json` nor `Catalog.md`. Re-run it once the registry is reachable.
+
 ## Add a new pack
 
 1. Create `packages/bluetemberg-rules-<domain>/` with a `package.json`:
