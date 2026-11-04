@@ -7,7 +7,7 @@ stacks:
 
 # Drizzle parameterized SQL
 
-Drizzle's `sql` template sends every `${value}` as a bound parameter (`$1`, `$2`, …), separately from the query text, which is what prevents SQL injection. `sql.raw()` and string building opt out of that. Input that reaches them becomes executable SQL.
+Drizzle's `sql` template sends each interpolated plain value (string, number, …) as a bound parameter (`$1`, `$2`, …), separately from the query text, which is what prevents SQL injection. Tables, columns and nested `sql` chunks are inlined as SQL instead. `sql.raw()` and string building opt out of that. Input that reaches them becomes executable SQL.
 
 ## Rules
 
@@ -34,8 +34,9 @@ const rows = await db.execute(
 // select * from "users" where "users"."email" = $1 --> [email]
 
 const sortable = { name: users.name, createdAt: users.createdAt } as const;
-const column =
-  sortable[req.query.sort as keyof typeof sortable] ?? users.createdAt;
+const column = Object.hasOwn(sortable, req.query.sort)
+  ? sortable[req.query.sort as keyof typeof sortable]
+  : users.createdAt;
 const sorted = await db.select().from(users).orderBy(column);
 ```
 
@@ -56,7 +57,7 @@ sql`select * from ${users} where ${users.id} in (${sql.join(
 ## Gotchas
 
 - `sql.raw()` inside a `sql` template is still raw: `` sql`... ${sql.raw(x)}` `` inlines `x` unescaped.
-- The `as keyof typeof sortable` cast is safe only because the lookup falls back to a default when the key isn't in the allowlist.
+- Check allowlist membership with `Object.hasOwn()` (or use a `Map`), not `sortable[key] ?? fallback`. Inherited keys such as `toString` or `constructor` return a function, not `undefined`, so they get past a plain lookup.
 
 ## Source
 
