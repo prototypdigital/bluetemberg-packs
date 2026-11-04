@@ -22,6 +22,7 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 | `bluetemberg-rules-git` _(not yet published)_ | Git workflow standards | `git-workflow`, `git-move`, `pre-commit-checks` |
 | [`bluetemberg-rules-security`](https://www.npmjs.com/package/bluetemberg-rules-security) | Security guardrails | `never-read-env`, `security-secrets`, `api-error-handling`, `lockfile-discipline`, `drizzle-parameterized-sql` |
 | [`bluetemberg-rules-docs`](https://www.npmjs.com/package/bluetemberg-rules-docs) | Documentation & diagnostics | `docs-parity`, `post-edit-diagnostics`, `mermaid-diagrams` |
+| `bluetemberg-rules-evidence` _(not yet published)_ | Evidence & reporting | `measure-dont-proxy`, `evidence-citation`, `correction-log`, `chart-integrity`, `no-hand-typed-figures` |
 | [`bluetemberg-rules-devops`](https://www.npmjs.com/package/bluetemberg-rules-devops) | Infrastructure | `docker-best-practices`, `terraform-conventions`, `ansible-conventions`, `kubernetes-manifests`, `helm-conventions`, `container-image-pinning`, `ci-workflow-conventions`, `shell-script-standards`, `idempotency`, `runbook-discipline` |
 | `bluetemberg-rules-context-engineering` _(not yet published)_ | LLM context engineering | `context-pollution-prevention`, `context-window-budget`, `multi-turn-state-management` |
 | [`bluetemberg-rules-nextjs`](https://www.npmjs.com/package/bluetemberg-rules-nextjs) | Next.js | `nextjs-public-env-vars` |
@@ -35,7 +36,7 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 
 ### Skills
 
-21 on-demand skill packs (`bluetemberg-skills-*`): `patterns`, `docs-upkeep`, `workspace-hygiene`, `react-patterns`, `code-review`, `api-design`, `security-audit`, `ci-cd-best-practices`, `migration-safety`, `stack-change-review`, `infrastructure-drift-check`, `rollback-plan`, `config-echo`, `create-agent`, `create-pack`, `create-rule`, `create-skill`, `sub-agent-design`, `figma-to-code`, `design-critique`, `visual-direction`.
+22 on-demand skill packs (`bluetemberg-skills-*`): `patterns`, `docs-upkeep`, `workspace-hygiene`, `react-patterns`, `code-review`, `api-design`, `security-audit`, `ci-cd-best-practices`, `migration-safety`, `stack-change-review`, `infrastructure-drift-check`, `rollback-plan`, `config-echo`, `create-agent`, `create-pack`, `create-rule`, `create-skill`, `sub-agent-design`, `figma-to-code`, `design-critique`, `visual-direction`, `talk-deck`.
 
 ### Guardrails
 

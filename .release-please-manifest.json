@@ -25,6 +25,7 @@
   "packages/bluetemberg-rules-design-craft": "1.0.2",
   "packages/bluetemberg-rules-devops": "0.3.2",
   "packages/bluetemberg-rules-docs": "0.3.2",
+  "packages/bluetemberg-rules-evidence": "0.1.0",
   "packages/bluetemberg-rules-git": "0.2.2",
   "packages/bluetemberg-rules-i18n": "1.0.3",
   "packages/bluetemberg-rules-llm-api-product": "0.2.2",
@@ -67,6 +68,7 @@
   "packages/bluetemberg-skills-skeletor-authoring": "0.2.2",
   "packages/bluetemberg-skills-stack-change-review": "0.2.2",
   "packages/bluetemberg-skills-sub-agent-design": "0.2.2",
+  "packages/bluetemberg-skills-talk-deck": "0.1.0",
   "packages/bluetemberg-skills-visual-direction": "1.0.2",
   "packages/bluetemberg-skills-workspace-hygiene": "0.3.2"
 }

@@ -1,0 +1,36 @@
+{
+  "name": "bluetemberg-skills-talk-deck",
+  "version": "0.1.0",
+  "description": "Build an evidence-backed conference deck from a research pack for Bluetemberg — Slidev scaffold, generated figures, demo risk triage.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "presentation",
+    "slidev",
+    "conference"
+  ],
+  "author": "Josip Ravas (https://github.com/jravas)",
+  "contributors": [
+    "Prototyp Digital (https://prototyp.digital)"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prototypdigital/bluetemberg-packs.git",
+    "directory": "packages/bluetemberg-skills-talk-deck"
+  },
+  "bugs": {
+    "url": "https://github.com/prototypdigital/bluetemberg-packs/issues"
+  },
+  "homepage": "https://prototypdigital.github.io/bluetemberg-packs/",
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "agentic",
+      "design-engineer"
+    ]
+  }
+}

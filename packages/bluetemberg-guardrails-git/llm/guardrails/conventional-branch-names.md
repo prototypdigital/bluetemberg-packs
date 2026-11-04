@@ -13,6 +13,8 @@ profiles:
   - fullstack
   - devops
   - pure-infra
+  - design-engineer
+  - agentic
 ---
 
 # Conventional Branch Names
