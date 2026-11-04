@@ -436,13 +436,13 @@ console.log('\n[6] Stack map (stack-packages.json ↔ catalog stackPackages)');
       const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'packages', dir, 'package.json'), 'utf8'));
       for (const s of pkg.bluetemberg?.stacks ?? []) tag(s, `packages/${dir}/package.json`);
       for (const file of findMdFiles(path.join(ROOT, 'packages', dir, 'llm'))) {
-        const fmMatch = fs.readFileSync(file, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/);
-        const flow = fmMatch && fmMatch[1].match(/^stacks:[ \t]*\{(.*)\}[ \t]*$/m);
+        const block = frontmatterBlock(fs.readFileSync(file, 'utf8'));
+        const flow = block !== null && block.match(/^stacks:[ \t]*\{(.*)\}[ \t]*$/m);
         for (const part of flow ? flow[1].split(',') : []) {
           const k = part.match(/^\s*["']?([^"':\s]+)["']?\s*:/);
           if (k) tag(k[1], path.relative(ROOT, file));
         }
-        const m = fmMatch && fmMatch[1].match(/^stacks:[ \t]*\r?\n((?:[ \t]+.*(?:\r?\n|$))+)/m);
+        const m = block !== null && block.match(/^stacks:[ \t]*\r?\n((?:[ \t]+.*(?:\r?\n|$))+)/m);
         if (!m) continue;
         for (const line of m[1].split(/\r?\n/)) {
           const k = line.match(/^[ \t]+["']?([^"':\s]+)["']?:/);
