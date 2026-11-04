@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-04T20:50:27.094Z",
+  "generated": "2026-11-04T20:56:23.822Z",
   "stackPackages": {
     "schema": 1,
     "stacks": {
@@ -912,6 +912,10 @@
         {
           "name": "api-error-handling",
           "description": "Use structured error responses and never leak internal details."
+        },
+        {
+          "name": "drizzle-parameterized-sql",
+          "description": "Keep user input in Drizzle's sql template parameters; never pass it to sql.raw() or build SQL with string concatenation."
         },
         {
           "name": "llm-package-hallucination",
