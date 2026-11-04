@@ -21,7 +21,7 @@ scope:
 ## Rules
 
 - Commit the lockfile, together with the `package.json` change that produced it. Never add a lockfile to `.gitignore`.
-- Keep one package manager and one lockfile per project. Each manager reads only its own lockfile, so a second one silently goes stale.
+- Keep one package manager and one lockfile per project. A frozen install verifies only its own manager's lockfile (`npm ci` reads `package-lock.json` or `npm-shrinkwrap.json`), so a second lockfile drifts unchecked. `npm install` can even resolve from a stray `yarn.lock`.
 - In CI and Dockerfiles, install with the frozen command so a lockfile that's out of sync with `package.json` fails the build instead of being rewritten:
   - npm: `npm ci`, not `npm install`.
   - pnpm: `pnpm install --frozen-lockfile`.
@@ -64,5 +64,6 @@ RUN npm ci --omit=dev
 - npm — `npm ci`: <https://docs.npmjs.com/cli/v11/commands/npm-ci> (lockfile required, errors on mismatch, never writes `package.json` or the lockfile, removes `node_modules`).
 - npm — `package-lock.json`: <https://docs.npmjs.com/cli/v11/configuring-npm/package-lock-json> ("intended to be committed into source repositories"; describes the exact tree so later installs are identical).
 - npm — `npm audit` (`audit signatures`): <https://docs.npmjs.com/cli/v11/commands/npm-audit>.
+- npm — `npm install` (lockfile precedence, including `yarn.lock`): <https://docs.npmjs.com/cli/v11/commands/npm-install>.
 - pnpm — `pnpm install --frozen-lockfile` (default `true` in CI): <https://pnpm.io/cli/install#--frozen-lockfile>.
 - Yarn — `yarn install --immutable` (defaults to true on CI): <https://yarnpkg.com/cli/install>; Yarn 1 `--frozen-lockfile`: <https://classic.yarnpkg.com/en/docs/cli/install>.
