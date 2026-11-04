@@ -3,6 +3,7 @@
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import frontmatter from './frontmatter.cjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, '..');
@@ -12,12 +13,9 @@ const WIKI_CATALOG_PATH = join(REPO_ROOT, 'docs', 'wiki', 'Catalog.md');
 
 const PREVIEW_MAX_CHARS = 300;
 
-/** Extract the `description` field from YAML frontmatter. */
+/** Extract the `description` field from YAML frontmatter, unquoted. */
 function parseFrontmatterDescription(content) {
-  const match = content.match(/^---\n([\s\S]*?)---\n/);
-  if (!match) return '';
-  const descMatch = match[1].match(/^description:\s*(.+)$/m);
-  return descMatch ? descMatch[1].trim() : '';
+  return frontmatter.readScalar(content, 'description');
 }
 
 /** Strip YAML frontmatter and return the first non-empty paragraph of body text. */

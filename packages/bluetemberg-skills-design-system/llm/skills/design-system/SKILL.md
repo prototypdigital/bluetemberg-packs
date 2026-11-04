@@ -1,6 +1,6 @@
 ---
 name: design-system
-description: Reuse shadcn/Radix before bespoke UI: components/ui first, Radix for interactive elements, cn()/cva() for variants, asChild for polymorphism. Use when building or reviewing a UI component.
+description: "Reuse shadcn/Radix before bespoke UI: components/ui first, Radix for interactive elements, cn()/cva() for variants, asChild for polymorphism. Use when building or reviewing a UI component."
 ---
 
 # design-system

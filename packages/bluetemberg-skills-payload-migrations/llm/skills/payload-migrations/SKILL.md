@@ -1,6 +1,6 @@
 ---
 name: payload-migrations
-description: Payload migration workflow: generate not hand-write, commit the paired .ts/.json snapshot, never edit generated types, gate destructive ops. Use when editing src/migrations/ or a schema field.
+description: "Payload migration workflow: generate not hand-write, commit the paired .ts/.json snapshot, never edit generated types, gate destructive ops. Use when editing src/migrations/ or a schema field."
 ---
 
 # payload-migrations
