@@ -28,6 +28,9 @@
   ],
   "bluetemberg": {
     "universal": false,
-    "profiles": []
+    "profiles": [],
+    "platforms": [
+      "claude"
+    ]
   }
 }

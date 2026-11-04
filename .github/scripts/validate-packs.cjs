@@ -286,11 +286,47 @@ console.log('\n[4] Catalog freshness (catalog.json ↔ pack frontmatter)');
         fail(`${pack.name}: catalog description is stale — run \`npm run generate:catalog\``);
         entryOk = false;
       }
+      const expectedPlatforms = Array.isArray(pkg.bluetemberg?.platforms) ? pkg.bluetemberg.platforms : [];
+      if (JSON.stringify(expectedPlatforms) !== JSON.stringify(pack.platforms ?? [])) {
+        fail(`${pack.name}: catalog platforms are stale — run \`npm run generate:catalog\``);
+        entryOk = false;
+      }
       if (norm(listItems(pkgDir, kind)) !== norm(pack[kind])) {
         fail(`${pack.name}: catalog ${kind} items/descriptions are stale — run \`npm run generate:catalog\``);
         entryOk = false;
       }
       if (entryOk) pass(`${pack.name} catalog entry matches frontmatter`);
+    }
+  }
+}
+
+// ─── 5. Pack platforms ────────────────────────────────────────────────────────
+// `bluetemberg.platforms` limits a pack to some hosts (e.g. ["claude"] for a pack
+// that needs Claude Code hooks). The engine quietly ignores an unknown id in a
+// catalog entry (a newer packs repo may name a platform an older engine lacks),
+// so a typo would make the pack match no platform at all. Catch it here.
+console.log('\n[5] Pack platforms (bluetemberg.platforms ids)');
+{
+  // The engine's platform ids (bluetemberg 0.19 `platforms` config). `windsurf`
+  // is only an alias the engine rewrites to `devin`, so the catalog uses `devin`.
+  const KNOWN_PLATFORMS = new Set([
+    'cursor', 'claude', 'copilot', 'gemini', 'antigravity', 'devin', 'codex', 'claude-marketplace', 'agent-plugins',
+  ]);
+  for (const dir of listPackDirs()) {
+    const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'packages', dir, 'package.json'), 'utf8'));
+    const platforms = pkg.bluetemberg?.platforms;
+    if (platforms === undefined) continue;
+    if (!Array.isArray(platforms) || !platforms.every((p) => typeof p === 'string')) {
+      fail(`packages/${dir}: bluetemberg.platforms must be an array of platform ids`);
+      continue;
+    }
+    const unknown = platforms.filter((p) => !KNOWN_PLATFORMS.has(p));
+    if (unknown.length > 0) {
+      fail(`packages/${dir}: bluetemberg.platforms has unknown id(s): ${unknown.join(', ')} (known: ${[...KNOWN_PLATFORMS].join(', ')})`);
+    } else if (new Set(platforms).size !== platforms.length) {
+      fail(`packages/${dir}: bluetemberg.platforms lists a platform twice`);
+    } else {
+      pass(`packages/${dir}: platforms ${JSON.stringify(platforms)}`);
     }
   }
 }

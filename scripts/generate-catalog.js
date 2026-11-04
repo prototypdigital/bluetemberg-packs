@@ -109,6 +109,10 @@ function buildEntry(pkgDir) {
       description: pkg.description ?? '',
       profiles: meta.profiles ?? [],
       stacks: Array.isArray(meta.stacks) ? meta.stacks.filter((s) => typeof s === 'string') : [],
+      // Platforms the pack works on (e.g. ["claude"] for a pack that needs Claude Code
+      // hooks). Empty = every platform. The engine (0.19+) skips the pack's output for
+      // other platforms and doesn't preselect it in `init` when none is targeted.
+      platforms: Array.isArray(meta.platforms) ? meta.platforms.filter((p) => typeof p === 'string') : [],
       universal: meta.universal ?? false,
       kind,
       // Rich items { name, description } — consumed by both the wiki table and
@@ -177,6 +181,9 @@ function generateWikiCatalog(packs) {
     for (const pack of packsOfKind) {
       lines.push(`### ${pack.name}`, '');
       lines.push(pack.description, '');
+      if (pack.platforms?.length) {
+        lines.push(`**Platforms:** ${pack.platforms.map((p) => `\`${p}\``).join(', ')} only. Sync skips this pack for other platforms.`, '');
+      }
 
       const items = pack[pack.kind] ?? [];
       if (items.length > 0) {

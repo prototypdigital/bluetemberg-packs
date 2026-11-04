@@ -58,7 +58,8 @@ for (const dir of readdirSync(PACKAGES_DIR)) {
     continue;
   }
 
-  pkg.bluetemberg = meta;
+  // Merge, so fields this table doesn't manage (stacks, platforms) survive.
+  pkg.bluetemberg = { ...pkg.bluetemberg, ...meta };
   writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n');
   updated++;
 }

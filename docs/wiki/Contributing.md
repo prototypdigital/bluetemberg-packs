@@ -88,6 +88,22 @@ After adding or editing any pack content, run `npm run generate:catalog` then `n
 4. Document the pack in the [Catalog](Catalog) and the [README](https://github.com/prototypdigital/bluetemberg-packs#packs).
 5. If the pack should be offered by the `bluetemberg init` wizard, add a matching entry to `RULE_COLLECTION_PRESETS` in the **bluetemberg** repo (`src/init/presets.ts`) — that's a separate PR in that repo.
 
+## Limit a pack to some platforms
+
+A pack that only works in one host declares it in its `package.json`. For example, `pr-review-loop` needs a Claude Code hook and `claude -p`:
+
+```json
+"bluetemberg": {
+  "universal": false,
+  "profiles": ["frontend", "backend"],
+  "platforms": ["claude"]
+}
+```
+
+`npm run generate:catalog` copies the list into the pack's `catalog.json` entry, where the engine reads it (bluetemberg 0.19+). Sync then skips the pack's output for the project's other platforms, and `init` doesn't preselect the pack unless one of its platforms is selected. `claude` covers the `claude-marketplace` plugins too. Content limited to `claude` is left out of `agent-plugins` bundles. Leave the field out (or `[]`) for packs that work everywhere. Ids are the engine's `platforms` config ids: `cursor`, `claude`, `copilot`, `gemini`, `antigravity`, `devin`, `codex`, `claude-marketplace`, `agent-plugins`. `npm run validate` rejects anything else. See the engine's [Profiles → Platforms](https://github.com/prototypdigital/bluetemberg/wiki/Profiles#platforms).
+
+Packs limited to Claude Code today: `bluetemberg-skills-pr-review-loop` (a Claude Code hook plus `claude -p`), and `bluetemberg-agents-session-auditor` and `bluetemberg-skills-session-retrospective` (both read Claude Code transcripts). `bluetemberg-agents-pr-reviewer` isn't tagged: it only needs `gh`, so it works as an on-demand or CI reviewer in any host.
+
 ## Test a pack locally
 
 You don't need to publish to try a pack. From a scratch project that has Bluetemberg installed:
