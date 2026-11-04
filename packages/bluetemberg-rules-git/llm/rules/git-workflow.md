@@ -46,14 +46,22 @@ Never push fixes or additions directly onto another open PR's branch. Always ope
 
 - Resolve any conflicts during the rebase before pushing.
 - Force-push the rebased branch to update the remote: `git push --force-with-lease`.
-- PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/): `type(scope): description`.
+- PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/): `type(scope): description`. A tracker task-ID prefix (`[PROJ-123] type(scope): description`) is fine on a merge-commit repo, where the title never becomes a commit subject. On a squash-merge repo the title *is* the commit subject, so put the ID at the end there.
+
+## Commit messages
+
+**Why:** release-please (and any Conventional Commits parser) builds releases from the non-merge commit subjects on the default branch, and silently drops a subject that does not start with `type(scope):`. The workflow stays green. Copying a `[PROJ-123]`-prefixed PR title into commit messages has kept whole releases' worth of changes out of the changelog this way.
+
+- Every commit subject is a Conventional Commit: `type(scope): description`.
+- A commit message carries **no task ID** — not as a prefix, not in the body. The PR title carries it, and the merge commit (or squash subject) keeps it in history.
+- Enforce it in CI, not prose alone: check each non-merge commit in the PR range (`git log --no-merges origin/main..HEAD`) against `^(feat|fix|perf|refactor|docs|chore|ci|build|test|style|revert)(\([^()]+\))?!?: \S`. A PR-title check does **not** cover this on a merge-commit repo — the branch commits are what reach `main`. The `bluetemberg-guardrails-git` pack blocks the agent-side case.
 
 ## Examples
 
 ```sh
-# BAD — pushing directly to main; bad branch name; non-conventional PR title
+# BAD — pushing directly to main; task ID in the commit subject
 git checkout main
-git commit -m "fixed login"
+git commit -m "[PROJ-42] fix(auth): fixed login"   # task ID in the commit — release-please drops it
 git push origin main
 
 # GOOD — feature branch with conventional name; rebased before PR
@@ -61,5 +69,5 @@ git checkout -b fix/login-redirect
 git commit -m "fix(auth): redirect to /dashboard after login"
 git fetch origin && git rebase origin/main
 git push --force-with-lease origin fix/login-redirect
-# PR title: fix(auth): redirect to /dashboard after login
+# PR title: [PROJ-42] fix(auth): redirect to /dashboard after login
 ```

@@ -1,9 +1,9 @@
 {
-  "generated": "2026-09-30T05:12:42.085Z",
+  "generated": "2026-10-07T11:50:19.832Z",
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Accessibility specialist agent for Bluetemberg — WCAG 2.2 A/AA audit and remediation.",
       "profiles": [
         "frontend",
@@ -23,7 +23,7 @@
     },
     {
       "name": "bluetemberg-agents-agentic-specialist",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "description": "Agentic systems specialist agent for Bluetemberg — agent memory design, state management, orchestration patterns.",
       "profiles": [
         "agentic"
@@ -41,7 +41,7 @@
     },
     {
       "name": "bluetemberg-agents-ansible-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Ansible specialist agent for Bluetemberg — roles, playbooks, and Jinja2 templates.",
       "profiles": [
         "devops",
@@ -60,7 +60,7 @@
     },
     {
       "name": "bluetemberg-agents-backend-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Backend specialist agent for Bluetemberg — API design, database patterns, error handling, auth.",
       "profiles": [
         "backend",
@@ -79,7 +79,7 @@
     },
     {
       "name": "bluetemberg-agents-code-reviewer",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Code reviewer agent for Bluetemberg — PR review covering patterns, naming, complexity, tests.",
       "profiles": [
         "frontend",
@@ -99,7 +99,7 @@
     },
     {
       "name": "bluetemberg-agents-design-engineer",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Design engineer agent for Bluetemberg — builds UI to a reference section-by-section, holds tokens and banned moves, catches stock drift.",
       "profiles": [
         "design-engineer"
@@ -117,7 +117,7 @@
     },
     {
       "name": "bluetemberg-agents-devops-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "DevOps specialist agent for Bluetemberg — CI/CD pipelines, container optimization, IaC review.",
       "profiles": [
         "devops",
@@ -136,7 +136,7 @@
     },
     {
       "name": "bluetemberg-agents-docs-maintainer",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "description": "Docs maintainer agent for Bluetemberg — documentation synchronization with code changes.",
       "profiles": [],
       "stacks": [],
@@ -152,7 +152,7 @@
     },
     {
       "name": "bluetemberg-agents-frontend-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Frontend specialist agent for Bluetemberg — UI implementation, design-system, i18n, accessibility.",
       "profiles": [
         "frontend",
@@ -172,7 +172,7 @@
     },
     {
       "name": "bluetemberg-agents-infrastructure-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Infrastructure specialist agent for Bluetemberg — build, CI, container, deployment config.",
       "profiles": [
         "devops",
@@ -191,7 +191,7 @@
     },
     {
       "name": "bluetemberg-agents-kubernetes-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Kubernetes specialist agent for Bluetemberg — manifests, Helm charts, Kustomize overlays.",
       "profiles": [
         "devops",
@@ -210,7 +210,7 @@
     },
     {
       "name": "bluetemberg-agents-payload-specialist",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Payload CMS specialist agent for Bluetemberg — collections, globals, blocks, fields, hooks, access, Lexical, plugins, and the generated types contract.",
       "profiles": [
         "backend",
@@ -231,7 +231,7 @@
     },
     {
       "name": "bluetemberg-agents-pr-reviewer",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Headless PR reviewer agent for Bluetemberg — fetches PR context with gh, posts a comment-only review with Conventional Comments findings.",
       "profiles": [
         "frontend",
@@ -252,7 +252,7 @@
     },
     {
       "name": "bluetemberg-agents-security-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Security specialist agent for Bluetemberg — vulnerability audit, dependency scanning, secrets.",
       "profiles": [
         "backend",
@@ -273,7 +273,7 @@
     },
     {
       "name": "bluetemberg-agents-session-auditor",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Session auditor agent for Bluetemberg — token-spend and harness-usage retrospective over Claude Code session transcripts.",
       "profiles": [],
       "stacks": [],
@@ -289,7 +289,7 @@
     },
     {
       "name": "bluetemberg-agents-skeletor-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Skeletor specialist agent for Bluetemberg — covers both consuming the public API (Block/Screen/Text, SkeletorProvider, animation hooks, skeleform) and authoring library internals (style-prop pipeline, memoizeStyle, Biome, release-please).",
       "profiles": [
         "frontend",
@@ -311,7 +311,7 @@
     },
     {
       "name": "bluetemberg-agents-sre-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "SRE specialist agent for Bluetemberg — SLOs, alerting, runbooks, and post-mortems.",
       "profiles": [
         "devops",
@@ -330,7 +330,7 @@
     },
     {
       "name": "bluetemberg-agents-test-specialist",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Test specialist agent for Bluetemberg — test creation, refactoring, and stabilization.",
       "profiles": [
         "frontend",
@@ -350,8 +350,8 @@
     },
     {
       "name": "bluetemberg-guardrails-git",
-      "version": "0.2.1",
-      "description": "Git guardrails for Bluetemberg — enforce conventional branch names on AI-created worktrees.",
+      "version": "0.2.2",
+      "description": "Git guardrails for Bluetemberg — enforce conventional branch names on AI-created worktrees, and block commit messages that start with a task ID.",
       "profiles": [],
       "stacks": [],
       "universal": true,
@@ -360,13 +360,17 @@
         {
           "name": "conventional-branch-names",
           "description": "Enforce conventional branch names before creating a worktree"
+        },
+        {
+          "name": "no-task-id-in-commits",
+          "description": "Block a git commit whose message starts with a tracker task ID like [PROJ-123]"
         }
       ],
       "preview": "Blocks AI tools from creating worktrees with auto-generated names (e.g. `claude/some-name`). Requires a branch name in `type/description` format before the worktree is created. This is **deterministic enforcement**, not a prose convention an agent is asked to remember. A rule lives in context and de"
     },
     {
       "name": "bluetemberg-rules-accessibility",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Accessibility rules for Bluetemberg — WCAG 2.2 A/AA guidance for semantic HTML, ARIA, keyboard navigation, and more.",
       "profiles": [
         "frontend",
@@ -413,7 +417,7 @@
     },
     {
       "name": "bluetemberg-rules-agent-memory",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Agent memory rules for Bluetemberg — statelessness as a hard constraint, memory provenance, promotion through consolidation, and authority-ranked recall.",
       "profiles": [
         "agentic"
@@ -443,7 +447,7 @@
     },
     {
       "name": "bluetemberg-rules-commit-attribution",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "description": "Commit and PR attribution hygiene rules for Bluetemberg — no AI agent-attribution residue in persisted artifacts.",
       "profiles": [],
       "stacks": [],
@@ -459,7 +463,7 @@
     },
     {
       "name": "bluetemberg-rules-context-engineering",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "description": "Context engineering rules for Bluetemberg — structuring LLM context, managing token budgets, avoiding context pollution.",
       "profiles": [
         "agentic"
@@ -497,7 +501,7 @@
     },
     {
       "name": "bluetemberg-rules-design-craft",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Anti-stock design-craft principles for building UI with AI — banned moves, real references, tokens-first, every state.",
       "profiles": [
         "design-engineer"
@@ -531,7 +535,7 @@
     },
     {
       "name": "bluetemberg-rules-devops",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "description": "Infrastructure rules for Bluetemberg — Docker, Terraform, Ansible, Kubernetes, Helm, CI/CD, shell scripts, and idempotency.",
       "profiles": [
         "devops",
@@ -590,7 +594,7 @@
     },
     {
       "name": "bluetemberg-rules-docs",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "description": "Documentation and diagnostics rules for Bluetemberg — docs parity, post-edit diagnostics, Mermaid diagrams.",
       "profiles": [],
       "stacks": [],
@@ -614,7 +618,7 @@
     },
     {
       "name": "bluetemberg-rules-git",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Git workflow rules for Bluetemberg — branch protection, naming, PR workflow, git move, pre-commit checks.",
       "profiles": [],
       "stacks": [],
@@ -638,7 +642,7 @@
     },
     {
       "name": "bluetemberg-rules-i18n",
-      "version": "1.0.2",
+      "version": "1.0.3",
       "description": "Internationalization rules for Bluetemberg — next-intl locale routing, Payload localized-field discipline, locale route guards, and message-key conventions.",
       "profiles": [
         "frontend",
@@ -672,7 +676,7 @@
     },
     {
       "name": "bluetemberg-rules-llm-api-product",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "LLM API and product-engineering rules for Bluetemberg — streaming, cost accounting, and cost-aware model selection.",
       "profiles": [
         "backend",
@@ -700,7 +704,7 @@
     },
     {
       "name": "bluetemberg-rules-nextjs",
-      "version": "0.4.0",
+      "version": "0.5.0",
       "description": "Next.js rules for Bluetemberg — NEXT_PUBLIC_* env var safety.",
       "profiles": [
         "frontend",
@@ -749,7 +753,7 @@
     },
     {
       "name": "bluetemberg-rules-payload",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Payload CMS rules for Bluetemberg — collection structure, snake_case dbName, composable access, field builders, revalidation hooks.",
       "profiles": [
         "backend",
@@ -786,7 +790,7 @@
     },
     {
       "name": "bluetemberg-rules-pr-links",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "description": "GitHub PR and issue link formatting rules for Bluetemberg — full URLs over owner/repo#123 shorthand.",
       "profiles": [],
       "stacks": [],
@@ -802,7 +806,7 @@
     },
     {
       "name": "bluetemberg-rules-security",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "description": "Security guardrail rules for Bluetemberg — secrets management, environment file protection, API error handling.",
       "profiles": [],
       "stacks": [],
@@ -830,7 +834,7 @@
     },
     {
       "name": "bluetemberg-rules-skeletor-authoring",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Rules for contributing to @prototyp/skeletor for Bluetemberg — style-prop pipeline, polymorphic spacing, component structure, RN Animated, context defaults, and type derivation.",
       "profiles": [
         "frontend",
@@ -871,7 +875,7 @@
     },
     {
       "name": "bluetemberg-rules-skeletor-consumer",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Rules for consuming @prototyp/skeletor in React Native apps — Block/Text/Screen primitives, SkeletorProvider config, animation hooks, and skeleform forms over raw RN primitives.",
       "profiles": [
         "frontend",
@@ -908,7 +912,7 @@
     },
     {
       "name": "bluetemberg-rules-tailwind",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Tailwind CSS v4 rules for Bluetemberg — @theme token discipline, fluid typography, OKLch colors, and single-source breakpoints.",
       "profiles": [
         "frontend",
@@ -941,7 +945,7 @@
     },
     {
       "name": "bluetemberg-rules-testing",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Testing rules for Bluetemberg — determinism, isolation, and meaningful coverage.",
       "profiles": [
         "frontend",
@@ -985,7 +989,7 @@
     },
     {
       "name": "bluetemberg-rules-typescript",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "TypeScript code quality rules for Bluetemberg — type safety, coding standards, early returns, no console.log, design system reuse.",
       "profiles": [
         "frontend",
@@ -1021,7 +1025,7 @@
     },
     {
       "name": "bluetemberg-skills-api-design",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "API design skill for Bluetemberg — RESTful conventions, pagination, versioning.",
       "profiles": [
         "backend",
@@ -1040,7 +1044,7 @@
     },
     {
       "name": "bluetemberg-skills-ci-cd-best-practices",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "CI/CD best practices skill for Bluetemberg — pipeline optimization and caching strategies.",
       "profiles": [
         "devops",
@@ -1059,7 +1063,7 @@
     },
     {
       "name": "bluetemberg-skills-code-review",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "description": "Code review skill for Bluetemberg — structured review checklist for PRs.",
       "profiles": [
         "frontend",
@@ -1079,7 +1083,7 @@
     },
     {
       "name": "bluetemberg-skills-config-echo",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Config echo skill for Bluetemberg — verifies that synced configuration was actually loaded by the LLM.",
       "profiles": [
         "frontend",
@@ -1101,7 +1105,7 @@
     },
     {
       "name": "bluetemberg-skills-create-agent",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "description": "Meta-skill for scaffolding new bluetemberg agents — frontmatter, scoped tools, responsibilities and constraints, and sync.",
       "profiles": [],
       "stacks": [],
@@ -1117,7 +1121,7 @@
     },
     {
       "name": "bluetemberg-skills-create-pack",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Meta-skill for scaffolding a whole new bluetemberg pack — package.json metadata, llm/ layout, catalog registration, and validation.",
       "profiles": [],
       "stacks": [],
@@ -1133,7 +1137,7 @@
     },
     {
       "name": "bluetemberg-skills-create-rule",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "description": "Meta-skill for scaffolding new bluetemberg rules — frontmatter, the Why/Rules/BAD-GOOD/config/gotchas structure, and sync.",
       "profiles": [],
       "stacks": [],
@@ -1149,7 +1153,7 @@
     },
     {
       "name": "bluetemberg-skills-create-skill",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Meta-skill for scaffolding new bluetemberg skills — frontmatter, five required sections, and sync.",
       "profiles": [],
       "stacks": [],
@@ -1165,7 +1169,7 @@
     },
     {
       "name": "bluetemberg-skills-design-critique",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Design critique skill for Bluetemberg — multi-lens review, hostile QA, and an impact-ranked fix list for built UI.",
       "profiles": [
         "design-engineer"
@@ -1183,7 +1187,7 @@
     },
     {
       "name": "bluetemberg-skills-design-system",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Design-system reuse skill for Bluetemberg — reach for shadcn/Radix primitives, cn()/cva() composition, and asChild polymorphism before bespoke UI.",
       "profiles": [
         "frontend",
@@ -1205,7 +1209,7 @@
     },
     {
       "name": "bluetemberg-skills-docs-upkeep",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "description": "Docs upkeep skill for Bluetemberg — keep docs aligned with implementation changes.",
       "profiles": [],
       "stacks": [],
@@ -1221,7 +1225,7 @@
     },
     {
       "name": "bluetemberg-skills-figma-to-code",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Figma-to-code skill for Bluetemberg — the section-by-section design-to-code loop with prompt stacking, drift checks, and surgical refinement.",
       "profiles": [
         "design-engineer"
@@ -1239,7 +1243,7 @@
     },
     {
       "name": "bluetemberg-skills-infrastructure-drift-check",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Infrastructure drift check skill for Bluetemberg — verify IaC state matches deployed state.",
       "profiles": [
         "devops",
@@ -1258,7 +1262,7 @@
     },
     {
       "name": "bluetemberg-skills-integration-safety",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Third-party integration-safety skill for Bluetemberg — lazy init, getRequiredEnv, safeParse over parse, fire-and-forget analytics, and safe widget script injection.",
       "profiles": [
         "backend",
@@ -1277,7 +1281,7 @@
     },
     {
       "name": "bluetemberg-skills-k6-load-testing",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "k6 load-testing skill for Bluetemberg — scenario taxonomy, shared config/requests libs, p95 threshold discipline, and __ENV-parametrized suites wired into CI.",
       "profiles": [
         "backend",
@@ -1297,7 +1301,7 @@
     },
     {
       "name": "bluetemberg-skills-migration-safety",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Migration safety skill for Bluetemberg — database migration review and rollback plans.",
       "profiles": [
         "backend",
@@ -1316,7 +1320,7 @@
     },
     {
       "name": "bluetemberg-skills-nextjs-caching",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Next.js caching & ISR skill for Bluetemberg — unstable_cache keyParts vs tags discipline, revalidateTag call sites, and the ISR cache handler.",
       "profiles": [
         "frontend",
@@ -1337,7 +1341,7 @@
     },
     {
       "name": "bluetemberg-skills-orval-openapi",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Orval OpenAPI client-generation skill for Bluetemberg — the build:api pipeline, tags-split output, the custom fetch mutator, and never hand-editing generated files.",
       "profiles": [
         "backend",
@@ -1356,7 +1360,7 @@
     },
     {
       "name": "bluetemberg-skills-patterns",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Patterns skill for Bluetemberg — apply reusable architecture and coding patterns.",
       "profiles": [
         "frontend",
@@ -1376,7 +1380,7 @@
     },
     {
       "name": "bluetemberg-skills-payload-blocks",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Payload CMS block-system skill for Bluetemberg — the co-located config.ts + Component.tsx pattern and the registry-dispatch RenderBlocks convention.",
       "profiles": [
         "frontend",
@@ -1397,7 +1401,7 @@
     },
     {
       "name": "bluetemberg-skills-payload-cache-revalidation",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Payload + Next.js cache revalidation skill for Bluetemberg — a single source of truth for cache tags and the per-locale vs locale-agnostic decision.",
       "profiles": [
         "backend",
@@ -1418,7 +1422,7 @@
     },
     {
       "name": "bluetemberg-skills-payload-migrations",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "description": "Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrite, paired .ts/.json snapshots, and gated destructive changes.",
       "profiles": [
         "backend",
@@ -1439,7 +1443,7 @@
     },
     {
       "name": "bluetemberg-skills-pr-review-loop",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "PR review loop skill for Bluetemberg — wire automated comment-only PR reviews via a local PostToolUse hook, without touching CI/CD.",
       "profiles": [
         "frontend",
@@ -1460,7 +1464,7 @@
     },
     {
       "name": "bluetemberg-skills-react-patterns",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "React patterns skill for Bluetemberg — component composition, hook extraction, state co-location.",
       "profiles": [
         "frontend",
@@ -1482,7 +1486,7 @@
     },
     {
       "name": "bluetemberg-skills-rollback-plan",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Rollback plan skill for Bluetemberg — require tested rollback steps for every production change.",
       "profiles": [
         "devops",
@@ -1501,7 +1505,7 @@
     },
     {
       "name": "bluetemberg-skills-security-audit",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Security audit skill for Bluetemberg — dependency audit, secrets scan, OWASP patterns.",
       "profiles": [
         "backend",
@@ -1522,7 +1526,7 @@
     },
     {
       "name": "bluetemberg-skills-session-retrospective",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Session retrospective skill for Bluetemberg — deterministic jq token/tool analysis of a Claude Code transcript plus a judged, severity-ordered process retrospective.",
       "profiles": [],
       "stacks": [],
@@ -1538,7 +1542,7 @@
     },
     {
       "name": "bluetemberg-skills-skeletor-authoring",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Skills for scaffolding @prototyp/skeletor primitives and hooks for Bluetemberg — folder + barrel + extract/memoize/displayName, and ref-stable RN Animated hooks.",
       "profiles": [
         "frontend",
@@ -1563,7 +1567,7 @@
     },
     {
       "name": "bluetemberg-skills-stack-change-review",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Stack change review skill for Bluetemberg — high-blast-radius infrastructure change review.",
       "profiles": [
         "devops",
@@ -1582,7 +1586,7 @@
     },
     {
       "name": "bluetemberg-skills-sub-agent-design",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "description": "Sub-agent design skill for Bluetemberg — plan, scope, and implement sub-agent architectures.",
       "profiles": [
         "agentic"
@@ -1600,7 +1604,7 @@
     },
     {
       "name": "bluetemberg-skills-visual-direction",
-      "version": "1.0.1",
+      "version": "1.0.2",
       "description": "Visual direction skill for Bluetemberg — explore distinct directions, lock one, and produce a banned-moves list and Design System Document.",
       "profiles": [
         "design-engineer"
@@ -1618,7 +1622,7 @@
     },
     {
       "name": "bluetemberg-skills-workspace-hygiene",
-      "version": "0.3.1",
+      "version": "0.3.2",
       "description": "Workspace hygiene skill for Bluetemberg — clean workspace state during edits.",
       "profiles": [],
       "stacks": [],
