@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-04T20:56:23.822Z",
+  "generated": "2026-11-04T20:59:51.007Z",
   "stackPackages": {
     "schema": 1,
     "stacks": {
@@ -16,6 +16,11 @@
       "drizzle": {
         "packages": {
           "npm": "drizzle-orm"
+        }
+      },
+      "nestjs": {
+        "packages": {
+          "npm": "@nestjs/core"
         }
       },
       "nextjs": {
@@ -924,6 +929,10 @@
         {
           "name": "lockfile-discipline",
           "description": "Commit one lockfile, install from it frozen in CI and Docker (npm ci, --frozen-lockfile, --immutable), and verify npm registry signatures."
+        },
+        {
+          "name": "nestjs-validation-pipe",
+          "description": "Bind ValidationPipe globally with whitelist on, so NestJS DTOs strip or reject request fields they don't declare."
         },
         {
           "name": "never-read-env",

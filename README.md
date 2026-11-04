@@ -20,7 +20,7 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 | ------- | ------ | ----- |
 | [`bluetemberg-rules-typescript`](https://www.npmjs.com/package/bluetemberg-rules-typescript) | TypeScript code quality | `type-safety`, `coding-standards`, `early-returns`, `no-console-log`, `design-system-reuse` |
 | `bluetemberg-rules-git` _(not yet published)_ | Git workflow standards | `git-workflow`, `git-move`, `pre-commit-checks` |
-| [`bluetemberg-rules-security`](https://www.npmjs.com/package/bluetemberg-rules-security) | Security guardrails | `never-read-env`, `security-secrets`, `api-error-handling`, `lockfile-discipline`, `drizzle-parameterized-sql` |
+| [`bluetemberg-rules-security`](https://www.npmjs.com/package/bluetemberg-rules-security) | Security guardrails | `never-read-env`, `security-secrets`, `api-error-handling`, `lockfile-discipline`, `drizzle-parameterized-sql`, `nestjs-validation-pipe` |
 | [`bluetemberg-rules-docs`](https://www.npmjs.com/package/bluetemberg-rules-docs) | Documentation & diagnostics | `docs-parity`, `post-edit-diagnostics`, `mermaid-diagrams` |
 | `bluetemberg-rules-evidence` _(not yet published)_ | Evidence & reporting | `measure-dont-proxy`, `evidence-citation`, `correction-log`, `chart-integrity`, `no-hand-typed-figures` |
 | [`bluetemberg-rules-devops`](https://www.npmjs.com/package/bluetemberg-rules-devops) | Infrastructure | `docker-best-practices`, `terraform-conventions`, `ansible-conventions`, `kubernetes-manifests`, `helm-conventions`, `container-image-pinning`, `ci-workflow-conventions`, `shell-script-standards`, `idempotency`, `runbook-discipline` |
