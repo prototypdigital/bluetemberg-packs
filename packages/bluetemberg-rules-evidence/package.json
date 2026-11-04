@@ -1,0 +1,36 @@
+{
+  "name": "bluetemberg-rules-evidence",
+  "version": "0.1.0",
+  "description": "Evidence and reporting rules for Bluetemberg — measure don't proxy, cite the basis, log corrections, honest charts, generated figures.",
+  "keywords": [
+    "bluetemberg-pack",
+    "rules",
+    "evidence",
+    "metrics",
+    "reporting",
+    "data-viz"
+  ],
+  "author": "Josip Ravas (https://github.com/jravas)",
+  "contributors": [
+    "Prototyp Digital (https://prototyp.digital)"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prototypdigital/bluetemberg-packs.git",
+    "directory": "packages/bluetemberg-rules-evidence"
+  },
+  "bugs": {
+    "url": "https://github.com/prototypdigital/bluetemberg-packs/issues"
+  },
+  "homepage": "https://prototypdigital.github.io/bluetemberg-packs/",
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "agentic"
+    ]
+  }
+}
