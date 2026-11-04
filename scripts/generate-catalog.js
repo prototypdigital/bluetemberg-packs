@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 // @ts-check
 import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { join, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join, dirname, resolve } from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import frontmatter from './frontmatter.cjs';
+import registry from './npm-registry.cjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, '..');
@@ -76,20 +77,6 @@ function listContentFiles(pkgDir, kind) {
   // Sort by name so catalog.json item order and the preview (contentFiles[0])
   // are deterministic — readdirSync order is filesystem-dependent.
   return files.sort((a, b) => a.name.localeCompare(b.name));
-}
-
-/** Returns true if the package name resolves on the npm registry. */
-async function isPublished(name) {
-  try {
-    const res = await fetch(`https://registry.npmjs.org/${encodeURIComponent(name)}`, {
-      headers: { Accept: 'application/json' },
-    });
-    if (!res.ok) return false;
-    const data = await res.json();
-    return !!(data['dist-tags'] && data['dist-tags'].latest);
-  } catch {
-    return false;
-  }
 }
 
 function buildEntry(pkgDir) {
@@ -214,7 +201,20 @@ function generateWikiCatalog(packs) {
   return lines.join('\n');
 }
 
-async function main() {
+/**
+ * Build catalog.json and docs/wiki/Catalog.md. Returns the process exit code.
+ * Writes nothing unless every pack's npm status was resolved: a pack is left
+ * out only when the registry says it isn't published (404 or fully
+ * unpublished); any other failure aborts so a bad network can't drop a pack.
+ * Options exist for the self-test in .github/scripts/validate-packs.cjs.
+ */
+export async function main({
+  fetchImpl = globalThis.fetch,
+  sleep,
+  catalogPath = CATALOG_PATH,
+  wikiCatalogPath = WIKI_CATALOG_PATH,
+  now = () => new Date(),
+} = {}) {
   const pkgDirs = readdirSync(PACKAGES_DIR, { withFileTypes: true })
     .filter((e) => e.isDirectory())
     .map((e) => join(PACKAGES_DIR, e.name))
@@ -222,14 +222,20 @@ async function main() {
 
   const candidates = pkgDirs.map(buildEntry).filter(Boolean);
 
-  // Filter to only packs that are published on npm
-  const publishResults = await Promise.all(
-    candidates.map((p) => isPublished(p.name)),
-  );
+  // Keep only packs published on npm. Only a definitive "not published" answer
+  // drops a pack; anything else throws and nothing is written.
+  let publishStatus;
+  try {
+    publishStatus = await registry.checkAllPublished(candidates.map((p) => p.name), { fetchImpl, sleep });
+  } catch (err) {
+    console.error(`${err.message}\nNot writing catalog.json or Catalog.md. Re-run once the registry is reachable.`);
+    return 1;
+  }
 
-  const packs = candidates.filter((_, i) => {
-    if (publishResults[i]) return true;
-    console.warn(`  skipped (not on npm): ${candidates[i].name}`);
+  const packs = candidates.filter((p) => {
+    const status = publishStatus.get(p.name);
+    if (status?.published) return true;
+    console.warn(`  excluded ${p.name}: not published on npm (${status?.reason ?? 'no status'})`);
     return false;
   });
 
@@ -238,31 +244,35 @@ async function main() {
     stackPackages = JSON.parse(readFileSync(STACK_PACKAGES_PATH, 'utf8'));
   } catch (err) {
     console.error(`Failed to read stack-packages.json:`, err.message);
-    process.exit(1);
+    return 1;
   }
 
   const catalog = {
-    generated: new Date().toISOString(),
+    generated: now().toISOString(),
     stackPackages,
     packs,
   };
 
   try {
-    writeFileSync(CATALOG_PATH, JSON.stringify(catalog, null, 2) + '\n');
+    writeFileSync(catalogPath, JSON.stringify(catalog, null, 2) + '\n');
     console.log(`catalog.json written — ${packs.length} pack(s)`);
   } catch (err) {
     console.error(`Failed to write catalog.json:`, err.message);
-    process.exit(1);
+    return 1;
   }
 
   // Write docs/wiki/Catalog.md
   try {
-    writeFileSync(WIKI_CATALOG_PATH, generateWikiCatalog(packs));
+    writeFileSync(wikiCatalogPath, generateWikiCatalog(packs));
     console.log('docs/wiki/Catalog.md written');
   } catch (err) {
     console.error(`Failed to write Catalog.md:`, err.message);
-    process.exit(1);
+    return 1;
   }
+  return 0;
 }
 
-main();
+// Run only when executed directly, not when imported by the validator's self-test.
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  process.exitCode = await main();
+}

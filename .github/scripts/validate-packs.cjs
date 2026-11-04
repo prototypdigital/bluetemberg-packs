@@ -476,6 +476,84 @@ console.log('\n[6] Stack map (stack-packages.json ↔ catalog stackPackages)');
   }
 }
 
+// ─── 7. Catalog registry check self-test ─────────────────────────────────────
+// generate:catalog drops a pack only when npm says it isn't published. A flaky
+// registry once dropped a published pack silently, so pin the contract here with
+// a stubbed fetch (no network): a 404 excludes the pack, a transient 5xx or bad
+// body is retried and the pack kept, and a persistent failure exits 1 without
+// writing anything. Runs the real generator against the real packages/ and
+// writes to a temp dir.
+async function registrySelfTest() {
+  console.log('\n[7] Catalog registry check self-test (stubbed npm, no network)');
+  const os = require('os');
+  const { pathToFileURL } = require('url');
+  const { ATTEMPTS } = require('../../scripts/npm-registry.cjs');
+  const { main } = await import(pathToFileURL(path.join(__dirname, '..', '..', 'scripts', 'generate-catalog.js')).href);
+
+  const names = listPackDirs().sort();
+  const target = names.includes('bluetemberg-rules-accessibility') ? 'bluetemberg-rules-accessibility' : names[0];
+  const published = () => new Response(JSON.stringify({ 'dist-tags': { latest: '1.0.0' } }), { status: 200 });
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'catalog-selftest-'));
+
+  // `targetResponses` answers the target pack's Nth request; every other pack is published.
+  const run = async (label, targetResponses) => {
+    let calls = 0;
+    const fetchImpl = async (url) => {
+      if (decodeURIComponent(url.split('/').pop()) !== target) return published();
+      const respond = targetResponses[Math.min(calls, targetResponses.length - 1)];
+      calls += 1;
+      return respond();
+    };
+    const catalogPath = path.join(tmp, `${label}.json`);
+    const wikiCatalogPath = path.join(tmp, `${label}.md`);
+    const output = [];
+    const saved = { log: console.log, warn: console.warn, error: console.error };
+    console.log = console.warn = console.error = (...args) => output.push(args.join(' '));
+    let code;
+    try {
+      code = await main({ fetchImpl, sleep: async () => {}, catalogPath, wikiCatalogPath, now: () => new Date(0) });
+    } finally {
+      Object.assign(console, saved);
+    }
+    const read = (p) => (fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : null);
+    const catalog = read(catalogPath);
+    return { code, calls, output: output.join('\n'), catalog: catalog && JSON.parse(catalog), wiki: read(wikiCatalogPath) };
+  };
+  const listed = (r) => (r.catalog?.packs || []).some((p) => p.name === target);
+  const inWiki = (r) => (r.wiki || '').includes(`### ${target}\n`);
+
+  try {
+    const r404 = await run('not-found', [() => new Response('{"error":"Not found"}', { status: 404 })]);
+    if (r404.code !== 0) fail(`self-test: a 404 made the generator exit ${r404.code}, want 0`);
+    else if (listed(r404) || inWiki(r404)) fail(`self-test: a 404 for ${target} did not exclude it`);
+    else if (r404.catalog.packs.length !== names.length - 1) fail(`self-test: a 404 for one pack left ${r404.catalog.packs.length}/${names.length} packs`);
+    else if (!r404.output.includes(`excluded ${target}: not published on npm (registry returned 404)`)) fail('self-test: a 404 exclusion was not logged with the pack and reason');
+    else pass(`404 → ${target} excluded and logged`);
+
+    const r500 = await run('transient', [() => new Response('upstream error', { status: 500 }), published]);
+    if (r500.code !== 0 || !listed(r500) || !inWiki(r500)) fail(`self-test: 500 then 200 did not keep ${target} (exit ${r500.code})`);
+    else if (r500.calls !== 2) fail(`self-test: 500 then 200 made ${r500.calls} request(s), want 2`);
+    else pass(`500 then 200 → ${target} retried and included`);
+
+    const rBody = await run('malformed', [() => new Response('<html>busy</html>', { status: 200 }), published]);
+    if (rBody.code !== 0 || !listed(rBody)) fail(`self-test: malformed body then 200 did not keep ${target} (exit ${rBody.code})`);
+    else pass(`malformed body then 200 → ${target} retried and included`);
+
+    const rDown = await run('persistent', [() => Promise.reject(new TypeError('fetch failed'))]);
+    if (rDown.code !== 1) fail(`self-test: a persistent network error made the generator exit ${rDown.code}, want 1`);
+    else if (rDown.catalog !== null || rDown.wiki !== null) fail('self-test: a persistent network error still wrote catalog.json/Catalog.md');
+    else if (rDown.calls !== ATTEMPTS) fail(`self-test: a persistent error made ${rDown.calls} request(s), want ${ATTEMPTS}`);
+    else if (!rDown.output.includes(`${target}: network error: fetch failed`)) fail('self-test: the failure message does not name the pack and the cause');
+    else pass(`persistent error → exit 1 after ${ATTEMPTS} attempts, nothing written`);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+}
+
 // ─── Result ───────────────────────────────────────────────────────────────────
-console.log(`\n${errors === 0 ? '✅ All checks passed.' : `❌ ${errors} error(s) found.`}\n`);
-process.exit(errors > 0 ? 1 : 0);
+registrySelfTest()
+  .catch((err) => fail(`self-test: registry check self-test crashed: ${err && err.stack ? err.stack : err}`))
+  .then(() => {
+    console.log(`\n${errors === 0 ? '✅ All checks passed.' : `❌ ${errors} error(s) found.`}\n`);
+    process.exit(errors > 0 ? 1 : 0);
+  });
