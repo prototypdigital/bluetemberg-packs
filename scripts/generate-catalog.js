@@ -183,6 +183,9 @@ function generateWikiCatalog(packs) {
     for (const pack of packsOfKind) {
       lines.push(`### ${pack.name}`, '');
       lines.push(pack.description, '');
+      if (pack.platforms?.length) {
+        lines.push(`**Platforms:** ${pack.platforms.map((p) => `\`${p}\``).join(', ')} only. Sync skips this pack for other platforms.`, '');
+      }
 
       const items = pack[pack.kind] ?? [];
       if (items.length > 0) {

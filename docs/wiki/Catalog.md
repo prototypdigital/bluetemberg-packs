@@ -353,6 +353,8 @@ Security specialist agent for Bluetemberg — vulnerability audit, dependency sc
 
 Session auditor agent for Bluetemberg — token-spend and harness-usage retrospective over Claude Code session transcripts.
 
+**Platforms:** `claude` only. Sync skips this pack for other platforms.
+
 | Agent | Description |
 | ----- | ----------- |
 | `session-auditor` | Audits a Claude Code session transcript for token spend and harness-usage quality — wasted calls, missed delegation, cache misses — and writes a graded retrospective. Use after a session ends. |
@@ -565,6 +567,8 @@ Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrit
 
 PR review loop skill for Bluetemberg — wire automated comment-only PR reviews via a local PostToolUse hook, with the hook scripts bundled under the skill, without touching CI/CD.
 
+**Platforms:** `claude` only. Sync skips this pack for other platforms.
+
 | Skill | Description |
 | ----- | ----------- |
 | `pr-review-loop` | Wires automated comment-only PR reviews through a local hook that reviews PRs the moment an agent opens them. Never touches the CI/CD pipeline. Use when setting up automated PR review. |
@@ -596,6 +600,8 @@ Security audit skill for Bluetemberg — dependency audit, secrets scan, OWASP p
 ### bluetemberg-skills-session-retrospective
 
 Session retrospective skill for Bluetemberg — deterministic jq token/tool analysis of a Claude Code transcript plus a judged, severity-ordered process retrospective.
+
+**Platforms:** `claude` only. Sync skips this pack for other platforms.
 
 | Skill | Description |
 | ----- | ----------- |

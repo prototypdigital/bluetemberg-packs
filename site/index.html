@@ -1312,9 +1312,15 @@
       function packCard(pack) {
         const npm = `https://www.npmjs.com/package/${encodeURIComponent(pack.name)}`;
         const items = pack[pack.kind] || [];
-        const profiles = (pack.profiles || [])
-          .map((p) => `<span class="tag">${esc(p)}</span>`)
+        // Packs limited to some hosts (catalog `platforms`, e.g. ["claude"]):
+        // say so, since sync writes nothing for the other platforms.
+        const platforms = (pack.platforms || [])
+          .map((p) => `<span class="tag" title="Only synced for ${esc(p)}; skipped for other platforms">${esc(p)} only</span>`)
           .join("");
+        const profiles =
+          (pack.profiles || [])
+            .map((p) => `<span class="tag">${esc(p)}</span>`)
+            .join("") + platforms;
 
         const pub = pack.published
           ? `<span class="pack-pub">· published ${esc(fmtDate(pack.published))}</span>`
