@@ -11,7 +11,7 @@
 // parse, so a description like `Next.js caching: ...` silently hides a skill.
 
 const FRONTMATTER_RE = /^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/;
-const ENTRY_RE = /^([A-Za-z_][A-Za-z0-9_-]*):(?:[ \t]+(.*))?$/;
+const ENTRY_RE = /^([A-Za-z_](?:[A-Za-z0-9_ -]*[A-Za-z0-9_-])?):(?:[ \t]+(.*))?$/;
 const DOUBLE_QUOTED_RE = /^"((?:[^"\\]|\\.)*)"\s*(?:#.*)?$/;
 const SINGLE_QUOTED_RE = /^'((?:[^']|'')*)'\s*(?:#.*)?$/;
 
@@ -32,16 +32,39 @@ function topLevelEntries(block) {
   return entries;
 }
 
+// YAML 1.2 double-quoted escapes (spec 5.7). `\x`, `\u` and `\U` take 2, 4 and 8 hex digits.
+const SIMPLE_ESCAPES = {
+  0: '\0', a: '\x07', b: '\b', t: '\t', '\t': '\t', n: '\n', v: '\v', f: '\f', r: '\r', e: '\x1b',
+  ' ': ' ', '"': '"', '/': '/', '\\': '\\', N: '\x85', _: '\xa0', L: '\u2028', P: '\u2029',
+};
+const HEX_ESCAPE_LENGTH = { x: 2, u: 4, U: 8 };
+
+/** Unescape a double-quoted body, or return null when it has an escape YAML rejects. */
+function unescapeDoubleQuoted(body) {
+  let out = '';
+  for (let i = 0; i < body.length; i++) {
+    if (body[i] !== '\\') {
+      out += body[i];
+      continue;
+    }
+    const code = body[++i];
+    if (code in SIMPLE_ESCAPES) {
+      out += SIMPLE_ESCAPES[code];
+      continue;
+    }
+    const length = HEX_ESCAPE_LENGTH[code];
+    const hex = length ? body.slice(i + 1, i + 1 + length) : '';
+    if (!length || !new RegExp(`^[0-9a-fA-F]{${length}}$`).test(hex)) return null;
+    out += String.fromCodePoint(parseInt(hex, 16));
+    i += length;
+  }
+  return out;
+}
+
 /** The string a YAML parser reads from a single-line scalar. Quotes are removed and unescaped. */
 function scalarValue(raw) {
   const double = raw.match(DOUBLE_QUOTED_RE);
-  if (double) {
-    try {
-      return JSON.parse(`"${double[1]}"`);
-    } catch {
-      return double[1];
-    }
-  }
+  if (double) return unescapeDoubleQuoted(double[1]) ?? double[1];
   const single = raw.match(SINGLE_QUOTED_RE);
   if (single) return single[1].replace(/''/g, "'");
   return raw;
@@ -55,7 +78,12 @@ function readScalar(content, key) {
   return entry ? scalarValue(entry.raw) : '';
 }
 
+const BLOCK_SCALAR_RE = /^[|>][0-9+-]*\s*(?:#.*)?$/;
+
 const RESERVED_START = {
+  ',': 'starts with ",", a YAML flow indicator',
+  ']': 'starts with "]", a YAML flow indicator',
+  '}': 'starts with "}", a YAML flow indicator',
   '@': 'starts with "@", a reserved YAML indicator',
   '`': 'starts with "`", a reserved YAML indicator',
   '&': 'starts with "&", which YAML reads as an anchor',
@@ -74,9 +102,17 @@ const RESERVED_START = {
 function scalarError(raw) {
   if (raw === '') return null;
   const first = raw[0];
-  if (first === '"') return DOUBLE_QUOTED_RE.test(raw) ? null : 'double-quoted value is not closed, or has text after the closing quote';
+  if (first === '"') {
+    const double = raw.match(DOUBLE_QUOTED_RE);
+    if (!double) return 'double-quoted value is not closed, or has text after the closing quote';
+    return unescapeDoubleQuoted(double[1]) === null ? 'double-quoted value has an escape YAML does not know (write a literal \\ as \\\\)' : null;
+  }
   if (first === "'") return SINGLE_QUOTED_RE.test(raw) ? null : "single-quoted value is not closed, or has text after the closing quote (escape ' as '')";
-  if (first === '[' || first === '{' || first === '|' || first === '>') return null;
+  // A flow collection must close at the end of the line, so `[WIP] Does things` is caught.
+  if (first === '[') return /\]\s*(?:#.*)?$/.test(raw) ? null : 'starts with "[" but is not a closed [list]';
+  if (first === '{') return /\}\s*(?:#.*)?$/.test(raw) ? null : 'starts with "{" but is not a closed {map}';
+  // A block scalar header (`|`, `>-`, `|2`) must be alone on its line.
+  if (first === '|' || first === '>') return BLOCK_SCALAR_RE.test(raw) ? null : `starts with "${first}", a YAML block scalar indicator`;
   if (RESERVED_START[first]) return RESERVED_START[first];
   if (/^[-?:](\s|$)/.test(raw)) return `starts with "${first} ", which YAML reads as structure`;
   if (/:(\s|$)/.test(raw)) return 'contains ": ", which YAML reads as a nested mapping';
@@ -84,11 +120,30 @@ function scalarError(raw) {
   return null;
 }
 
-/** One message per top-level entry whose value a strict YAML parser would reject or misread. */
+/**
+ * One message per problem a strict YAML parser would reject or misread: a top-level value that
+ * doesn't parse as the string it looks like, a key given twice, or a line at column 0 that isn't a
+ * `key: value` entry (`description:foo`, a stray `- item`). Indented lines (block lists, nested maps)
+ * are left alone. Not a full parser: see the module comment.
+ */
 function frontmatterErrors(content) {
   const block = frontmatterBlock(content);
   if (block === null) return [];
   const errors = [];
+  block.split(/\r?\n/).forEach((text, index) => {
+    if (text === '' || /^\s+/.test(text) && !/^\t/.test(text)) return;
+    if (/^\t/.test(text)) {
+      errors.push(`line ${index + 2}: starts with a tab, which YAML does not allow for indentation`);
+      return;
+    }
+    if (text.startsWith('#') || ENTRY_RE.test(text)) return;
+    errors.push(`line ${index + 2}: not a \`key: value\` line (a key needs ": " after it)`);
+  });
+  const seen = new Set();
+  for (const entry of topLevelEntries(block)) {
+    if (seen.has(entry.key)) errors.push(`line ${entry.line}: '${entry.key}' is given twice`);
+    seen.add(entry.key);
+  }
   for (const entry of topLevelEntries(block)) {
     const reason = scalarError(entry.raw);
     if (reason) errors.push(`line ${entry.line}: '${entry.key}' ${reason}; quote the value`);

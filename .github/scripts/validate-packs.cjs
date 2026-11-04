@@ -137,7 +137,7 @@ console.log('\n[2] Frontmatter validation');
       // Hosts parse frontmatter with a real YAML parser and drop a file that
       // fails, so an unquoted `description: Foo: bar` hides the whole skill.
       for (const err of frontmatterErrors(content)) {
-        fail(`${rel}: frontmatter is not valid YAML — ${err}`);
+        fail(`${rel}: frontmatter won't parse as written — ${err}`);
         fileOk = false;
       }
 
