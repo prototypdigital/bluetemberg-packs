@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-04T17:59:20.384Z",
+  "generated": "2026-11-04T20:50:27.094Z",
   "stackPackages": {
     "schema": 1,
     "stacks": {
@@ -352,7 +352,7 @@
     },
     {
       "name": "bluetemberg-agents-session-auditor",
-      "version": "1.0.3",
+      "version": "1.1.0",
       "description": "Session auditor agent for Bluetemberg — token-spend and harness-usage retrospective over Claude Code session transcripts.",
       "profiles": [],
       "stacks": [],
@@ -371,7 +371,7 @@
     },
     {
       "name": "bluetemberg-agents-skeletor-specialist",
-      "version": "0.2.2",
+      "version": "0.2.3",
       "description": "Skeletor specialist agent for Bluetemberg — covers both consuming the public API (Block/Screen/Text, SkeletorProvider, animation hooks, skeleform) and authoring library internals (style-prop pipeline, memoizeStyle, Biome, release-please).",
       "profiles": [
         "frontend",
@@ -918,6 +918,10 @@
           "description": "Verify every LLM-suggested dependency exists in the registry before installing — hallucinated package names are a real supply-chain attack surface (slopsquatting)."
         },
         {
+          "name": "lockfile-discipline",
+          "description": "Commit one lockfile, install from it frozen in CI and Docker (npm ci, --frozen-lockfile, --immutable), and verify npm registry signatures."
+        },
+        {
           "name": "never-read-env",
           "description": "Never read .env files directly in code."
         },
@@ -1297,7 +1301,7 @@
     },
     {
       "name": "bluetemberg-skills-design-system",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Design-system reuse skill for Bluetemberg — reach for shadcn/Radix primitives, cn()/cva() composition, and asChild polymorphism before bespoke UI.",
       "profiles": [
         "frontend",
@@ -1376,7 +1380,7 @@
     },
     {
       "name": "bluetemberg-skills-integration-safety",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Third-party integration-safety skill for Bluetemberg — lazy init, getRequiredEnv, safeParse over parse, fire-and-forget analytics, and safe widget script injection.",
       "profiles": [
         "backend",
@@ -1437,7 +1441,7 @@
     },
     {
       "name": "bluetemberg-skills-nextjs-caching",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Next.js caching & ISR skill for Bluetemberg — unstable_cache keyParts vs tags discipline, revalidateTag call sites, and the ISR cache handler.",
       "profiles": [
         "frontend",
@@ -1459,7 +1463,7 @@
     },
     {
       "name": "bluetemberg-skills-orval-openapi",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Orval OpenAPI client-generation skill for Bluetemberg — the build:api pipeline, tags-split output, the custom fetch mutator, and never hand-editing generated files.",
       "profiles": [
         "backend",
@@ -1500,7 +1504,7 @@
     },
     {
       "name": "bluetemberg-skills-payload-blocks",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Payload CMS block-system skill for Bluetemberg — the co-located config.ts + Component.tsx pattern and the registry-dispatch RenderBlocks convention.",
       "profiles": [
         "frontend",
@@ -1544,7 +1548,7 @@
     },
     {
       "name": "bluetemberg-skills-payload-migrations",
-      "version": "0.3.0",
+      "version": "0.3.1",
       "description": "Payload CMS migration workflow skill for Bluetemberg — generate-don't-handwrite, paired .ts/.json snapshots, and gated destructive changes.",
       "profiles": [
         "backend",
@@ -1566,7 +1570,7 @@
     },
     {
       "name": "bluetemberg-skills-pr-review-loop",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "description": "PR review loop skill for Bluetemberg — wire automated comment-only PR reviews via a local PostToolUse hook, with the hook scripts bundled under the skill, without touching CI/CD.",
       "profiles": [
         "frontend",
@@ -1655,7 +1659,7 @@
     },
     {
       "name": "bluetemberg-skills-session-retrospective",
-      "version": "1.0.3",
+      "version": "1.1.0",
       "description": "Session retrospective skill for Bluetemberg — deterministic jq token/tool analysis of a Claude Code transcript plus a judged, severity-ordered process retrospective.",
       "profiles": [],
       "stacks": [],
