@@ -1,5 +1,70 @@
 {
-  "generated": "2026-11-04T16:44:13.922Z",
+  "generated": "2026-11-04T17:59:20.384Z",
+  "stackPackages": {
+    "schema": 1,
+    "stacks": {
+      "angular": {
+        "packages": {
+          "npm": "@angular/core"
+        }
+      },
+      "astro": {
+        "packages": {
+          "npm": "astro"
+        }
+      },
+      "drizzle": {
+        "packages": {
+          "npm": "drizzle-orm"
+        }
+      },
+      "nextjs": {
+        "packages": {
+          "npm": "next"
+        }
+      },
+      "payload": {
+        "packages": {
+          "npm": "payload"
+        }
+      },
+      "react": {
+        "packages": {
+          "npm": "react"
+        }
+      },
+      "react-native": {
+        "packages": {
+          "npm": "react-native"
+        }
+      },
+      "solid": {
+        "packages": {
+          "npm": "solid-js"
+        }
+      },
+      "svelte": {
+        "packages": {
+          "npm": "svelte"
+        }
+      },
+      "tailwind": {
+        "packages": {
+          "npm": "tailwindcss"
+        }
+      },
+      "trpc": {
+        "packages": {
+          "npm": "@trpc/server"
+        }
+      },
+      "vue": {
+        "packages": {
+          "npm": "vue"
+        }
+      }
+    }
+  },
   "packs": [
     {
       "name": "bluetemberg-agents-a11y-specialist",
