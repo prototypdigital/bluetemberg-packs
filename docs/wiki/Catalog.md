@@ -167,6 +167,7 @@ Security guardrail rules for Bluetemberg — secrets management, environment fil
 | Rule | Enforces |
 | ---- | -------- |
 | `api-error-handling` | Use structured error responses and never leak internal details. |
+| `drizzle-parameterized-sql` | Keep user input in Drizzle's sql template parameters; never pass it to sql.raw() or build SQL with string concatenation. |
 | `llm-package-hallucination` | Verify every LLM-suggested dependency exists in the registry before installing — hallucinated package names are a real supply-chain attack surface (slopsquatting). |
 | `lockfile-discipline` | Commit one lockfile, install from it frozen in CI and Docker (npm ci, --frozen-lockfile, --immutable), and verify npm registry signatures. |
 | `never-read-env` | Never read .env files directly in code. |
