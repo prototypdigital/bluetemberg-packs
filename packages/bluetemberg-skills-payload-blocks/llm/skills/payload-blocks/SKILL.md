@@ -1,6 +1,6 @@
 ---
 name: payload-blocks
-description: Payload block system: co-located config.ts + Component.tsx and the registry-dispatch RenderBlocks convention. Use when adding, editing, or rendering a Payload block or RenderBlocks dispatcher.
+description: "Payload block system: co-located config.ts + Component.tsx and the registry-dispatch RenderBlocks convention. Use when adding, editing, or rendering a Payload block or RenderBlocks dispatcher."
 ---
 
 # payload-blocks

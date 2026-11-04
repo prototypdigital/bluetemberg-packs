@@ -3,6 +3,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { readScalar, frontmatterErrors, frontmatterBlock, topLevelEntries, scalarValue } = require('../../scripts/frontmatter.cjs');
 
 const ROOT = process.cwd();
 let errors = 0;
@@ -16,23 +17,19 @@ function pass(msg) {
   console.log(`  ✓ ${msg}`);
 }
 
-// Parses YAML frontmatter — handles both scalar and block/array values.
-// Returns { fieldValues, presentKeys } where presentKeys tracks all keys
-// that appeared, even those with no inline value (e.g. multi-line arrays).
+// Reads top-level frontmatter keys. Returns { values, keys }, where keys tracks
+// every key that appeared, even those with no inline value (e.g. multi-line
+// arrays), and values holds each scalar unquoted the way a YAML parser reads it.
 function parseFrontmatter(content) {
-  const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
-  if (!match) return null;
+  const block = frontmatterBlock(content);
+  if (block === null) return null;
 
   const values = {};
   const keys = new Set();
-
-  for (const line of match[1].split(/\r?\n/)) {
-    const kv = line.match(/^([a-zA-Z_]+):\s*(.*)$/);
-    if (kv) {
-      keys.add(kv[1]);
-      const val = kv[2].trim().replace(/^["']|["']$/g, '');
-      if (val) values[kv[1]] = val;
-    }
+  for (const { key, raw } of topLevelEntries(block)) {
+    keys.add(key);
+    const val = scalarValue(raw);
+    if (val) values[key] = val;
   }
 
   return { values, keys };
@@ -111,6 +108,48 @@ console.log('\n[1] Config integrity (bluetemberg.config.json ↔ packages/)');
   }
 }
 
+// ─── 2a. Frontmatter checker self-test ───────────────────────────────────────
+// Every pack file is clean, so step [2] alone can't show the checker still
+// catches anything. These samples pin what it must reject and accept; a
+// regression in scripts/frontmatter.cjs fails here instead of passing silently.
+console.log('\n[2a] Frontmatter checker self-test');
+{
+  const doc = (body) => `---\nname: x\n${body}\n---\n`;
+  const mustReject = [
+    'description: Next.js caching: ISR and tags',
+    'description: @prototyp/skeletor expert',
+    'description: [WIP] Does things',
+    'description: | Does things',
+    'description: , oops',
+    'description: Ends with colon:',
+    'description: "unclosed',
+    'description: "bad \\q escape"',
+    'description: drops # the rest',
+    'description: Foo\ndescription: Bar',
+    'description:foo',
+    '\tdescription: tabbed',
+  ];
+  const mustAccept = [
+    'description: "Next.js caching: ISR and tags"',
+    "description: 'it''s fine: really'",
+    'description: plain text, with commas (and parens) 100%',
+    'description: x:y and http://a.b/c',
+    'tools: ["read", "search"]',
+    'description: >-\n  Folded text',
+    'stacks:\n  payload: ">=3 <4"',
+  ];
+  for (const body of mustReject) {
+    if (frontmatterErrors(doc(body)).length === 0) fail(`self-test: checker accepted invalid frontmatter ${JSON.stringify(body)}`);
+  }
+  for (const body of mustAccept) {
+    const errs = frontmatterErrors(doc(body));
+    if (errs.length > 0) fail(`self-test: checker rejected valid frontmatter ${JSON.stringify(body)}: ${errs[0]}`);
+  }
+  const read = readScalar(doc('description: "a: b \\"q\\" \\x41"'), 'description');
+  if (read !== 'a: b "q" A') fail(`self-test: readScalar unquoted to ${JSON.stringify(read)}`);
+  pass(`checker rejects ${mustReject.length} invalid and accepts ${mustAccept.length} valid samples`);
+}
+
 // ─── 2. Frontmatter validation ────────────────────────────────────────────────
 console.log('\n[2] Frontmatter validation');
 {
@@ -136,6 +175,13 @@ console.log('\n[2] Frontmatter validation');
 
       const { values, keys } = fm;
       let fileOk = true;
+
+      // Hosts parse frontmatter with a real YAML parser and drop a file that
+      // fails, so an unquoted `description: Foo: bar` hides the whole skill.
+      for (const err of frontmatterErrors(content)) {
+        fail(`${rel}: frontmatter won't parse as written — ${err}`);
+        fileOk = false;
+      }
 
       if (!values.description) {
         fail(`${rel}: missing required field 'description'`);
@@ -201,12 +247,7 @@ console.log('\n[4] Catalog freshness (catalog.json ↔ pack frontmatter)');
   } else {
     const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
 
-    const parseDesc = (content) => {
-      const m = content.match(/^---\n([\s\S]*?)---\n/);
-      if (!m) return '';
-      const d = m[1].match(/^description:\s*(.+)$/m);
-      return d ? d[1].trim() : '';
-    };
+    const parseDesc = (content) => readScalar(content, 'description');
     const inferKind = (name) => {
       if (name.includes('-rules-')) return 'rules';
       if (name.includes('-agents-')) return 'agents';

@@ -1,6 +1,6 @@
 ---
 name: nextjs-caching
-description: Next.js caching/ISR: unstable_cache keyParts vs tags, direct revalidateTag, the ISR cache handler, force-static vs force-dynamic. Use when editing unstable_cache, revalidateTag, or render mode.
+description: "Next.js caching/ISR: unstable_cache keyParts vs tags, direct revalidateTag, the ISR cache handler, force-static vs force-dynamic. Use when editing unstable_cache, revalidateTag, or render mode."
 ---
 
 # nextjs-caching

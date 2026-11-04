@@ -1,6 +1,6 @@
 ---
 name: integration-safety
-description: Safe third-party integrations: lazy init, getRequiredEnv, safeParse over parse, best-effort analytics, resilient widget scripts, hardened cookies. Use when integrating an external service.
+description: "Safe third-party integrations: lazy init, getRequiredEnv, safeParse over parse, best-effort analytics, resilient widget scripts, hardened cookies. Use when integrating an external service."
 ---
 
 # integration-safety

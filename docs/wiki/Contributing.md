@@ -33,6 +33,8 @@ Concise, actionable guidance the AI sees as always-on context.
 | `description` | One-line summary. Shown in tooling and transformed into each platform's description field. |
 | `scope` | Glob(s) the rule applies to. `'**'` = always on. A single glob or an array. |
 
+Frontmatter must be valid YAML: hosts parse it strictly and drop a file whose frontmatter fails. Quote any value that contains `: ` or ` #`, or that starts with `@`, `` ` ``, `&`, `*`, `!`, `%`, `,`, `[`, `]`, `{`, `}`, `|`, `>` or `- ` (for example `description: "Next.js caching: ISR, tags, and render mode."`). Inside double quotes, write a literal backslash as `\\`. `npm run validate` flags these, along with duplicate keys, tab indentation, and lines that aren't `key: value`.
+
 Keep rules short and imperative. They are passive context the assistant reads on every interaction — not documentation. See the [Bluetemberg Writing Rules guide](https://github.com/prototypdigital/bluetemberg/wiki/Writing-Rules) for style guidance.
 
 ## Add or edit a rule in an existing pack
