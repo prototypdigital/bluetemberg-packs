@@ -341,6 +341,13 @@ console.log('\n[6] Stack map (stack-packages.json ↔ catalog stackPackages)');
   const NPM_NAME = /^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
   const STACK_NAME = /^[a-z0-9][a-z0-9._-]*$/;
   const isObject = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+  // The engine's built-in table (bluetemberg 0.19 BUILTIN_STACK_PACKAGES). The
+  // engine merges this file over it, so a built-in still owns its package and
+  // an entry without packages.npm keeps the built-in one.
+  const BUILTIN = {
+    nextjs: 'next', react: 'react', payload: 'payload', angular: '@angular/core', vue: 'vue', svelte: 'svelte',
+    astro: 'astro', solid: 'solid-js', tailwind: 'tailwindcss', drizzle: 'drizzle-orm', trpc: '@trpc/server',
+  };
 
   const mapPath = path.join(ROOT, 'stack-packages.json');
   let map = null;
@@ -365,6 +372,11 @@ console.log('\n[6] Stack map (stack-packages.json ↔ catalog stackPackages)');
       for (const s of pkg.bluetemberg?.stacks ?? []) tag(s, `packages/${dir}/package.json`);
       for (const file of findMdFiles(path.join(ROOT, 'packages', dir, 'llm'))) {
         const fmMatch = fs.readFileSync(file, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        const flow = fmMatch && fmMatch[1].match(/^stacks:[ \t]*\{(.*)\}[ \t]*$/m);
+        for (const part of flow ? flow[1].split(',') : []) {
+          const k = part.match(/^\s*["']?([^"':\s]+)["']?\s*:/);
+          if (k) tag(k[1], path.relative(ROOT, file));
+        }
         const m = fmMatch && fmMatch[1].match(/^stacks:[ \t]*\r?\n((?:[ \t]+.*(?:\r?\n|$))+)/m);
         if (!m) continue;
         for (const line of m[1].split(/\r?\n/)) {
@@ -375,33 +387,39 @@ console.log('\n[6] Stack map (stack-packages.json ↔ catalog stackPackages)');
     }
 
     if (stacks) {
-      const byPackage = new Map();
+      const byPackage = new Map(Object.entries(BUILTIN).map(([stack, npm]) => [npm, stack]));
+      const known = (name) => Object.hasOwn(stacks, name) || Object.hasOwn(BUILTIN, name) || tagged.has(name);
       for (const [stack, entry] of Object.entries(stacks)) {
         const where = `stack-packages.json stacks.${stack}`;
         if (!STACK_NAME.test(stack)) { fail(`${where}: not a valid stack name (${STACK_NAME})`); continue; }
         if (!isObject(entry)) { fail(`${where}: entry must be an object`); continue; }
-        const npm = entry.packages?.npm;
+        const ownNpm = entry.packages?.npm;
+        // What the engine resolves: this entry's package, else the built-in one.
+        const npm = ownNpm ?? (Object.hasOwn(BUILTIN, stack) ? BUILTIN[stack] : undefined);
         if (entry.packages !== undefined && !isObject(entry.packages)) fail(`${where}: "packages" must be an object`);
-        else if (npm !== undefined && (typeof npm !== 'string' || npm.length > 214 || !NPM_NAME.test(npm))) fail(`${where}: "packages.npm" ${JSON.stringify(npm)} is not a valid npm package name`);
-        else if (npm !== undefined && byPackage.has(npm)) fail(`${where}: package "${npm}" is also mapped by ${byPackage.get(npm)} — one package, one stack`);
+        else if (ownNpm !== undefined && (typeof ownNpm !== 'string' || ownNpm.length > 214 || !NPM_NAME.test(ownNpm))) fail(`${where}: "packages.npm" ${JSON.stringify(ownNpm)} is not a valid npm package name`);
+        else if (npm !== undefined && byPackage.has(npm) && byPackage.get(npm) !== stack) fail(`${where}: package "${npm}" is also mapped by ${byPackage.get(npm)}${Object.hasOwn(BUILTIN, byPackage.get(npm)) ? ' (built-in)' : ''} — one package, one stack`);
         else if (npm !== undefined) byPackage.set(npm, stack);
         if (entry.implies !== undefined) {
           if (!Array.isArray(entry.implies)) fail(`${where}: "implies" must be an array`);
           else {
             for (const implied of entry.implies) {
-              if (implied === stack) fail(`${where}: implies itself`);
-              else if (!(implied in stacks) && !tagged.has(implied)) fail(`${where}: implies unknown stack "${implied}"`);
+              // The engine drops the whole entry when any element is not a stack name.
+              if (typeof implied !== 'string' || !STACK_NAME.test(implied)) fail(`${where}: implies ${JSON.stringify(implied)}, which is not a valid stack name`);
+              else if (implied === stack) fail(`${where}: implies itself`);
+              else if (!known(implied)) fail(`${where}: implies unknown stack "${implied}"`);
             }
           }
         }
       }
 
       for (const [stack, where] of tagged) {
-        if (stack in stacks) pass(`stack "${stack}" mapped to ${stacks[stack].packages?.npm ?? '(built-in)'}`);
+        if (Object.hasOwn(stacks, stack)) pass(`stack "${stack}" mapped to ${stacks[stack].packages?.npm ?? '(built-in)'}`);
         // The engine auto-detects only mapped stacks; an unmapped one counts only
-        // when a project declares it in config `stacks` (or a mapped stack implies
-        // it). That's deliberate for `skeletor` (authoring the library itself).
-        else pass(`stack "${stack}" (${where}) is unmapped — never auto-detected, only when a project declares it in config \`stacks\``);
+        // when a project pins a version for it in config `stacks` ("auto" would
+        // look up an npm package of the same name). That's deliberate for
+        // `skeletor` (authoring the library itself).
+        else pass(`stack "${stack}" (${where}) is unmapped — never auto-detected; a project pins its version in config \`stacks\``);
       }
     }
 
