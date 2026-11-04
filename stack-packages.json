@@ -4,6 +4,7 @@
     "angular": { "packages": { "npm": "@angular/core" } },
     "astro": { "packages": { "npm": "astro" } },
     "drizzle": { "packages": { "npm": "drizzle-orm" } },
+    "nestjs": { "packages": { "npm": "@nestjs/core" } },
     "nextjs": { "packages": { "npm": "next" } },
     "payload": { "packages": { "npm": "payload" } },
     "react": { "packages": { "npm": "react" } },
