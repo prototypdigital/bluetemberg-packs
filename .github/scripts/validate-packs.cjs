@@ -537,6 +537,7 @@ async function registrySelfTest() {
 
     const rBody = await run('malformed', [() => new Response('<html>busy</html>', { status: 200 }), published]);
     if (rBody.code !== 0 || !listed(rBody)) fail(`self-test: malformed body then 200 did not keep ${target} (exit ${rBody.code})`);
+    else if (rBody.calls !== 2) fail(`self-test: malformed body then 200 made ${rBody.calls} request(s), want 2`);
     else pass(`malformed body then 200 → ${target} retried and included`);
 
     const rDown = await run('persistent', [() => Promise.reject(new TypeError('fetch failed'))]);

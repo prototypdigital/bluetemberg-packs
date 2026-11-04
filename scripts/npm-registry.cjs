@@ -42,6 +42,10 @@ function retryAfterMs(res) {
  * One request. Returns { status: 'published' | 'absent', reason? } or
  * { status: 'retry', reason, waitMs? } — never throws.
  */
+function describeError(err, timeoutMs) {
+  return err?.name === 'TimeoutError' ? `timed out after ${timeoutMs}ms` : `network error: ${err?.message ?? err}`;
+}
+
 async function attempt(name, fetchImpl, timeoutMs) {
   let res;
   try {
@@ -50,16 +54,23 @@ async function attempt(name, fetchImpl, timeoutMs) {
       signal: AbortSignal.timeout(timeoutMs),
     });
   } catch (err) {
-    const reason = err?.name === 'TimeoutError' ? `timed out after ${timeoutMs}ms` : `network error: ${err?.message ?? err}`;
-    return { status: 'retry', reason };
+    return { status: 'retry', reason: describeError(err, timeoutMs) };
   }
 
   if (res.status === 404) return { status: 'absent', reason: 'registry returned 404' };
   if (!res.ok) return { status: 'retry', reason: `HTTP ${res.status}`, waitMs: retryAfterMs(res) };
 
+  // The timeout signal also covers reading the body, so tell a slow or broken
+  // download apart from a body that arrived but isn't JSON.
+  let text;
+  try {
+    text = await res.text();
+  } catch (err) {
+    return { status: 'retry', reason: `reading body: ${describeError(err, timeoutMs)}` };
+  }
   let doc;
   try {
-    doc = await res.json();
+    doc = JSON.parse(text);
   } catch {
     return { status: 'retry', reason: 'response body is not valid JSON' };
   }

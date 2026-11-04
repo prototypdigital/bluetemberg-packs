@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // @ts-check
-import { readdirSync, readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync, existsSync, realpathSync } from 'node:fs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import frontmatter from './frontmatter.cjs';
@@ -273,6 +273,8 @@ export async function main({
 }
 
 // Run only when executed directly, not when imported by the validator's self-test.
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+// Node realpaths the main module's URL, so realpath argv[1] too: otherwise a run
+// through a symlinked path would skip main() and exit 0 having written nothing.
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(resolve(process.argv[1]))).href) {
   process.exitCode = await main();
 }
