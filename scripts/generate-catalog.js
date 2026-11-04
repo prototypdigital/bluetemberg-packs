@@ -10,6 +10,10 @@ const REPO_ROOT = join(__dirname, '..');
 const PACKAGES_DIR = join(REPO_ROOT, 'packages');
 const CATALOG_PATH = join(REPO_ROOT, 'catalog.json');
 const WIKI_CATALOG_PATH = join(REPO_ROOT, 'docs', 'wiki', 'Catalog.md');
+// Hand-edited stack → package map, copied into the catalog verbatim as
+// `stackPackages`. The engine (0.19+) merges it over its built-in table to know
+// which package carries each stack's version. See docs/wiki/Contributing.md.
+const STACK_PACKAGES_PATH = join(REPO_ROOT, 'stack-packages.json');
 
 const PREVIEW_MAX_CHARS = 300;
 
@@ -229,8 +233,17 @@ async function main() {
     return false;
   });
 
+  let stackPackages;
+  try {
+    stackPackages = JSON.parse(readFileSync(STACK_PACKAGES_PATH, 'utf8'));
+  } catch (err) {
+    console.error(`Failed to read stack-packages.json:`, err.message);
+    process.exit(1);
+  }
+
   const catalog = {
     generated: new Date().toISOString(),
+    stackPackages,
     packs,
   };
 

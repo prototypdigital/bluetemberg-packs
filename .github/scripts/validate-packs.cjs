@@ -331,6 +331,92 @@ console.log('\n[5] Pack platforms (bluetemberg.platforms ids)');
   }
 }
 
+// ─── 6. Stack map ─────────────────────────────────────────────────────────────
+// stack-packages.json tells the engine which npm package carries each stack's
+// version (catalog `stackPackages`). The engine drops a malformed entry with
+// only a warning, so validate it here, and check that catalog.json carries it.
+console.log('\n[6] Stack map (stack-packages.json ↔ catalog stackPackages)');
+{
+  // Same patterns as the engine's src/stacks/packages.ts.
+  const NPM_NAME = /^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
+  const STACK_NAME = /^[a-z0-9][a-z0-9._-]*$/;
+  const isObject = (v) => !!v && typeof v === 'object' && !Array.isArray(v);
+
+  const mapPath = path.join(ROOT, 'stack-packages.json');
+  let map = null;
+  try {
+    map = JSON.parse(fs.readFileSync(mapPath, 'utf8'));
+  } catch (err) {
+    fail(`stack-packages.json: ${err.message}`);
+  }
+
+  if (map) {
+    if (map.schema !== 1) fail(`stack-packages.json: "schema" must be 1 (got ${JSON.stringify(map.schema)})`);
+    const stacks = isObject(map.stacks) ? map.stacks : null;
+    if (!stacks) fail('stack-packages.json: "stacks" must be an object');
+
+    // Stacks packs target: bluetemberg.stacks, plus keys of `stacks:` frontmatter.
+    const tagged = new Map();
+    const tag = (stack, where) => {
+      if (!tagged.has(stack)) tagged.set(stack, where);
+    };
+    for (const dir of listPackDirs()) {
+      const pkg = JSON.parse(fs.readFileSync(path.join(ROOT, 'packages', dir, 'package.json'), 'utf8'));
+      for (const s of pkg.bluetemberg?.stacks ?? []) tag(s, `packages/${dir}/package.json`);
+      for (const file of findMdFiles(path.join(ROOT, 'packages', dir, 'llm'))) {
+        const fmMatch = fs.readFileSync(file, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        const m = fmMatch && fmMatch[1].match(/^stacks:[ \t]*\r?\n((?:[ \t]+.*(?:\r?\n|$))+)/m);
+        if (!m) continue;
+        for (const line of m[1].split(/\r?\n/)) {
+          const k = line.match(/^[ \t]+["']?([^"':\s]+)["']?:/);
+          if (k) tag(k[1], path.relative(ROOT, file));
+        }
+      }
+    }
+
+    if (stacks) {
+      const byPackage = new Map();
+      for (const [stack, entry] of Object.entries(stacks)) {
+        const where = `stack-packages.json stacks.${stack}`;
+        if (!STACK_NAME.test(stack)) { fail(`${where}: not a valid stack name (${STACK_NAME})`); continue; }
+        if (!isObject(entry)) { fail(`${where}: entry must be an object`); continue; }
+        const npm = entry.packages?.npm;
+        if (entry.packages !== undefined && !isObject(entry.packages)) fail(`${where}: "packages" must be an object`);
+        else if (npm !== undefined && (typeof npm !== 'string' || npm.length > 214 || !NPM_NAME.test(npm))) fail(`${where}: "packages.npm" ${JSON.stringify(npm)} is not a valid npm package name`);
+        else if (npm !== undefined && byPackage.has(npm)) fail(`${where}: package "${npm}" is also mapped by ${byPackage.get(npm)} — one package, one stack`);
+        else if (npm !== undefined) byPackage.set(npm, stack);
+        if (entry.implies !== undefined) {
+          if (!Array.isArray(entry.implies)) fail(`${where}: "implies" must be an array`);
+          else {
+            for (const implied of entry.implies) {
+              if (implied === stack) fail(`${where}: implies itself`);
+              else if (!(implied in stacks) && !tagged.has(implied)) fail(`${where}: implies unknown stack "${implied}"`);
+            }
+          }
+        }
+      }
+
+      for (const [stack, where] of tagged) {
+        if (stack in stacks) pass(`stack "${stack}" mapped to ${stacks[stack].packages?.npm ?? '(built-in)'}`);
+        // The engine auto-detects only mapped stacks; an unmapped one counts only
+        // when a project declares it in config `stacks` (or a mapped stack implies
+        // it). That's deliberate for `skeletor` (authoring the library itself).
+        else pass(`stack "${stack}" (${where}) is unmapped — never auto-detected, only when a project declares it in config \`stacks\``);
+      }
+    }
+
+    const catalogPath = path.join(ROOT, 'catalog.json');
+    if (fs.existsSync(catalogPath)) {
+      const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
+      if (JSON.stringify(catalog.stackPackages) !== JSON.stringify(map)) {
+        fail('catalog.json stackPackages differs from stack-packages.json — run `npm run generate:catalog`');
+      } else {
+        pass('catalog.json stackPackages matches stack-packages.json');
+      }
+    }
+  }
+}
+
 // ─── Result ───────────────────────────────────────────────────────────────────
 console.log(`\n${errors === 0 ? '✅ All checks passed.' : `❌ ${errors} error(s) found.`}\n`);
 process.exit(errors > 0 ? 1 : 0);

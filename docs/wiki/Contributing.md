@@ -104,6 +104,20 @@ A pack that only works in one host declares it in its `package.json`. For exampl
 
 Packs limited to Claude Code today: `bluetemberg-skills-pr-review-loop` (a Claude Code hook plus `claude -p`), and `bluetemberg-agents-session-auditor` and `bluetemberg-skills-session-retrospective` (both read Claude Code transcripts). `bluetemberg-agents-pr-reviewer` isn't tagged: it only needs `gh`, so it works as an on-demand or CI reviewer in any host.
 
+## Map a stack to its npm package
+
+The engine detects a stack (`nextjs`, `payload`, …) from the npm package that carries its version. That stack-to-package map lives in [`stack-packages.json`](https://github.com/prototypdigital/bluetemberg-packs/blob/main/stack-packages.json). `npm run generate:catalog` copies it verbatim into `catalog.json` as `stackPackages`, and the engine (bluetemberg 0.19+) merges it over its built-in table. Edit `stack-packages.json`, never `catalog.json`.
+
+```json
+"react-native": { "packages": { "npm": "react-native" } }
+```
+
+- The key is the stack name, spelled exactly as packs tag it in `bluetemberg.stacks` and as rules write it in `stacks:` frontmatter.
+- `packages.npm` is the package whose installed version *is* the stack's version: the framework's core package, not a CLI or a plugin. Check it on npm before adding it.
+- `implies` (optional) lists stacks that always come along, such as `"nextjs": { "implies": ["react"] }`. Adding one changes detection for every project on that stack, so only add stacks that are guaranteed to be installed with it.
+
+`npm run validate` checks the schema, the package names, `implies` targets, that no package is mapped twice, and that `catalog.json` is up to date. The engine auto-detects only stacks in this map (or implied by one). A stack a pack tags but the map leaves out applies only when a project declares it in its config `stacks`. That's deliberate for `skeletor`, which means working on `@prototyp/skeletor` itself, not consuming it. See the engine's [Stacks → Adding a mapping (packs repo)](https://github.com/prototypdigital/bluetemberg/wiki/Stacks#adding-a-mapping-packs-repo).
+
 ## Test a pack locally
 
 You don't need to publish to try a pack. From a scratch project that has Bluetemberg installed:
