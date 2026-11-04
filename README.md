@@ -20,7 +20,7 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 | ------- | ------ | ----- |
 | [`bluetemberg-rules-typescript`](https://www.npmjs.com/package/bluetemberg-rules-typescript) | TypeScript code quality | `type-safety`, `coding-standards`, `early-returns`, `no-console-log`, `design-system-reuse` |
 | `bluetemberg-rules-git` _(not yet published)_ | Git workflow standards | `git-workflow`, `git-move`, `pre-commit-checks` |
-| [`bluetemberg-rules-security`](https://www.npmjs.com/package/bluetemberg-rules-security) | Security guardrails | `never-read-env`, `security-secrets`, `api-error-handling` |
+| [`bluetemberg-rules-security`](https://www.npmjs.com/package/bluetemberg-rules-security) | Security guardrails | `never-read-env`, `security-secrets`, `api-error-handling`, `lockfile-discipline` |
 | [`bluetemberg-rules-docs`](https://www.npmjs.com/package/bluetemberg-rules-docs) | Documentation & diagnostics | `docs-parity`, `post-edit-diagnostics`, `mermaid-diagrams` |
 | [`bluetemberg-rules-devops`](https://www.npmjs.com/package/bluetemberg-rules-devops) | Infrastructure | `docker-best-practices`, `terraform-conventions`, `ansible-conventions`, `kubernetes-manifests`, `helm-conventions`, `container-image-pinning`, `ci-workflow-conventions`, `shell-script-standards`, `idempotency`, `runbook-discipline` |
 | `bluetemberg-rules-context-engineering` _(not yet published)_ | LLM context engineering | `context-pollution-prevention`, `context-window-budget`, `multi-turn-state-management` |

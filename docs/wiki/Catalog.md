@@ -168,6 +168,7 @@ Security guardrail rules for Bluetemberg — secrets management, environment fil
 | ---- | -------- |
 | `api-error-handling` | Use structured error responses and never leak internal details. |
 | `llm-package-hallucination` | Verify every LLM-suggested dependency exists in the registry before installing — hallucinated package names are a real supply-chain attack surface (slopsquatting). |
+| `lockfile-discipline` | Commit one lockfile, install from it frozen in CI and Docker (npm ci, --frozen-lockfile, --immutable), and verify npm registry signatures. |
 | `never-read-env` | Never read .env files directly in code. |
 | `security-secrets` | Never hardcode secrets, tokens, or credentials in source code. |
 
