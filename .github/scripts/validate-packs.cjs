@@ -349,6 +349,72 @@ console.log('\n[6] Stack map (stack-packages.json ↔ catalog stackPackages)');
     astro: 'astro', solid: 'solid-js', tailwind: 'tailwindcss', drizzle: 'drizzle-orm', trpc: '@trpc/server',
   };
 
+  /**
+   * Every problem in a stack map, as the engine's buildStackPackages would see it.
+   * `isTagged(name)` says whether a pack targets the stack (a known implies target).
+   */
+  function stackMapErrors(map, isTagged) {
+    const errors = [];
+    if (map.schema !== 1) errors.push(`stack-packages.json: "schema" must be 1 (got ${JSON.stringify(map.schema)})`);
+    if (!isObject(map.stacks)) return errors;
+    const stacks = map.stacks;
+    const byPackage = new Map(Object.entries(BUILTIN).map(([stack, npm]) => [npm, stack]));
+    const known = (name) => Object.hasOwn(stacks, name) || Object.hasOwn(BUILTIN, name) || isTagged(name);
+    for (const [stack, entry] of Object.entries(stacks)) {
+      const where = `stack-packages.json stacks.${stack}`;
+      if (!STACK_NAME.test(stack)) { errors.push(`${where}: not a valid stack name (${STACK_NAME})`); continue; }
+      if (!isObject(entry)) { errors.push(`${where}: entry must be an object`); continue; }
+      const ownNpm = entry.packages?.npm;
+      // What the engine resolves: this entry's package, else the built-in one.
+      const npm = ownNpm ?? (Object.hasOwn(BUILTIN, stack) ? BUILTIN[stack] : undefined);
+      if (entry.packages !== undefined && !isObject(entry.packages)) errors.push(`${where}: "packages" must be an object`);
+      else if (ownNpm !== undefined && (typeof ownNpm !== 'string' || ownNpm.length > 214 || !NPM_NAME.test(ownNpm))) errors.push(`${where}: "packages.npm" ${JSON.stringify(ownNpm)} is not a valid npm package name`);
+      else if (npm !== undefined && byPackage.has(npm) && byPackage.get(npm) !== stack) errors.push(`${where}: package "${npm}" is also mapped by ${byPackage.get(npm)}${Object.hasOwn(BUILTIN, byPackage.get(npm)) ? ' (built-in)' : ''} — one package, one stack`);
+      else if (npm !== undefined) byPackage.set(npm, stack);
+      if (entry.implies === undefined) continue;
+      if (!Array.isArray(entry.implies)) { errors.push(`${where}: "implies" must be an array`); continue; }
+      for (const implied of entry.implies) {
+        // The engine drops the whole entry when any element is not a stack name.
+        if (typeof implied !== 'string' || !STACK_NAME.test(implied)) errors.push(`${where}: implies ${JSON.stringify(implied)}, which is not a valid stack name`);
+        else if (implied === stack) errors.push(`${where}: implies itself`);
+        else if (!known(implied)) errors.push(`${where}: implies unknown stack "${implied}"`);
+      }
+    }
+    return errors;
+  }
+
+  // Self-test: the real map is valid, so without these samples a regression in
+  // the checks above would pass CI unnoticed. Each "bad" one is something the
+  // engine warns about or drops (see buildStackPackages), except an unknown
+  // `implies` target, which the engine accepts and this repo forbids (#134).
+  {
+    const map = (stacks, schema = 1) => ({ schema, stacks });
+    const bad = [
+      map({}, 2),
+      map({ 'Bad Name': {} }),
+      map({ expo: { packages: { npm: 'Expo' } } }),
+      map({ expo: { packages: 'expo' } }),
+      map({ 'next-app': { packages: { npm: 'next' } } }),
+      map({ nextjs: { implies: ['react'] }, 'next-app': { packages: { npm: 'next' } } }),
+      map({ a: { packages: { npm: 'pkg-a' } }, b: { packages: { npm: 'pkg-a' } } }),
+      map({ expo: { packages: { npm: 'expo' }, implies: ['expo'] } }),
+      map({ expo: { packages: { npm: 'expo' }, implies: ['nope-stack'] } }),
+      map({ expo: { packages: { npm: 'expo' }, implies: ['Bad Name'] } }),
+      map({ expo: { packages: { npm: 'expo' }, implies: 'react' } }),
+    ];
+    const good = [
+      map({}),
+      map({ nextjs: { packages: { npm: 'next' }, implies: ['react'] } }),
+      map({ nextjs: { implies: ['react'] } }),
+      map({ expo: { packages: { npm: 'expo' }, implies: ['react-native', 'vue'] }, 'react-native': { packages: { npm: 'react-native' } } }),
+      map({ angular: { packages: { npm: '@angular/core' } }, py: { packages: { pypi: 'django' } } }),
+    ];
+    const none = () => false;
+    bad.forEach((m, i) => { if (stackMapErrors(m, none).length === 0) fail(`self-test: stack map check accepted invalid sample #${i} ${JSON.stringify(m.stacks)}`); });
+    good.forEach((m, i) => { const e = stackMapErrors(m, none); if (e.length) fail(`self-test: stack map check rejected valid sample #${i}: ${e[0]}`); });
+    pass(`stack map check rejects ${bad.length} invalid and accepts ${good.length} valid samples`);
+  }
+
   const mapPath = path.join(ROOT, 'stack-packages.json');
   let map = null;
   try {
@@ -358,7 +424,6 @@ console.log('\n[6] Stack map (stack-packages.json ↔ catalog stackPackages)');
   }
 
   if (map) {
-    if (map.schema !== 1) fail(`stack-packages.json: "schema" must be 1 (got ${JSON.stringify(map.schema)})`);
     const stacks = isObject(map.stacks) ? map.stacks : null;
     if (!stacks) fail('stack-packages.json: "stacks" must be an object');
 
@@ -387,31 +452,7 @@ console.log('\n[6] Stack map (stack-packages.json ↔ catalog stackPackages)');
     }
 
     if (stacks) {
-      const byPackage = new Map(Object.entries(BUILTIN).map(([stack, npm]) => [npm, stack]));
-      const known = (name) => Object.hasOwn(stacks, name) || Object.hasOwn(BUILTIN, name) || tagged.has(name);
-      for (const [stack, entry] of Object.entries(stacks)) {
-        const where = `stack-packages.json stacks.${stack}`;
-        if (!STACK_NAME.test(stack)) { fail(`${where}: not a valid stack name (${STACK_NAME})`); continue; }
-        if (!isObject(entry)) { fail(`${where}: entry must be an object`); continue; }
-        const ownNpm = entry.packages?.npm;
-        // What the engine resolves: this entry's package, else the built-in one.
-        const npm = ownNpm ?? (Object.hasOwn(BUILTIN, stack) ? BUILTIN[stack] : undefined);
-        if (entry.packages !== undefined && !isObject(entry.packages)) fail(`${where}: "packages" must be an object`);
-        else if (ownNpm !== undefined && (typeof ownNpm !== 'string' || ownNpm.length > 214 || !NPM_NAME.test(ownNpm))) fail(`${where}: "packages.npm" ${JSON.stringify(ownNpm)} is not a valid npm package name`);
-        else if (npm !== undefined && byPackage.has(npm) && byPackage.get(npm) !== stack) fail(`${where}: package "${npm}" is also mapped by ${byPackage.get(npm)}${Object.hasOwn(BUILTIN, byPackage.get(npm)) ? ' (built-in)' : ''} — one package, one stack`);
-        else if (npm !== undefined) byPackage.set(npm, stack);
-        if (entry.implies !== undefined) {
-          if (!Array.isArray(entry.implies)) fail(`${where}: "implies" must be an array`);
-          else {
-            for (const implied of entry.implies) {
-              // The engine drops the whole entry when any element is not a stack name.
-              if (typeof implied !== 'string' || !STACK_NAME.test(implied)) fail(`${where}: implies ${JSON.stringify(implied)}, which is not a valid stack name`);
-              else if (implied === stack) fail(`${where}: implies itself`);
-              else if (!known(implied)) fail(`${where}: implies unknown stack "${implied}"`);
-            }
-          }
-        }
-      }
+      for (const err of stackMapErrors(map, (name) => tagged.has(name))) fail(err);
 
       for (const [stack, where] of tagged) {
         if (Object.hasOwn(stacks, stack)) pass(`stack "${stack}" mapped to ${stacks[stack].packages?.npm ?? '(built-in)'}`);
