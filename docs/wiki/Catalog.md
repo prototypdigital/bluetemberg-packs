@@ -94,6 +94,18 @@ Documentation and diagnostics rules for Bluetemberg — docs parity, post-edit d
 | `mermaid-diagrams` | Use Mermaid diagrams instead of ASCII art. |
 | `post-edit-diagnostics` | Run diagnostics and formatter after editing code files. |
 
+### bluetemberg-rules-evidence
+
+Evidence and reporting rules for Bluetemberg — measure don't proxy, cite the basis, log corrections, honest charts, generated figures.
+
+| Rule | Enforces |
+| ---- | -------- |
+| `chart-integrity` | One claim per chart, annotate the threshold, keep the caveat on the chart, never chart a misleading-but-true metric. |
+| `correction-log` | Log corrections in the artifact instead of silently fixing them. |
+| `evidence-citation` | Every number in a deliverable carries its source and its basis; own data is never dressed as research. |
+| `measure-dont-proxy` | Never report a proxy metric when the real measurement is available; run the thing. |
+| `no-hand-typed-figures` | Generate every figure in a deliverable from source data; never type a number in by hand. |
+
 ### bluetemberg-rules-git
 
 Git workflow rules for Bluetemberg — branch protection, naming, PR workflow, git move, pre-commit checks.
@@ -634,6 +646,14 @@ Sub-agent design skill for Bluetemberg — plan, scope, and implement sub-agent 
 | Skill | Description |
 | ----- | ----------- |
 | `sub-agent-design` | Design a multi-agent system — scope responsibilities, define typed input/output contracts, wire orchestration, add tests. Use when one agent is overloaded or work has parallelizable phases. |
+
+### bluetemberg-skills-talk-deck
+
+Build an evidence-backed conference deck from a research pack for Bluetemberg — Slidev scaffold, generated figures, demo risk triage.
+
+| Skill | Description |
+| ----- | ----------- |
+| `talk-deck` | Builds an evidence-backed conference deck from research data — Slidev scaffold, generated figures, demo risk triage, PDF fallback. Use when turning measured findings into a talk. |
 
 ### bluetemberg-skills-visual-direction
 
