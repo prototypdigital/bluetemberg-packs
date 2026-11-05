@@ -19,7 +19,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.4",
     "@commitlint/config-conventional": "^21.2.4",
-    "bluetemberg": "^0.13.1",
+    "bluetemberg": "^0.20.0",
     "markdownlint-cli": "^0.49.1"
   }
 }
