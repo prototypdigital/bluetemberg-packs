@@ -72,6 +72,7 @@
     { "path": "./packages/bluetemberg-skills-sub-agent-design", "platforms": ["claude-marketplace"] },
     { "path": "./packages/bluetemberg-skills-talk-deck", "platforms": ["claude-marketplace"] },
     { "path": "./packages/bluetemberg-skills-visual-direction", "platforms": ["claude-marketplace"] },
+    { "path": "./packages/bluetemberg-skills-web-performance", "platforms": ["claude-marketplace"] },
     { "path": "./packages/bluetemberg-skills-workspace-hygiene", "platforms": ["claude-marketplace"] }
   ],
   "marketplace": {

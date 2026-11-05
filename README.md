@@ -36,7 +36,7 @@ Each pack is a standalone npm package containing vendor-neutral content in the s
 
 ### Skills
 
-22 on-demand skill packs (`bluetemberg-skills-*`): `patterns`, `docs-upkeep`, `workspace-hygiene`, `react-patterns`, `code-review`, `api-design`, `security-audit`, `ci-cd-best-practices`, `migration-safety`, `stack-change-review`, `infrastructure-drift-check`, `rollback-plan`, `config-echo`, `create-agent`, `create-pack`, `create-rule`, `create-skill`, `sub-agent-design`, `figma-to-code`, `design-critique`, `visual-direction`, `talk-deck`.
+22 on-demand skill packs (`bluetemberg-skills-*`): `patterns`, `docs-upkeep`, `workspace-hygiene`, `react-patterns`, `code-review`, `api-design`, `security-audit`, `ci-cd-best-practices`, `migration-safety`, `stack-change-review`, `infrastructure-drift-check`, `rollback-plan`, `config-echo`, `create-agent`, `create-pack`, `create-rule`, `create-skill`, `sub-agent-design`, `figma-to-code`, `design-critique`, `visual-direction`, `talk-deck`, `web-performance`.
 
 ### Guardrails
 
