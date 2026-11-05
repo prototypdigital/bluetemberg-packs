@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-talk-deck",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Build an evidence-backed conference deck from a research pack for Bluetemberg — Slidev scaffold, generated figures, demo risk triage.",
   "keywords": [
     "bluetemberg-pack",
