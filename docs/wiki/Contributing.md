@@ -57,6 +57,8 @@ Every kind has a research-backed quality bar in [Authoring Standards](Authoring-
 
 After adding or editing any pack content, run `npm run generate:catalog` then `npm run validate`: the validator now fails if `catalog.json` or the wiki catalog has drifted from the pack frontmatter.
 
+Then run `npm run scan`. It runs the engine's [content scan](https://github.com/prototypdigital/bluetemberg/wiki/Registry#content-scan), the same one `bluetemberg add`/`install` apply to every download, over all packs. CI runs it on every pull request. A blocking finding fails the check: a real-looking credential, a command that sends secrets off the machine, hidden Unicode text, or an instruction to disable guardrails. If a rule quotes an attack on purpose, put it in a code fence labelled as a bad example (`**Bad:**`, `❌`) so it is reported as a warning instead.
+
 `generate:catalog` checks each pack on the npm registry and leaves out only packs npm says aren't published: a 404, or a package whose versions were all unpublished. It logs each one as `excluded <pack>: not published on npm (<reason>)`. Network errors, timeouts, 429s, 5xx responses and malformed responses are retried with backoff. If a pack still can't be checked, the script exits 1 and writes neither `catalog.json` nor `Catalog.md`. Re-run it once the registry is reachable.
 
 ## Add a new pack
