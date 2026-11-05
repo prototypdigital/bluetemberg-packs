@@ -86,11 +86,27 @@ console.log('\n[1] Config integrity (bluetemberg.config.json ↔ packages/)');
 {
   const config = JSON.parse(fs.readFileSync(path.join(ROOT, 'bluetemberg.config.json'), 'utf8'));
   const packDirs = listPackDirs();
-  const listedPacks = new Set(
-    (config.extends || [])
-      .map(e => e.replace(/^\.\//, '').replace(/^packages\//, '').split('/')[0])
-      .filter(Boolean)
-  );
+  const MARKETPLACE = 'claude-marketplace';
+  // An extends entry is a path string (every platform) or { path, platforms } (engine 0.19+
+  // platform-scoped entry, used to keep the local .claude/ dogfood output minimal).
+  const toDir = p => p.replace(/^\.\//, '').replace(/^packages\//, '').split('/')[0];
+  const listedPacks = new Set();
+  for (const entry of config.extends || []) {
+    if (typeof entry === 'string') {
+      listedPacks.add(toDir(entry));
+      continue;
+    }
+    if (!entry || typeof entry.path !== 'string' || !Array.isArray(entry.platforms)) {
+      fail(`extends entry ${JSON.stringify(entry)} must be a path string or { "path": string, "platforms": string[] }`);
+      continue;
+    }
+    // Every pack must reach the marketplace; scoping may only narrow the native platforms.
+    if (!entry.platforms.includes(MARKETPLACE)) {
+      fail(`extends entry "${entry.path}" is scoped away from ${MARKETPLACE}, so its pack would drop out of the marketplace`);
+    }
+    listedPacks.add(toDir(entry.path));
+  }
+  listedPacks.delete('');
 
   for (const dir of packDirs) {
     // Guardrail packs are distributed as npm packages but are not content
