@@ -70,5 +70,6 @@
   "packages/bluetemberg-skills-sub-agent-design": "0.2.2",
   "packages/bluetemberg-skills-talk-deck": "0.1.0",
   "packages/bluetemberg-skills-visual-direction": "1.0.2",
+  "packages/bluetemberg-skills-web-performance": "0.1.0",
   "packages/bluetemberg-skills-workspace-hygiene": "0.3.2"
 }
