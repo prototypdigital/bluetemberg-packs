@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-04T20:59:51.007Z",
+  "generated": "2026-11-05T11:50:59.779Z",
   "stackPackages": {
     "schema": 1,
     "stacks": {
@@ -709,6 +709,41 @@
         }
       ],
       "preview": "A PR that changes behavior without updating docs is not done. **Why:** Docs that lag behind behavior mislead users into using flags, defaults, or APIs that no longer work, and the drift compounds with every unsynced change. Best enforced by a CI check that fails when source under a watched path chan"
+    },
+    {
+      "name": "bluetemberg-rules-evidence",
+      "version": "0.1.0",
+      "description": "Evidence and reporting rules for Bluetemberg — measure don't proxy, cite the basis, log corrections, honest charts, generated figures.",
+      "profiles": [
+        "agentic"
+      ],
+      "stacks": [],
+      "platforms": [],
+      "universal": false,
+      "kind": "rules",
+      "rules": [
+        {
+          "name": "chart-integrity",
+          "description": "One claim per chart, annotate the threshold, keep the caveat on the chart, never chart a misleading-but-true metric."
+        },
+        {
+          "name": "correction-log",
+          "description": "Log corrections in the artifact instead of silently fixing them."
+        },
+        {
+          "name": "evidence-citation",
+          "description": "Every number in a deliverable carries its source and its basis; own data is never dressed as research."
+        },
+        {
+          "name": "measure-dont-proxy",
+          "description": "Never report a proxy metric when the real measurement is available; run the thing."
+        },
+        {
+          "name": "no-hand-typed-figures",
+          "description": "Generate every figure in a deliverable from source data; never type a number in by hand."
+        }
+      ],
+      "preview": "A chart makes exactly one claim, names the threshold that makes it matter, and carries its caveat in view. **Why:** a chart is read in about three seconds, so whatever it implies in those three seconds is what the reader takes away, regardless of the text around it. A technically true chart that imp"
     },
     {
       "name": "bluetemberg-rules-git",
@@ -1753,6 +1788,26 @@
         }
       ],
       "preview": "Use this skill when breaking a complex agentic task into a coordinated set of sub-agents with defined responsibilities and communication contracts. - A single agent is doing too many things (context overloads, inconsistent outputs, hard-to-test) - A workflow has parallelizable phases with no data de"
+    },
+    {
+      "name": "bluetemberg-skills-talk-deck",
+      "version": "0.1.0",
+      "description": "Build an evidence-backed conference deck from a research pack for Bluetemberg — Slidev scaffold, generated figures, demo risk triage.",
+      "profiles": [
+        "agentic",
+        "design-engineer"
+      ],
+      "stacks": [],
+      "platforms": [],
+      "universal": false,
+      "kind": "skills",
+      "skills": [
+        {
+          "name": "talk-deck",
+          "description": "Builds an evidence-backed conference deck from research data — Slidev scaffold, generated figures, demo risk triage, PDF fallback. Use when turning measured findings into a talk."
+        }
+      ],
+      "preview": "Use this skill when asked to build a conference talk, technical presentation or data-driven deck where the claims must be defensible. - \"build a deck / slides / presentation for this talk\" - \"turn this research into a presentation\" - \"prepare a conference submission and deck\" - Any request to presen"
     },
     {
       "name": "bluetemberg-skills-visual-direction",
