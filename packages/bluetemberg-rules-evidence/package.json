@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-rules-evidence",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Evidence and reporting rules for Bluetemberg — measure don't proxy, cite the basis, log corrections, honest charts, generated figures.",
   "keywords": [
     "bluetemberg-pack",
