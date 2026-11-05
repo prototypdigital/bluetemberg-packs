@@ -7,6 +7,8 @@ on:
     paths:
       - 'packages/**'
       - 'bluetemberg.config.json'
+      # An engine bump changes the generated output, so republish when the lockfile changes.
+      - 'package-lock.json'
   workflow_dispatch:
 
 permissions: read-all
@@ -24,10 +26,20 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '20'
+          node-version: '24'
 
+      # Install the engine version pinned in package-lock.json, so an engine upgrade reaches the
+      # marketplace only through a reviewed lockfile change. --ignore-scripts skips the postinstall
+      # sync (and its `|| true`), so the sync below runs once and its exit code fails the job.
+      - name: Install pinned engine
+        run: npm ci --ignore-scripts
+
+      - name: Verify registry signatures
+        run: npm audit signatures
+
+      # --no-install: fail instead of silently downloading the newest bluetemberg from npm.
       - name: Generate marketplace output
-        run: npx -y bluetemberg sync
+        run: npx --no-install bluetemberg sync
 
       - name: Load marketplace deploy key
         uses: webfactory/ssh-agent@e83874834305fe9a4a2997156cb26c5de65a8555 # v0.10.0
