@@ -90,7 +90,7 @@ The old `NPM_TOKEN` secret (a bypass-2FA publish token) is no longer used by any
 
 ## Claude marketplace sync
 
-`.github/workflows/sync-marketplace.yml` runs on every merge to `main` that touches `packages/**` or `bluetemberg.config.json`, and can also be started by hand (`workflow_dispatch`). It runs `bluetemberg sync` and pushes the generated `plugins/` and `.claude-plugin/` to the marketplace repo named by the `MARKETPLACE_REPO` repository variable (`prototypdigital/claude-marketplace`). It skips the push when sync produced no output or nothing changed.
+`.github/workflows/sync-marketplace.yml` runs on every merge to `main` that touches `packages/**`, `bluetemberg.config.json` or `package-lock.json`, and can also be started by hand (`workflow_dispatch`). It installs the engine version pinned in `package-lock.json` (`npm ci`), runs that `bluetemberg sync`, and pushes the generated `plugins/` and `.claude-plugin/` to the marketplace repo named by the `MARKETPLACE_REPO` repository variable (`prototypdigital/claude-marketplace`). It skips the push when sync produced no output or nothing changed.
 
 The push authenticates over SSH with a **deploy key**, not a personal access token, so it can't silently expire:
 
