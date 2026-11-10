@@ -1,6 +1,6 @@
 {
   "name": "bluetemberg-skills-web-performance",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Web performance skills for Bluetemberg — an interleaved Lighthouse A/B runner that keeps scores comparable, and a protocol for attributing a low score to its cause before changing code.",
   "keywords": [
     "bluetemberg-pack",
