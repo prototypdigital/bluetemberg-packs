@@ -1,0 +1,38 @@
+{
+  "name": "bluetemberg-skills-web-performance",
+  "version": "0.1.0",
+  "description": "Web performance skills for Bluetemberg — an interleaved Lighthouse A/B runner that keeps scores comparable, and a protocol for attributing a low score to its cause before changing code.",
+  "keywords": [
+    "bluetemberg-pack",
+    "skills",
+    "lighthouse",
+    "web-vitals",
+    "performance",
+    "lcp",
+    "frontend"
+  ],
+  "author": "Josip Ravas (https://github.com/jravas)",
+  "contributors": [
+    "Prototyp Digital (https://prototyp.digital)"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prototypdigital/bluetemberg-packs.git",
+    "directory": "packages/bluetemberg-skills-web-performance"
+  },
+  "bugs": {
+    "url": "https://github.com/prototypdigital/bluetemberg-packs/issues"
+  },
+  "homepage": "https://prototypdigital.github.io/bluetemberg-packs/",
+  "files": [
+    "llm/"
+  ],
+  "bluetemberg": {
+    "universal": false,
+    "profiles": [
+      "frontend",
+      "fullstack"
+    ]
+  }
+}
