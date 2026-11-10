@@ -89,8 +89,9 @@ Then run `npm run scan`. It runs the engine's [content scan](https://github.com/
 
 2. Add your rules under `llm/rules/`.
 3. Register the pack with release-please so it gets versioned and published: add `"packages/<name>": {}` to `release-please-config.json` and `"packages/<name>": "0.1.0"` to `.release-please-manifest.json`. See [Releasing](Releasing) for the one-time npm bootstrap.
-4. Document the pack in the [Catalog](Catalog) and the [README](https://github.com/prototypdigital/bluetemberg-packs#packs).
-5. If the pack should be offered by the `bluetemberg init` wizard, add a matching entry to `RULE_COLLECTION_PRESETS` in the **bluetemberg** repo (`src/init/presets.ts`) — that's a separate PR in that repo.
+4. Add the pack to `extends` in `bluetemberg.config.json` so it reaches the Claude marketplace. Use a marketplace-only entry, `{ "path": "./packages/<name>", "platforms": ["claude-marketplace"] }`. A plain path string also syncs the pack into this repo's own `.claude/`, which is kept to the pack-authoring tools (the `create-*` and `config-echo` skills and the git, docs, commit-attribution and PR-link rules). `npm run validate` fails if a pack is missing from `extends` or scoped away from `claude-marketplace`.
+5. Document the pack in the [Catalog](Catalog) and the [README](https://github.com/prototypdigital/bluetemberg-packs#packs).
+6. If the pack should be offered by the `bluetemberg init` wizard, add a matching entry to `RULE_COLLECTION_PRESETS` in the **bluetemberg** repo (`src/init/presets.ts`) — that's a separate PR in that repo.
 
 ## Limit a pack to some platforms
 
