@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-guardrails-git-v0.2.2...bluetemberg-guardrails-git-v0.3.0) (2026-11-10)
+
+
+### Features
+
+* **packs:** add rules-evidence and skills-talk-deck ([a8e4bdd](https://github.com/prototypdigital/bluetemberg-packs/commit/a8e4bdde8ecfaac9b7a1b9d530b662cff11bbf66))
+
 ## [0.2.2](https://github.com/prototypdigital/bluetemberg-packs/compare/bluetemberg-guardrails-git-v0.2.1...bluetemberg-guardrails-git-v0.2.2) (2026-09-30)
 
 
